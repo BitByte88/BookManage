@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <Context> 
+     <Resource name="jdbc/mysql" 
+         auth="Container"
+         type="javax.sql.DataSource"
+         driverClassName="com.mysql.cj.jdbc.Driver"
+         url="jdbc:mysql://localhost:3307/book_manage"
+         username="root" 
+         password="root"
+         maxActive="500" 
+         maxIdle="100"/>  
+ </Context>
