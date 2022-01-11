@@ -8,7 +8,7 @@ public class AdminBookListAction implements Action {
 	public ActionForward execute(HttpServletRequest request,
 			HttpServletResponse response) {
 		AdminBookDAO abookdao=new AdminBookDAO();
-		BookBean abb=new BookBean();
+		BookBean bookbean=new BookBean();
 		
 		ActionForward forward=new ActionForward();
 		

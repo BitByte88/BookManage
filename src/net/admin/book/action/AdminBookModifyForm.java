@@ -8,10 +8,10 @@ public class AdminBookModifyForm implements Action {
 			HttpServletResponse response) {
 		ActionForward forward=new ActionForward();		
 		AdminBookDAO abookdao=new AdminBookDAO();
-		BookBean abb=new BookBean();		
+		BookBean bookbean=new BookBean();		
 		String num=request.getParameter("book_num");		
-		abb=abookdao.getBook(Integer.parseInt(num));		
-		request.setAttribute("agb", abb);		
+		bookbean=abookdao.getBook(Integer.parseInt(num));		
+		request.setAttribute("agb", bookbean);		
 		forward.setPath("./adminbook/admin_book_modify.jsp");
 		return forward;
 	}

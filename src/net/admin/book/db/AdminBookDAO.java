@@ -32,19 +32,19 @@ public class AdminBookDAO {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				BookBean abb = new BookBean();
-				abb.setBOOK_NUM(rs.getInt("book_num"));
-				abb.setBOOK_CATEGORY(rs.getString("book_category"));
-				abb.setBOOK_NAME(rs.getString("book_name"));
-				abb.setBOOK_CONTENT(rs.getString("book_content"));
-				abb.setBOOK_SIZE(rs.getString("book_size"));
-				abb.setBOOK_COLOR(rs.getString("book_color"));
-				abb.setBOOK_AMOUNT(rs.getInt("book_amount"));
-				abb.setBOOK_PRICE(rs.getInt("book_price"));
-				abb.setBOOK_IMAGE(rs.getString("book_image"));
-				abb.setBOOK_BEST(rs.getInt("book_best"));
-				abb.setBOOK_DATE(rs.getString("book_date"));
-				booklist.add(abb);
+				BookBean bookbean = new BookBean();
+				bookbean.setBOOK_NUM(rs.getInt("book_num"));
+				bookbean.setBOOK_CATEGORY(rs.getString("book_category"));
+				bookbean.setBOOK_NAME(rs.getString("book_name"));
+				bookbean.setBOOK_CONTENT(rs.getString("book_content"));
+				bookbean.setBOOK_SIZE(rs.getString("book_size"));
+				bookbean.setBOOK_COLOR(rs.getString("book_color"));
+				bookbean.setBOOK_AMOUNT(rs.getInt("book_amount"));
+				bookbean.setBOOK_PRICE(rs.getInt("book_price"));
+				bookbean.setBOOK_IMAGE(rs.getString("book_image"));
+				bookbean.setBOOK_BEST(rs.getInt("book_best"));
+				bookbean.setBOOK_DATE(rs.getString("book_date"));
+				booklist.add(bookbean);
 			}
 		} catch (Exception e) {
 			e.getStackTrace();

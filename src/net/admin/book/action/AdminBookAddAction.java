@@ -14,7 +14,7 @@ public class AdminBookAddAction implements Action {
 			HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
 		AdminBookDAO abookdao= new AdminBookDAO();
-		BookBean abb = new BookBean();
+		BookBean bookbean = new BookBean();
 		String realPath = "";
 		String savePath = "upload";
 		int maxSize = 5 * 1024 * 1024;
@@ -45,20 +45,20 @@ public class AdminBookAddAction implements Action {
 				fl.append(savefiles.get(i));	
 			}
 			//main.jpg,image1-1.jpg,image1-2.jpg,image1-3.jpg
-			abb.setBOOK_CATEGORY(multi.getParameter("book_category"));
-			abb.setBOOK_NAME(multi.getParameter("book_name"));
-			abb.setBOOK_CONTENT(multi.getParameter("book_content"));
-			abb.setBOOK_SIZE(multi.getParameter("book_size"));
-			abb.setBOOK_COLOR(multi.getParameter("book_color"));
-			abb.setBOOK_AMOUNT(
+			bookbean.setBOOK_CATEGORY(multi.getParameter("book_category"));
+			bookbean.setBOOK_NAME(multi.getParameter("book_name"));
+			bookbean.setBOOK_CONTENT(multi.getParameter("book_content"));
+			bookbean.setBOOK_SIZE(multi.getParameter("book_size"));
+			bookbean.setBOOK_COLOR(multi.getParameter("book_color"));
+			bookbean.setBOOK_AMOUNT(
 					Integer.parseInt(multi.getParameter("book_amount")));
-			abb.setBOOK_PRICE(
+			bookbean.setBOOK_PRICE(
 					Integer.parseInt(multi.getParameter("book_price")));
-			abb.setBOOK_IMAGE(fl.toString());
-			abb.setBOOK_BEST(
+			bookbean.setBOOK_IMAGE(fl.toString());
+			bookbean.setBOOK_BEST(
 					Integer.parseInt(multi.getParameter("book_best")));
 			
-			int result = abookdao.insertBook(abb);
+			int result = abookdao.insertBook(bookbean);
 			//MultiPartRequest ��ü ������ �� �̹� ���ε� ó�� �Ǿ���
 			//���ε� �� ���Ͽ� ���õ� ���� �Ӽ����� TO ��ü�� ��Ƽ� �Ķ���ͷ� �����ϸ鼭
 			//DB�� �Է� �۾��� ��

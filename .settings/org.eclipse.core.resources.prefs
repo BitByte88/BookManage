@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/SQL/table.sql=UTF-8
 encoding//WebContent/adminbook/admin_book_list.jsp=UTF-8
 encoding//WebContent/adminbook/admin_book_modify.jsp=UTF-8
 encoding//WebContent/adminbook/admin_book_write.jsp=UTF-8

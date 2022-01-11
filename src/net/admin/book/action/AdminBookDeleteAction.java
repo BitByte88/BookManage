@@ -8,10 +8,10 @@ public class AdminBookDeleteAction implements Action {
 			HttpServletResponse response) {	
 		ActionForward forward=new ActionForward();
 		AdminBookDAO abookdao=new AdminBookDAO();
-		BookBean abb= new BookBean();		
-		abb.setBOOK_NUM(
+		BookBean bookbean= new BookBean();		
+		bookbean.setBOOK_NUM(
 				Integer.parseInt(request.getParameter("book_num")));		
-		int check=abookdao.deleteBook(abb);
+		int check=abookdao.deleteBook(bookbean);
 		if(check>0){
 			forward.setRedirect(true);
 			forward.setPath("BookList.adbook");
