@@ -104,7 +104,7 @@ public class AdminBookDAO {
 			rs.next();
 			num=rs.getInt(1)+1;
 			sql="insert into book values "+
-			"(?,?,?,?,?,?,?,?,?,?,sysdate)";
+			"(?,?,?,?,?,?,?,?,?,?,DATE(SYSDATE()))";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, abb.getBOOK_CATEGORY());

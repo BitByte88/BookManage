@@ -77,7 +77,7 @@ public class BookDetailAction implements Action {
 			imgList.add(st.nextToken());
 		}
 		
-		String mainImage = (String) imgList.get(1);
+		String mainImage = (String) imgList.get(0);
 		List contentImage = new ArrayList();
 		for (int i = 2; i < imgList.size(); i++) {
 			contentImage.add(imgList.get(i));

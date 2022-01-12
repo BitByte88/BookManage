@@ -54,7 +54,7 @@ public class AdminOrderDAO {
 	
 	public List getOrderList(int page,int limit){
 		String order_list_sql=
-			"select * from (select rownum rnum,ORDER_NUM,"+
+			"select * from (select ROW_NUMBER() OVER (order by ORDER_DATE desc) AS rnum,ORDER_NUM,"+
 			"ORDER_TRADE_NUM,ORDER_TRANS_NUM,ORDER_BOOK_NUM,"+
 			"ORDER_BOOK_AMOUNT,ORDER_MEMBER_ID,"+
 			"ORDER_RECEIVE_NAME,ORDER_RECEIVE_ADDR1,"+
@@ -63,8 +63,7 @@ public class AdminOrderDAO {
 			"ORDER_SUM_MONEY,ORDER_TRADE_TYPE,"+
 			"ORDER_TRADE_DATE,ORDER_TRADE_PAYER,"+
 			"ORDER_DATE,ORDER_STATUS from "+
-			"(select * from BOOK_ORDER order by "+
-			"ORDER_DATE desc)) where rnum>=? and rnum<=?";
+			"BOOK_ORDER) as orderList where rnum>=? and rnum<=?";
 		List orderlist=new ArrayList();
 		
 		int startrow=(page-1)*10+1;

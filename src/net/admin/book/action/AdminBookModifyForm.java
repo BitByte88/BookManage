@@ -11,7 +11,7 @@ public class AdminBookModifyForm implements Action {
 		BookBean bookbean=new BookBean();		
 		String num=request.getParameter("book_num");		
 		bookbean=abookdao.getBook(Integer.parseInt(num));		
-		request.setAttribute("agb", bookbean);		
+		request.setAttribute("abb", bookbean);		
 		forward.setPath("./adminbook/admin_book_modify.jsp");
 		return forward;
 	}
