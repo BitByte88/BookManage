@@ -114,7 +114,7 @@ public class CartDAO {
 			num=rs.getInt(1)+1;
 			
 			sql="insert into cart values "+
-				"(?,?,?,?,?,?,sysdate)";
+				"(?,?,?,?,?,?,DATE(SYSDATE()))";
 			
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, num);

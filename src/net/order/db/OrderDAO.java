@@ -164,7 +164,7 @@ public class OrderDAO {
 				++ordernum;
 				
 				sql = "insert into book_order values(?,?,?,?,?,"+
-					"?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,sysdate,0)";
+					"?,?,?,?,?,?,?,?,?,?,?,?,DATE(SYSDATE()),?,DATE(SYSDATE()),0)";
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, ordernum);

@@ -17,8 +17,6 @@
 		cartlist = (ArrayList) request.getAttribute("cartlist");
 		booklist = (ArrayList) request.getAttribute("booklist");
 	}
-	System.out.println(cartlist.size());
-	System.out.println(booklist.size());
 %>
 <html>
 <head>
