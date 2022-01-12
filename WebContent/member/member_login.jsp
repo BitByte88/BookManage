@@ -1,7 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <html>
 <head>
-<title>ログイン</title>
+	<link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon"> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
+	
+<title>図書管理システム</title>
 <script>
 function check(){
 	var id=loginform.MEMBER_ID.value;

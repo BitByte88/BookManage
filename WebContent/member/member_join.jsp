@@ -1,7 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
 <head>
-<title>쇼핑몰</title>
+	<link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon"> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
+	
+<title>図書管理システム</title>
 <script>
 function check(){
 	var id=joinform.MEMBER_ID.value;
@@ -17,22 +23,27 @@ function check(){
 	var forms = document.getElementById("joinform");
 
 	if ((forms.MEMBER_NAME.value=="")||(forms.MEMBER_NAME.value.length<=1)){
-		alert("이름을 제대로 입력해 주세요.");
+		alert("氏名を入力してください。");
 		forms.MEMBER_NAME.focus();
          		return false;
 	}
+	if ((forms.MEMBER_NAME_KANA.value=="")||(forms.MEMBER_NAME_KANA.value.length<=1)){
+		alert("氏名（カナ）を入力してください。");
+		forms.MEMBER_NAME_KANA.focus();
+         		return false;
+	}
 	if(id.length == 0){
-		alert("아이디를 입력하세요.");
+		alert("アカウントを入力してください。");
 		joinform.MEMBER_ID.focus();
 		return false;
 	}
 	if(password1.length == 0){
-		alert("비밀번호를 입력하세요.");
+		alert("パスワードを入力してください。");
 		joinform.MEMBER_PW.focus();
 		return false;
 	} 
 	if(password1 != password2){
-		alert("비밀번호가 일치하지 않습니다.");
+		alert("パスワードが一致していません。");
 		joinform.MEMBER_PW.value="";
 		joinform.MEMBER_PW2.value="";
 		joinform.MEMBER_PW.focus();
@@ -49,7 +60,7 @@ function check(){
         return false;
 	} 
 	if(email1.length == 0 || email2.length ==0){
-		alert("이메일을 제대로 입력하세요.");
+		alert("メールアドレスを入力してください。");
 		joinform.MEMBER_EMAIL1.focus();
 		return false;
 	}
@@ -79,7 +90,7 @@ function check(){
 		return false;
 	} 
 	if(mobile.length == 0){
-		alert("휴대폰 번호를 입력하세요.");
+		alert("電話番号を入力してください。");
 		joinform.MEMBER_MOBILE.focus();
 		return false;
 	}
@@ -92,7 +103,7 @@ function openConfirmId(joinform){
 	var url="./MemberIDCheckAction.member?MEMBER_ID="+joinform.MEMBER_ID.value;
 	
 	if(id.length == 0){
-		alert("아이디를 입력하세요.");
+		alert("アカウントを入力してください。");
 		joinform.MEMBER_ID.focus();
 		return false;
 	}
@@ -121,14 +132,13 @@ function gNumCheck(){
 <table width="960" cellspacing="0" cellpadding="0" border="0" align="center">
 	<tr>
 	<td colspan=2>
-	<!-- 회원가입 -->
-	<form name="joinform" action="./MemberJoinAction.member" method="post" 
-		onsubmit="return check()">		
+	<!-- 会員登録 -->
+	<form name="joinform" action="./MemberJoinAction.member" method="post" onsubmit="return check()">		
 	<p align="center">	
-	<table border="1" width="80%" height="80%">
+	<table width="80%" height="80%">
 	<tr>
 		<td width="17%" bgcolor="#f5f5f5">
-			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;이름</font>
+			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;氏名</font>
 		</td>
 		<td>
 			&nbsp;&nbsp;&nbsp;
@@ -136,19 +146,28 @@ function gNumCheck(){
 		</td>
 	</tr>
 	<tr>
+		<td width="17%" bgcolor="#f5f5f5">
+			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;氏名（カナ）</font>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;
+			<input type="text" name="MEMBER_NAME_KANA" size="20"/>
+		</td>
+	</tr>
+	<tr>
 		<td bgcolor="#f5f5f5">
-			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;아이디</font>
+			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;アカウント</font>
 		</td>
 		<td>
 			&nbsp;&nbsp;&nbsp;
 			<input type="text" name="MEMBER_ID" size="10" maxlength=15/>
-			<input type="button" name="confirm_id" value="중복확인" 
+			<input type="button" name="confirm_id" value="アカウント確認" 
 				onclick="openConfirmId(this.form)" />
 		</td>
 	</tr>
 	<tr>
 		<td bgcolor="#f5f5f5">
-			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;비밀번호</font>
+			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;パスワード</font>
 		</td>
 		<td>
 			&nbsp;&nbsp;&nbsp;
@@ -157,7 +176,7 @@ function gNumCheck(){
 	</tr>
 	<tr>
 		<td bgcolor="#f5f5f5">
-			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;비밀번호 확인</font>
+			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;パスワード確認</font>
 		</td>
 		<td>
 			&nbsp;&nbsp;&nbsp;
@@ -165,10 +184,19 @@ function gNumCheck(){
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor="#f5f5f5">&nbsp;</td>
+		<td>&nbsp;</td>
 		<td>
 		<font size="2">&nbsp;&nbsp;&nbsp;
 		(아이디와 비밀번호는 문자와 숫자를 조합하여 2~12자리로 만들어 주세요)</font>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#f5f5f5">
+			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;電話番号</font>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;
+			<input type="text" name="MEMBER_MOBILE" size="24" />
 		</td>
 	</tr>
 	<tr>
@@ -185,7 +213,7 @@ function gNumCheck(){
 	</tr>
 	<tr>
 		<td bgcolor="#f5f5f5">
-			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;이메일 주소</font>
+			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;メールアドレス</font>
 		</td>
 		<td>
 			&nbsp;&nbsp;&nbsp;
@@ -216,7 +244,7 @@ function gNumCheck(){
 		</tr>
 		<tr>
 			<td bgcolor="#f5f5f5">
-				<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;우편번호</font>
+				<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;郵便番号</font>
 			</td>
 			<td>
 			&nbsp;&nbsp;&nbsp;
@@ -224,7 +252,7 @@ function gNumCheck(){
 				onkeypress="gNumCheck()" maxlength="3"/>- 
 			<input type="text" name="MEMBER_ZIPCODE2" size="6" 
 				onkeypress="gNumCheck()" maxlength="3" />&nbsp;&nbsp;
-			<input type="button" name="zipcode" value="우편번호 검색" 
+			<input type="button" name="zipcode" value="郵便番号検索" 
 				onclick="openZipcode(this.form)" />
 			</td>
 		</tr>
@@ -246,15 +274,6 @@ function gNumCheck(){
 				<input type="text" name="MEMBER_ADDR2" size="50" />
 			</td>
 		</tr>
-		<tr>
-			<td bgcolor="#f5f5f5">
-				<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;휴대폰</font>
-			</td>
-			<td>
-				&nbsp;&nbsp;&nbsp;
-				<input type="text" name="MEMBER_MOBILE" size="24" />
-				</td>
-			</tr>
 		</table>
 		<table width="80%">
 			<tr>
@@ -264,7 +283,7 @@ function gNumCheck(){
 			</tr>
 		</table>
 		</form>
-		<!-- 회원가입 -->	
+		<!-- 会員登録 -->	
 		</td>
 	</tr>
 </table>
