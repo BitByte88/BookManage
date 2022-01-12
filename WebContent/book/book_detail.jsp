@@ -269,7 +269,7 @@ function count_change(temp){
 		</table>
 		</form><!-- 상품 구매 메뉴 끝 -->
 		<!-- 상품 내용 -->
-		<table width="700" height="300" align="enter">
+		<table width="700" height="50" align="enter">
 			<tr>
 				<td align="center">
 				<div>${itemArray.BOOK_CONTENT }</div>

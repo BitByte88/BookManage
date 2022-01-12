@@ -25,7 +25,7 @@ public class BookDAO {
 			Context envCtx=(Context)initCtx.lookup("java:comp/env");
 			ds=(DataSource)envCtx.lookup("jdbc/mysql");
 		}catch(Exception ex){
-			System.out.println("DB ���� ���� : " + ex);
+			System.out.println("DB接続エラー：　" + ex);
 			return;
 		}
 	}
@@ -40,21 +40,22 @@ public class BookDAO {
 			con = ds.getConnection();
 			StringBuffer findQuery = new StringBuffer();
 			
-			findQuery.append("SELECT * FROM (SELECT BOOK_NUM,");
-			findQuery.append("BOOK_CATEGORY, BOOK_NAME, ");
-			findQuery.append("BOOK_CONTENT,BOOK_PRICE,BOOK_IMAGE,");
-			findQuery.append("BOOK_BEST,BOOK_DATE, rownum r FROM ");
+			findQuery.append("SELECT * FROM ");
+			findQuery.append("(SELECT ROW_NUMBER() OVER (ORDER BY BOOK_NUM DESC) AS rowNum, ");
+			findQuery.append("BOOK_NUM, BOOK_CATEGORY, BOOK_NAME, ");
+			findQuery.append("BOOK_CONTENT, BOOK_PRICE, BOOK_IMAGE, ");
+			findQuery.append("BOOK_BEST, BOOK_DATE FROM ");
 			findQuery.append("BOOK WHERE ");
 			
 			if (item.equals("new_item")) {
-				findQuery.append("BOOK_DATE>=sysdate-7");
+				findQuery.append("BOOK_DATE>=DATE_SUB(SYSDATE(), INTERVAL 7 DAY) ");
 			}else if (item.equals("hit_item")) { 
 				findQuery.append("BOOK_BEST=1 ");
 			}else{
 				findQuery.append("BOOK_CATEGORY=? ");
 			}
-			findQuery.append("ORDER BY BOOK_NUM DESC) ");
-			findQuery.append("WHERE r>=? AND r<=? ");		
+			findQuery.append("ORDER BY BOOK_NUM DESC) as book ");
+			findQuery.append("WHERE book.rowNum>=? AND book.rowNum<=? ");		
 			
 			pstmt = con.prepareStatement(findQuery.toString(), 
 				ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -131,20 +132,21 @@ public class BookDAO {
 			con=ds.getConnection();
 			StringBuffer findQuery = new StringBuffer();
 			
-			findQuery.append("SELECT * FROM (SELECT BOOK_NUM, ");
-			findQuery.append("BOOK_CATEGORY, BOOK_NAME, ");
-			findQuery.append("BOOK_CONTENT,BOOK_PRICE,BOOK_IMAGE,");
-			findQuery.append("BOOK_BEST, rownum r FROM BOOK WHERE ");
+			findQuery.append("SELECT * FROM ");
+			findQuery.append("(SELECT ROW_NUMBER() OVER (ORDER BY BOOK_NUM DESC) AS rowNum, ");
+			findQuery.append("BOOK_NUM, BOOK_CATEGORY, BOOK_NAME, ");
+			findQuery.append("BOOK_CONTENT, BOOK_PRICE, BOOK_IMAGE,");
+			findQuery.append("BOOK_BEST FROM BOOK WHERE ");
 			if (item.equals("new_item")){
-				findQuery.append("BOOK_DATE>=sysdate-7");
+				findQuery.append("BOOK_DATE>=DATE_SUB(SYSDATE(), INTERVAL 7 DAY) ");
 			}else if (item.equals("hit_item")) { 
 				findQuery.append("BOOK_BEST=1 ");
 			}else {
 				findQuery.append("BOOK_CATEGORY=? ");
 			}
 			findQuery.append(" AND (BOOK_PRICE BETWEEN ? AND ? ) ");
-			findQuery.append("ORDER BY BOOK_NUM DESC) ");
-			findQuery.append("WHERE r>=? AND r<=? ");		
+			findQuery.append("ORDER BY BOOK_NUM DESC) as book ");
+			findQuery.append("WHERE book.rowNum>=? AND book.rowNum<=? ");		
 			
 			pstmt = con.prepareStatement(findQuery.toString(), 
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -224,33 +226,33 @@ public class BookDAO {
 		
 		StringBuffer dQuery = new StringBuffer();
 		if(direction.equals("next")){
-			dQuery.append("SELECT BOOK_NUM,BOOK_CATEGORY,");
-			dQuery.append("BOOK_IMAGE,BOOK_NAME FROM BOOK ");
+			dQuery.append("SELECT BOOK_NUM, BOOK_CATEGORY, ");
+			dQuery.append("BOOK_IMAGE, BOOK_NAME FROM BOOK ");
 			dQuery.append("WHERE BOOK_NUM>? AND ");
 			if(item.equals("new_item")) {
-				dQuery.append("BOOK_DATE>=sysdate-7");
+				dQuery.append("BOOK_DATE>=DATE_SUB(SYSDATE(), INTERVAL 7 DAY) ");
 			} else if (item.equals("hit_item")) {
 				dQuery.append(" BOOK_BEST=1 ");
 			} else {
 				dQuery.append(" BOOK_CATEGORY=? ");			
 			}
 			if (!price.equals("no")) {
-				dQuery.append(" AND (BOOK_PRICE BETWEEN ? AND ? ) ");
+				dQuery.append("AND (BOOK_PRICE BETWEEN ? AND ? ) ");
 			}
 		}else if(direction.equals("prev")){
 			dQuery.append(
-			"SELECT BOOK_NUM,BOOK_CATEGORY,BOOK_IMAGE,");
+			"SELECT BOOK_NUM, BOOK_CATEGORY, BOOK_IMAGE, ");
 			dQuery.append(
 			"BOOK_NAME FROM BOOK WHERE BOOK_NUM<? AND ");
 			if(item.equals("new_item")) {
-				dQuery.append("BOOK_DATE<=sysdate-7");
+				dQuery.append("BOOK_DATE<=DATE_SUB(SYSDATE(), INTERVAL 7 DAY) ");
 			} else if (item.equals("hit_item")) {
-				dQuery.append(" BOOK_BEST=1 ");
+				dQuery.append("BOOK_BEST=1 ");
 			} else {
-				dQuery.append(" BOOK_CATEGORY=? ");			
+				dQuery.append("BOOK_CATEGORY=? ");			
 			}
 			if (!price.equals("no")) {
-				dQuery.append(" AND (BOOK_PRICE BETWEEN ? AND ? ) ");
+				dQuery.append("AND (BOOK_PRICE BETWEEN ? AND ? ) ");
 			}
 			dQuery.append("ORDER BY BOOK_NUM DESC ");
 		}
@@ -312,11 +314,11 @@ public class BookDAO {
 			con = ds.getConnection();
 			StringBuffer dQuery = new StringBuffer();
 		
-			dQuery.append("SELECT *");		
-			dQuery.append(" FROM BOOK WHERE BOOK_NUM=?  AND ");
+			dQuery.append("SELECT * ");		
+			dQuery.append("FROM BOOK WHERE BOOK_NUM=? AND ");
 			
 			if(item.equals("new_item")) {
-				dQuery.append("BOOK_DATE>=sysdate-7");
+				dQuery.append("BOOK_DATE>=DATE_SUB(SYSDATE(), INTERVAL 7 DAY) ");
 			} else if (item.equals("hit_item")) {
 				dQuery.append("BOOK_BEST=1 ");
 			} else {
@@ -373,11 +375,11 @@ public class BookDAO {
 		findQuery.append("SELECT COUNT(BOOK_NUM) FROM BOOK WHERE ");
 		
 		if (item.equals("new_item")) {
-			findQuery.append("BOOK_DATE>=sysdate-7");
+			findQuery.append("BOOK_DATE>=DATE_SUB(SYSDATE(), INTERVAL 7 DAY) ");
 		} else if (item.equals("hit_item")) { 
 			findQuery.append("BOOK_BEST=? ");
 		}else {
-			findQuery.append("BOOK_CATEGORY=?");
+			findQuery.append("BOOK_CATEGORY=? ");
 		}
 		
 		try{
@@ -434,13 +436,13 @@ public class BookDAO {
 		
 		findQuery.append("SELECT COUNT(BOOK_NUM) FROM BOOK WHERE ");
 		if (item.equals("new_item")) {
-			findQuery.append("BOOK_DATE>=sysdate-7");
+			findQuery.append("BOOK_DATE>=DATE_SUB(SYSDATE(), INTERVAL 7 DAY) ");
 		} else if (item.equals("hit_item")) { 
 			findQuery.append("BOOK_BEST=? ");
 		}else {
-			findQuery.append("BOOK_CATEGORY=?");
+			findQuery.append("BOOK_CATEGORY=? ");
 		}
-		findQuery.append(" and (book_price between ? and ?)");
+		findQuery.append("AND (BOOK_PRICE BETWEEN ? AND ?) ");
 		
 		try
 		{

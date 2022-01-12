@@ -1,19 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <html>
 <head>
-<title>쇼핑몰</title>
+<title>ログイン</title>
 <script>
 function check(){
 	var id=loginform.MEMBER_ID.value;
 	var pass=loginform.MEMBER_PW.value;
 	
 	if(id.length == 0){
-		alert("아이디를 입력하세요.");
+		alert("アカウントを入力してください。");
 		loginform.MEMBER_ID.focus();
 		return false;
 	}
 	if(pass.length == 0){
-		alert("비밀번호를 입력하세요.");
+		alert("パスワードを入力してください。");
 		loginform.MEMBER_PW.focus();
 		return false;
 	}
@@ -41,7 +41,7 @@ function openConfirmId(loginform){
 <table width="400" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td bgcolor="f6f6f6">
-		<table width="400" border="0" cellspacing="4" cellpadding="0">
+		<table width="550" border="0" cellspacing="4" cellpadding="0">
 		<tr>
 		<td valign="top" bgcolor="#FFFFFF">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -49,12 +49,13 @@ function openConfirmId(loginform){
 		<td align="center">
 		<table cellpadding=0 cellspacing=0 border=0>
 			<tr>
-			<td width=73>아이디</td>
+			<td width=90>アカウント</td>
 			<td width=9>:</td>
 			<td width=103>
 				<input type=text name="MEMBER_ID" size=12 maxlength=20>
 			</td>
-			<td width=66 rowspan=3><input type="submit" value="로그인">
+			<td width=9></td>
+			<td width=66 rowspan=3><input type="submit" value="ログイン">
 			</td>
 			<td width=26 rowspan=3></td>
 			</tr>
@@ -62,7 +63,7 @@ function openConfirmId(loginform){
 			<td height=4 colspan=3></td>
 			</tr>
 			<tr>
-			<td width=73>비밀번호</td>
+			<td width=73>パスワード</td>
 			<td width=9>:</td>
 			<td width=103>
 			<input type=password name="MEMBER_PW" size=12 maxlength=12>
@@ -71,10 +72,10 @@ function openConfirmId(loginform){
 			<tr>
 			<td height=35 colspan=6 align="center">
 			<input
-				type="button" value="회원가입"
+				type="button" value="会員登録"
 				onclick="javascript:window.location='./MemberJoin.member'">
 			<a href="#">
-			<input type="button" value="아이디/비밀번호 찾기"
+			<input type="button" value="アカウント／パスワードを探す"
 				onclick="openConfirmId(this.form)">
 			</a>
 			</td>
@@ -90,7 +91,7 @@ function openConfirmId(loginform){
 				</td>
 				<td width="392">
 				<font size=2 color="565656">
-				아이디가 없을 경우 '회원가입'을 클릭하십시오.
+				アカウントを持っていない場合、「会員登録」をお願い致します。
 				</font>
 				</td>
 				</tr>
@@ -98,7 +99,7 @@ function openConfirmId(loginform){
 				<td><img src="#" width="8" height="7"></td>
 				<td>
 				<font size=2 color="565656">
-				아이디 또는 비밀번호를 잊어버렸을 경우 '아이디/비밀번호 찾기'를 클릭하십시오.
+				アカウント及びパスワードを忘れた場合、「アカウント／パスワードを探す」をご利用してください。
 				</font>
 				</td>
 				</tr>
