@@ -134,7 +134,7 @@
 			<td style="font-family: Tahoma; font-size: 8pt;" height=24
 				bgcolor="f7f7f7">휴대폰</td>
 			<td width=320 height=24>
-				<font size=2><%=member.getMEMBER_MOBILE()%></font>
+				<font size=2><%=member.getMEMBER_TEL()%></font>
 			</td>
 		</tr>
 		<tr>
@@ -144,7 +144,7 @@
 			<td style="font-family: Tahoma; font-size: 8pt;" height=24
 				bgcolor="f7f7f7">이메일 주소</td>
 			<td width=320 height=24>
-				<font size=2><%=member.getMEMBER_EMAIL()%></font>
+				<font size=2><%=member.getMEMBER_MAIL()%></font>
 			</td>
 		</tr>
 		<tr>
@@ -180,7 +180,7 @@
 				bgcolor="f7f7f7">집 전화</td>
 			<td style="font-family: Tahoma; font-size: 8pt;">
 				<input type="text" name="ORDER_RECEIVE_PHONE" size=15
-				value="<%=member.getMEMBER_PHONE() %>">
+				value="<%=member.getMEMBER_TEL() %>">
 			</td>
 		</tr>
 		<tr>
@@ -191,7 +191,7 @@
 				bgcolor="f7f7f7">휴대폰</td>
 			<td style="font-family: Tahoma; font-size: 8pt;">
 				<input type="text" name="ORDER_RECEIVE_MOBILE" size=15
-				value="<%=member.getMEMBER_MOBILE() %>">
+				value="<%=member.getMEMBER_TEL() %>">
 			</td>
 		</tr>
 		<tr>
@@ -213,7 +213,7 @@
 				bgcolor="f7f7f7">배송지 주소</td>
 			<td style="font-family: Tahoma; font-size: 8pt;">
 				<input type="text" name="ORDER_RECEIVE_ADDR1" size=50
-				value="<%=member.getMEMBER_ADDR1() %>"></td>
+				value="<%=member.getMEMBER_ADD_1() %>"></td>
 		</tr>
 		<tr>
 			<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
@@ -223,7 +223,7 @@
 				bgcolor="f7f7f7">배송지 나머지 주소</td>
 			<td style="font-family: Tahoma; font-size: 8pt;">
 				<input type="text" name="ORDER_RECEIVE_ADDR2" size=50
-				value="<%=member.getMEMBER_ADDR2() %>">
+				value="<%=member.getMEMBER_ADD_2() %>">
 			</td>
 		</tr>
 		<tr>

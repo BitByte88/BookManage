@@ -12,9 +12,10 @@ public class MemberFindAction implements Action{
 		MemberDAO memberdao=new MemberDAO();
 		MemberBean member=new MemberBean();		
 		String name=request.getParameter("MEMBER_NAME");
-		String jumin1=request.getParameter("MEMBER_JUMIN1");
-		String jumin2=request.getParameter("MEMBER_JUMIN2");		
-		member= memberdao.findId(name, jumin1, jumin2);		
+		String nameKana=request.getParameter("MEMBER_NAME_KANA");
+		String tel=request.getParameter("MEMBER_TEL");
+		String mail=request.getParameter("MEMBER_MAIL");
+		member= memberdao.findId(name, nameKana, tel, mail);		
 		if(member!=null){
 			request.setAttribute("id", member.getMEMBER_ID());
 			request.setAttribute("passwd", member.getMEMBER_PW());			

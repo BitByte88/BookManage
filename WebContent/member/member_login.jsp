@@ -39,7 +39,7 @@ function openConfirmId(loginform){
 <tr>
 <td colspan=2 align=center>
 <table border=0 cellpadding=0 cellspacing=0 width=500>
-<!--회원 로그인 -->
+<!--会員ログイン -->
 <tr>
 <form action="./MemberLoginAction.member" method=post name=loginform
 	onsubmit="return check()">
@@ -123,7 +123,7 @@ function openConfirmId(loginform){
 </form>
 </tr>
 </table>
-<!-- 회원 로그인 -->
+<!-- 会員ログイン -->
 </td>
 </tr>
 </table>

@@ -1,6 +1,7 @@
 package net.member.db;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,27 +32,29 @@ public class MemberDAO {
 		String sql=null;
 		boolean result = false;
 		try{
+			Long date = System.currentTimeMillis();
 			con = ds.getConnection();
 			sql="insert into member values "+
-				"(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				"(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, mb.getMEMBER_ID());
 			pstmt.setString(2, mb.getMEMBER_PW());
 			pstmt.setString(3, mb.getMEMBER_NAME());
-			pstmt.setInt(4, mb.getMEMBER_JUMIN1());
-			pstmt.setInt(5, mb.getMEMBER_JUMIN2());
-			pstmt.setString(6, mb.getMEMBER_EMAIL());
-			pstmt.setString(7, mb.getMEMBER_EMAIL_GET());
-			pstmt.setString(8, mb.getMEMBER_MOBILE());
-			pstmt.setString(9, mb.getMEMBER_PHONE());
-			pstmt.setString(10, mb.getMEMBER_ZIPCODE());
-			pstmt.setString(11, mb.getMEMBER_ADDR1());
-			pstmt.setString(12, mb.getMEMBER_ADDR2());
-			pstmt.setInt(13, mb.getMEMBER_ADMIN());
-			pstmt.setTimestamp(14, mb.getMEMBER_JOIN_DATE());
+			pstmt.setString(4, mb.getMEMBER_NAME_KANA());
+			pstmt.setString(5, mb.getMEMBER_TEL());
+			pstmt.setString(6, mb.getMEMBER_MAIL());
+			pstmt.setString(7, mb.getMEMBER_ZIPCODE());
+			pstmt.setString(8, mb.getMEMBER_ADD_1());
+			pstmt.setString(9, mb.getMEMBER_ADD_2());
+			pstmt.setString(10, mb.getMEMBER_ADD_3());
+			pstmt.setInt(11, 1); //1:一般ユーザー
+			pstmt.setInt(12, 0); //0:未削除
+			pstmt.setInt(13, 1); //1:一般ユーザー
+			pstmt.setDate(14, new Date(date));
+			pstmt.setInt(15, 1); //1:一般ユーザー
+			pstmt.setDate(16, new Date(date));
 			pstmt.executeUpdate();
-			
 			result = true;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -93,7 +96,6 @@ public class MemberDAO {
 				if(con!=null)con.close();
 			}catch(Exception ex) {}
 		}
-		
 		return x;
 	}
 	
@@ -121,7 +123,6 @@ public class MemberDAO {
 				if(con!=null)con.close();
 			}catch(Exception ex) {}
 		}
-		
 		return x;
 	}
 	
@@ -141,21 +142,14 @@ public class MemberDAO {
 				
 				member.setMEMBER_ID(rs.getString("MEMBER_ID"));
 				member.setMEMBER_NAME(rs.getString("MEMBER_NAME"));
-				member.setMEMBER_JUMIN1(rs.getInt("MEMBER_JUMIN1"));
-				member.setMEMBER_JUMIN2(rs.getInt("MEMBER_JUMIN2"));
-				member.setMEMBER_EMAIL(rs.getString("MEMBER_EMAIL"));
-				member.setMEMBER_EMAIL_GET(
-						rs.getString("MEMBER_EMAIL_GET"));
-				member.setMEMBER_MOBILE(
-						rs.getString("MEMBER_MOBILE"));
-				member.setMEMBER_PHONE(
-						rs.getString("MEMBER_PHONE"));
-				member.setMEMBER_ZIPCODE(
-						rs.getString("MEMBER_ZIPCODE"));
-				member.setMEMBER_ADDR1(rs.getString("MEMBER_ADDR1"));
-				member.setMEMBER_ADDR2(rs.getString("MEMBER_ADDR2"));
-				
-				
+				member.setMEMBER_NAME_KANA(rs.getString("MEMBER_NAME_KANA"));
+				member.setMEMBER_TEL(rs.getString("MEMBER_TEL"));
+				member.setMEMBER_MAIL(rs.getString("MEMBER_MAIL"));
+				member.setMEMBER_ZIPCODE(rs.getString("MEMBER_EMAIL"));
+				member.setMEMBER_ADD_1(rs.getString("MEMBER_ADD_1"));
+				member.setMEMBER_ADD_2(rs.getString("MEMBER_ADD_2"));
+				member.setMEMBER_ADD_3(rs.getString("MEMBER_ADD_3"));
+				member.setMEMBER_TYPE(rs.getInt("MEMBER_TYPE"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -166,7 +160,6 @@ public class MemberDAO {
 				if(con!=null)con.close();
 			}catch(Exception ex) {}
 		}
-		
 		return member;
 	}
 	
@@ -176,21 +169,21 @@ public class MemberDAO {
 		try{
 			con = ds.getConnection();
 			sql="update member set MEMBER_PW=?,MEMBER_NAME=?,"+
-			"MEMBER_EMAIL=?,MEMBER_EMAIL_GET=?,MEMBER_MOBILE=?,"+
-			"MEMBER_PHONE=?,MEMBER_ZIPCODE=?,MEMBER_ADDR1=?,"+
-			"MEMBER_ADDR2=? where MEMBER_ID=?";
+			"MEMBER_NAME_KANA=?,MEMBER_TEL=?,MEMBER_MAIL=?,"+
+			"MEMBER_ZIPCODE=?,MEMBER_ADD_1=?,MEMBER_ADD_2=?,"+
+			"MEMBER_ADD_3=? where MEMBER_ID=?";
 			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, mb.getMEMBER_PW());
 			pstmt.setString(2, mb.getMEMBER_NAME());
-			pstmt.setString(3, mb.getMEMBER_EMAIL());
-			pstmt.setString(4, mb.getMEMBER_EMAIL_GET());
-			pstmt.setString(5, mb.getMEMBER_MOBILE());
-			pstmt.setString(6, mb.getMEMBER_PHONE());
-			pstmt.setString(7, mb.getMEMBER_ZIPCODE());
-			pstmt.setString(8, mb.getMEMBER_ADDR1());
-			pstmt.setString(9, mb.getMEMBER_ADDR2());
-			pstmt.setString(10, mb.getMEMBER_ID());			
+			pstmt.setString(3, mb.getMEMBER_NAME_KANA());
+			pstmt.setString(4, mb.getMEMBER_TEL());
+			pstmt.setString(5, mb.getMEMBER_MAIL());
+			pstmt.setString(6, mb.getMEMBER_ZIPCODE());
+			pstmt.setString(7, mb.getMEMBER_ADD_1());
+			pstmt.setString(8, mb.getMEMBER_ADD_2());
+			pstmt.setString(9, mb.getMEMBER_ADD_3());
+			pstmt.setString(10, mb.getMEMBER_ID());
 			pstmt.executeUpdate();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -226,7 +219,6 @@ public class MemberDAO {
 				}else{
 					x=0;
 				}
-				
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -237,38 +229,30 @@ public class MemberDAO {
 				if(con!=null)con.close();
 			}catch(Exception ex) {}
 		}
-		
 		return x;
 	}	
 	
-	public MemberBean findId(String name, String jumin1, String jumin2)
+	public MemberBean findId(String name, String nameKana, String tel, String mail)
 	throws SQLException{
 		String sql=null;
 		MemberBean member=null;
 		
 		try{
 			con = ds.getConnection();
-			sql="select MEMBER_ID, MEMBER_PW, MEMBER_JUMIN1,"+
-				"MEMBER_JUMIN2 from member where MEMBER_NAME=?";
+			sql="select MEMBER_ID, MEMBER_PW "+
+				"from member where MEMBER_NAME=? and MEMBER_NAME_KANA=? and MEMBER_TEL=? and MEMBER_MAIL=?";
 			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, name);
+			pstmt.setString(2, nameKana);
+			pstmt.setString(3, tel);
+			pstmt.setString(4, mail);
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()){
-				
-				String memberjumin1=rs.getString("MEMBER_JUMIN1");
-				String memberjumin2=rs.getString("MEMBER_JUMIN2");
-				
-				if(memberjumin1.equals(jumin1) && 
-						memberjumin2.equals(jumin2)){
-					member = new MemberBean();
-					member.setMEMBER_ID(
-							rs.getString("MEMBER_ID"));
-					member.setMEMBER_PW(
-							rs.getString("MEMBER_PW"));
-					
-				}
+				member = new MemberBean();
+				member.setMEMBER_ID(rs.getString("MEMBER_ID"));
+				member.setMEMBER_PW(rs.getString("MEMBER_PW"));
 			}
 			
 			
@@ -281,13 +265,12 @@ public class MemberDAO {
 				if(con!=null)con.close();
 			}catch(Exception ex) {}
 		}
-		
 		return member;
 	}
 	
 	public boolean isAdmin(String id){
-		String sql="select MEMBER_ADMIN from MEMBER where MEMBER_ID=?";
-		int member_admin=0;
+		String sql="select MEMBER_TYPE from MEMBER where MEMBER_ID=?";
+		int member_admin=1;
 		boolean result = false;
 		try {
 			con = ds.getConnection();
@@ -296,9 +279,9 @@ public class MemberDAO {
 			rs=pstmt.executeQuery();
 			rs.next();
 			
-			member_admin=rs.getInt("MEMBER_ADMIN");
+			member_admin=rs.getInt("MEMBER_TYPE");
 			
-			if(member_admin==1){
+			if(member_admin==0){
 				result = true;
 			}
 		} catch (SQLException e) {

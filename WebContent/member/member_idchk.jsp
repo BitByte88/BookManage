@@ -5,7 +5,13 @@
 %>
 <html>
 <head>
-<title>쇼핑몰</title>
+	<link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon"> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
+	
+<title>アカウント確認</title>
 <script>
 function windowclose(){
 	opener.document.joinform.MEMBER_ID.value="<%=id %>";
@@ -18,7 +24,7 @@ function windowclose(){
 <table width="360" border="0" cellspacing="0" cellpadding="5">
 	<tr align="center">
 	<td height="30">
-		<font size="2"><%=id %> 는 이미 사용 중인 아이디입니다.</font>
+		<font size="2"><%=id %> は既に登録済みのアカウントです。</font>
 	</td>
 	</tr>
 </table>
@@ -27,9 +33,9 @@ function windowclose(){
 <table width="360" border="0" cellspacing="0" cellpadding="5">
 	<tr>
 	<td align="center">
-		<font size="2">다른 아이디를 선택하세요.</font><p>
+		<font size="2">別のアカウントを入力してください。</font><p>
 		<input type="text" size="10" maxlength="12" name="MEMBER_ID"/>
-		<input type="submit" value="중복확인" />
+		<input type="submit" value="重複確認" />
 	</td>					
 	</tr>
 </table>
@@ -38,9 +44,9 @@ function windowclose(){
 <table width="360" border="0" cellspacing="0" cellpadding="5">
 	<tr>
 		<td align="center">
-		<font size="2">입력하신 <%=id %> 는 사용할 수 있는 아이디입니다.</font>
+		<font size="2"> <%=id %> は登録可能なアカウントです。</font>
 		<br/><br/>
-		<input type="button" value="닫기" onclick="windowclose()" />
+		<input type="button" value="閉じる" onclick="windowclose()" />
 		</td>
 	</tr>
 </table>

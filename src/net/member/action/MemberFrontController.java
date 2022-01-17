@@ -5,9 +5,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 public class MemberFrontController extends HttpServlet{
-	public void service(HttpServletRequest request, HttpServletResponse response)
-	throws IOException, ServletException{
+	public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		
 		 String RequestURI=request.getRequestURI();
 		 String contextPath=request.getContextPath();
 		 String command=RequestURI.substring(contextPath.length());
@@ -86,13 +87,13 @@ public class MemberFrontController extends HttpServlet{
 			 }
 		 }
 		 if(forward != null){
-		 if(forward.isRedirect()){
-			 response.sendRedirect(forward.getPath());
-		 }else{
-			 RequestDispatcher dispatcher=
-				 request.getRequestDispatcher(forward.getPath());
-			 dispatcher.forward(request, response);
-		 }	 
+			 if(forward.isRedirect()){
+				 response.sendRedirect(forward.getPath());
+			 }else{
+				 RequestDispatcher dispatcher=
+					 request.getRequestDispatcher(forward.getPath());
+				 dispatcher.forward(request, response);
+			 }	 
 		 }
 	}
 }

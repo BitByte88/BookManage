@@ -155,7 +155,7 @@
 		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
 			bgcolor="f7f7f7">이메일주소</td>
 		<td style="font-family: Tahoma; font-size: 8pt;">
-			<%=ordermember.getMEMBER_EMAIL() %>
+			<%=ordermember.getMEMBER_MAIL() %>
 		</td>
 	</tr>
 	<tr>
@@ -165,7 +165,7 @@
 		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
 			bgcolor="f7f7f7">집전화</td>
 		<td style="font-family: Tahoma; font-size: 8pt;">
-			<%=ordermember.getMEMBER_PHONE() %>
+			<%=ordermember.getMEMBER_TEL() %>
 		</td>
 	</tr>
 	<tr>
@@ -175,7 +175,7 @@
 		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
 			bgcolor="f7f7f7">휴대폰</td>
 		<td style="font-family: Tahoma; font-size: 8pt;">
-			<%=ordermember.getMEMBER_MOBILE() %>
+			<%=ordermember.getMEMBER_TEL() %>
 		</td>
 	</tr>
 	<tr>
