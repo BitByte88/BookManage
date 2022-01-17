@@ -145,7 +145,7 @@ public class MemberDAO {
 				member.setMEMBER_NAME_KANA(rs.getString("MEMBER_NAME_KANA"));
 				member.setMEMBER_TEL(rs.getString("MEMBER_TEL"));
 				member.setMEMBER_MAIL(rs.getString("MEMBER_MAIL"));
-				member.setMEMBER_ZIPCODE(rs.getString("MEMBER_EMAIL"));
+				member.setMEMBER_ZIPCODE(rs.getString("MEMBER_ZIPCODE"));
 				member.setMEMBER_ADD_1(rs.getString("MEMBER_ADD_1"));
 				member.setMEMBER_ADD_2(rs.getString("MEMBER_ADD_2"));
 				member.setMEMBER_ADD_3(rs.getString("MEMBER_ADD_3"));

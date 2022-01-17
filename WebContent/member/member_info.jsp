@@ -3,7 +3,7 @@
 <%
 	MemberBean member=(MemberBean)request.getAttribute("member");
 	String MEMBER_MAIL=member.getMEMBER_MAIL();
-	String[] email=MEMBER_MAIL.split("@");	//"@"로 구분함
+	String[] email=MEMBER_MAIL.split("@");
 %>
 <html>
 <head>
@@ -15,70 +15,77 @@
 	
 <title>図書管理システム</title>
 <script>
-document.getElementsByName("MEMBER_ADD_1").querySelector("option[value='${member.MEMBER_NAME_KANA }']").selected = true;
+window.onload = function() {
+	document.querySelector('#MEMBER_ADD_1').value = "${member.MEMBER_ADD_1 }";
+}
 
 function check(form){
-	var pass1=infoform.MEMBER_PW.value;
-	var pass2=infoform.MEMBER_PW2.value;
-	var email1=infoform.MEMBER_EMAIL1.value;				
-	var email2=infoform.MEMBER_EMAIL2.value;
-	var tel=infoform.MEMBER_PHONE.value;
-	var addr=infoform.MEMBER_ADDR1.value;
-	var addr_about=infoform.MEMBER_ADDR2.value;
-	var phone=infoform.MEMBER_MOBILE.value;
-	
-	var forms = document.getElementById("infoform");
+	var password1=form.MEMBER_PW1.value;
+	var password2=form.MEMBER_PW2.value;
+	var tel=form.MEMBER_TEL.value;
+	var mail1=form.MEMBER_MAIL1.value;
+	var mail2=form.MEMBER_MAIL2.value;
+	var add_1=form.MEMBER_ADD_1.value;
+	var add_2=form.MEMBER_ADD_2.value;
+	var add_3=form.MEMBER_ADD_3.value;
 
-	if ((forms.MEMBER_NAME.value=="")||(forms.MEMBER_NAME.value.length<=1)){
-		alert("이름을 입력하세요.");
-		forms.MEMBER_NAME.focus();
-        return false;
+	if(password1.length == 0){
+		alert("パスワードを入力してください。");
+		form.MEMBER_PW1.focus();
+		return false;
 	}
-	if(pass1.length == 0){
-		alert("비밀번호를 입력하세요.");
-		infoform.MEMBER_PW.focus();
+	if(password2.length == 0){
+		alert("パスワード確認を入力してください。");
+		form.MEMBER_PW2.focus();
 		return false;
-	} 
-	if(pass1 != pass2){
-		alert("비밀번호가 일치하지 않습니다.");
-		infoform.MEMBER_PW.value="";
-		infoform.MEMBER_PW2.value="";
-		infoform.MEMBER_PW.focus();
+	}
+	if(password1 != password2){
+		alert("パスワードが一致していません。");
+		form.MEMBER_PW1.value="";
+		form.MEMBER_PW2.value="";
+		form.MEMBER_PW1.focus();
+		form.MEMBER_PW2.focus();
 		return false;
-	} 				 
-	if(email1.length == 0 || email2.length == 0){
-		alert("이메일 주소를 입력하세요.");
-		infoform.MEMBER_EMAIL1.focus();
+	}
+	if ((form.MEMBER_NAME.value=="")||(form.MEMBER_NAME.value.length<=1)){
+		alert("氏名を入力してください。");
+		form.MEMBER_NAME.focus();
+		return false;
+	}
+	if ((form.MEMBER_NAME_KANA.value=="")||(form.MEMBER_NAME_KANA.value.length<=1)){
+		alert("氏名（カナ）を入力してください。");
+		form.MEMBER_NAME_KANA.focus();
 		return false;
 	}
 	if(tel.length == 0){
-		alert("집 전화를 입력하세요.");
-		infoform.MEMBER_PHONE.focus();
+		alert("電話番号を入力してください。");
+		form.MEMBER_TEL.focus();
+		return false;
+	}
+	if(mail1.length == 0 || mail2.length ==0){
+		alert("メールアドレスを入力してください。");
+		form.MEMBER_MAIL1.focus();
+		form.MEMBER_MAIL2.focus();
 		return false;
 	} 
-	if((forms.MEMBER_ZIPCODE1.value=="")||(forms.MEMBER_ZIPCODE1.value.length<3)){
-		alert("우편번호 앞의 3자리를 입력해 주세요.");
-      	forms.MEMBER_ZIPCODE1.focus();
-         	return false;
- 		}
- 	if((forms.MEMBER_ZIPCODE2.value=="")||(forms.MEMBER_ZIPCODE2.value.length<3)){
-		alert("우편번호 뒤의 3자리 입력해 주세요.");
-      	forms.MEMBER_ZIPCODE2.focus();
+	if((form.MEMBER_ZIPCODE.value=="")||(form.MEMBER_ZIPCODE.value.length<6)){
+		alert("郵便番号を入力してください。");
+      	form.MEMBER_ZIPCODE.focus();
         return false;
-	}   
-	if(addr.length == 0){
-		alert("집 주소를 입력하세요.");
-		infoform.MEMBER_ADDR1.focus();
+ 	} 
+	if(add_1.length == 0){
+		alert("都道府県を選択してください。");
+		form.MEMBER_ADD_1.focus();
 		return false;
 	} 
-	if(addr_about.length == 0){
-		alert("상세 주소를 입력하세요.");
-		infoform.MEMBER_ADDR2.focus();
+	if(add_2.length == 0){
+		alert("市区町村を入力してください。");
+		form.MEMBER_ADD_2.focus();
 		return false;
-	} 
-	if(phone.length == 0){
-		alert("전화번호를 입력하세요.");
-		infoform.MEMBER_MOBILE.focus();
+	}
+	if(add_3.length == 0){
+		alert("丁目、番地、建物名を入力してください。");
+		form.MEMBER_ADD_3.focus();
 		return false;
 	}
 	
@@ -100,7 +107,7 @@ function gNumCheck(){
 }
 
 function out(){
-	var Answer = confirm("회원탈퇴를 하시겠습니까?");
+	var Answer = confirm("退会しますか");
  		if (Answer == true){ 
  		location.href = "./MemberOut.member";
  	}
@@ -111,11 +118,11 @@ function out(){
 <table width="960" cellspacing="0" cellpadding="0" border="0" align="center">
 <tr>
 <td colspan=2>
-<!-- アカウント情報変更 -->
+<!-- 会員情報変更 -->
 <p align="center">
 <form action="./MemberModifyAction_2.member" method="post" name="infoform" 
 		onsubmit="return check(this)">
-<table border="1" width="80%" height="80%">
+<table width="100%" height="80%">
 	<tr>
 		<td bgcolor="#f5f5f5">
 			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;アカウント</font>
@@ -130,7 +137,7 @@ function out(){
 		</td>
 		<td>
 			&nbsp;&nbsp;&nbsp;
-			<input type="password" name="MEMBER_PW" size="15"/>
+			<input type="password" name="MEMBER_PW1" size="15"/>
 		</td>
 	</tr>
 	<tr>
@@ -143,10 +150,10 @@ function out(){
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor="#f5f5f5">&nbsp;</td>
+		<td>&nbsp;</td>
 		<td>
 		<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;
-		(아이디와 비밀번호는 문자와 숫자를 조합하여 2~12자리로 만들어 주세요)</font>
+		（アカウント／パスワードは英字、数字を組み合わせ２～１２桁で作成お願いします。）</font>
 		</td>
 	</tr>
 	<tr>
@@ -187,7 +194,7 @@ function out(){
 		&nbsp;&nbsp;&nbsp;
 		<input type="text" name="MEMBER_MAIL1" size="15" 
 			value="<%=email[0].trim() %>" /> @ 
-		<input type="text" name="MEMBER_MAIL2" size="15" 
+		<input type="text" name="MEMBER_MAIL2" size="20" 
 			value="<%=email[1].trim() %>" />
 		</td>
 	</tr>
@@ -210,7 +217,7 @@ function out(){
 		</td>
 		<td>
 			&nbsp;&nbsp;&nbsp;
-			<select name="MEMBER_ADD_1">
+			<select id="MEMBER_ADD_1" name="MEMBER_ADD_1">
 				<option value="北海道" >北海道</option>
 				<option value="青森県">青森県</option>
 				<option value="岩手県">岩手県</option>
@@ -286,13 +293,13 @@ function out(){
 <table width="80%">
 	<tr>
 		<td align="center">
-			<br/><input type="submit" value="회원정보 수정" />
-			<input type="button" value="회원 탈퇴" name="bt" onclick="out()" />
+			<br/><input type="submit" value="会員情報変更" />
+			<input type="button" value="退会" name="bt" onclick="out()" />
 		</td>
 	</tr>
 </table>
 </form>
-<!-- 개인정보 수정 -->
+<!-- 会員情報変更 -->
 </td>
 </tr>	
 </table>

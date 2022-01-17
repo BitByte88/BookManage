@@ -199,7 +199,7 @@ function gNumCheck(){
 		<td>
 			&nbsp;&nbsp;&nbsp;
 			<input type="text" name="MEMBER_MAIL1" size="15" placeholder="tosyo"/>@
-			<input type="text" name="MEMBER_MAIL2" size="15" placeholder="nuvo.co.jp"/> 
+			<input type="text" name="MEMBER_MAIL2" size="20" placeholder="nuvo.co.jp"/> 
 		</td>
 		</tr>
 		<tr>

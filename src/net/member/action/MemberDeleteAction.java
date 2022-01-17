@@ -21,17 +21,14 @@ public class MemberDeleteAction implements Action{
 			int check=memberdao.deleteMember(id, pass);
 			
 			if(check == 1){
-				
 				session.invalidate();
-				
 				forward.setPath("./member/member_out_ok.jsp"); 
-				
 			}else{
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
-				out.println("alert('��й�ȣ�� �����ʽ��ϴ�.');");
-				out.println("history.book(-1);");
+				out.println("alert('パスワードが一致していません。');");
+				out.println("history.back();");
 				out.println("</script>");
 				out.close();
 				forward=null;

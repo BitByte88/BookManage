@@ -24,7 +24,7 @@ public class MemberModifyAction_2 implements Action{
 		MemberBean dto=new MemberBean();
 		
 		dto.setMEMBER_ID(id);
-		dto.setMEMBER_PW(request.getParameter("MEMBER_PW"));
+		dto.setMEMBER_PW(request.getParameter("MEMBER_PW1"));
 		dto.setMEMBER_NAME(request.getParameter("MEMBER_NAME"));
 		dto.setMEMBER_NAME_KANA(request.getParameter("MEMBER_NAME_KANA"));
 		dto.setMEMBER_TEL(request.getParameter("MEMBER_TEL"));
@@ -38,9 +38,10 @@ public class MemberModifyAction_2 implements Action{
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('ȸ������ ������ �����Ͽ����ϴ�.');");
-		out.println("</script>");
-		forward.setPath("./MemberModifyAction_1.member"); 			
+		out.println("alert('会員情報を変更しました。');");
+		out.println("location.href='./MemberModifyAction_1.member';");
+		out.println("</script>");			
+		out.close();				
 		return forward;
 	}
 }
