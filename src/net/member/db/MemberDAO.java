@@ -297,29 +297,25 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public List searchZipcode(String searchdong){
-		String sql="select * from zipcode where dong like ?";
+	public List searchZipcode(String zipcode){
+		String sql="select * from zipcode where ZIPCODE like ?";
 		List zipcodeList=new ArrayList();
 		
 		try{
 			con = ds.getConnection();
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, "%"+searchdong+"%");
+			pstmt.setString(1, "%"+zipcode+"%");
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
-				String sido=rs.getString("sido");
-				String gugun=rs.getString("gugun");
-				String dong=rs.getString("dong");  
-				String ri=rs.getString("ri"); 
-				String bunji=rs.getString("bunji");
-				if(ri == null) ri="";
-				if(bunji == null) bunji="";
+				String add_1=rs.getString("ADD_1");
+				String add_2=rs.getString("ADD_2");
+				String add_3=rs.getString("ADD_3");  
 				
-				String zipcode=rs.getString("zipcode");
-				String addr=sido+ " "+gugun+ " "+dong+ " "+ri+ " "+bunji;
+				String zipcodeResult=rs.getString("ZIPCODE");
+				String addr=add_1+add_2+add_3;
 				
-				zipcodeList.add(zipcode+","+addr);
+				zipcodeList.add(zipcodeResult+","+add_1+"-"+add_2+"-"+add_3);
 			}
 			
 			

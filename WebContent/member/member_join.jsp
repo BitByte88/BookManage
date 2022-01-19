@@ -108,7 +108,7 @@ function openZipcode(joinform){
 	open(url, "confirm", "toolbar=no,location=no,"
 						+"status=no,menubar=no,"
 						+"scrollbars=yes,resizable=no,"
-						+"width=410,height=400");
+						+"width=500,height=400");
 }	
 
 function gNumCheck(){

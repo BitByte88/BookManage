@@ -11,8 +11,8 @@ public class MemberZipcodeAction implements Action{
 		ActionForward forward=new ActionForward();
 		MemberDAO memberdao=new MemberDAO();
 		List zipcodeList=new ArrayList();
-		String searchdong=request.getParameter("dong");
-		zipcodeList=memberdao.searchZipcode(searchdong);
+		String searchZipcode=request.getParameter("zipcode");
+		zipcodeList=memberdao.searchZipcode(searchZipcode);
 		request.setAttribute("zipcodelist", zipcodeList);
 		forward.setPath("./member/member_zipcode.jsp"); 
 		return forward;

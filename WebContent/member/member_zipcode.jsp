@@ -1,21 +1,29 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="java.util.*"%>
 <%
-	String addr="";
 	String zipcode="";
-	String zip1="";
-	String zip2="";	
+	String addr="";
+	String add_1="";
+	String add_2="";
+	String add_3="";
 	List zipcodeList=(ArrayList)request.getAttribute("zipcodelist");
 %>
 
 <html>
 <head>
-<title>쇼핑몰</title>
+	<link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon"> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
+	
+<title>郵便番号検索</title>
 <script>
-function setZipcode(zip1,zip2,addr){
-	opener.document.forms[0].MEMBER_ZIPCODE1.value=zip1;
-	opener.document.forms[0].MEMBER_ZIPCODE2.value=zip2;
-	opener.document.forms[0].MEMBER_ADDR1.value=addr;
+function setZipcode(zipcode,add_1,add_2,add_3){
+	opener.document.forms[0].MEMBER_ZIPCODE.value=zipcode;
+	opener.document.forms[0].MEMBER_ADD_1.value=add_1;
+	opener.document.forms[0].MEMBER_ADD_2.value=add_2;
+	opener.document.forms[0].MEMBER_ADD_3.value=add_3;
 	self.close();
 }
 </script>
@@ -25,7 +33,7 @@ function setZipcode(zip1,zip2,addr){
 <table width="370" border="0" cellspacing="0" cellpadding="5">
 	<tr align="center">
 		<td align="center">
-			<font color="#ff4500">-우편번호 검색-</font><br>
+			<font color="#ff4500">郵便番号検索</font><br>
 		</td>
 	</tr>
 </table>
@@ -33,10 +41,10 @@ function setZipcode(zip1,zip2,addr){
 <table width="370" border="0" cellspacing="0" cellpadding="5">
 	<tr align="center">
 		<td align="center">
-			<font size="2">지역명 : </font>
-			<input type="text" name="dong"/>
-			<input type="submit" value="검색"><br>
-			<font size="2">동을 입력하세요.(예:방배, 원천, 2글자 이상입력)</font>
+			<font size="2">郵便番号： </font>
+			<input type="text" name="zipcode" placeholder="1230123"/>
+			<input type="submit" value="検索"><br>
+			<font size="2">郵便番号を入力してください。（2桁以上入力）</font>
 		</td>
 	</tr>
 </table>
@@ -44,7 +52,7 @@ function setZipcode(zip1,zip2,addr){
 <br>
 <table width="370" border="0" cellspacing="0" cellpadding="5">
 <tr height="35">
-	<td align="center" colspan="2">-검색결과-</td>
+	<td align="center" colspan="2">検索結果</td>
 </tr>
 <%	
 	if(zipcodeList!=null && zipcodeList.size()!=0){	
@@ -55,21 +63,22 @@ function setZipcode(zip1,zip2,addr){
 			zipcode=st.nextToken();
 			addr=st.nextToken();
 			
-			zip1=zipcode.split("-")[0];
-			zip2=zipcode.split("-")[1];
+			add_1=addr.split("-")[0];
+			add_2=addr.split("-")[1];
+			add_3=addr.split("-")[2];
 %>
 <tr>
 	<td width="20%">
-	<a href="#"	onclick="setZipcode(<%=zip1%>,<%=zip2%>,'<%=addr %>')">
+	<a href="#"	onclick="setZipcode('<%=zipcode%>','<%=add_1 %>','<%=add_2 %>','<%=add_3 %>')">
 		<font size="2"><%=zipcode%></font>
 	</a>
 	</td>
-	<td width="80%"><font size="2"><%=addr %></font></td>
+	<td width="80%"><font size="2"><%=add_1+add_2+add_3 %></font></td>
 </tr>
 <%		}
 	}else{ %>
 <tr>
-	<td colspan="2" align="center">검색 결과가 없습니다.</td>
+	<td colspan="2" align="center">検索結果がありません。</td>
 </tr>
 <%	}%>
 </table>

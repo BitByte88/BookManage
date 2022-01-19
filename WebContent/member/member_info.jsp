@@ -95,7 +95,7 @@ function check(form){
 function openzipcode(joinform){			
 	var url="./Zipcode.member";	
 	open(url, "confirm", "toolbar=no,location=no,status=no,menubar=no,"+
-						 "scrollbars=yes,resizable=no,width=410,height=400");
+						 "scrollbars=yes,resizable=no,width=500,height=400");
 }
 
 function gNumCheck(){
