@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
-	String category=(String) request.getAttribute("category");
-	String price=(String) request.getAttribute("price");
 	int nowpage=1;
 	if(request.getParameter("page")!=null){
 		nowpage=Integer.parseInt(request.getParameter("page"));
@@ -22,13 +20,18 @@
 <head>
 <title>쇼핑몰</title>
 <script>
-function searchPrice(item,searchprice) {
-	if (searchprice!="all") {
-		window.location.href=
-		"BookList.book?item="+item+"&page=1&searchprice="+searchprice;
-	} else {
-		window.location.href="BookList.book?item="+item+"&page=1";
+function check(){
+	var title=searchform.title.value;
+	var publisher=searchform.publisher.value;
+	var startDate=searchform.startDate.value;
+	var endDate=searchform.endDate.value;
+	
+	if(title.length == 0 && publisher.length == 0 && startDate.length == 0 && endDate.length == 0){
+		alert("入力内容が存在しません。");
+		return false;
 	}
+	
+	return true;
 }
 </script>
 </head>
@@ -36,44 +39,43 @@ function searchPrice(item,searchprice) {
 	<table width="960" cellspacing="0" cellpadding="0" border="0" 
 		align="center">
 	<tr>
+	<td>
+		<form action="./BookList.book" method=post name=searchform onsubmit="return check()" accept-charset="UTF-8">
+			<table width="700" cellspacing="0" cellpadding="0" border="0" align="center">
+			<tr>
+			<td>タイトル：</td>
+			<td><input type="text" name="title" maxlength="20" size="20" value="${search.BOOK_NAME}"></td>
+			</tr>
+			<tr>
+			<td>出版社 ：</td>
+			<td><input type="text" name="publisher" maxlength="20" size="20" value="${search.BOOK_PUBLISHER}"></td>
+			</tr>
+			<tr>
+			<td>出版日時：</td>
+			<td><input type="text" name="startDate" placeholder="2022/01/01" maxlength="10" size="10" value="${search.START_DATE}"> - <input type="text" placeholder="2022/01/31" name="endDate" maxlength="10" size="10" value="${search.END_DATE}">			</td>
+			</tr>
+			<tr>
+			<td></td>
+			<td><input style="float: right;" type="submit" value="検索"></td>
+			</tr>
+			</table>
+		</form>
+	</td>
+	</tr>
+	<tr>
 	<td colspan=2>
-	<table width=700 height="460" border="0" align="center">
-		<tr valign="middle">
-			<td height="50" width="700" align="right" valign="middle" 
-				colspan="4">
-			-상품 목록-&nbsp;
-			<a href="javascript:searchPrice('<%=category%>','1~3')">
-			[3만원 미만]
-			</a>
-			<a href="javascript:searchPrice('<%=category%>','3~5')">
-			[3~5만원]
-			</a>
-			<a href="javascript:searchPrice('<%=category%>','5~7')">
-			[5~7만원]
-			</a>
-			<a href="javascript:searchPrice('<%=category%>','7~10')">
-			[7~10만원]
-			</a>
-			<a href="javascript:searchPrice('<%=category%>','10')">
-			[10만원 이상]
-			</a>
-			<a href="javascript:searchPrice('<%=category%>','all')">
-			[전체 보기]
-			</a>
-			</td>
-		</tr>
-		
+	<table width=700 height="460" border="0" align="center">	
 		<tr>
 		<td valign="top">
-		<!-- 상품 리스트 -->
+		<!-- 図書リスト -->
 		<table border="0">
 		<tr>	   
 		   <c:choose> 
 				<c:when test=
-					"${requestScope.itemList[0].BOOK_NUM==null}">
+					"${requestScope.itemList[0].BOOK_NO==null}">
 					<tr>
 					<td width="700" height="300" align="center">
-					등록된 글이 없습니다.
+					登録された本がありません。
 					</td>
 					</tr>
 				</c:when>
@@ -83,44 +85,13 @@ function searchPrice(item,searchprice) {
 				<td width="180" valign="top" >
 				<br>
 				<div align="center">
-				<%if(category.equals("new_item")) { 
-			      	if(price.equals("no")) {
-				%>
 				<a href="Book_Detail.book?item=${item.BOOK_CATEGORY}
-						&gr_book_num=${item.BOOK_NUM}&isitem=new">
-				<%	}else{ %>
-				<a href="Book_Detail.book?item=${item.BOOK_CATEGORY}
-						&gr_book_num=${item.BOOK_NUM}
-						&isitem=new&price=${price}">
-				<% 	}
-			      }else if (category.equals("hit_item")) { 
-			      	if(price.equals("no")) {
-			 	%>
-				<a href="Book_Detail.book?item=${item.BOOK_CATEGORY}
-						&gr_book_num=${item.BOOK_NUM}&isitem=hit">
-				<% 	}else{ %>
-				<a href="Book_Detail.book?item=${item.BOOK_CATEGORY}
-						&gr_book_num=${item.BOOK_NUM}
-						&isitem=hit&price=${price}">
-				<%	}
-			      } else { 
-					if(price.equals("no")) {
-				%>
-				<a href="Book_Detail.book?item=${item.BOOK_CATEGORY}
-						&gr_book_num=${item.BOOK_NUM}&isitem=other">
-				<% 	}else{ %>
-				<a href="Book_Detail.book?item=${item.BOOK_CATEGORY}
-						&gr_book_num=${item.BOOK_NUM}
-						&isitem=other&price=${price}">
-				<%	}
-				 }
-				%>
-			 	
+						&gr_book_no=${item.BOOK_NO}">
 			 	<img src="./upload/${fn:trim(item.BOOK_IMAGE)}" 
 			 		width="130" height="130" border="0"/>
 			 	<br/>${item.BOOK_NAME}<br/>
 				</a>
-				<br/><b>${item.BOOK_PRICE}원</b>
+				<br/><b>${item.BOOK_PRICE}円</b>
 				</div>
 				<br>
 				</td>
@@ -129,7 +100,7 @@ function searchPrice(item,searchprice) {
 			</c:choose>
 		</tr>
 		</table>
-		<!-- 상품 리스트 -->
+		<!-- 図書リスト -->
 		</td>
 		</tr>
 		<tr>
@@ -138,32 +109,23 @@ function searchPrice(item,searchprice) {
 		<%
 		if (count>0) {
 			if (startPage>10) { %>
-			<a href="BookList.book?item=<%=category%>&
-					page=<%=startPage-1%>">[이전]</a>
+			<a href="BookList.book?page=<%=startPage-1%>">[前へ]</a>
 			<% }
 			for (int i=startPage;i<=endPage ; i++) { 
 				if (i==nowpage) {   %>
 				<font color=red>[<%=i%>]</font>
-				<% } else { 
-					if (price.equals("no")) {
-				%>
-					<a href="BookList.book?item=<%=category%>
-						&page=<%=i%>">[<%=i%>]</a>
-					<% } else { %>  
-					<a href="BookList.book?item=<%=category%>
-						&page=<%=i%>&searchprice=<%=price%>">[<%=i%>]</a>
+				<% } else { %>  
+					<a href="BookList.book?page=<%=i%>">[<%=i%>]</a>
 					<%
 			 		 }
 				}
-			}
 			if (endPage<pageCount) { %>
-			<a href="BookList.book?item=<%=category%>
-					&page=<%=endPage+1%>">[다음]</a>
+			<a href="BookList.book?page=<%=endPage+1%>">[次へ]</a>
 			<%
 			}
 		}
 		%>			
-		<!-- 페이징 -->
+		<!-- ページング -->
 		</td>
 		</tr>
 		</table>

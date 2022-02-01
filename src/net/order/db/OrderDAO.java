@@ -171,7 +171,7 @@ public class OrderDAO {
 				pstmt.setString(2,sdf.format(
 						cal.getTime()).toString()+ "-" + ordernum);
 				pstmt.setString(3, " ");
-				pstmt.setInt(4, book.getBOOK_NUM());
+				pstmt.setInt(4, book.getBOOK_NO());
 				pstmt.setString(5, book.getBOOK_NAME());
 				pstmt.setInt(6, cart.getCART_BOOK_AMOUNT());
 				pstmt.setString(7, cart.getCART_BOOK_SIZE());

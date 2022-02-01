@@ -3,23 +3,22 @@ package net.book.db;
 import java.sql.Timestamp;
 
 public class BookBean {
-	private int BOOK_NUM;
+	private int BOOK_NO;
 	private String BOOK_CATEGORY;
 	private String BOOK_NAME;
+	private String BOOK_WRITER;
+	private String BOOK_PUBLISHER;
+	private Timestamp BOOK_PUBLISHING_DATE;
 	private String BOOK_CONTENT;
-	private String BOOK_SIZE;
-	private String BOOK_COLOR;
-	private int BOOK_AMOUNT;
 	private int BOOK_PRICE;
 	private String BOOK_IMAGE;
-	private int BOOK_BEST;
-	private Timestamp BOOK_DATE;
+	private String BOOK_ISBN;
 	
-	public int getBOOK_NUM() {
-		return BOOK_NUM;
+	public int getBOOK_NO() {
+		return BOOK_NO;
 	}
-	public void setBOOK_NUM(int book_num) {
-		BOOK_NUM = book_num;
+	public void setBOOK_NO(int book_no) {
+		BOOK_NO = book_no;
 	}
 	public String getBOOK_CATEGORY() {
 		return BOOK_CATEGORY;
@@ -33,29 +32,29 @@ public class BookBean {
 	public void setBOOK_NAME(String book_name) {
 		BOOK_NAME = book_name;
 	}
+	public String getBOOK_WRITER() {
+		return BOOK_WRITER;
+	}
+	public void setBOOK_WRITER(String book_writer) {
+		BOOK_WRITER = book_writer;
+	}
+	public String getBOOK_PUBLISHER() {
+		return BOOK_PUBLISHER;
+	}
+	public void setBOOK_PUBLISHER(String book_publisher) {
+		BOOK_PUBLISHER = book_publisher;
+	}
+	public Timestamp getBOOK_PUBLISHING_DATE() {
+		return BOOK_PUBLISHING_DATE;
+	}
+	public void setBOOK_PUBLISHING_DATE(Timestamp book_publishing_date) {
+		BOOK_PUBLISHING_DATE = book_publishing_date;
+	}
 	public String getBOOK_CONTENT() {
 		return BOOK_CONTENT;
 	}
 	public void setBOOK_CONTENT(String book_content) {
 		BOOK_CONTENT = book_content;
-	}
-	public String getBOOK_SIZE() {
-		return BOOK_SIZE;
-	}
-	public void setBOOK_SIZE(String book_size) {
-		BOOK_SIZE = book_size;
-	}
-	public String getBOOK_COLOR() {
-		return BOOK_COLOR;
-	}
-	public void setBOOK_COLOR(String book_color) {
-		BOOK_COLOR = book_color;
-	}
-	public int getBOOK_AMOUNT() {
-		return BOOK_AMOUNT;
-	}
-	public void setBOOK_AMOUNT(int book_amount) {
-		BOOK_AMOUNT = book_amount;
 	}
 	public int getBOOK_PRICE() {
 		return BOOK_PRICE;
@@ -69,16 +68,10 @@ public class BookBean {
 	public void setBOOK_IMAGE(String book_image) {
 		BOOK_IMAGE = book_image;
 	}
-	public int getBOOK_BEST() {
-		return BOOK_BEST;
+	public String getBOOK_ISBN() {
+		return BOOK_ISBN;
 	}
-	public void setBOOK_BEST(int book_best) {
-		BOOK_BEST = book_best;
-	}
-	public Timestamp getBOOK_DATE() {
-		return BOOK_DATE;
-	}
-	public void setBOOK_DATE(Timestamp book_date) {
-		BOOK_DATE = book_date;
+	public void setBOOK_ISBN(String book_isbn) {
+		BOOK_ISBN = book_isbn;
 	}
 }

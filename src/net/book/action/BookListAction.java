@@ -1,18 +1,23 @@
 package net.book.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.admin.book.db.BookBean;
 import net.book.db.*;
 
 public class BookListAction implements Action{
 	public ActionForward execute(HttpServletRequest request,
-			HttpServletResponse response){
+			HttpServletResponse response) throws IOException{
 		ActionForward forward=new ActionForward();
 		BookDAO bookdao=new BookDAO();
-		
+		request.setCharacterEncoding("UTF-8");
 		List itemList=null;
 		String item=null;
 		String price="";
@@ -22,17 +27,35 @@ public class BookListAction implements Action{
 			page=Integer.parseInt(request.getParameter("page"));
 		}
 		
-		item=request.getParameter("item");
+		SearchBean searchBean = new SearchBean();
+		searchBean.setBOOK_NAME(request.getParameter("title"));
+		searchBean.setBOOK_PUBLISHER(request.getParameter("publisher"));
+		searchBean.setSTART_DATE(request.getParameter("startDate"));
+		searchBean.setEND_DATE(request.getParameter("endDate"));
+
+		//出版日時形式チェック
+		SimpleDateFormat dateFormatParser = new SimpleDateFormat("yyyy/MM/dd"); 
+        dateFormatParser.setLenient(false); 
+        try {
+        	if(searchBean.getSTART_DATE() != null && !searchBean.getSTART_DATE().isEmpty()) {
+			dateFormatParser.parse(searchBean.getSTART_DATE());
+        	}
+        	if(searchBean.getEND_DATE() != null && !searchBean.getEND_DATE().isEmpty()) {
+			dateFormatParser.parse(searchBean.getEND_DATE());
+        	}
+		} catch (ParseException e1) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('出版日時の形式を確認してください。');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+			return null;
+		} 
 		
-		if (request.getParameter("searchprice")==null || 
-				request.getParameter("searchprice").equals("")) {
-			itemList= bookdao.item_List(item,page);
-			count=bookdao.getCount(item);
-		} else {
-			price=request.getParameter("searchprice");
-			itemList= bookdao.item_List(item,page,price);
-			count=bookdao.getCount(item, price);
-		}
+		itemList= bookdao.item_List(page,searchBean);
+		count=bookdao.getCount(item);
 		
 		int pageSize=12;
 		int pageCount=count/pageSize+(count % pageSize==0?0:1);
@@ -44,6 +67,7 @@ public class BookListAction implements Action{
 		request.setAttribute("category", item);
 		request.setAttribute("count", count);
 		request.setAttribute("price", price);
+		request.setAttribute("search", searchBean);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
