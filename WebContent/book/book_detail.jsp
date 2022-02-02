@@ -201,17 +201,17 @@ function count_change(temp){
 				<tr>
 					<td>
 					<%
-					if (prevpage.getBOOK_NUM() != 0) {
+					if (prevpage.getBOOK_NO() != 0) {
 						if (price.equals("no")) {
 					%>
 						<a href="Book_Detail.book?search=prev
-						&gr_book_num=<%=itemArray.getBOOK_NUM()%>
+						&gr_book_num=<%=itemArray.getBOOK_NO()%>
 						&item=<%=category%>">
 					<%
 						} else {
 					%> 
 						<a href="Book_Detail.book?search=prev
-						&gr_book_num=<%=itemArray.getBOOK_NUM()%>
+						&gr_book_num=<%=itemArray.getBOOK_NO()%>
 						&item=<%=category%>&price=<%=price%>">
 					<%
 						}
@@ -232,7 +232,7 @@ function count_change(temp){
 					%>
 					<td width="100" align="right">
 					<%
-					if (nextpage.getBOOK_NUM() != 0) {
+					if (nextpage.getBOOK_NO() != 0) {
 					%>
 						<div align="center">
 						<img
@@ -246,13 +246,13 @@ function count_change(temp){
 						if (price.equals("no")) {
 					%>
 						<a href="Book_Detail.book?search=next
-						&gr_book_num=<%=itemArray.getBOOK_NUM()%>
+						&gr_book_num=<%=itemArray.getBOOK_NO()%>
 						&item=<%=category%>">
 					<%
 						} else {
 					%>
 						<a href="Book_Detail.book?search=next
-						&gr_book_num=<%=itemArray.getBOOK_NUM()%>
+						&gr_book_num=<%=itemArray.getBOOK_NO()%>
 						&item=<%=category%>&price=<%=price%>">
 					<%
 						}

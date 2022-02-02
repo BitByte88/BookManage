@@ -40,7 +40,7 @@ public class BookDetailAction implements Action {
 			if (request.getParameter("search").equals("next")) {
 				next_Bean = bookdao.findDetail(
 						gr_book_num, item, price,"next");
-				nextpage = next_Bean.getBOOK_NUM();
+				nextpage = next_Bean.getBOOK_NO();
 				itemArray = bookdao.findDetailList(nextpage, item);
 				isnextpage = bookdao.findDetail(
 						nextpage, item, price,"next");
@@ -49,7 +49,7 @@ public class BookDetailAction implements Action {
 			}else if (request.getParameter("search").equals("prev")){
 				prev_Bean = bookdao.findDetail(
 						gr_book_num, item,price,"prev");
-				prevpage = prev_Bean.getBOOK_NUM();
+				prevpage = prev_Bean.getBOOK_NO();
 				itemArray = bookdao.findDetailList(prevpage, item);
 				isnextpage = bookdao.findDetail(
 						prevpage, item, price,"next");
