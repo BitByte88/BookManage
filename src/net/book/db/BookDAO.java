@@ -109,62 +109,20 @@ public class BookDAO {
 
 	
 	
-	public BookBean findDetail(int book_num, String item, 
-			String price,String direction) {
+	public BookBean findDetail(int book_no,String direction) {
 		BookBean book=new BookBean();
 		
 		int firstprice=0;
 		int secondprice=0;
 		
-		if(price.equals("1~3")) {
-			firstprice=1;
-			secondprice=29999;
-		} else if (price.equals("3~5")) {
-			firstprice=30000;
-			secondprice=49999;
-			
-		} else if (price.equals("5~7")) {
-			firstprice=50000;
-			secondprice=69999;
-		} else if (price.equals("7~10")) {
-			firstprice=70000;
-			secondprice=99999;
-		} else if (price.equals("10")){
-			firstprice=100000;
-			secondprice=999999;
-		}
-		
 		StringBuffer dQuery = new StringBuffer();
 		if(direction.equals("next")){
-			dQuery.append("SELECT BOOK_NUM, BOOK_CATEGORY, ");
-			dQuery.append("BOOK_IMAGE, BOOK_NAME FROM BOOK ");
-			dQuery.append("WHERE BOOK_NUM>? AND ");
-			if(item.equals("new_item")) {
-				dQuery.append("BOOK_DATE>=DATE_SUB(SYSDATE(), INTERVAL 7 DAY) ");
-			} else if (item.equals("hit_item")) {
-				dQuery.append(" BOOK_BEST=1 ");
-			} else {
-				dQuery.append(" BOOK_CATEGORY=? ");			
-			}
-			if (!price.equals("no")) {
-				dQuery.append("AND (BOOK_PRICE BETWEEN ? AND ? ) ");
-			}
+			dQuery.append("SELECT * FROM BOOK ");
+			dQuery.append("WHERE BOOK_NO > ? ");
 		}else if(direction.equals("prev")){
-			dQuery.append(
-			"SELECT BOOK_NUM, BOOK_CATEGORY, BOOK_IMAGE, ");
-			dQuery.append(
-			"BOOK_NAME FROM BOOK WHERE BOOK_NUM<? AND ");
-			if(item.equals("new_item")) {
-				dQuery.append("BOOK_DATE<=DATE_SUB(SYSDATE(), INTERVAL 7 DAY) ");
-			} else if (item.equals("hit_item")) {
-				dQuery.append("BOOK_BEST=1 ");
-			} else {
-				dQuery.append("BOOK_CATEGORY=? ");			
-			}
-			if (!price.equals("no")) {
-				dQuery.append("AND (BOOK_PRICE BETWEEN ? AND ? ) ");
-			}
-			dQuery.append("ORDER BY BOOK_NUM DESC ");
+			dQuery.append("SELECT * FROM BOOK ");
+			dQuery.append("WHERE BOOK_NO < ? ");
+			dQuery.append("ORDER BY BOOK_NO DESC ");
 		}
 		
 		try {
@@ -173,25 +131,7 @@ public class BookDAO {
 				ResultSet.TYPE_SCROLL_INSENSITIVE,
 				ResultSet.CONCUR_READ_ONLY );
 			
-			if (item.equals("new_item") || item.equals("hit_item")){
-				if (price.equals("no")) {
-					pstmt.setInt(1, book_num);
-				} else {
-					pstmt.setInt(1, book_num);
-					pstmt.setInt(2, firstprice);
-					pstmt.setInt(3, secondprice);
-				}
-			} else {
-				if (price.equals("no")) {
-					pstmt.setInt(1, book_num);
-					pstmt.setString(2, item);
-				} else{
-					pstmt.setInt(1, book_num);
-					pstmt.setString(2, item);
-					pstmt.setInt(3, firstprice);
-					pstmt.setInt(4, secondprice);
-				}
-			}
+					pstmt.setInt(1, book_no);
 			
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -217,7 +157,7 @@ public class BookDAO {
 		return book;	
 	}
 	
-	public BookBean findDetailList(int book_num, String item){
+	public BookBean findDetailList(int book_num){
 		BookBean book=new BookBean();
 		
 		try {
@@ -225,7 +165,7 @@ public class BookDAO {
 			StringBuffer dQuery = new StringBuffer();
 		
 			dQuery.append("SELECT * ");		
-			dQuery.append("FROM BOOK WHERE BOOK_NUM=? ");
+			dQuery.append("FROM BOOK WHERE BOOK_NO=? ");
 			
 			pstmt = con.prepareStatement(dQuery.toString(), 
 				ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -235,17 +175,17 @@ public class BookDAO {
 			rs = pstmt.executeQuery();			
 			
 			if (rs.next()) {	
-				book.setBOOK_NO(rs.getInt("BOOK_NUM"));
-				book.setBOOK_CATEGORY(
-						rs.getString("BOOK_CATEGORY"));
+				book.setBOOK_NO(rs.getInt("BOOK_NO"));
+				book.setBOOK_CATEGORY(rs.getString("BOOK_CATEGORY"));
 				book.setBOOK_NAME(rs.getString("BOOK_NAME"));
-				book.setBOOK_CONTENT(
-						rs.getString("BOOK_CONTENT"));
+				book.setBOOK_WRITER(rs.getString("BOOK_WRITER"));
+				book.setBOOK_PUBLISHER(rs.getString("BOOK_PUBLISHER"));
+				book.setBOOK_PUBLISHING_DATE(rs.getTimestamp("BOOK_PUBLISHING_DATE"));
+				book.setBOOK_CONTENT(rs.getString("BOOK_CONTENT"));
 				book.setBOOK_PRICE(rs.getInt("BOOK_PRICE"));
-				book.setBOOK_IMAGE(rs.getString("BOOK_IMAGE"));			
+				book.setBOOK_IMAGE(rs.getString("BOOK_IMAGE"));		
+				book.setBOOK_ISBN(rs.getString("BOOK_ISBN"));	
 			}
-			
-
 			return book;
 		} catch(SQLException e) {
 			e.printStackTrace();

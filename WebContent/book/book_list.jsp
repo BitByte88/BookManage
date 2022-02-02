@@ -18,7 +18,7 @@
 
 <html>
 <head>
-<title>쇼핑몰</title>
+<title>図書管理システム</title>
 <script>
 function check(){
 	var title=searchform.title.value;
@@ -85,8 +85,7 @@ function check(){
 				<td width="180" valign="top" >
 				<br>
 				<div align="center">
-				<a href="Book_Detail.book?item=${item.BOOK_CATEGORY}
-						&gr_book_no=${item.BOOK_NO}">
+				<a href="Book_Detail.book?&gr_book_no=${item.BOOK_NO}">
 			 	<img src="./upload/${fn:trim(item.BOOK_IMAGE)}" 
 			 		width="130" height="130" border="0"/>
 			 	<br/>${item.BOOK_NAME}<br/>

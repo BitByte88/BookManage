@@ -5,16 +5,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 	BookBean itemArray = (BookBean) request.getAttribute("itemArray");
-	String category = (String) request.getAttribute("item");
-	String price = (String) request.getAttribute("price");
-
 	BookBean prevpage = (BookBean) request.getAttribute("prevpage");
 	BookBean nextpage = (BookBean) request.getAttribute("nextpage");
 %>
 
 <html>
 <head>
-<title>쇼핑몰</title>
+<title>図書管理システム</title>
 <script>
 function isBuy(bookform) {
 	if (document.bookform.size.value=="") {
@@ -77,27 +74,17 @@ function count_change(temp){
 <table width="960" cellspacing="0" cellpadding="0" border="0"
 	align="center">
 	<tr>
-		<td colspan=2 align=center><!-- 상품 내용 -->
+		<td colspan=2 align=center><!-- 商品内容 -->
 		<form name="bookform" action="#" method="post">
-		<input type="hidden" name="booknum" 
-			value="${itemArray.BOOK_NUM }">
-		<input type="hidden" name="item"
-			value="<%=request.getParameter("item") %>"> 
-		<input type="hidden" name="gr_book_num"
-			value="<%=request.getParameter("gr_book_num") %>">
-		<input type="hidden" name="isitem"
-			value="<%=request.getParameter("isitem") %>">
+		<input type="hidden" name="bookno" 
+			value="${itemArray.BOOK_NO }">
 		<input type="hidden" name="order" value="book">
-		<input type="hidden" name="price" 
-			value="<%=itemArray.getBOOK_PRICE() %>">
-		<input type="hidden" name="bookname" 
-			value="<%=itemArray.getBOOK_NAME() %>"> 
-		<input type="hidden" name="bookimage"
-			value="${fn:trim(mainImage)}">
-		
+		<input type="hidden" name="price" value="<%=itemArray.getBOOK_PRICE() %>">
+		<input type="hidden" name="bookname" value="<%=itemArray.getBOOK_NAME() %>"> 
+		<input type="hidden" name="bookimage" value="${fn:trim(mainImage)}">
 		<table width="600" border="0" align="center">
 		<tr>
-			<td height="60" colspan="2">상 세 보 기</td>
+			<td height="60" colspan="2">詳細</td>
 		</tr>
 		<tr>
 			<td width="303" height="223" align="center" valign="middle">
@@ -112,11 +99,11 @@ function count_change(temp){
 					</td>
 				</tr>
 				<tr>
-					<td>판매가격 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
-					<td colspan="3">${itemArray.BOOK_PRICE} 원</td>
+					<td>販売価格 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+					<td colspan="3">${itemArray.BOOK_PRICE} 円</td>
 				</tr>
 				<tr>
-					<td rowspan="2">수량
+					<td rowspan="2">本数
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
 					</td>
@@ -130,7 +117,7 @@ function count_change(temp){
 							<a href="JavaScript:count_change(0)">▲</a>
 						</div>
 					</td>
-					<td width="69" rowspan="2" align="left">개</td>
+					<td width="69" rowspan="2" align="left">本</td>
 				</tr>
 				<tr>
 					<td valign="top">
@@ -140,51 +127,15 @@ function count_change(temp){
 					</td>
 				</tr>
 				<tr>
-					<td align="left" colspan="4" height="30" 
-						valign="middle">
-						남은수량(${itemArray.BOOK_AMOUNT })개
-					</td>
-				</tr>
-				<tr>
-					<td colspan="4">크기&nbsp;&nbsp;&nbsp;&nbsp; 
-						<select name="size" size="1">
-							<option value="">크기를 선택하세요</option>
-							<option value="">-----------------</option>
-
-							<c:forTokens var="size" 
-							items="${itemArray.BOOK_SIZE}"	delims=",">
-								<option value=${fn:trim(size)}>
-									${fn:trim(size)}
-								</option>
-							</c:forTokens>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="4">색깔&nbsp;&nbsp;&nbsp;&nbsp;
-						<select name="color" size="1">
-							<option value="">색깔을 선택하세요</option>
-							<option value="">-----------------</option>
-							<c:forTokens var="color" 
-								items="${itemArray.BOOK_COLOR}"
-								delims=",">
-								<option value="${fn:trim(color)}">
-									${fn:trim(color)}
-								</option>
-							</c:forTokens>
-						</select>
-					</td>
-				</tr>
-				<tr>
 					<td height="50" colspan="4">&nbsp;</td>
 				</tr>
 				<tr>
 					<td colspan="4">
 						<a href="javascript:isBuy(bookform);">
-						[구매하기]
+						[購入する]
 						</a> 
 						<a href="javascript:isCart(bookform);">
-						[장바구니 담기]
+						[カートに入れる]
 						</a>
 					</td>
 				</tr>
@@ -202,28 +153,14 @@ function count_change(temp){
 					<td>
 					<%
 					if (prevpage.getBOOK_NO() != 0) {
-						if (price.equals("no")) {
-					%>
-						<a href="Book_Detail.book?search=prev
-						&gr_book_num=<%=itemArray.getBOOK_NO()%>
-						&item=<%=category%>">
-					<%
-						} else {
 					%> 
-						<a href="Book_Detail.book?search=prev
-						&gr_book_num=<%=itemArray.getBOOK_NO()%>
-						&item=<%=category%>&price=<%=price%>">
-					<%
-						}
-					%>
-						[이전상품] 
+						<a href="Book_Detail.book?search=prev&gr_book_no=<%=itemArray.getBOOK_NO()%>">
+						[前商品] 
 						</a>
 					</td>
 					<td width="100" align="left">
 					<div align="center">
-						<img 
-						src="./upload/<%=prevpage.getBOOK_IMAGE()%>"
-						width="70" height="50" border="0">
+						<img src="./upload/<%=prevpage.getBOOK_IMAGE()%>" width="70" height="50" border="0">
 						<br><%=prevpage.getBOOK_NAME()%>
 					</div>
 					</td>
@@ -235,57 +172,43 @@ function count_change(temp){
 					if (nextpage.getBOOK_NO() != 0) {
 					%>
 						<div align="center">
-						<img
-						src="./upload/<%=nextpage.getBOOK_IMAGE()%>"
-						width="70" height="50" border="0">
+						<img src="./upload/<%=nextpage.getBOOK_IMAGE()%>" width="70" height="50" border="0">
 						<br><%=nextpage.getBOOK_NAME()%>
 					</div>
 					</td>
 					<td>
-					<%
-						if (price.equals("no")) {
-					%>
-						<a href="Book_Detail.book?search=next
-						&gr_book_num=<%=itemArray.getBOOK_NO()%>
-						&item=<%=category%>">
-					<%
-						} else {
-					%>
-						<a href="Book_Detail.book?search=next
-						&gr_book_num=<%=itemArray.getBOOK_NO()%>
-						&item=<%=category%>&price=<%=price%>">
-					<%
-						}
-					%> [다음상품] 
+						<a href="Book_Detail.book?search=next&gr_book_no=<%=itemArray.getBOOK_NO()%>">
+						[次商品] 
 						</a>
-					<%
- 					}
- 					%>
 					</td>
+					<%
+					}
+					%>
 				</tr>
 			</table>
 			</td>
 		</tr>
 		</table>
-		</form><!-- 상품 구매 메뉴 끝 -->
-		<!-- 상품 내용 -->
+		</form>
+		<!-- 商品内容 -->
 		<table width="700" height="50" align="enter">
 			<tr>
 				<td align="center">
-				<div>${itemArray.BOOK_CONTENT }</div>
+				<div>${itemArray.BOOK_CONTENT}</div>
 				</td>
 			</tr>
 		</table>
 		<br><br>
 		<table width="200" border="0" align="center">
 			<tr align="left">
-				<td colspan="3"><c:forEach var="itemimg"
-					items="${requestScope.contentImage}">
-					<img src="./upload/${fn:trim(itemimg)}" />
-				</c:forEach></td>
+				<td colspan="3">
+					<c:forEach var="itemimg" items="${requestScope.contentImage}">
+						<img src="./upload/${fn:trim(itemimg)}" />
+					</c:forEach>
+				</td>
 			</tr>
 		</table>
-		<!-- 상품 내용 끝 --></td>
+		<!-- 商品内容 --></td>
 	</tr>
 </table>
 </body>
