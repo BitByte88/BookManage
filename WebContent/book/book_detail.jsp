@@ -21,18 +21,11 @@
 <title>図書管理システム</title>
 <script>
 function isBuy(bookform) {
-	if (document.bookform.size.value=="") {
-		alert("사이즈를 선택해주세요.")
-		return;
-	} else if (document.bookform.color.value=="") {
-		alert("색상을 선택해주세요.")
+	var amount= parseInt(document.bookform.amount.value);
+	if (amount <= 0) {
+		alert("本数は１本以上を注文してください。")
 		return;
 	}
-
-	var amount=document.bookform.amount.value;
-	var size=document.bookform.size.value;;
-	var type=document.bookform.color.value;;
-	
 	var isbuy=confirm("구매하시겠습니까?");
 	if(isbuy==true) {
 		bookform.action="OrderStart.order";
@@ -43,17 +36,12 @@ function isBuy(bookform) {
 }
 
 function isCart(cartform) {
-	if (document.bookform.size.value=="") {
-		alert("사이즈를 선택해주세요.")
-		return;
-	} else if (document.bookform.color.value=="") {
-		alert("색상을 선택해주세요.")
+	var amount=parseInt(document.bookform.amount.value);
+	if (amount <= 0) {
+		alert("本数は１本以上を注文してください。")
 		return;
 	}
-	
-	var amount=document.bookform.amount.value;
-	var size=document.bookform.size.value;;
-	var type=document.bookform.color.value;;
+
 	
 	var isbuy=confirm("장바구니에 저장하시겠습니까?");
 	
@@ -107,14 +95,28 @@ function count_change(temp){
 					</td>
 				</tr>
 				<tr>
-					<td>販売価格 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+					<td>カテゴリー &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+					<td colspan="3">${itemArray.BOOK_CATEGORY}</td>
+				</tr>
+				<tr>
+					<td>出版者 　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+					<td colspan="3">${itemArray.BOOK_WRITER}</td>
+				</tr>
+				<tr>
+					<td>出版社 　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+					<td colspan="3">${itemArray.BOOK_PUBLISHER}</td>
+				</tr>
+				<tr>
+				<tr>
+					<td>出版日時 　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+					<td colspan="3">${itemArray.BOOK_PUBLISHING_DATE}</td>
+				</tr>
+				<tr>
+					<td>販売価格 　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
 					<td colspan="3">${itemArray.BOOK_PRICE} 円</td>
 				</tr>
 				<tr>
-					<td rowspan="2">本数
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-					</td>
+					<td rowspan="2">本数　 　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
 					<td width="58" rowspan="2">
 						<input name="amount" type="text" 
 							style="text-align: right"

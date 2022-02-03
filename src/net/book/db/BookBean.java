@@ -1,5 +1,6 @@
 package net.book.db;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class BookBean {
@@ -8,7 +9,7 @@ public class BookBean {
 	private String BOOK_NAME;
 	private String BOOK_WRITER;
 	private String BOOK_PUBLISHER;
-	private Timestamp BOOK_PUBLISHING_DATE;
+	private Date BOOK_PUBLISHING_DATE;
 	private String BOOK_CONTENT;
 	private int BOOK_PRICE;
 	private String BOOK_IMAGE;
@@ -44,10 +45,10 @@ public class BookBean {
 	public void setBOOK_PUBLISHER(String book_publisher) {
 		BOOK_PUBLISHER = book_publisher;
 	}
-	public Timestamp getBOOK_PUBLISHING_DATE() {
+	public Date getBOOK_PUBLISHING_DATE() {
 		return BOOK_PUBLISHING_DATE;
 	}
-	public void setBOOK_PUBLISHING_DATE(Timestamp book_publishing_date) {
+	public void setBOOK_PUBLISHING_DATE(Date book_publishing_date) {
 		BOOK_PUBLISHING_DATE = book_publishing_date;
 	}
 	public String getBOOK_CONTENT() {

@@ -180,7 +180,8 @@ public class BookDAO {
 				book.setBOOK_NAME(rs.getString("BOOK_NAME"));
 				book.setBOOK_WRITER(rs.getString("BOOK_WRITER"));
 				book.setBOOK_PUBLISHER(rs.getString("BOOK_PUBLISHER"));
-				book.setBOOK_PUBLISHING_DATE(rs.getTimestamp("BOOK_PUBLISHING_DATE"));
+				
+				book.setBOOK_PUBLISHING_DATE(rs.getDate("BOOK_PUBLISHING_DATE"));
 				book.setBOOK_CONTENT(rs.getString("BOOK_CONTENT"));
 				book.setBOOK_PRICE(rs.getInt("BOOK_PRICE"));
 				book.setBOOK_IMAGE(rs.getString("BOOK_IMAGE"));		

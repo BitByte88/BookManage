@@ -24,11 +24,12 @@ public class OrderAddAction implements Action{
 		String id=(String)session.getAttribute("id");
 		
 		if(id==null){
-			PrintWriter out=response.getWriter();
-			out.println("<script>");
-			out.println("history.book(-1);");
-			out.println("</script>");
-			out.close();
+			String referer = request.getHeader("Referer");
+			request.getSession().setAttribute("redirectURI", referer);
+			ActionForward forward=new ActionForward();
+			forward.setRedirect(true);
+			forward.setPath("./MemberLogin.member");
+			return forward;
 		}
 		
 		Vector bookvector=new Vector();

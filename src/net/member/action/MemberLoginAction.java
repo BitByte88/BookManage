@@ -23,8 +23,16 @@ public class MemberLoginAction implements Action{
 				return forward;
 			}else{
 				session.setAttribute("memberType", 1); //一般ユーザー
-				forward.setRedirect(true);
-				forward.setPath("./BookList.book?item=new_item"); 
+				
+				String redirectURL = (String)session.getAttribute("redirectURI");
+				if(redirectURL == null) {
+					forward.setRedirect(true);
+					forward.setPath("./BookList.book"); 
+				} else {
+					forward.setRedirect(true);
+					redirectURL =redirectURL.substring(redirectURL.lastIndexOf("/"));
+					forward.setPath("."+redirectURL);
+				}
 				return forward;
 			}
 		}else if(check == 0){
