@@ -6,6 +6,11 @@
 
 <html>
 <head>
+	<link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon"> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
 <script>
 function windowclose(){
 	self.close();
@@ -15,20 +20,20 @@ function windowclose(){
 <body>
 <table width="450px" height="35px">
 	<tr><td align="left">
-	<b>아이디/비밀번호 찾기</b>
+	<b>アカウント／パスワードを探す</b>
 	</td></tr>
 </table>
 	
 <table width="440px">
-	<thead>검색된 아이디/비밀번호입니다.<br/><br/><br/></thead>
-	<tr><td align="left">아이디 : <%=id %></td></tr>
-	<tr><td align="left">비밀번호 : <%=passwd %></td></tr>
+	<thead><label style="font-size:12;color:red">アカウント／パスワードを忘れないように注意してください。</label><br/><br/><br/></thead>
+	<tr><td align="left">アカウント　： <%=id %></td></tr>
+	<tr><td align="left">パスワード　： <%=passwd %></td></tr>
 </table>
 
 <table width="450px">
 	<tr>
 		<td align="center">	
-			<hr/><br/><input type="button" value="닫기" onclick="windowclose()"/>
+			<hr/><br/><input type="button" value="閉じる" onclick="windowclose()"/>
 		</td>
 	</tr>
 </table>

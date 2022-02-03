@@ -14,19 +14,19 @@ public class MemberFindAction implements Action{
 		String name=request.getParameter("MEMBER_NAME");
 		String nameKana=request.getParameter("MEMBER_NAME_KANA");
 		String tel=request.getParameter("MEMBER_TEL");
-		String mail=request.getParameter("MEMBER_MAIL");
+		String mail=request.getParameter("MEMBER_MAIL1")+"@"+request.getParameter("MEMBER_MAIL2");
 		member= memberdao.findId(name, nameKana, tel, mail);		
 		if(member!=null){
 			request.setAttribute("id", member.getMEMBER_ID());
 			request.setAttribute("passwd", member.getMEMBER_PW());			
 			forward.setRedirect(false);
-			forward.setPath("./member/member_find_ok.jsp"); 			
+			forward.setPath("./member/member_find_ok.jsp");
 		}else{
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('�Է��� ������ ��ġ���� �ʽ��ϴ�.');");
-			out.println("history.book(-1);");
+			out.println("alert('一致するアカウントが存在していません。');");
+			out.println("history.book();");
 			out.println("</script>");
 			out.close();
 			forward=null;

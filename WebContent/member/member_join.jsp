@@ -191,7 +191,7 @@ function gNumCheck(){
 		</td>
 		<td>
 			&nbsp;&nbsp;&nbsp;
-			<input type="text" name="MEMBER_TEL" size="24" placeholder="0120000000"/>
+			<input type="text" name="MEMBER_TEL" size="11" placeholder="0120000000"/>
 		</td>
 	</tr>
 	<tr>

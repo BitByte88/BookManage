@@ -240,7 +240,7 @@ public class MemberDAO {
 		try{
 			con = ds.getConnection();
 			sql="select MEMBER_ID, MEMBER_PW "+
-				"from member where MEMBER_NAME=? and MEMBER_NAME_KANA=? and MEMBER_TEL=? and MEMBER_MAIL=?";
+				"from MEMBER where MEMBER_NAME=? and MEMBER_NAME_KANA=? and MEMBER_TEL=? and MEMBER_MAIL=?";
 			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, name);

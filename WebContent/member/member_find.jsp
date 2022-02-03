@@ -1,73 +1,98 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
 <head>
-<script>
-function formSubmit(){
-	var forms = document.getElementById("findform");
-	
-	if ((forms.MEMBER_NAME.value=="") ||
-		(forms.MEMBER_NAME.value.length<=1)){
-		alert("이름을 정확히 입력해 주십시오.");
-		forms.MEMBER_NAME.focus();
-        return false;
-	}else if((forms.MEMBER_JUMIN1.value=="") ||
-			(forms.MEMBER_JUMIN1.value.length<6)){
-		alert("주민등록번호를 정확히 입력해 주십시오.");
-   		forms.MEMBER_JUMIN1.focus();
-        return false;
- 	}else if((forms.MEMBER_JUMIN2.value=="")||
- 			(forms.MEMBER_JUMIN2.value.length<7)){
-		alert("주민등록번호를 정확히 입력해 주십시오.");
-      	forms.MEMBER_JUMIN2.focus();
-        return false;
+	<link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon"> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
+	<script>
+	function formSubmit(){
+		var form = document.getElementById("findform");
+		
+		if ((form.MEMBER_NAME.value=="") ||
+			(form.MEMBER_NAME.value.length<=1)){
+			alert("氏名を入力してください。");
+			form.MEMBER_NAME.focus();
+	        return false;
+		}else if((form.MEMBER_NAME_KANA.value=="") ||
+				(form.MEMBER_NAME_KANA.value.length<=1)){
+			alert("氏名（カナ）を入力してください。");
+	   		form.MEMBER_NAME_KANA.focus();
+	        return false;
+	 	}else if((form.MEMBER_TEL.length==0)){
+	 		alert("電話番号を入力してください。");
+	      	form.MEMBER_TEL.focus();
+	        return false;
+		}else if((form.MEMBER_MAIL1.length==0)||
+	 			(form.MEMBER_MAIL2.length==0)){
+			alert("メールアドレスを入力してください。");
+	      	form.MEMBER_MAIL1.focus();
+	      	form.MEMBER_MAIL2.focus();
+	        return false;
+		}
+		
+		return true;
 	}
-	
-	return true;
-}
-</script>
+	</script>
 </head>
 <body>
 <table width="450px" height="20px">
 	<tr>
 		<td align="left">
-			<b>아이디/비밀번호 찾기</b>
+			<b>アカウント／パスワードを探す</b>
 		</td>
 	</tr>
 </table>	
-<form action="./MemberFindAction.member" method="post" name="findform" 
+<form action="./MemberFindAction.member" method="post" id="findform" 
 	onSubmit="return formSubmit();">
 <table width="450px" cellspacing="0" cellpadding="0" border="0">
 <thead>
 	<font size="2">				
 	&nbsp;&nbsp;&nbsp;&nbsp;
-	이름과 주민등록번호를 정확히 입력해주세요.
+	氏名、氏名（カナ）、電話番号、メールアドレスを入力してください。
 	<br/><br/><br/><br/></font>
 </thead>
 <tr>
 	<td height="29" bgcolor="#F3F3F3">
-		<font size="2">이름</font>
+		<font size="2">氏名</font>
 	</td>
 	<td>
 		&nbsp;
-		<input type="text" name="MEMBER_NAME" maxlength="12" size="14">
+		<input type="text" name="MEMBER_NAME" maxlength="20" size="20" placeholder="図書　太郎">
 	</td>
-</tr>
-<tr>
-	<td colspan="2" height="1"></td>
 </tr>
 <tr>
 	<td height="29" bgcolor="#F3F3F3">
-		<font size="2">주민등록번호</font>
+		<font size="2">氏名（カナ）</font>
 	</td>
 	<td>
 		&nbsp;
-		<input type="password" name="MEMBER_JUMIN1" maxlength="6" size="12" > - 
-		<input type="password" name="MEMBER_JUMIN2" maxlength="7" size="12">
+		<input type="text" name="MEMBER_NAME_KANA" maxlength="20" size="20" placeholder="トショ　タロウ">
 	</td>
 </tr>
 <tr>
-	<td colspan="2" style="padding:10px 0 20px 0" align="center">
-		<input type="submit" value="확인">
+	<td height="29" bgcolor="#F3F3F3">
+		<font size="2">電話番号</font>
+	</td>
+	<td>
+		&nbsp;
+		<input type="text" name="MEMBER_TEL" maxlength="11" size="11" placeholder="0120000000">
+	</td>
+</tr>
+<tr>
+	<td height="29" bgcolor="#F3F3F3">
+		<font size="2">メールアドレス</font>
+	</td>
+	<td>
+		&nbsp;
+		<input type="text" name="MEMBER_MAIL1" size="15" placeholder="tosyo"/>@
+		<input type="text" name="MEMBER_MAIL2" size="20" placeholder="nuvo.co.jp"/> 
+	</td>
+</tr>
+<tr>
+	<td colspan="2" style="padding:10px 0 0 0" align="center">
+		<input type="submit" value="確認">
 	</td>
 </tr>				
 </table>

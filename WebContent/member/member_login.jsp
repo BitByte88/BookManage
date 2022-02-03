@@ -30,7 +30,7 @@ function check(){
 function openConfirmId(loginform){	
 	var url="./MemberFind.member";
 	open(url, "confirm", "toolbar=no,location=no,status=no,menubar=no,"+
-						 "scrollbars=no,resizable=no,width=450px,height=300");
+						 "scrollbars=no,resizable=no,width=600px,height=350");
 }
 </script>
 </head>
