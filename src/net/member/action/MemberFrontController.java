@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class MemberFrontController extends HttpServlet{
 	public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
@@ -85,6 +86,13 @@ public class MemberFrontController extends HttpServlet{
 			 } catch (Exception e) {
 				 e.printStackTrace();
 			 }
+		 }else if(command.equals("/MemberLogout.member")){
+			 HttpSession sesseion=request.getSession(true);
+			 sesseion.removeAttribute("id");
+			 sesseion.removeAttribute("memberType");
+			 sesseion.removeAttribute("member");
+			 forward=new ActionForward();
+			 forward.setPath("./member/member_login.jsp");
 		 }
 		 if(forward != null){
 			 if(forward.isRedirect()){

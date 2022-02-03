@@ -9,7 +9,7 @@ public class MemberModifyAction_1 implements Action{
 	throws Exception{
 		ActionForward forward=new ActionForward();
 		HttpSession sesseion=request.getSession(true);
-		String id=(String)sesseion.getAttribute("id");		
+		String id=(String)sesseion.getAttribute("id");
 		if(id==null){
 			forward.setRedirect(true);
 			forward.setPath("./MemberLogin.member");

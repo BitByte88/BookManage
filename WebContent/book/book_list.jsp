@@ -18,6 +18,13 @@
 
 <html>
 <head>
+	<link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon"> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
+	<jsp:include page="/menu/menu.jsp" />
+	
 <title>図書管理システム</title>
 <script>
 function check(){
@@ -36,22 +43,23 @@ function check(){
 </script>
 </head>
 <body>		
+	<div name="main" style="margin:30 0 50 0">
 	<table width="960" cellspacing="0" cellpadding="0" border="0" 
 		align="center">
 	<tr>
 	<td>
 		<form action="./BookList.book" method=post name=searchform onsubmit="return check()" accept-charset="UTF-8">
-			<table width="700" cellspacing="0" cellpadding="0" border="0" align="center">
+			<table width="700" height="130" cellspacing="0" cellpadding="0" border="0" align="center">
 			<tr>
-			<td>タイトル：</td>
+			<td bgcolor="#f5f5f5">タイトル</td>
 			<td><input type="text" name="title" maxlength="20" size="20" value="${search.BOOK_NAME}"></td>
 			</tr>
 			<tr>
-			<td>出版社 ：</td>
+			<td bgcolor="#f5f5f5">出版社</td>
 			<td><input type="text" name="publisher" maxlength="20" size="20" value="${search.BOOK_PUBLISHER}"></td>
 			</tr>
 			<tr>
-			<td>出版日時：</td>
+			<td bgcolor="#f5f5f5">出版日時</td>
 			<td><input type="text" name="startDate" placeholder="2022/01/01" maxlength="10" size="10" value="${search.START_DATE}"> - <input type="text" placeholder="2022/01/31" name="endDate" maxlength="10" size="10" value="${search.END_DATE}">			</td>
 			</tr>
 			<tr>
@@ -104,7 +112,7 @@ function check(){
 		</tr>
 		<tr>
 		<td height="20" colspan="4" align="center">		
-		<!-- 페이징 -->
+		<!-- ページング -->
 		<%
 		if (count>0) {
 			if (startPage>10) { %>
@@ -131,5 +139,6 @@ function check(){
 		</td>
 	</tr>
 	</table>
+	</div>
 </body>
 </html>

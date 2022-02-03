@@ -6,6 +6,7 @@
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
 	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
+	<jsp:include page="/menu/menu.jsp" />
 	
 <title>図書管理システム</title>
 <script>
@@ -34,20 +35,21 @@ function openConfirmId(loginform){
 </script>
 </head>
 <body>
+<div name="main" style="margin:30 0 50 0">
 <table width="960" cellspacing="0" cellpadding="0" border="0"
 	align="center">
 <tr>
 <td colspan=2 align=center>
-<table border=0 cellpadding=0 cellspacing=0 width=500>
+<table border="0" cellpadding="0" cellspacing="0" width="550">
 <!--会員ログイン -->
 <tr>
 <form action="./MemberLoginAction.member" method=post name=loginform
 	onsubmit="return check()">
-<td><br><br>
-<table width="400" border="0" cellspacing="0" cellpadding="0">
+<td><br>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td bgcolor="f6f6f6">
-		<table width="550" border="0" cellspacing="4" cellpadding="0">
+		<table width="100%" border="0" cellspacing="4" cellpadding="0">
 		<tr>
 		<td valign="top" bgcolor="#FFFFFF">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -66,7 +68,7 @@ function openConfirmId(loginform){
 			<td width=26 rowspan=3></td>
 			</tr>
 			<tr>
-			<td height=4 colspan=3></td>
+			<td height=10 colspan=3></td>
 			</tr>
 			<tr>
 			<td width=73>パスワード</td>
@@ -76,12 +78,12 @@ function openConfirmId(loginform){
 			</td>
 			</tr>
 			<tr>
-			<td height=35 colspan=6 align="center">
+			<td height=50 colspan=6 align="center">
 			<input
 				type="button" value="会員登録"
 				onclick="javascript:window.location='./MemberJoin.member'">
 			<a href="#">
-			<input type="button" value="アカウント／パスワードを探す"
+			<input type="button" value="アカウント／パスワ―ドを探す"
 				onclick="openConfirmId(this.form)">
 			</a>
 			</td>
@@ -127,5 +129,6 @@ function openConfirmId(loginform){
 </td>
 </tr>
 </table>
+</div>
 </body>
 </html>
