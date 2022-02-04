@@ -61,15 +61,10 @@ public class OrderAddAction implements Action{
 		
 		String ordertype=request.getParameter("ordertype");
 		if(ordertype.equals("book")){
-			cart.setCART_BOOK_NUM(	Integer.parseInt(
-						request.getParameter("booknum")));
-			cart.setCART_BOOK_AMOUNT(Integer.parseInt(
+			cart.setCART_BOOK_NO(	Integer.parseInt(
+						request.getParameter("bookno")));
+			cart.setCART_COUNT(Integer.parseInt(
 						request.getParameter("bookamount")));
-			cart.setCART_BOOK_SIZE(
-						request.getParameter("booksize"));
-			cart.setCART_BOOK_COLOR(
-						request.getParameter("bookcolor"));
-			
 			book.setBOOK_NAME(request.getParameter("bookname"));
 			book.setBOOK_PRICE(Integer.parseInt(
 						request.getParameter("bookprice")));

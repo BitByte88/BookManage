@@ -7,27 +7,24 @@
 <%
 	List cartList = (ArrayList) request.getAttribute("cartlist");
 	List bookList = (ArrayList) request.getAttribute("booklist");
-	
-	String item = request.getParameter("item");
-	String gr_book_num = request.getParameter("gr_book_num");
-	String isitem = request.getParameter("isitem");
+
 %>
 
 <html>
 <head>
-<title>쇼핑몰</title>
+<title>図書管理システム</title>
 </head>
 <body>
 <table width="960" cellspacing="0" cellpadding="0" border="0"
 	align="center">
 	<tr>
-		<td colspan=2><!-- 장바구니 -->
+		<td colspan=2><!--カート -->
 		<p align="center">
 		<form action="./OrderStart.order" name="cartform" method="post">
 		<input type="hidden" name="order" value="cart">
 		<table width="80%">
 			<tr align=center>
-				<td><b>장 바 구 니</b></td>
+				<td><b>カート</b></td>
 			</tr>
 		</table>
 		<table width="80%" cellpadding="0" cellspacing="0">
@@ -35,12 +32,12 @@
 				<td height="3" colspan="7" align=right></td>
 			</tr>
 			<tr bgcolor="#f0f8ff" align="center">
-				<td width="5%"><font size="2">번호</font></td>
-				<td width="5%"><font size="2">사진</font></td>
-				<td width="25%"><font size="2">제품명</font></td>
-				<td width="8%"><font size="2">수량</font></td>
-				<td width="8%"><font size="2">가격</font></td>
-				<td width="8%"><font size="2">취소</font></td>
+				<td width="5%"><font size="2">番号</font></td>
+				<td width="5%"><font size="2">写真</font></td>
+				<td width="25%"><font size="2">図書名</font></td>
+				<td width="8%"><font size="2">本数</font></td>
+				<td width="8%"><font size="2">価格</font></td>
+				<td width="8%"><font size="2">キャンセル</font></td>
 			</tr>
 			<%
 			if (cartList != null && cartList.size() != 0) {
@@ -49,18 +46,18 @@
 					BookBean book=(BookBean) bookList.get(i);
 			%>
 			<tr align="center">
-			<td><font size="2"><%=dto.getCART_NUM()%></font></td>
+			<td><font size="2"><%=dto.getCART_NO()%></font></td>
 			<td><font size="2"><img 
 				src="./upload/<%=book.getBOOK_IMAGE().split(",")[0] %>" 
 				width=50 height=50></font></td>
 			<td><font size="2"><%=book.getBOOK_NAME()%></font></td>
 			<td><font size="2">
-				<%=dto.getCART_BOOK_AMOUNT()%>
+				<%=dto.getCART_COUNT()%>
 			</font></td>
 			<td><font size="2"><%=book.getBOOK_PRICE()%></font></td>
 			<td><font size="2">
-			<a href="CartDelete.cart?num=<%=dto.getCART_NUM()%>"
-				onclick="return confirm('취소하시겠습니까?')">취소</a>
+			<a href="CartDelete.cart?num=<%=dto.getCART_NO()%>"
+				onclick="return confirm('キャンセルしますか。?')">キャンセル</a>
 			</font></td>
 			</tr>
 			<%
@@ -69,7 +66,7 @@
 			%>
 			<tr>
 			<td colspan="7" align="center">
-				<font size="2">장바구니에 담긴 상품이 없습니다.</font>
+				<font size="2">カートに本がありません。</font>
 			</td>
 			</tr>
 			<%
@@ -94,25 +91,18 @@
 			[구매하기]
 			</a>
 			<%}else{%>
-			<a href="#" onclick="javascript:alert('주문할 상품이 없습니다.')">
+			<a href="#" onclick="javascript:alert('注文する本がありません。')">
 			[구매하기]
 			</a>
-			<%}
-			if (item == null) {%>
-			<a href="./BookList.book?item=new_item">
-			[계속 쇼핑하기]</a>
-			<%}else{%>
-			<a href="./Book_Detail.book?item=<%=item %>
-			&gr_book_num=<%=gr_book_num %>
-			&isitem=<%=isitem %>">
-			[계속 쇼핑하기]</a>
 			<%}%>
+			<a href="./BookList.book">
+			[계속 쇼핑하기]
+			</a>
 			</td>
 			</tr>
 		</table>
 		</form>
-		<!-- 장바구니 -->
-		</p>
+		<!-- カート -->
 		</td>
 	</tr>
 </table>

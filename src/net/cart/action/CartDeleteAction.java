@@ -15,13 +15,15 @@ public class CartDeleteAction implements Action{
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
 		
-		if(id==null){ //�α��ε��� �ʾ��� ���.
-			PrintWriter out=response.getWriter();
-			out.println("<script>");
-			out.println("history.book(-1);");
-			out.println("</script>");
-			out.close();
+		if(id==null){
+			String referer = request.getHeader("Referer");
+			request.getSession().setAttribute("redirectURI", referer);
+			ActionForward forward=new ActionForward();
+			forward.setRedirect(true);
+			forward.setPath("./MemberLogin.member");
+			return forward;			
 		}
+		
 		String num=request.getParameter("num");
 		if(num==null){
 			return null;

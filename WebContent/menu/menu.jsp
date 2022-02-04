@@ -33,7 +33,7 @@
 	        if(id==null) {
 	        %>
 		        <li class="nav-item">
-		          <a class="nav-link" href="#">カート</a>
+		          <a class="nav-link" href="./CartList.cart">カート</a>
 		        </li>
 		    <%
 		    } else {

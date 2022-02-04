@@ -1,21 +1,19 @@
 package net.cart.db;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class CartBean {
-	private int CART_NUM;
+	private int CART_NO;
 	private String CART_MEMBER_ID;
-	private int CART_BOOK_NUM;
-	private int CART_BOOK_AMOUNT;
-	private String CART_BOOK_SIZE;
-	private String CART_BOOK_COLOR;
-	private Date CART_DATE;
+	private int CART_BOOK_NO;
+	private int CART_COUNT;
+	private Timestamp CART_GENERATE_DATE;
 	
-	public int getCART_NUM() {
-		return CART_NUM;
+	public int getCART_NO() {
+		return CART_NO;
 	}
-	public void setCART_NUM(int cart_num) {
-		CART_NUM = cart_num;
+	public void setCART_NO(int cart_no) {
+		CART_NO = cart_no;
 	}
 	public String getCART_MEMBER_ID() {
 		return CART_MEMBER_ID;
@@ -23,34 +21,25 @@ public class CartBean {
 	public void setCART_MEMBER_ID(String cart_member_id) {
 		CART_MEMBER_ID = cart_member_id;
 	}
-	public int getCART_BOOK_NUM() {
-		return CART_BOOK_NUM;
+	public int getCART_BOOK_NO() {
+		return CART_BOOK_NO;
 	}
-	public void setCART_BOOK_NUM(int cart_book_num) {
-		CART_BOOK_NUM = cart_book_num;
+	public void setCART_BOOK_NO(int cart_book_no) {
+		CART_BOOK_NO = cart_book_no;
 	}
-	public int getCART_BOOK_AMOUNT() {
-		return CART_BOOK_AMOUNT;
+	public int getCART_COUNT() {
+		return CART_COUNT;
 	}
-	public void setCART_BOOK_AMOUNT(int cart_book_amount) {
-		CART_BOOK_AMOUNT = cart_book_amount;
+	public void setCART_COUNT(int cart_count) {
+		CART_COUNT = cart_count;
 	}
-	public String getCART_BOOK_SIZE() {
-		return CART_BOOK_SIZE;
+	public Timestamp getCART_GENERATE_DATE() {
+		return CART_GENERATE_DATE;
 	}
-	public void setCART_BOOK_SIZE(String cart_book_size) {
-		CART_BOOK_SIZE = cart_book_size;
+	public void setCART_GENERATE_DATE(Timestamp cart_generate_date) {
+		CART_GENERATE_DATE = cart_generate_date;
 	}
-	public String getCART_BOOK_COLOR() {
-		return CART_BOOK_COLOR;
-	}
-	public void setCART_BOOK_COLOR(String cart_book_color) {
-		CART_BOOK_COLOR = cart_book_color;
-	}
-	public Date getCART_DATE() {
-		return CART_DATE;
-	}
-	public void setCART_DATE(Date cart_date) {
-		CART_DATE = cart_date;
-	}
+	
+	
+
 }

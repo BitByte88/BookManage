@@ -26,7 +26,7 @@ public class CartDAO {
 			Context envCtx=(Context)initCtx.lookup("java:comp/env");
 			ds=(DataSource)envCtx.lookup("jdbc/mysql");
 		}catch(Exception ex){
-			System.out.println("DB ���� ���� : " + ex);
+			System.out.println("DB接続エラー：　" + ex);
 			return;
 		}
 	}
@@ -49,30 +49,26 @@ public class CartDAO {
 				CartBean dto = new CartBean();
 				BookBean book = new BookBean();
 				
-				dto.setCART_NUM(rs.getInt("CART_NUM"));
+				dto.setCART_NO(rs.getInt("CART_NO"));
 				dto.setCART_MEMBER_ID(
 						rs.getString("CART_MEMBER_ID"));
-				dto.setCART_BOOK_NUM(
-						rs.getInt("CART_BOOK_NUM"));
-				dto.setCART_BOOK_AMOUNT(
-						rs.getInt("CART_BOOK_AMOUNT"));
-				dto.setCART_BOOK_SIZE(
-						rs.getString("CART_BOOK_SIZE"));
-				dto.setCART_BOOK_COLOR(
-						rs.getString("CART_BOOK_COLOR"));
-				dto.setCART_DATE(
-						rs.getDate("CART_DATE"));
+				dto.setCART_BOOK_NO(
+						rs.getInt("CART_BOOK_NO"));
+				dto.setCART_COUNT(
+						rs.getInt("CART_COUNT"));
+				dto.setCART_GENERATE_DATE(
+						rs.getTimestamp("CART_GENERATE_DATE"));
 				
-				sql = "select * from book where book_num=?";
+				sql = "select * from book where book_no=?";
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, dto.getCART_BOOK_NUM());
+				pstmt.setInt(1, dto.getCART_BOOK_NO());
 				rs1 = pstmt.executeQuery();
 				
 				if(rs1.next()){
 					book.setBOOK_NAME(
-							rs1.getString("book_name"));
+							rs1.getString("BOOK_NAME"));
 					book.setBOOK_PRICE(
-							rs1.getInt("book_price"));
+							rs1.getInt("BOOK_PRICE"));
 					book.setBOOK_IMAGE(
 							rs1.getString("BOOK_IMAGE"));
 				}else{
@@ -101,9 +97,8 @@ public class CartDAO {
 		return null;
 	}
 	
-	public void cartAdd(String id,int booknum,
-			int amount,String size,String color){
-		String sql="select max(cart_num) from cart";
+	public void cartAdd(String id,int bookno, int amount){
+		String sql="select max(cart_no) from cart";
 		int num=0;
 		
 		try{
@@ -114,16 +109,13 @@ public class CartDAO {
 			num=rs.getInt(1)+1;
 			
 			sql="insert into cart values "+
-				"(?,?,?,?,?,?,DATE(SYSDATE()))";
+				"(?,?,?,?,SYSDATE(),0,0,SYSDATE(),0,SYSDATE())";
 			
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, id);
-			pstmt.setInt(3, booknum);
+			pstmt.setInt(3, bookno);
 			pstmt.setInt(4, amount);
-			pstmt.setString(5,size);
-			pstmt.setString(6, color);
-			
 			pstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -138,7 +130,7 @@ public class CartDAO {
 	}
 	
 	public boolean cartRemove(int num) {
-		String sql = "delete from CART where CART_NUM=?";
+		String sql = "delete from CART where CART_NO=?";
 		
 		try {
 			conn = ds.getConnection();

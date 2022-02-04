@@ -24,21 +24,14 @@ public class CartAddAction implements Action{
 			return forward;			
 		}
 		
-		int num=Integer.parseInt(request.getParameter("booknum"));
+		int num=Integer.parseInt(request.getParameter("bookno"));
 		int amount=Integer.parseInt(request.getParameter("amount"));
-		String size=request.getParameter("size");
-		String color=request.getParameter("color");
 		
-		String item=request.getParameter("item");
-		String gr_book_num=request.getParameter("gr_book_num");
-		String isitem=request.getParameter("isitem");
-		
-		cartdao.cartAdd(id,num,amount,size,color);
+		cartdao.cartAdd(id,num,amount);
 		
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(true);
-		forward.setPath("./CartList.cart?item="+item+
-				"&gr_book_num="+gr_book_num+"&isitem="+isitem);
+		forward.setPath("./CartList.cart");
 		return forward;
 	}
 }

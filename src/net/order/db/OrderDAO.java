@@ -173,9 +173,7 @@ public class OrderDAO {
 				pstmt.setString(3, " ");
 				pstmt.setInt(4, book.getBOOK_NO());
 				pstmt.setString(5, book.getBOOK_NAME());
-				pstmt.setInt(6, cart.getCART_BOOK_AMOUNT());
-				pstmt.setString(7, cart.getCART_BOOK_SIZE());
-				pstmt.setString(8, cart.getCART_BOOK_COLOR());
+				pstmt.setInt(6, cart.getCART_COUNT());
 				pstmt.setString(9, order.getORDER_MEMBER_ID());
 				pstmt.setString(10, order.getORDER_RECEIVE_NAME());
 				pstmt.setString(11, order.getORDER_RECEIVE_ADDR1());
@@ -183,7 +181,7 @@ public class OrderDAO {
 				pstmt.setString(13, order.getORDER_RECEIVE_PHONE());
 				pstmt.setString(14, order.getORDER_RECEIVE_MOBILE());
 				pstmt.setString(15, order.getORDER_MEMO());
-				pstmt.setInt(16, (book.getBOOK_PRICE()*cart.getCART_BOOK_AMOUNT()));
+				pstmt.setInt(16, (book.getBOOK_PRICE()*cart.getCART_COUNT()));
 				pstmt.setString(17, order.getORDER_TRADE_TYPE());
 				pstmt.setString(18, order.getORDER_TRADE_PAYER());
       			
