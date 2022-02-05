@@ -14,8 +14,8 @@ public class AdminOrderModifyAction implements Action{
 		
 		boolean result=false;
 		request.setCharacterEncoding("UTF-8");
-		order.setORDER_NUM(Integer.parseInt(request.getParameter("num")));
-		order.setORDER_TRANS_NUM(request.getParameter("transportnum"));
+		order.setORDER_NO(Integer.parseInt(request.getParameter("num")));
+		order.setORDER_TRANS_NO(request.getParameter("transportnum"));
 		order.setORDER_MEMO(request.getParameter("memo"));
 		order.setORDER_STATUS(Integer.parseInt(request.getParameter("status")));
 		

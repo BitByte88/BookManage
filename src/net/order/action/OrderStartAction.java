@@ -20,9 +20,11 @@ public class OrderStartAction implements Action{
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		if(id==null){
+			String referer = request.getHeader("Referer");
+			request.getSession().setAttribute("redirectURI", referer);
 			forward.setRedirect(true);
 			forward.setPath("./MemberLogin.member");
-			return forward;
+			return forward;		
 		}
 		
 		request.setCharacterEncoding("UTF-8");
@@ -31,11 +33,9 @@ public class OrderStartAction implements Action{
 		String order=request.getParameter("order");
 		
 		if(order.equals("book")){
-			orderinfo.add(Integer.parseInt(request.getParameter("booknum")));
+			orderinfo.add(Integer.parseInt(request.getParameter("bookno")));
 			orderinfo.add(request.getParameter("bookname"));
 			orderinfo.add(Integer.parseInt(request.getParameter("amount")));
-			orderinfo.add(request.getParameter("size"));
-			orderinfo.add(request.getParameter("color"));
 			orderinfo.add(Integer.parseInt(request.getParameter("price")));
 			orderinfo.add(request.getParameter("bookimage"));
 			

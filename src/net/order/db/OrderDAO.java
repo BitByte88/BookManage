@@ -29,7 +29,7 @@ public class OrderDAO {
 			Context envCtx=(Context)initCtx.lookup("java:comp/env");
 			ds=(DataSource)envCtx.lookup("jdbc/mysql");
 		}catch(Exception ex){
-			System.out.println("DB ���� ���� : " + ex);
+			System.out.println("DB接続エラー：　" + ex);
 			return;
 		}
 	}
@@ -58,9 +58,8 @@ public class OrderDAO {
 	}
 	
 	public int getOrderSumMoney(String id) throws SQLException{
-		String sql="select sum(ORDER_SUM_MONEY) from book_order "+
+		String sql="select sum(BOR.ORDER_COUNT * B.BOOK_PRICE) from book_order as BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO "+
 				   "where ORDER_MEMBER_ID=?";
-		
 		try{
 			conn = ds.getConnection();
 			pstmt=conn.prepareStatement(sql);
@@ -83,12 +82,12 @@ public class OrderDAO {
 	}
 	
 	public List getOrderList(int page,int limit,String id) throws SQLException {
-		String sql="select * from (select rownum rnum,ORDER_BOOK_NUM,"+
-				"ORDER_BOOK_NAME,ORDER_BOOK_AMOUNT,ORDER_BOOK_SIZE,"+
-				"ORDER_BOOK_COLOR,ORDER_SUM_MONEY,ORDER_DATE,"+
-				"ORDER_STATUS from (select * from BOOK_ORDER " +
-				"where ORDER_MEMBER_ID=? order by ORDER_DATE desc)) "+
-				"where rnum>=? and rnum<=?";
+		String sql="select * from (select ROW_NUMBER() OVER (order by ORDER_DATE desc) AS rnum, "+
+				"BOR.ORDER_BOOK_NO, B.BOOK_NAME,B.BOOK_PRICE, BOR.ORDER_COUNT, "+
+				"BOR.ORDER_COUNT * B.BOOK_PRICE AS TOTAL_PRICE, ORDER_DATE, ORDER_STATUS "+
+				"from book_order AS BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO " +
+				"WHERE ORDER_MEMBER_ID = 1 order by ORDER_DATE desc) AS OL "+
+				"where OL.rnum>? and OL.rnum<?";
 		List book_order_list=new ArrayList();
 		
 		int startrow=(page-1)*10+1;
@@ -104,20 +103,13 @@ public class OrderDAO {
 			
 			while(rs.next()){
 				OrderBean order=new OrderBean();
-				order.setORDER_BOOK_NUM(
-						rs.getInt("ORDER_BOOK_NUM"));
-				order.setORDER_BOOK_NAME(
-						rs.getString("ORDER_BOOK_NAME"));
-				order.setORDER_BOOK_AMOUNT(
-						rs.getInt("ORDER_BOOK_AMOUNT"));
-				order.setORDER_BOOK_SIZE(
-						rs.getString("ORDER_BOOK_SIZE"));
-				order.setORDER_BOOK_COLOR(
-						rs.getString("ORDER_BOOK_COLOR"));
-				order.setORDER_SUM_MONEY(
-						rs.getInt("ORDER_SUM_MONEY"));
-				order.setORDER_STATUS(rs.getInt("ORDER_STATUS"));
+				order.setORDER_BOOK_NO(rs.getInt("ORDER_BOOK_NO"));
+				order.setBOOK_NAME(rs.getString("BOOK_NAME"));
+				order.setBOOK_PRICE(rs.getInt("BOOK_PRICE"));
+				order.setORDER_COUNT(rs.getInt("ORDER_COUNT"));
+				order.setTOTAL_PRICE(rs.getInt("TOTAL_PRICE"));
 				order.setORDER_DATE(rs.getDate("ORDER_DATE"));
+				order.setORDER_STATUS(rs.getInt("ORDER_STATUS"));
 				
 				book_order_list.add(order);
 			}
@@ -141,7 +133,7 @@ public class OrderDAO {
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
 		
 		int ordernum=0;
-		String sql="select max(ORDER_NUM) from book_order";
+		String sql="select max(ORDER_NO) from book_order";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -164,26 +156,24 @@ public class OrderDAO {
 				++ordernum;
 				
 				sql = "insert into book_order values(?,?,?,?,?,"+
-					"?,?,?,?,?,?,?,?,?,?,?,?,DATE(SYSDATE()),?,DATE(SYSDATE()),0)";
+					"?,?,?,?,?,?,?,?,?,?,SYSDATE(),SYSDATE(),0,0,0,SYSDATE(),0,SYSDATE())";
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, ordernum);
-				pstmt.setString(2,sdf.format(
-						cal.getTime()).toString()+ "-" + ordernum);
-				pstmt.setString(3, " ");
-				pstmt.setInt(4, book.getBOOK_NO());
-				pstmt.setString(5, book.getBOOK_NAME());
-				pstmt.setInt(6, cart.getCART_COUNT());
-				pstmt.setString(9, order.getORDER_MEMBER_ID());
-				pstmt.setString(10, order.getORDER_RECEIVE_NAME());
-				pstmt.setString(11, order.getORDER_RECEIVE_ADDR1());
-				pstmt.setString(12, order.getORDER_RECEIVE_ADDR2());
-				pstmt.setString(13, order.getORDER_RECEIVE_PHONE());
-				pstmt.setString(14, order.getORDER_RECEIVE_MOBILE());
-				pstmt.setString(15, order.getORDER_MEMO());
-				pstmt.setInt(16, (book.getBOOK_PRICE()*cart.getCART_COUNT()));
-				pstmt.setString(17, order.getORDER_TRADE_TYPE());
-				pstmt.setString(18, order.getORDER_TRADE_PAYER());
+				pstmt.setString(2,sdf.format(cal.getTime()).toString()+ "-" + ordernum);
+				pstmt.setInt(3, book.getBOOK_NO());
+				pstmt.setInt(4, cart.getCART_COUNT());
+				pstmt.setString(5, order.getORDER_MEMBER_ID());
+				pstmt.setString(6, order.getORDER_RECEIVE_NAME());
+				pstmt.setString(7, order.getORDER_RECEIVE_NAME_KANA());
+				pstmt.setString(8, order.getORDER_RECEIVE_EMAIL());
+				pstmt.setString(9, order.getORDER_RECEIVE_TEL());
+				pstmt.setString(10, order.getORDER_RECEIVE_ZIPCODE());
+				pstmt.setString(11, order.getORDER_RECEIVE_ADD_1());
+				pstmt.setString(12, order.getORDER_RECEIVE_ADD_2());
+				pstmt.setString(13, order.getORDER_RECEIVE_ADD_3());
+				pstmt.setString(14, order.getORDER_MEMO());
+				pstmt.setString(15, order.getORDER_TRADE_TYPE());
       			
       			pstmt.executeUpdate();
       			

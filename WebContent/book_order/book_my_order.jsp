@@ -13,34 +13,40 @@
 %>
 <html>
 <head>
-<title>쇼핑몰</title>
+	<link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon"> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
+	<jsp:include page="/menu/menu.jsp" />
+	
+<title>図書管理システム</title>
 </head>
 <body>
 <table width="960" cellspacing="0" cellpadding="0" border="0"
 	align="center">
 <tr>
 <td colspan=2>
-<!-- 회원의 주문내역 보기 -->
+<!-- 会員の注文履歴-->
 <table width="700" border="0" align="center">
 <tr>
-	<td>현재 (<%=id%>)고객님께서 주문하신 내역이 총 (<%=ordercount%>)개 있습니다.</td>
+	<td>現在 (<%=id%>)お客様から 注文した図書は(<%=ordercount%>)個あります。</td>
 </tr>
 <tr>
 	<td height="62" align="center" valign="middle">
 	<table width="700" border="1" cellspacing="0" cellpadding="0"
 		bordercolor="#CCCCCC">
 		<tr>
-			<td height="20"><div align="center">상품명</div></td>
-			<td><div align="center">색상/사이즈</div>	</td>
-			<td><div align="center">수량</div></td>
-			<td><div align="center">총 금액</div></td>
-			<td><div align="center">주문 상태</div></td>
-			<td><div align="center">주문 날짜</div></td>
+			<td height="20"><div align="center">図書名</div></td>
+			<td><div align="center">本数</div></td>
+			<td><div align="center">小計</div></td>
+			<td><div align="center">注文ステータス</div></td>
+			<td><div align="center">注文日時</div></td>
 		</tr>
 		<%
 		if (book_order_list.size() == 0) {
 		%>
-		<td align=center colspan=6>주문 내역이 없습니다.</td>
+		<td align=center colspan=6>注文する本がありません。</td>
 		<%
 		}
 		
@@ -49,20 +55,16 @@
 			order = (OrderBean) book_order_list.get(i);
 		%>
 		<tr align=center>
-			<td height="20"><%=order.getORDER_BOOK_NAME()%></td>
+			<td height="20"><%=order.getBOOK_NAME()%></td>
+			<td><%=order.getORDER_COUNT()%></td>
+			<td><%=order.getTOTAL_PRICE()%></td>
 			<td>
-				<%=order.getORDER_BOOK_COLOR()%>/
-				<%=order.getORDER_BOOK_SIZE()%>
-			</td>
-			<td><%=order.getORDER_BOOK_AMOUNT()%></td>
-			<td><%=order.getORDER_SUM_MONEY()%></td>
-			<td>
-			<%if (order.getORDER_STATUS() == 0) {%>대기중
-			<%}else if (order.getORDER_STATUS() == 1){%>발송준비
-			<%}else if (order.getORDER_STATUS() == 2){%>발송완료
-			<%}else if (order.getORDER_STATUS() == 3){%>배송중
-			<%}else if (order.getORDER_STATUS() == 4){%>배송완료
-			<%}else if (order.getORDER_STATUS() == 5){%>주문취소
+			<%if (order.getORDER_STATUS() == 0) {%>注文受付
+			<%}else if (order.getORDER_STATUS() == 1){%>発送準備中
+			<%}else if (order.getORDER_STATUS() == 2){%>発送済み
+			<%}else if (order.getORDER_STATUS() == 3){%>配送中
+			<%}else if (order.getORDER_STATUS() == 4){%>配送済み
+			<%}else if (order.getORDER_STATUS() == 5){%>注文キャンセル
 			<%}%>
 			</td>
 			<td><%=order.getORDER_DATE()%></td>
@@ -73,9 +75,9 @@
 		<tr align=center height=20>
 			<td colspan=7 style="font-family: Tahoma; font-size: 10pt;">
 			<%if (nowpage <= 1) {%>
-			[이전]&nbsp;
+			[前へ]&nbsp;
 			<%}else{%>
-			<a href="./OrderList.order?page=<%=nowpage-1 %>">[이전]</a>&nbsp;
+			<a href="./OrderList.order?page=<%=nowpage-1 %>">[前へ]</a>&nbsp;
 			<%}%>
 			<%
 			for (int a = startpage; a <= endpage; a++) {
@@ -90,9 +92,9 @@
 			}
 			%>
 			<%if (nowpage >= maxpage) {%>
-			[다음]
+			[次へ]
 			<%}else{%>
-			<a href="./OrderList.order?page=<%=nowpage+1 %>">[다음]</a>
+			<a href="./OrderList.order?page=<%=nowpage+1 %>">[次へ]</a>
 			<%}%>
 			</td>
 		</tr>
@@ -101,11 +103,11 @@
 </tr>
 <tr>
 	<td height="28">
-	<div align="right">총 주문금액 : <%=totalmoney%>원</div>
+	<div align="right">合計金額 : <%=totalmoney%>円</div>
 	</td>
 </tr>
 </table>
-<!-- 회원의 주문내역 보기 -->
+<!-- 会員の注文履歴 -->
 </td>
 </tr>
 </table>

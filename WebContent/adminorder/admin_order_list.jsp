@@ -39,10 +39,10 @@
 		OrderBean order=new OrderBean();
 		order=(OrderBean)orderlist.get(i); %>
 	<tr align=center height=20>
-	<td style=font-family:Tahoma;font-size:7pt;><%=order.getORDER_TRADE_NUM()%></td>
+	<td style=font-family:Tahoma;font-size:7pt;><%=order.getORDER_TRANS_NO()%></td>
 	<td style=font-family:Tahoma;font-size:8pt;><%=order.getORDER_MEMBER_ID()%></td>
 	<td style=font-family:Tahoma;font-size:8pt;><%=order.getORDER_TRADE_TYPE()%></td>
-	<td style=font-family:Tahoma;font-size:8pt;><%=order.getORDER_SUM_MONEY()%></td>
+	<td style=font-family:Tahoma;font-size:8pt;><%=order.getTOTAL_PRICE()%></td>
 	<td style=font-family:Tahoma;font-size:8pt;>
    		<%if(order.getORDER_STATUS()==0){ %>
    			대기중
@@ -60,9 +60,9 @@
    	</td>
    	<td style=font-family:Tahoma;font-size:8pt;><%=order.getORDER_DATE()%></td>
    	<td style=font-family:Tahoma;font-size:8pt;>
-   	<a href="./AdminOrderDetail.adorder?num=<%=order.getORDER_NUM() %>">
+   	<a href="./AdminOrderDetail.adorder?num=<%=order.getORDER_NO() %>">
    	Modify</a>/
-   	<a href="./AdminOrderDelete.adorder?num=<%=order.getORDER_NUM() %>" 
+   	<a href="./AdminOrderDelete.adorder?num=<%=order.getORDER_NO() %>" 
    		onclick="return confirm('삭제하시겠습니까?')">Delete</a>
    	</td>
 	</tr>

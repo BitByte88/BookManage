@@ -76,36 +76,30 @@ public class AdminOrderDAO {
 			rs=pstmt.executeQuery();
 			while(rs.next()){
 				OrderBean order=new OrderBean();
-				order.setORDER_NUM(rs.getInt("ORDER_NUM"));
-				order.setORDER_TRADE_NUM(
-						rs.getString("ORDER_TRADE_NUM"));
-				order.setORDER_TRANS_NUM(
+				order.setORDER_NO(rs.getInt("ORDER_NO"));
+				order.setORDER_TRANS_NO(
 						rs.getString("ORDER_TRANS_NUM"));
-				order.setORDER_BOOK_NUM(
+				order.setORDER_BOOK_NO(
 						rs.getInt("ORDER_BOOK_NUM"));
-				order.setORDER_BOOK_AMOUNT(
+				order.setORDER_COUNT(
 						rs.getInt("ORDER_BOOK_AMOUNT"));
 				order.setORDER_MEMBER_ID(
 						rs.getString("ORDER_MEMBER_ID"));
 				order.setORDER_RECEIVE_NAME(
 						rs.getString("ORDER_RECEIVE_NAME"));
-				order.setORDER_RECEIVE_ADDR1(
+				order.setORDER_RECEIVE_ADD_1(
 						rs.getString("ORDER_RECEIVE_ADDR1"));
-				order.setORDER_RECEIVE_ADDR2(
+				order.setORDER_RECEIVE_ADD_2(
 						rs.getString("ORDER_RECEIVE_ADDR2"));
-				order.setORDER_RECEIVE_PHONE(
+				order.setORDER_RECEIVE_TEL(
 						rs.getString("ORDER_RECEIVE_PHONE"));
-				order.setORDER_RECEIVE_MOBILE(
-						rs.getString("ORDER_RECEIVE_MOBILE"));
 				order.setORDER_MEMO(rs.getString("ORDER_MEMO"));
-				order.setORDER_SUM_MONEY(
+				order.setTOTAL_PRICE(
 						rs.getInt("ORDER_SUM_MONEY"));
 				order.setORDER_TRADE_TYPE(
 						rs.getString("ORDER_TRADE_TYPE"));
 				order.setORDER_TRADE_DATE(
 						rs.getDate("ORDER_TRADE_DATE"));
-				order.setORDER_TRADE_PAYER(
-						rs.getString("ORDER_TRADE_PAYER"));
 				order.setORDER_DATE(rs.getDate("ORDER_DATE"));
 				order.setORDER_STATUS(rs.getInt("ORDER_STATUS"));
 				orderlist.add(order);
@@ -136,33 +130,25 @@ public class AdminOrderDAO {
 			rs.next();
 			
 			OrderBean order=new OrderBean();
-			order.setORDER_NUM(rs.getInt("ORDER_NUM"));
-			order.setORDER_TRADE_NUM(rs.getString("ORDER_TRADE_NUM"));
-			order.setORDER_TRANS_NUM(rs.getString("ORDER_TRANS_NUM"));
-			order.setORDER_BOOK_NUM(rs.getInt("ORDER_BOOK_NUM"));
-			order.setORDER_BOOK_NAME(rs.getString("ORDER_BOOK_NAME"));
-			order.setORDER_BOOK_AMOUNT(
+			order.setORDER_NO(rs.getInt("ORDER_NUM"));
+			order.setORDER_TRANS_NO(rs.getString("ORDER_TRANS_NUM"));
+			order.setORDER_BOOK_NO(rs.getInt("ORDER_BOOK_NUM"));
+			order.setBOOK_NAME(rs.getString("ORDER_BOOK_NAME"));
+			order.setORDER_COUNT(
 					rs.getInt("ORDER_BOOK_AMOUNT"));
-			order.setORDER_BOOK_SIZE(rs.getString("ORDER_BOOK_SIZE"));
-			order.setORDER_BOOK_COLOR(
-					rs.getString("ORDER_BOOK_COLOR"));
 			order.setORDER_MEMBER_ID(rs.getString("ORDER_MEMBER_ID"));
 			order.setORDER_RECEIVE_NAME(
 					rs.getString("ORDER_RECEIVE_NAME"));
-			order.setORDER_RECEIVE_ADDR1(
+			order.setORDER_RECEIVE_ADD_1(
 					rs.getString("ORDER_RECEIVE_ADDR1"));
-			order.setORDER_RECEIVE_ADDR2(
+			order.setORDER_RECEIVE_ADD_2(
 					rs.getString("ORDER_RECEIVE_ADDR2"));
-			order.setORDER_RECEIVE_PHONE(
-					rs.getString("ORDER_RECEIVE_PHONE"));
-			order.setORDER_RECEIVE_MOBILE(
+			order.setORDER_RECEIVE_TEL(
 					rs.getString("ORDER_RECEIVE_MOBILE"));
 			order.setORDER_MEMO(rs.getString("ORDER_MEMO"));
-			order.setORDER_SUM_MONEY(rs.getInt("ORDER_SUM_MONEY"));
+			order.setTOTAL_PRICE(rs.getInt("ORDER_SUM_MONEY"));
 			order.setORDER_TRADE_TYPE(rs.getString("ORDER_TRADE_TYPE"));
 			order.setORDER_TRADE_DATE(rs.getDate("ORDER_TRADE_DATE"));
-			order.setORDER_TRADE_PAYER(
-					rs.getString("ORDER_TRADE_PAYER"));
 			order.setORDER_DATE(rs.getDate("ORDER_DATE"));
 			order.setORDER_STATUS(rs.getInt("ORDER_STATUS"));
 			
@@ -189,10 +175,10 @@ public class AdminOrderDAO {
 		try{
 			conn = ds.getConnection();
 			pstmt=conn.prepareStatement(order_modify_sql);
-			pstmt.setString(1, order.getORDER_TRANS_NUM());
+			pstmt.setString(1, order.getORDER_TRANS_NO());
 			pstmt.setString(2, order.getORDER_MEMO());
 			pstmt.setInt(3, order.getORDER_STATUS());
-			pstmt.setInt(4, order.getORDER_NUM());
+			pstmt.setInt(4, order.getORDER_NO());
 			result=pstmt.executeUpdate();
 			
 			if(result==1){

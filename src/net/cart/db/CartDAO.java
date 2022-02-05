@@ -150,4 +150,26 @@ public class CartDAO {
 		}
 		return false;
 	}
+	
+	public boolean cartClear(String id) {
+		String sql = "delete from CART where CART_MEMBER_ID=?";
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			if(pstmt.executeUpdate()!=0){
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			}catch(Exception ex) {}
+		}
+		return false;
+	}
 }

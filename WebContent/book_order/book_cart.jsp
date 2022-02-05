@@ -12,6 +12,13 @@
 
 <html>
 <head>
+	<link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon"> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
+	<jsp:include page="/menu/menu.jsp" />
+	
 <title>図書管理システム</title>
 </head>
 <body>
@@ -37,6 +44,7 @@
 				<td width="25%"><font size="2">図書名</font></td>
 				<td width="8%"><font size="2">本数</font></td>
 				<td width="8%"><font size="2">価格</font></td>
+				<td width="8%"><font size="2">小計</font></td>
 				<td width="8%"><font size="2">キャンセル</font></td>
 			</tr>
 			<%
@@ -55,6 +63,7 @@
 				<%=dto.getCART_COUNT()%>
 			</font></td>
 			<td><font size="2"><%=book.getBOOK_PRICE()%></font></td>
+			<td><font size="2"><%=book.getBOOK_PRICE()*dto.getCART_COUNT()%></font></td>
 			<td><font size="2">
 			<a href="CartDelete.cart?num=<%=dto.getCART_NO()%>"
 				onclick="return confirm('キャンセルしますか。?')">キャンセル</a>
@@ -88,15 +97,15 @@
 			if (cartList != null && cartList.size() != 0) {
 			%>
 			<a href="javascript:cartform.submit()">
-			[구매하기]
+			[購入する]
 			</a>
 			<%}else{%>
 			<a href="#" onclick="javascript:alert('注文する本がありません。')">
-			[구매하기]
+			[購入する]
 			</a>
 			<%}%>
 			<a href="./BookList.book">
-			[계속 쇼핑하기]
+			[続けてショッピングする]
 			</a>
 			</td>
 			</tr>

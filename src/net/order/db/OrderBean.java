@@ -3,75 +3,51 @@ package net.order.db;
 import java.sql.Date;
 
 public class OrderBean {
-	private int ORDER_NUM;
-	private String ORDER_TRADE_NUM;
-	private String ORDER_TRANS_NUM;
-	private int ORDER_BOOK_NUM;
-	private String ORDER_BOOK_NAME;
-	private int ORDER_BOOK_AMOUNT;
-	private String ORDER_BOOK_SIZE;
-	private String ORDER_BOOK_COLOR;
+	private int ORDER_NO;
+	private String ORDER_TRANS_NO;
+	private int ORDER_BOOK_NO;
+	private int ORDER_COUNT;
 	private String ORDER_MEMBER_ID;
 	private String ORDER_RECEIVE_NAME;
-	private String ORDER_RECEIVE_ADDR1;
-	private String ORDER_RECEIVE_ADDR2;
-	private String ORDER_RECEIVE_PHONE;
-	private String ORDER_RECEIVE_MOBILE;
+	private String ORDER_RECEIVE_NAME_KANA;
+	private String ORDER_RECEIVE_EMAIL;
+	private String ORDER_RECEIVE_TEL;
+	private String ORDER_RECEIVE_ZIPCODE;
+	private String ORDER_RECEIVE_ADD_1;
+	private String ORDER_RECEIVE_ADD_2;
+	private String ORDER_RECEIVE_ADD_3;
 	private String ORDER_MEMO;
-	private int ORDER_SUM_MONEY;
 	private String ORDER_TRADE_TYPE;
-	private Date ORDER_TRADE_DATE;
-	private String ORDER_TRADE_PAYER;
-	private Date ORDER_DATE;
+	private Date ORDER_TRADE_DATE;	
+	private Date ORDER_DATE;	
 	private int ORDER_STATUS;
+	private int TOTAL_PRICE;
+	private String BOOK_NAME;
+	private int BOOK_PRICE;
 	
-	public String getORDER_BOOK_NAME() {
-		return ORDER_BOOK_NAME;
+	public int getORDER_NO() {
+		return ORDER_NO;
 	}
-	public void setORDER_BOOK_NAME(String order_book_name) {
-		ORDER_BOOK_NAME = order_book_name;
+	public void setORDER_NO(int order_no) {
+		ORDER_NO = order_no;
 	}
-	public String getORDER_BOOK_SIZE() {
-		return ORDER_BOOK_SIZE;
+	public String getORDER_TRANS_NO() {
+		return ORDER_TRANS_NO;
 	}
-	public void setORDER_BOOK_SIZE(String order_book_size) {
-		ORDER_BOOK_SIZE = order_book_size;
+	public void setORDER_TRANS_NO(String order_trans_no) {
+		ORDER_TRANS_NO = order_trans_no;
 	}
-	public String getORDER_BOOK_COLOR() {
-		return ORDER_BOOK_COLOR;
+	public int getORDER_BOOK_NO() {
+		return ORDER_BOOK_NO;
 	}
-	public void setORDER_BOOK_COLOR(String order_book_color) {
-		ORDER_BOOK_COLOR = order_book_color;
+	public void setORDER_BOOK_NO(int order_book_no) {
+		ORDER_BOOK_NO = order_book_no;
 	}
-	public String getORDER_TRANS_NUM() {
-		return ORDER_TRANS_NUM;
+	public int getORDER_COUNT() {
+		return ORDER_COUNT;
 	}
-	public void setORDER_TRANS_NUM(String order_trans_num) {
-		ORDER_TRANS_NUM = order_trans_num;
-	}
-	public int getORDER_NUM() {
-		return ORDER_NUM;
-	}
-	public void setORDER_NUM(int order_num) {
-		ORDER_NUM = order_num;
-	}
-	public String getORDER_TRADE_NUM() {
-		return ORDER_TRADE_NUM;
-	}
-	public void setORDER_TRADE_NUM(String order_trade_num) {
-		ORDER_TRADE_NUM = order_trade_num;
-	}
-	public int getORDER_BOOK_NUM() {
-		return ORDER_BOOK_NUM;
-	}
-	public void setORDER_BOOK_NUM(int order_book_num) {
-		ORDER_BOOK_NUM = order_book_num;
-	}
-	public int getORDER_BOOK_AMOUNT() {
-		return ORDER_BOOK_AMOUNT;
-	}
-	public void setORDER_BOOK_AMOUNT(int order_book_amount) {
-		ORDER_BOOK_AMOUNT = order_book_amount;
+	public void setORDER_COUNT(int order_count) {
+		ORDER_COUNT = order_count;
 	}
 	public String getORDER_MEMBER_ID() {
 		return ORDER_MEMBER_ID;
@@ -85,41 +61,53 @@ public class OrderBean {
 	public void setORDER_RECEIVE_NAME(String order_receive_name) {
 		ORDER_RECEIVE_NAME = order_receive_name;
 	}
-	public String getORDER_RECEIVE_ADDR1() {
-		return ORDER_RECEIVE_ADDR1;
+	public String getORDER_RECEIVE_NAME_KANA() {
+		return ORDER_RECEIVE_NAME_KANA;
 	}
-	public void setORDER_RECEIVE_ADDR1(String order_receive_addr1) {
-		ORDER_RECEIVE_ADDR1 = order_receive_addr1;
+	public void setORDER_RECEIVE_NAME_KANA(String order_receive_name_kana) {
+		ORDER_RECEIVE_NAME_KANA = order_receive_name_kana;
 	}
-	public String getORDER_RECEIVE_ADDR2() {
-		return ORDER_RECEIVE_ADDR2;
+	public String getORDER_RECEIVE_EMAIL() {
+		return ORDER_RECEIVE_EMAIL;
 	}
-	public void setORDER_RECEIVE_ADDR2(String order_receive_addr2) {
-		ORDER_RECEIVE_ADDR2 = order_receive_addr2;
+	public void setORDER_RECEIVE_EMAIL(String order_receive_email) {
+		ORDER_RECEIVE_EMAIL = order_receive_email;
 	}
-	public String getORDER_RECEIVE_PHONE() {
-		return ORDER_RECEIVE_PHONE;
+	public String getORDER_RECEIVE_TEL() {
+		return ORDER_RECEIVE_TEL;
 	}
-	public void setORDER_RECEIVE_PHONE(String order_receive_phone) {
-		ORDER_RECEIVE_PHONE = order_receive_phone;
+	public void setORDER_RECEIVE_TEL(String order_receive_tel) {
+		ORDER_RECEIVE_TEL = order_receive_tel;
 	}
-	public String getORDER_RECEIVE_MOBILE() {
-		return ORDER_RECEIVE_MOBILE;
+	public String getORDER_RECEIVE_ZIPCODE() {
+		return ORDER_RECEIVE_ZIPCODE;
 	}
-	public void setORDER_RECEIVE_MOBILE(String order_receive_mobile) {
-		ORDER_RECEIVE_MOBILE = order_receive_mobile;
+	public void setORDER_RECEIVE_ZIPCODE(String order_receive_zipcode) {
+		ORDER_RECEIVE_ZIPCODE = order_receive_zipcode;
+	}
+	public String getORDER_RECEIVE_ADD_1() {
+		return ORDER_RECEIVE_ADD_1;
+	}
+	public void setORDER_RECEIVE_ADD_1(String order_receive_add_1) {
+		ORDER_RECEIVE_ADD_1 = order_receive_add_1;
+	}
+	public String getORDER_RECEIVE_ADD_2() {
+		return ORDER_RECEIVE_ADD_2;
+	}
+	public void setORDER_RECEIVE_ADD_2(String order_receive_add_2) {
+		ORDER_RECEIVE_ADD_2 = order_receive_add_2;
+	}
+	public String getORDER_RECEIVE_ADD_3() {
+		return ORDER_RECEIVE_ADD_3;
+	}
+	public void setORDER_RECEIVE_ADD_3(String order_receive_add_3) {
+		ORDER_RECEIVE_ADD_3 = order_receive_add_3;
 	}
 	public String getORDER_MEMO() {
 		return ORDER_MEMO;
 	}
 	public void setORDER_MEMO(String order_memo) {
 		ORDER_MEMO = order_memo;
-	}
-	public int getORDER_SUM_MONEY() {
-		return ORDER_SUM_MONEY;
-	}
-	public void setORDER_SUM_MONEY(int order_sum_money) {
-		ORDER_SUM_MONEY = order_sum_money;
 	}
 	public String getORDER_TRADE_TYPE() {
 		return ORDER_TRADE_TYPE;
@@ -133,12 +121,6 @@ public class OrderBean {
 	public void setORDER_TRADE_DATE(Date order_trade_date) {
 		ORDER_TRADE_DATE = order_trade_date;
 	}
-	public String getORDER_TRADE_PAYER() {
-		return ORDER_TRADE_PAYER;
-	}
-	public void setORDER_TRADE_PAYER(String order_trade_payer) {
-		ORDER_TRADE_PAYER = order_trade_payer;
-	}
 	public Date getORDER_DATE() {
 		return ORDER_DATE;
 	}
@@ -151,4 +133,24 @@ public class OrderBean {
 	public void setORDER_STATUS(int order_status) {
 		ORDER_STATUS = order_status;
 	}
+	public int getTOTAL_PRICE() {
+		return TOTAL_PRICE;
+	}
+	public void setTOTAL_PRICE(int total_price) {
+		TOTAL_PRICE = total_price;
+	}
+	public String getBOOK_NAME() {
+		return BOOK_NAME;
+	}
+	public void setBOOK_NAME(String book_name) {
+		BOOK_NAME = book_name;
+	}
+	public int getBOOK_PRICE() {
+		return BOOK_PRICE;
+	}
+	public void setBOOK_PRICE(int book_price) {
+		BOOK_PRICE = book_price;
+	}
+
+
 }

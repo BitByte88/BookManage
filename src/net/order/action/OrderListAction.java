@@ -17,9 +17,11 @@ public class OrderListAction implements Action{
 		String id =(String)session.getAttribute("id");
 		
 		if(id==null){			
+			String referer = request.getHeader("Referer");
+			request.getSession().setAttribute("redirectURI", referer);
 			forward.setRedirect(true);
 			forward.setPath("./MemberLogin.member");
-			return forward;
+			return forward;		
 		}
 		
 		int page=1;

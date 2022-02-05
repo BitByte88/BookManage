@@ -32,6 +32,7 @@ public class MemberLoginAction implements Action{
 					forward.setRedirect(true);
 					redirectURL =redirectURL.substring(redirectURL.lastIndexOf("/"));
 					forward.setPath("."+redirectURL);
+					session.removeAttribute("redirectURI");
 				}
 				return forward;
 			}

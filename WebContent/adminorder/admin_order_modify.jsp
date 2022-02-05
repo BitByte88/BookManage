@@ -16,7 +16,7 @@
 <td colspan=2 align=center>
 <!-- 주문 정보 수정(관리자) -->
 <form action="./AdminOrderModify.adorder" name="orderform" method="post">
-<input type="hidden" name="num" value="<%=order.getORDER_NUM() %>">
+<input type="hidden" name="num" value="<%=order.getORDER_NO() %>">
 <table width=80% border=0 cellpadding="0" cellspacing="1">
 	<tr><td height=10></td></tr>
 	<tr><td height=10></td></tr>
@@ -25,8 +25,8 @@
 		width=130 height=24 bgcolor="f7f7f7">운송장(등기)번호</td>
 	<td width=320 height=24><input type="text" name="transportnum"
 		size=15 maxlength=20
-		value=<%if(order.getORDER_TRANS_NUM()!=null){%>
-		<%=order.getORDER_TRANS_NUM()%> <%} %>></td>
+		value=<%if(order.getORDER_TRANS_NO()!=null){%>
+		<%=order.getORDER_TRANS_NO()%> <%} %>></td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
@@ -35,7 +35,7 @@
 		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;"
 			width=130 height=24 bgcolor="f7f7f7">주문번호</td>
 		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;">
-		<%=order.getORDER_TRADE_NUM() %></td>
+		<%=order.getORDER_TRANS_NO() %></td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
@@ -51,7 +51,7 @@
 		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
 			bgcolor="f7f7f7">상품이름</td>
 		<td style="font-family: Tahoma; font-size: 8pt;">
-			<%=order.getORDER_BOOK_NAME() %>
+			<%=order.getBOOK_NAME() %>
 		</td>
 	</tr>
 	<tr>
@@ -61,28 +61,11 @@
 		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
 			bgcolor="f7f7f7">수량</td>
 		<td style="font-family: Tahoma; font-size: 8pt;">
-			<%=order.getORDER_BOOK_AMOUNT() %>
+			<%=order.getORDER_COUNT() %>
 		</td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
-	</tr>
-	<tr height=20>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
-			bgcolor="f7f7f7">사이즈</td>
-		<td style="font-family: Tahoma; font-size: 8pt;">
-			<%=order.getORDER_BOOK_SIZE()%>
-		</td>
-	</tr>
-	<tr>
-		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
-	</tr>
-	<tr height=20>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
-			bgcolor="f7f7f7">색깔</td>
-		<td style="font-family: Tahoma; font-size: 8pt;">
-			<%=order.getORDER_BOOK_COLOR() %>
-		</td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
@@ -108,18 +91,11 @@
 		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
 			bgcolor="f7f7f7">집전화</td>
 		<td style="font-family: Tahoma; font-size: 8pt;">
-			<%=order.getORDER_RECEIVE_PHONE() %>
+			<%=order.getORDER_RECEIVE_TEL() %>
 		</td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
-	</tr>
-	<tr height=20>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
-			bgcolor="f7f7f7">휴대폰</td>
-		<td style="font-family: Tahoma; font-size: 8pt;">
-			<%=order.getORDER_RECEIVE_MOBILE()%>
-		</td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
@@ -128,7 +104,7 @@
 		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
 			bgcolor="f7f7f7">배송지 주소</td>
 		<td style="font-family: Tahoma; font-size: 8pt;">
-			<%=order.getORDER_RECEIVE_ADDR1() %>
+			<%=order.getORDER_RECEIVE_ADD_1() %>
 		</td>
 	</tr>
 	<tr>
@@ -138,7 +114,7 @@
 		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
 			bgcolor="f7f7f7">배송지 나머지 주소</td>
 		<td style="font-family: Tahoma; font-size: 8pt;">
-			<%=order.getORDER_RECEIVE_ADDR2() %>
+			<%=order.getORDER_RECEIVE_ADD_2() %>
 		</td>
 	</tr>
 	<tr>
@@ -204,7 +180,7 @@
 		<td style="font-family: Tahoma; font-size: 8pt;" width=200 height=24
 			bgcolor="f7f7f7">주문 합계금액 :</td>
 		<td width=320 height=24>
-			<font size=2><%=order.getORDER_SUM_MONEY() %>원</font>
+			<font size=2><%=order.getTOTAL_PRICE() %>원</font>
 		</td>
 	</tr>
 	<tr>
@@ -219,13 +195,6 @@
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
-	</tr>
-	<tr>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=200 height=24
-			bgcolor="f7f7f7">입금자명 :</td>
-		<td width=320 height=24>
-			<font size=2><%=order.getORDER_TRADE_PAYER() %></font>
-		</td>
 	</tr>
 	<tr>
 		<td style="font-family: Tahoma; font-size: 8pt;" width=200 height=24

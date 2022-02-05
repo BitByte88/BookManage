@@ -44,31 +44,24 @@ public class OrderAddAction implements Action{
 		CartBean cart=new CartBean();
 		
 		order.setORDER_MEMBER_ID(request.getParameter("memberid"));
-		order.setORDER_RECEIVE_NAME(
-				request.getParameter("ORDER_RECEIVE_NAME"));
-		order.setORDER_RECEIVE_PHONE(
-				request.getParameter("ORDER_RECEIVE_PHONE"));
-		order.setORDER_RECEIVE_MOBILE(
-				request.getParameter("ORDER_RECEIVE_MOBILE"));
-		order.setORDER_RECEIVE_ADDR1(
-				request.getParameter("ORDER_RECEIVE_ZIPCODE")+
-				" "+request.getParameter("ORDER_RECEIVE_ADDR1"));
-		order.setORDER_RECEIVE_ADDR2(
-				request.getParameter("ORDER_RECEIVE_ADDR2"));
+		order.setORDER_RECEIVE_NAME(request.getParameter("ORDER_RECEIVE_NAME"));
+		order.setORDER_RECEIVE_NAME_KANA(request.getParameter("ORDER_RECEIVE_NAME_KANA"));
+		order.setORDER_RECEIVE_EMAIL(request.getParameter("ORDER_RECEIVE_EMAIL"));
+		order.setORDER_RECEIVE_TEL(request.getParameter("ORDER_RECEIVE_TEL"));
+		order.setORDER_RECEIVE_ZIPCODE(request.getParameter("ORDER_RECEIVE_ZIPCODE"));
+		order.setORDER_RECEIVE_ADD_1(request.getParameter("ORDER_RECEIVE_ADD_1"));
+		order.setORDER_RECEIVE_ADD_2(request.getParameter("ORDER_RECEIVE_ADD_2"));
+		order.setORDER_RECEIVE_ADD_3(request.getParameter("ORDER_RECEIVE_ADD_3"));
 		order.setORDER_MEMO(request.getParameter("ORDER_MEMO"));
-		order.setORDER_TRADE_TYPE("�¶����Ա�");
-		order.setORDER_TRADE_PAYER(request.getParameter("ORDER_TRADE_PAYER"));
+		
+		order.setORDER_TRADE_TYPE("オンライン入金");
 		
 		String ordertype=request.getParameter("ordertype");
 		if(ordertype.equals("book")){
-			cart.setCART_BOOK_NO(	Integer.parseInt(
-						request.getParameter("bookno")));
-			cart.setCART_COUNT(Integer.parseInt(
-						request.getParameter("bookamount")));
+			cart.setCART_BOOK_NO(Integer.parseInt(request.getParameter("bookno")));
+			cart.setCART_COUNT(Integer.parseInt(request.getParameter("amount")));
 			book.setBOOK_NAME(request.getParameter("bookname"));
-			book.setBOOK_PRICE(Integer.parseInt(
-						request.getParameter("bookprice")));
-			
+			book.setBOOK_PRICE(Integer.parseInt(request.getParameter("price")));
 			cartlist.add(cart);
 			booklist.add(book);
 			bookvector.add(cartlist);
@@ -78,7 +71,7 @@ public class OrderAddAction implements Action{
 		}
 		
 		orderdao.addOrder(order, bookvector);
-		
+		cartdao.cartClear(id);
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(true);
 		forward.setPath("./OrderOk.order");
