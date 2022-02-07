@@ -82,6 +82,11 @@
 		        	</ul>
 		        	<ul class="navbar-nav">
 			        	<li class="nav-item">
+			        		<a class="nav-link" href="./OrderList.order">注文履歴</a>
+			        	</li>
+		        	</ul>
+		        	<ul class="navbar-nav">
+			        	<li class="nav-item">
 			        		<a class="nav-link" href="./MemberLogout.member">ログアウト</a>
 			        	</li>
 		        	</ul>

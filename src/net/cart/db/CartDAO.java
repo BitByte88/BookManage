@@ -65,6 +65,7 @@ public class CartDAO {
 				rs1 = pstmt.executeQuery();
 				
 				if(rs1.next()){
+					book.setBOOK_NO(rs1.getInt("BOOK_NO"));
 					book.setBOOK_NAME(
 							rs1.getString("BOOK_NAME"));
 					book.setBOOK_PRICE(

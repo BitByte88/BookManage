@@ -86,8 +86,8 @@ public class OrderDAO {
 				"BOR.ORDER_BOOK_NO, B.BOOK_NAME,B.BOOK_PRICE, BOR.ORDER_COUNT, "+
 				"BOR.ORDER_COUNT * B.BOOK_PRICE AS TOTAL_PRICE, ORDER_DATE, ORDER_STATUS "+
 				"from book_order AS BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO " +
-				"WHERE ORDER_MEMBER_ID = 1 order by ORDER_DATE desc) AS OL "+
-				"where OL.rnum>? and OL.rnum<?";
+				"WHERE ORDER_MEMBER_ID = ? order by ORDER_DATE desc) AS OL "+
+				"where OL.rnum>=? and OL.rnum<=?";
 		List book_order_list=new ArrayList();
 		
 		int startrow=(page-1)*10+1;

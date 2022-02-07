@@ -92,7 +92,7 @@
 			<%=cart.getCART_COUNT()%>
 		</td>
 		<td style="font-family: Tahoma; font-size: 8pt;">
-			<%=book.getBOOK_PRICE()%>
+			<%=book.getBOOK_PRICE()%>円
 		</td>
 		</tr>
 		<tr>
@@ -264,7 +264,7 @@
 			<td align=center style="height: 1px;"
 				colspan=6>
 				<input type=submit value="注文">&nbsp;
-				<input type=button value="キャンセル">
+				<input type=button onclick="javascript:history.back();"value="キャンセル">
 			</td>
 		</tr>
 	</table>

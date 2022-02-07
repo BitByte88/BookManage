@@ -57,7 +57,7 @@
 		<tr align=center>
 			<td height="20"><%=order.getBOOK_NAME()%></td>
 			<td><%=order.getORDER_COUNT()%></td>
-			<td><%=order.getTOTAL_PRICE()%></td>
+			<td><%=order.getTOTAL_PRICE()%>円</td>
 			<td>
 			<%if (order.getORDER_STATUS() == 0) {%>注文受付
 			<%}else if (order.getORDER_STATUS() == 1){%>発送準備中
