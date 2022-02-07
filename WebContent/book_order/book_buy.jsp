@@ -52,9 +52,9 @@
 			<p align=left><b><font size=4>注文詳細内容</font></b></p>
 		</tr>
 		
-		<tr align=center height=20>
-		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;">写真</td>
-		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;">図書名</td>
+		<tr align=center height=20 bgcolor="f7f7f7">
+		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;">画像</td>
+		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;">書名</td>
 		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;">本数</td>
 		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;">価格</td>
 		</tr>
@@ -69,7 +69,7 @@
 			src="./upload/<%=orderinfo.get(4) %>" width=50 height=50></td>
 		<td style="font-family: Tahoma; font-size: 8pt;"><%=orderinfo.get(1)%></td>
 		<td style="font-family: Tahoma; font-size: 8pt;"><%=orderinfo.get(2)%></td>
-		<td style="font-family: Tahoma; font-size: 8pt;"><%=orderinfo.get(3)%></td>
+		<td style="font-family: Tahoma; font-size: 8pt;"><%=orderinfo.get(3)%>円</td>
 		</tr>
 		<tr>
 			<td style="background-color: #F0F0F0; height: 1px;" colspan=6>

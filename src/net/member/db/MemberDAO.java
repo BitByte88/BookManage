@@ -24,7 +24,8 @@ public class MemberDAO {
 			Context envCtx=(Context)initCtx.lookup("java:comp/env");
 			ds=(DataSource)envCtx.lookup("jdbc/mysql");
 		}catch(Exception ex){
-			ex.printStackTrace();
+			System.out.println("DB接続エラー：　" + ex);
+			return;
 		}
 	}
 	
@@ -74,7 +75,7 @@ public class MemberDAO {
 		
 		try{
 			con = ds.getConnection();
-			sql="select MEMBER_PW from member where MEMBER_ID=?";
+			sql="select MEMBER_PW from member where MEMBER_ID=? and DELETE_FLAG=0";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
@@ -105,7 +106,7 @@ public class MemberDAO {
 		
 		try{
 			con = ds.getConnection();
-			sql="select MEMBER_ID from member where MEMBER_ID=? ";
+			sql="select MEMBER_ID from member where MEMBER_ID=? and DELETE_FLAG=0";
 			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -132,7 +133,7 @@ public class MemberDAO {
 		
 		try{
 			con = ds.getConnection();
-			sql="select * from member where MEMBER_ID=?";
+			sql="select * from member where MEMBER_ID=? and DELETE_FLAG=0";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
@@ -171,7 +172,7 @@ public class MemberDAO {
 			sql="update member set MEMBER_PW=?,MEMBER_NAME=?,"+
 			"MEMBER_NAME_KANA=?,MEMBER_TEL=?,MEMBER_MAIL=?,"+
 			"MEMBER_ZIPCODE=?,MEMBER_ADD_1=?,MEMBER_ADD_2=?,"+
-			"MEMBER_ADD_3=? where MEMBER_ID=?";
+			"MEMBER_ADD_3=? where MEMBER_ID=? and DELETE_FLAG=0";
 			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, mb.getMEMBER_PW());
@@ -202,7 +203,7 @@ public class MemberDAO {
 		
 		try{
 			con = ds.getConnection();
-			sql="select MEMBER_PW from member where MEMBER_ID=?";
+			sql="select MEMBER_PW from member where MEMBER_ID=? and DELETE_FLAG=0";
 			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -240,7 +241,7 @@ public class MemberDAO {
 		try{
 			con = ds.getConnection();
 			sql="select MEMBER_ID, MEMBER_PW "+
-				"from MEMBER where MEMBER_NAME=? and MEMBER_NAME_KANA=? and MEMBER_TEL=? and MEMBER_MAIL=?";
+				"from MEMBER where MEMBER_NAME=? and MEMBER_NAME_KANA=? and MEMBER_TEL=? and MEMBER_MAIL=? and DELETE_FLAG=0";
 			
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, name);
@@ -269,7 +270,7 @@ public class MemberDAO {
 	}
 	
 	public boolean isAdmin(String id){
-		String sql="select MEMBER_TYPE from MEMBER where MEMBER_ID=?";
+		String sql="select MEMBER_TYPE from MEMBER where MEMBER_ID=? and DELETE_FLAG=0";
 		int member_admin=1;
 		boolean result = false;
 		try {
@@ -298,7 +299,7 @@ public class MemberDAO {
 	}
 	
 	public List searchZipcode(String zipcode){
-		String sql="select * from zipcode where ZIPCODE like ?";
+		String sql="select * from zipcode where ZIPCODE like ? and DELETE_FLAG=0";
 		List zipcodeList=new ArrayList();
 		
 		try{

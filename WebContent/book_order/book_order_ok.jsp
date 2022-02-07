@@ -12,6 +12,7 @@
 <title>図書管理システム</title>
 </head>
 <body>
+<div name="main" style="margin:30 0 50 0">
 <table width="960" cellspacing="0" cellpadding="0" border="0"
 	align="center">
 <tr>
@@ -51,5 +52,6 @@
 </td>
 </tr>
 </table>
+</div>
 </body>
 </html>
