@@ -89,6 +89,9 @@
 			<%=book.getBOOK_NAME()%>
 		</td>
 		<td style="font-family: Tahoma; font-size: 8pt;">
+			<%=cart.getCART_COUNT()%>
+		</td>
+		<td style="font-family: Tahoma; font-size: 8pt;">
 			<%=book.getBOOK_PRICE()%>
 		</td>
 		</tr>
