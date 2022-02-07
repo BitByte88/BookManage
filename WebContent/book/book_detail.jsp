@@ -26,7 +26,7 @@ function isBuy(bookform) {
 		alert("本数は１本以上を注文してください。")
 		return;
 	}
-	var isbuy=confirm("구매하시겠습니까?");
+	var isbuy=confirm("購入しますか");
 	if(isbuy==true) {
 		bookform.action="OrderStart.order";
 		bookform.submit();
@@ -43,7 +43,7 @@ function isCart(cartform) {
 	}
 
 	
-	var isbuy=confirm("장바구니에 저장하시겠습니까?");
+	var isbuy=confirm("カートに入れますか");
 	
 	if(isbuy==true) {
 		cartform.action="CartAdd.cart";

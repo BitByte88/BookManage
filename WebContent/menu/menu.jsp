@@ -23,7 +23,7 @@
 	    <div class="collapse navbar-collapse" id="navbarColor01">
 	      <ul class="navbar-nav me-auto">
 	        <li class="nav-item active">
-	          <a class="nav-link" href="./BookList.book"><label style="text-weight:bold">ホーム</label>
+	          <a class="nav-link" href="./BookList.book">ホーム
 	            <span class="visually-hidden">(current)</span>
 	          </a>
 	        </li>

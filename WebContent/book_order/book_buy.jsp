@@ -30,6 +30,7 @@
 <title>図書管理システム</title>
 </head>
 <body>
+<div name="main" style="margin:30 0 50 0">
 <table width="960" cellspacing="0" cellpadding="0" border="0"
 	align="center">
 <tr>
@@ -46,9 +47,9 @@
 	<input type="hidden" name="memberid" value="<%=member.getMEMBER_ID() %>">
 	
 	<!-- 注文詳細内容 -->
-	<table border=0 cellspacing=1 cellpadding=0 width=80%>
+	<table border=0 cellspacing=1 cellpadding=0 width=90%>
 		<tr>
-			<p align=left><b><font size=2>注文詳細内容</font></b></p>
+			<p align=left><b><font size=4>注文詳細内容</font></b></p>
 		</tr>
 		
 		<tr align=center height=20>
@@ -100,7 +101,7 @@
 		%>
 	</table>
 
-	<table width=80% border=0 cellpadding="0" cellspacing="1">
+	<table width=90% border=0 cellpadding="0" cellspacing="1">
 		<tr>
 			<td height=10>
 			<td>
@@ -144,7 +145,7 @@
 		</tr>
 	</table>
 
-	<table width=80% border=0 cellpadding="0" cellspacing="1">
+	<table width=90% border=0 cellpadding="0" cellspacing="1">
 		<tr>
 			<td height=10>
 			<td>
@@ -157,7 +158,7 @@
 			<td><b><font size=2>お届け先情報</font></b></td>
 		</tr>
 		<tr height=20>
-			<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
+			<td style="font-family: Tahoma; font-size: 8pt;" width=170 height=24
 				bgcolor="f7f7f7">届け先_氏名</td>
 			<td style="font-family: Tahoma; font-size: 8pt;">
 				<input type="text" name="ORDER_RECEIVE_NAME" size=12
@@ -165,7 +166,7 @@
 			</td>
 		</tr>
 		<tr height=20>
-			<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
+			<td style="font-family: Tahoma; font-size: 8pt;" width=170 height=24
 				bgcolor="f7f7f7">届け先_氏名（カナ）</td>
 			<td style="font-family: Tahoma; font-size: 8pt;">
 				<input type="text" name="ORDER_RECEIVE_NAME_KANA" size=12
@@ -176,7 +177,7 @@
 			<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 		</tr>
 		<tr height=20>
-			<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
+			<td style="font-family: Tahoma; font-size: 8pt;" width=170 height=24
 				bgcolor="f7f7f7">届け先_TEL</td>
 			<td style="font-family: Tahoma; font-size: 8pt;">
 				<input type="text" name="ORDER_RECEIVE_TEL" size=15
@@ -187,7 +188,7 @@
 			<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 		</tr>
 		<tr height=20>
-			<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
+			<td style="font-family: Tahoma; font-size: 8pt;" width=170 height=24
 				bgcolor="f7f7f7">届け先_メールアドレス</td>
 			<td style="font-family: Tahoma; font-size: 8pt;">
 				<input type="text" name="ORDER_RECEIVE_EMAIL" size=15
@@ -198,7 +199,7 @@
 			<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 		</tr>
 		<tr height=20>
-			<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
+			<td style="font-family: Tahoma; font-size: 8pt;" width=170 height=24
 				bgcolor="f7f7f7">届け先_郵便番号</td>
 			<td style="font-family: Tahoma; font-size: 8pt;">
 				<input type="text" name="ORDER_RECEIVE_ZIPCODE" size=7
@@ -209,7 +210,7 @@
 			<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 		</tr>
 		<tr height=20>
-			<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
+			<td style="font-family: Tahoma; font-size: 8pt;" width=170 height=24
 				bgcolor="f7f7f7">届け先_都道府県</td>
 			<td style="font-family: Tahoma; font-size: 8pt;">
 				<input type="text" name="ORDER_RECEIVE_ADD_1" size=50
@@ -219,7 +220,7 @@
 			<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 		</tr>
 		<tr height=20>
-			<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
+			<td style="font-family: Tahoma; font-size: 8pt;" width=170 height=24
 				bgcolor="f7f7f7">届け先_市区町村</td>
 			<td style="font-family: Tahoma; font-size: 8pt;">
 				<input type="text" name="ORDER_RECEIVE_ADD_2" size=50
@@ -230,7 +231,7 @@
 			<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 		</tr>
 		<tr height=20>
-			<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
+			<td style="font-family: Tahoma; font-size: 8pt;" width=170 height=24
 				bgcolor="f7f7f7">届け先_丁目、番地、号、建物名</td>
 			<td style="font-family: Tahoma; font-size: 8pt;">
 				<input type="text" name="ORDER_RECEIVE_ADD_3" size=50
@@ -241,7 +242,7 @@
 			<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 		</tr>
 		<tr height=20>
-			<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
+			<td style="font-family: Tahoma; font-size: 8pt;" width=170 height=24
 				bgcolor="f7f7f7">メモー</td>
 			<td style="font-family: Tahoma; font-size: 8pt;">
 			<textarea name="ORDER_MEMO" cols=60 rows=12></textarea>
@@ -252,12 +253,12 @@
 		</tr>
 	</table>
 
-	<table width=80% border=0 cellpadding="0" cellspacing="1">
+	<table width=90% border=0 cellpadding="0" cellspacing="1">
 		<tr>
-			<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+			<td style="height: 10px;" colspan=6>
 		</tr>
 		<tr>
-			<td align=center style="background-color: #F0F0F0; height: 1px;"
+			<td align=center style="height: 1px;"
 				colspan=6>
 				<input type=submit value="注文">&nbsp;
 				<input type=button value="キャンセル">
@@ -269,5 +270,6 @@
 	</td>
 </tr>
 </table>
+</div>
 </body>
 </html>
