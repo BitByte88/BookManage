@@ -9,7 +9,7 @@ public class AdminBookModifyForm implements Action {
 		ActionForward forward=new ActionForward();		
 		AdminBookDAO abookdao=new AdminBookDAO();
 		BookBean bookbean=new BookBean();		
-		String num=request.getParameter("book_num");		
+		String num=request.getParameter("book_no");		
 		bookbean=abookdao.getBook(Integer.parseInt(num));		
 		request.setAttribute("abb", bookbean);		
 		forward.setPath("./adminbook/admin_book_modify.jsp");

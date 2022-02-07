@@ -1,80 +1,113 @@
 package net.admin.book.db;
+
+import java.math.BigDecimal;
+import java.sql.Date;
+
 public class BookBean {
-	private int BOOK_NUM;
+	private int BOOK_NO;
 	private String BOOK_CATEGORY;
 	private String BOOK_NAME;
+	private String BOOK_WRITER;
+	private String BOOK_PUBLISHER;
+	private Date BOOK_PUBLISHING_DATE;
 	private String BOOK_CONTENT;
-	private String BOOK_SIZE;
-	private String BOOK_COLOR;
+	private BigDecimal BOOK_PRICE;
 	private String BOOK_IMAGE;
-	private int BOOK_AMOUNT;
-	private int BOOK_PRICE;
-	private int BOOK_BEST;
-	private String BOOK_DATE;	
-	public int getBOOK_NUM() {
-		return BOOK_NUM;
+	private String BOOK_ISBN;
+	private Integer DELETE_FLAG;
+	private Integer CREATE_USER;
+	private Date CREATE_DATE;
+	private Integer UPDATE_USER;
+	private Date UPDATE_DATE;
+	
+	public int getBOOK_NO() {
+		return BOOK_NO;
 	}
-	public void setBOOK_NUM(int book_num) {
-		BOOK_NUM = book_num;
+	public void setBOOK_NO(int bOOK_NO) {
+		BOOK_NO = bOOK_NO;
 	}
 	public String getBOOK_CATEGORY() {
 		return BOOK_CATEGORY;
 	}
-	public void setBOOK_CATEGORY(String book_category) {
-		BOOK_CATEGORY = book_category;
+	public void setBOOK_CATEGORY(String bOOK_CATEGORY) {
+		BOOK_CATEGORY = bOOK_CATEGORY;
 	}
 	public String getBOOK_NAME() {
 		return BOOK_NAME;
 	}
-	public void setBOOK_NAME(String book_name) {
-		BOOK_NAME = book_name;
+	public void setBOOK_NAME(String bOOK_NAME) {
+		BOOK_NAME = bOOK_NAME;
+	}
+	public String getBOOK_WRITER() {
+		return BOOK_WRITER;
+	}
+	public void setBOOK_WRITER(String bOOK_WRITER) {
+		BOOK_WRITER = bOOK_WRITER;
+	}
+	public String getBOOK_PUBLISHER() {
+		return BOOK_PUBLISHER;
+	}
+	public void setBOOK_PUBLISHER(String bOOK_PUBLISHER) {
+		BOOK_PUBLISHER = bOOK_PUBLISHER;
+	}
+	public Date getBOOK_PUBLISHING_DATE() {
+		return BOOK_PUBLISHING_DATE;
+	}
+	public void setBOOK_PUBLISHING_DATE(Date bOOK_PUBLISHING_DATE) {
+		BOOK_PUBLISHING_DATE = bOOK_PUBLISHING_DATE;
 	}
 	public String getBOOK_CONTENT() {
 		return BOOK_CONTENT;
 	}
-	public void setBOOK_CONTENT(String book_content) {
-		BOOK_CONTENT = book_content;
+	public void setBOOK_CONTENT(String bOOK_CONTENT) {
+		BOOK_CONTENT = bOOK_CONTENT;
 	}
-	public String getBOOK_SIZE() {
-		return BOOK_SIZE;
+	public BigDecimal getBOOK_PRICE() {
+		return BOOK_PRICE;
 	}
-	public void setBOOK_SIZE(String book_size) {
-		BOOK_SIZE = book_size;
-	}
-	public String getBOOK_COLOR() {
-		return BOOK_COLOR;
-	}
-	public void setBOOK_COLOR(String book_color) {
-		BOOK_COLOR = book_color;
+	public void setBOOK_PRICE(BigDecimal bOOK_PRICE) {
+		BOOK_PRICE = bOOK_PRICE;
 	}
 	public String getBOOK_IMAGE() {
 		return BOOK_IMAGE;
 	}
-	public void setBOOK_IMAGE(String book_image) {
-		BOOK_IMAGE = book_image;
+	public void setBOOK_IMAGE(String bOOK_IMAGE) {
+		BOOK_IMAGE = bOOK_IMAGE;
 	}
-	public int getBOOK_AMOUNT() {
-		return BOOK_AMOUNT;
+	public String getBOOK_ISBN() {
+		return BOOK_ISBN;
 	}
-	public void setBOOK_AMOUNT(int book_amount) {
-		BOOK_AMOUNT = book_amount;
+	public void setBOOK_ISBN(String bOOK_ISBN) {
+		BOOK_ISBN = bOOK_ISBN;
 	}
-	public int getBOOK_PRICE() {
-		return BOOK_PRICE;
+	public Integer getDELETE_FLAG() {
+		return DELETE_FLAG;
 	}
-	public void setBOOK_PRICE(int book_price) {
-		BOOK_PRICE = book_price;
+	public void setDELETE_FLAG(Integer dELETE_FLAG) {
+		DELETE_FLAG = dELETE_FLAG;
 	}
-	public int getBOOK_BEST() {
-		return BOOK_BEST;
+	public Integer getCREATE_USER() {
+		return CREATE_USER;
 	}
-	public void setBOOK_BEST(int book_best) {
-		BOOK_BEST = book_best;
+	public void setCREATE_USER(Integer cREATE_USER) {
+		CREATE_USER = cREATE_USER;
 	}
-	public String getBOOK_DATE() {
-		return BOOK_DATE;
+	public Date getCREATE_DATE() {
+		return CREATE_DATE;
 	}
-	public void setBOOK_DATE(String book_date) {
-		BOOK_DATE = book_date;
+	public void setCREATE_DATE(Date cREATE_DATE) {
+		CREATE_DATE = cREATE_DATE;
+	}
+	public Integer getUPDATE_USER() {
+		return UPDATE_USER;
+	}
+	public void setUPDATE_USER(Integer uPDATE_USER) {
+		UPDATE_USER = uPDATE_USER;
+	}
+	public Date getUPDATE_DATE() {
+		return UPDATE_DATE;
+	}
+	public void setUPDATE_DATE(Date uPDATE_DATE) {
+		UPDATE_DATE = uPDATE_DATE;
 	}
 }

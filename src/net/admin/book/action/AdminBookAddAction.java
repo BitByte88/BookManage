@@ -48,29 +48,29 @@ public class AdminBookAddAction implements Action {
 			bookbean.setBOOK_CATEGORY(multi.getParameter("book_category"));
 			bookbean.setBOOK_NAME(multi.getParameter("book_name"));
 			bookbean.setBOOK_CONTENT(multi.getParameter("book_content"));
-			bookbean.setBOOK_SIZE(multi.getParameter("book_size"));
-			bookbean.setBOOK_COLOR(multi.getParameter("book_color"));
-			bookbean.setBOOK_AMOUNT(
-					Integer.parseInt(multi.getParameter("book_amount")));
-			bookbean.setBOOK_PRICE(
-					Integer.parseInt(multi.getParameter("book_price")));
-			bookbean.setBOOK_IMAGE(fl.toString());
-			bookbean.setBOOK_BEST(
-					Integer.parseInt(multi.getParameter("book_best")));
-			
-			int result = abookdao.insertBook(bookbean);
+//			bookbean.setBOOK_SIZE(multi.getParameter("book_size"));
+//			bookbean.setBOOK_COLOR(multi.getParameter("book_color"));
+//			bookbean.setBOOK_AMOUNT(
+//					Integer.parseInt(multi.getParameter("book_amount")));
+//			bookbean.setBOOK_PRICE(
+//					Integer.parseInt(multi.getParameter("book_price")));
+//			bookbean.setBOOK_IMAGE(fl.toString());
+//			bookbean.setBOOK_BEST(
+//					Integer.parseInt(multi.getParameter("book_best")));
+//			
+//			int result = abookdao.insertBook(bookbean);
 			//MultiPartRequest ��ü ������ �� �̹� ���ε� ó�� �Ǿ���
 			//���ε� �� ���Ͽ� ���õ� ���� �Ӽ����� TO ��ü�� ��Ƽ� �Ķ���ͷ� �����ϸ鼭
 			//DB�� �Է� �۾��� ��
-			if (result <= 0){
-				response.setContentType("text/html;charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('��Ͻ���')");
-				out.println("history.back()");
-				out.println("</script>");
-				return null;
-			}
+//			if (result <= 0){
+//				response.setContentType("text/html;charset=UTF-8");
+//				PrintWriter out = response.getWriter();
+//				out.println("<script>");
+//				out.println("alert('��Ͻ���')");
+//				out.println("history.back()");
+//				out.println("</script>");
+//				return null;
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
