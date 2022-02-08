@@ -34,7 +34,7 @@
 	<p align=left><b><font size=4>注文履歴</font></b></p>
 </tr>
 <tr>
-	<td>現在、 <%=id%>様からの注文件数は<%=ordercount%>件になります。</td>
+	<td>現在、 <%=id%>様からの注文件数は<%=ordercount%>件でございます。</td>
 </tr>
 <tr>
 	<td height="62" align="center" valign="middle">
