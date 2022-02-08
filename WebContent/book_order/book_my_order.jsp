@@ -23,6 +23,7 @@
 <title>図書管理システム</title>
 </head>
 <body>
+<div name="main" style="margin:30 0 50 0">
 <table width="960" cellspacing="0" cellpadding="0" border="0"
 	align="center">
 <tr>
@@ -30,18 +31,24 @@
 <!-- 会員の注文履歴-->
 <table width="700" border="0" align="center">
 <tr>
-	<td>現在 (<%=id%>)お客様から 注文した図書は(<%=ordercount%>)個あります。</td>
+	<p align=left><b><font size=4>注文履歴</font></b></p>
+</tr>
+<tr>
+	<td>現在、 <%=id%>様からの注文件数は<%=ordercount%>件になります。</td>
 </tr>
 <tr>
 	<td height="62" align="center" valign="middle">
-	<table width="700" border="1" cellspacing="0" cellpadding="0"
+	<table width="800" border="0" cellspacing="0" cellpadding="0"
 		bordercolor="#CCCCCC">
+		<tr height=13 bgcolor="94d7e7">
+			<td height="3" colspan="7" align=right></td>
+		</tr>
 		<tr>
-			<td height="20"><div align="center">図書名</div></td>
-			<td><div align="center">本数</div></td>
-			<td><div align="center">小計</div></td>
-			<td><div align="center">注文ステータス</div></td>
-			<td><div align="center">注文日時</div></td>
+			<td height="20" bgcolor="f7f7f7"><div align="center">書名</div></td>
+			<td bgcolor="f7f7f7"><div align="center">本数</div></td>
+			<td bgcolor="f7f7f7"><div align="center">小計</div></td>
+			<td bgcolor="f7f7f7"><div align="center">注文ステータス</div></td>
+			<td bgcolor="f7f7f7"><div align="center">注文日時</div></td>
 		</tr>
 		<%
 		if (book_order_list.size() == 0) {
@@ -55,7 +62,7 @@
 			order = (OrderBean) book_order_list.get(i);
 		%>
 		<tr align=center>
-			<td height="20"><%=order.getBOOK_NAME()%></td>
+			<td height="20" style="text-align:left;padding-left:40"><%=order.getBOOK_NAME()%></td>
 			<td><%=order.getORDER_COUNT()%></td>
 			<td><%=order.getTOTAL_PRICE()%>円</td>
 			<td>
@@ -68,6 +75,13 @@
 			<%}%>
 			</td>
 			<td><%=order.getORDER_DATE()%></td>
+		</tr>
+		<tr>
+			<td height="2" bgcolor="94d7e7"></td>
+			<td height="2" bgcolor="94d7e7"></td>
+			<td height="2" bgcolor="94d7e7"></td>
+			<td height="2" bgcolor="94d7e7"></td>
+			<td height="2" bgcolor="94d7e7"></td>
 		</tr>
 		<%
 			}
@@ -111,5 +125,6 @@
 </td>
 </tr>
 </table>
+</div>
 </body>
 </html>

@@ -32,7 +32,7 @@
 		<input type="hidden" name="order" value="cart">
 		<table width="90%">
 			<tr align=center>
-				<td><b><font size=4>カート</font></b></td>
+				<td><p align=left><b><font size=4>カート</font></b></p></td>
 			</tr>
 		</table>
 		<table width="90%" cellpadding="0" cellspacing="0">
@@ -41,8 +41,8 @@
 			</tr>
 			<tr bgcolor="#f0f8ff" align="center">
 				<td width="5%"><font size="2">番号</font></td>
-				<td width="5%"><font size="2">写真</font></td>
-				<td width="25%"><font size="2">図書名</font></td>
+				<td width="5%"><font size="2">画像</font></td>
+				<td width="25%"><font size="2">書名</font></td>
 				<td width="8%"><font size="2">本数</font></td>
 				<td width="8%"><font size="2">価格</font></td>
 				<td width="8%"><font size="2">小計</font></td>
@@ -59,7 +59,7 @@
 			<td><font size="2"><img 
 				src="./upload/<%=book.getBOOK_IMAGE().split(",")[0] %>" 
 				width=50 height=50></font></td>
-			<td><font size="2"><%=book.getBOOK_NAME()%></font></td>
+			<td style="text-align:left;padding-left:50"><font size="2"><%=book.getBOOK_NAME()%></font></td>
 			<td><font size="2">
 				<%=dto.getCART_COUNT()%>
 			</font></td>
