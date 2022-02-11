@@ -37,7 +37,7 @@ function bookdelete(book_no){
 		<!-- 図書リスト -->
 		<table border="0" width="100%">
 			<tr>
-				<td height="22" bgcolor="#6699FF">
+				<td height="26" bgcolor="94d7e7">
 					<p align="center">
 						<font size=4>図書リスト</font>
 					</p>

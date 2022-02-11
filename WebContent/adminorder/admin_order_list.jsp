@@ -20,16 +20,25 @@
 <title>図書管理システム</title>
 </head>
 <body>
-<table width="960" cellspacing="0" cellpadding="0" border="0" align="center">
+<div name="main" style="margin:30 0 50 0">
+<table width="1000" cellspacing="0" cellpadding="0" border="0" align="center">
+<tr>
+	<td height="26" bgcolor="94d7e7">
+		<p align="center">
+			<font size=4>注文リスト</font>
+		</p>
+	</td>
+</tr>
 <tr>
 <td colspan=2 align=center>
-<table border=0 cellspacing=1 cellpadding=0 width=80%>
+<table border=0 cellspacing=1 cellpadding=0 width=100%>
 	<tr>
 	<td align=right colspan=10 height=25 colspan=2 style=font-family:Tahoma;font-size:10pt;>
 	すべての注文数 : <b><%=ordercount %></b> 件&nbsp;&nbsp;&nbsp;
 	</td>
 	</tr>
-	<tr align=center height=20>
+	<tr height="26"></tr>
+	<tr align=center height=20 bgcolor="#EFEFEF">
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>注文番号</td>
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>注文者</td>
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>決済方法</td>
@@ -39,7 +48,7 @@
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>修正/削除</td>
 	</tr>
 	<tr>
-		<td style="background-color:#F0F0F0; height:1px;" colspan=6>
+		<td style="background-color:#EFEFEF; height:5px;" colspan=7>
 	</tr>
 	<%for(int i=0;i<orderlist.size();i++){ 
 		OrderBean order=new OrderBean();
@@ -48,7 +57,7 @@
 	<td style=font-family:Tahoma;font-size:7pt;><%=order.getORDER_TRANS_NO()%></td>
 	<td style=font-family:Tahoma;font-size:10pt;><%=order.getORDER_MEMBER_ID()%></td>
 	<td style=font-family:Tahoma;font-size:10pt;><%=order.getORDER_TRADE_TYPE()%></td>
-	<td style=font-family:Tahoma;font-size:10pt;><%=order.getTOTAL_PRICE()%></td>
+	<td style=font-family:Tahoma;font-size:10pt;><%=order.getTOTAL_PRICE()%>円</td>
 	<td style=font-family:Tahoma;font-size:10pt;>
 		<%if (order.getORDER_STATUS() == 0) {%>注文受付
 		<%}else if (order.getORDER_STATUS() == 1){%>発送準備中
@@ -95,5 +104,6 @@
 </td>
 </tr>	
 </table>
+</div>
 </body>
 </html>
