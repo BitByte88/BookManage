@@ -15,7 +15,7 @@ public class AdminOrderDeleteAction implements Action{
 		result=orderdao.deleteOrder(Integer.parseInt(num));
 		
 		if(result==false){
-			System.out.println("��ǰ ���� ����");
+			System.out.println("注文情報削除エラー");
 			return null;
 		}
 		

@@ -49,7 +49,7 @@
 	          			<a class="nav-link" href="./BookList.adbook">図書リスト</a>
 	        		</li>
 		        	<li class="nav-item">
-	          			<a class="nav-link" href="#">注文リスト</a>
+	          			<a class="nav-link" href="./AdminOrderList.adorder">注文リスト</a>
 		        	</li>
        		<%
 		        }

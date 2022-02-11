@@ -15,13 +15,12 @@ public class AdminOrderModifyAction implements Action{
 		boolean result=false;
 		request.setCharacterEncoding("UTF-8");
 		order.setORDER_NO(Integer.parseInt(request.getParameter("num")));
-		order.setORDER_TRANS_NO(request.getParameter("transportnum"));
 		order.setORDER_MEMO(request.getParameter("memo"));
 		order.setORDER_STATUS(Integer.parseInt(request.getParameter("status")));
 		
 		result=orderdao.modifyOrder(order);
 		if(result==false){
-			System.out.println("��ǰ ���� ����");
+			System.out.println("注文情報修正エラー");
 			return null;
 		}
 		

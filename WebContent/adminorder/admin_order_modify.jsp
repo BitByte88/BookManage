@@ -7,6 +7,12 @@
 %>
 <html>
 <head>
+	<link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon"> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
+	<jsp:include page="/menu/menu.jsp" />
 <title>쇼핑몰</title>
 </head>
 <body>
@@ -14,43 +20,41 @@
 	align="center">
 <tr>
 <td colspan=2 align=center>
-<!-- 주문 정보 수정(관리자) -->
+<!-- 注文情報修正(管理者) -->
 <form action="./AdminOrderModify.adorder" name="orderform" method="post">
 <input type="hidden" name="num" value="<%=order.getORDER_NO() %>">
 <table width=80% border=0 cellpadding="0" cellspacing="1">
 	<tr><td height=10></td></tr>
 	<tr><td height=10></td></tr>
 	<tr>
-	<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;"
-		width=130 height=24 bgcolor="f7f7f7">운송장(등기)번호</td>
-	<td width=320 height=24><input type="text" name="transportnum"
-		size=15 maxlength=20
-		value=<%if(order.getORDER_TRANS_NO()!=null){%>
-		<%=order.getORDER_TRANS_NO()%> <%} %>></td>
-	</tr>
-	<tr>
-		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
-	</tr>
-	<tr>
-		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;"
-			width=130 height=24 bgcolor="f7f7f7">주문번호</td>
-		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;">
+	<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;"
+		width=130 height=24 bgcolor="f7f7f7">送り状書留番号</td>
+		<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;">
 		<%=order.getORDER_TRANS_NO() %></td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
-	<tr height=20>
-		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;"
-			width=130 height=24 bgcolor="f7f7f7" colspan=2>상품 정보</td>
+	<tr>
+		<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;"
+			width=130 height=24 bgcolor="f7f7f7">注文番号</td>
+		<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;">
+		<%=order.getORDER_NO() %></td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr height=20>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
-			bgcolor="f7f7f7">상품이름</td>
-		<td style="font-family: Tahoma; font-size: 8pt;">
+		<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;"
+			width=130 height=24 bgcolor="f7f7f7" colspan=2>商品情報</td>
+	</tr>
+	<tr>
+		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+	</tr>
+	<tr height=20>
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">書名</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
 			<%=order.getBOOK_NAME() %>
 		</td>
 	</tr>
@@ -58,9 +62,19 @@
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr height=23>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
-			bgcolor="f7f7f7">수량</td>
-		<td style="font-family: Tahoma; font-size: 8pt;">
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">単価</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
+			<%=order.getBOOK_PRICE() %>
+		</td>
+	</tr>
+	<tr>
+		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+	</tr>
+	<tr height=23>
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">本数</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
 			<%=order.getORDER_COUNT() %>
 		</td>
 	</tr>
@@ -71,39 +85,66 @@
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr height=20>
-		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;"
-			width=130 height=24 bgcolor="f7f7f7" colspan=2>배송지 정보</td>
+		<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;"
+			width=130 height=24 bgcolor="f7f7f7" colspan=2>お届け先情報</td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr height=20>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
-			bgcolor="f7f7f7">받는사람</td>
-		<td style="font-family: Tahoma; font-size: 8pt;">
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">届け先_氏名</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
 			<%=order.getORDER_RECEIVE_NAME() %>
 		</td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
+	<tr height=20>
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">届け先_氏名（カナ）</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
+			<%=order.getORDER_RECEIVE_NAME_KANA() %>
+		</td>
+	</tr>
+	<tr>
+		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+	</tr>
 	<tr height=23>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
-			bgcolor="f7f7f7">집전화</td>
-		<td style="font-family: Tahoma; font-size: 8pt;">
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">届け先_TEL</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
 			<%=order.getORDER_RECEIVE_TEL() %>
 		</td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
+	<tr height=23>
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">届け先_メールアドレス</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
+			<%=order.getORDER_RECEIVE_EMAIL() %>
+		</td>
+	</tr>
+	<tr>
+		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+	</tr>
+	<tr height=23>
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">届け先_郵便番号</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
+			<%=order.getORDER_RECEIVE_ZIPCODE() %>
+		</td>
+	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr height=20>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
-			bgcolor="f7f7f7">배송지 주소</td>
-		<td style="font-family: Tahoma; font-size: 8pt;">
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">届け先_都道府県</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
 			<%=order.getORDER_RECEIVE_ADD_1() %>
 		</td>
 	</tr>
@@ -111,9 +152,9 @@
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr height=20>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
-			bgcolor="f7f7f7">배송지 나머지 주소</td>
-		<td style="font-family: Tahoma; font-size: 8pt;">
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">届け先_市区町村</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
 			<%=order.getORDER_RECEIVE_ADD_2() %>
 		</td>
 	</tr>
@@ -121,16 +162,36 @@
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr height=20>
-		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;"
-			width=130 height=24 bgcolor="f7f7f7" colspan=2>주문자 정보</td>
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">届け先_丁目、番地、号、建物名</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
+			<%=order.getORDER_RECEIVE_ADD_3() %>
+		</td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr height=20>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
-			bgcolor="f7f7f7">이메일주소</td>
-		<td style="font-family: Tahoma; font-size: 8pt;">
+		<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;"
+			width=130 height=24 bgcolor="f7f7f7" colspan=2>注文者情報</td>
+	</tr>
+	<tr>
+		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+	</tr>
+	<tr height=20>
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">ID</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
+			<%=order.getORDER_MEMBER_ID() %>
+		</td>
+	</tr>
+	<tr>
+		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+	</tr>
+	<tr height=20>
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">メールアドレス</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
 			<%=ordermember.getMEMBER_MAIL() %>
 		</td>
 	</tr>
@@ -138,9 +199,9 @@
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr height=23>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
-			bgcolor="f7f7f7">집전화</td>
-		<td style="font-family: Tahoma; font-size: 8pt;">
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">TEL</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
 			<%=ordermember.getMEMBER_TEL() %>
 		</td>
 	</tr>
@@ -148,19 +209,9 @@
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr height=20>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
-			bgcolor="f7f7f7">휴대폰</td>
-		<td style="font-family: Tahoma; font-size: 8pt;">
-			<%=ordermember.getMEMBER_TEL() %>
-		</td>
-	</tr>
-	<tr>
-		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
-	</tr>
-	<tr height=20>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=130 height=24
-			bgcolor="f7f7f7">기타 요구사항</td>
-		<td style="font-family: Tahoma; font-size: 8pt;">
+		<td style="font-family: Tahoma; font-size: 10pt;" width=130 height=24
+			bgcolor="f7f7f7">メモー</td>
+		<td style="font-family: Tahoma; font-size: 10pt;">
 		<textarea name="memo" cols=60 rows=12><%=order.getORDER_MEMO() %>
 		</textarea>
 		</td>
@@ -174,21 +225,31 @@
 	<tr><td height=10></td></tr>
 	<tr><td height=10></td></tr>
 	<tr>
-		<td><b><font size=2>결제 정보</font></b></td>
+		<td><b><font size=2>決済情報</font></b></td>
 	</tr>
 	<tr>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=200 height=24
-			bgcolor="f7f7f7">주문 합계금액 :</td>
+		<td style="font-family: Tahoma; font-size: 10pt;" width=200 height=24
+			bgcolor="f7f7f7">注文合計金額 :</td>
 		<td width=320 height=24>
-			<font size=2><%=order.getTOTAL_PRICE() %>원</font>
+			<font size=2><%=order.getTOTAL_PRICE() %>円</font>
 		</td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=200 height=24
-			bgcolor="f7f7f7">결제방법 :</td>
+		<td style="font-family: Tahoma; font-size: 10pt;" width=200 height=24
+			bgcolor="f7f7f7">注文日時 :</td>
+		<td width=320 height=24>
+			<font size=2><%=order.getORDER_DATE() %></font>
+		</td>
+	</tr>
+	<tr>
+		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+	</tr>
+	<tr>
+		<td style="font-family: Tahoma; font-size: 10pt;" width=200 height=24
+			bgcolor="f7f7f7">決済方法 :</td>
 		<td width=320 height=24>
 			<font size=2><%=order.getORDER_TRADE_TYPE() %></font>
 		</td>
@@ -197,22 +258,22 @@
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr>
-		<td style="font-family: Tahoma; font-size: 8pt;" width=200 height=24
-			bgcolor="f7f7f7">주문 상태 :</td>
+		<td style="font-family: Tahoma; font-size: 10pt;" width=200 height=24
+			bgcolor="f7f7f7">注文ステータス :</td>
 		<td width=320 height=24>
 		<select name="status">
 			<option value="0" <%if(order.getORDER_STATUS()==0){%> selected
-				<%}%>>대기중</option>
+				<%}%>>注文受付</option>
 			<option value="1" <%if(order.getORDER_STATUS()==1){%> selected
-				<%}%>>발송 준비</option>
+				<%}%>>発送準備中</option>
 			<option value="2" <%if(order.getORDER_STATUS()==2){%> selected
-				<%}%>>발송 완료</option>
+				<%}%>>発送済み</option>
 			<option value="3" <%if(order.getORDER_STATUS()==3){%> selected
-				<%}%>>배송중</option>
+				<%}%>>配送中</option>
 			<option value="4" <%if(order.getORDER_STATUS()==4){%> selected
-				<%}%>>배송 완료</option>
+				<%}%>>配送済み</option>
 			<option value="5" <%if(order.getORDER_STATUS()==5){%> selected
-				<%}%>>주문 취소</option>
+				<%}%>>注文キャンセル</option>
 		</select>
 		</td>
 	</tr>
@@ -221,15 +282,13 @@
 	<tr>
 		<td align=center style="background-color: #F0F0F0; height: 1px;"
 			colspan=6>
-			<input type=submit value="수정">&nbsp; 
-			<input type=button
-			onclick="javascript:location.href('./AdminOrderList.adorder')"
-			value="취소">
+			<input type=submit value="修正">&nbsp; 
+			<input type=button onclick="javascript:history.back();" value="戻る">
 		</td>
 	</tr>
 </table>
 </form>
-<!-- 주문 정보 수정 -->
+<!-- 注文情報修正 -->
 </td>
 </tr>
 </table>

@@ -11,7 +11,13 @@
 %>
 <html>
 <head>
-<title>쇼핑몰</title>
+	<link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon"> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
+	<jsp:include page="/menu/menu.jsp" />
+<title>図書管理システム</title>
 </head>
 <body>
 <table width="960" cellspacing="0" cellpadding="0" border="0" align="center">
@@ -19,18 +25,18 @@
 <td colspan=2 align=center>
 <table border=0 cellspacing=1 cellpadding=0 width=80%>
 	<tr>
-	<td align=right colspan=10 height=25 colspan=2 style=font-family:Tahoma;font-size:8pt;>
-	전체 주문 수 : <b><%=ordercount %></b> 개&nbsp;&nbsp;&nbsp;
+	<td align=right colspan=10 height=25 colspan=2 style=font-family:Tahoma;font-size:10pt;>
+	すべての注文数 : <b><%=ordercount %></b> 件&nbsp;&nbsp;&nbsp;
 	</td>
 	</tr>
 	<tr align=center height=20>
-	  <td style=font-family:Tahoma;font-size:8pt;font-weight:bold;>주문번호</td>
-	  <td style=font-family:Tahoma;font-size:8pt;font-weight:bold;>주문자</td>
-	  <td style=font-family:Tahoma;font-size:8pt;font-weight:bold;>결제방법</td>
-	  <td style=font-family:Tahoma;font-size:8pt;font-weight:bold;>주문금액</td>
-	  <td style=font-family:Tahoma;font-size:8pt;font-weight:bold;>주문상태</td>
-	  <td style=font-family:Tahoma;font-size:8pt;font-weight:bold;>주문일시</td>
-	  <td style=font-family:Tahoma;font-size:8pt;font-weight:bold;>수정/삭제</td>
+	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>注文番号</td>
+	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>注文者</td>
+	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>決済方法</td>
+	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>注文金額</td>
+	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>注文ステータス</td>
+	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>注文日時</td>
+	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>修正/削除</td>
 	</tr>
 	<tr>
 		<td style="background-color:#F0F0F0; height:1px;" colspan=6>
@@ -40,30 +46,24 @@
 		order=(OrderBean)orderlist.get(i); %>
 	<tr align=center height=20>
 	<td style=font-family:Tahoma;font-size:7pt;><%=order.getORDER_TRANS_NO()%></td>
-	<td style=font-family:Tahoma;font-size:8pt;><%=order.getORDER_MEMBER_ID()%></td>
-	<td style=font-family:Tahoma;font-size:8pt;><%=order.getORDER_TRADE_TYPE()%></td>
-	<td style=font-family:Tahoma;font-size:8pt;><%=order.getTOTAL_PRICE()%></td>
-	<td style=font-family:Tahoma;font-size:8pt;>
-   		<%if(order.getORDER_STATUS()==0){ %>
-   			대기중
-   		<%}else if(order.getORDER_STATUS()==1){ %>
-   			발송준비
-   		<%}else if(order.getORDER_STATUS()==2){ %>
-   			발송완료
-   		<%}else if(order.getORDER_STATUS()==3){ %>
-   			배송중
-   		<%}else if(order.getORDER_STATUS()==4){ %>
-   			배송완료
-   		<%}else if(order.getORDER_STATUS()==5){ %>
-   			주문취소
-   		<%} %>
+	<td style=font-family:Tahoma;font-size:10pt;><%=order.getORDER_MEMBER_ID()%></td>
+	<td style=font-family:Tahoma;font-size:10pt;><%=order.getORDER_TRADE_TYPE()%></td>
+	<td style=font-family:Tahoma;font-size:10pt;><%=order.getTOTAL_PRICE()%></td>
+	<td style=font-family:Tahoma;font-size:10pt;>
+		<%if (order.getORDER_STATUS() == 0) {%>注文受付
+		<%}else if (order.getORDER_STATUS() == 1){%>発送準備中
+		<%}else if (order.getORDER_STATUS() == 2){%>発送済み
+		<%}else if (order.getORDER_STATUS() == 3){%>配送中
+		<%}else if (order.getORDER_STATUS() == 4){%>配送済み
+		<%}else if (order.getORDER_STATUS() == 5){%>注文キャンセル
+		<%}%>
    	</td>
-   	<td style=font-family:Tahoma;font-size:8pt;><%=order.getORDER_DATE()%></td>
-   	<td style=font-family:Tahoma;font-size:8pt;>
+   	<td style=font-family:Tahoma;font-size:10pt;><%=order.getORDER_DATE()%></td>
+   	<td style=font-family:Tahoma;font-size:10pt;>
    	<a href="./AdminOrderDetail.adorder?num=<%=order.getORDER_NO() %>">
-   	Modify</a>/
+   	変更</a>/
    	<a href="./AdminOrderDelete.adorder?num=<%=order.getORDER_NO() %>" 
-   		onclick="return confirm('삭제하시겠습니까?')">Delete</a>
+   		onclick="return confirm('キャンセルしますか。?')">削除</a>
    	</td>
 	</tr>
 	<tr>
@@ -72,10 +72,10 @@
 	<%} %>
 	<tr align=center height=20>
 		<td colspan=7 style=font-family:Tahoma;font-size:10pt;>
-			<%if(nowpage<=1){ %>[이전]&nbsp;
+			<%if(nowpage<=1){ %>[前へ]&nbsp;
 			<%}else{ %>
 			<a href="./AdminOrderList.adorder?page=<%=nowpage-1 %>">
-			[이전]</a>&nbsp;
+			[前へ]</a>&nbsp;
 			<%}%>
 			<%for(int a=startpage;a<=endpage;a++){
 				if(a==nowpage){%>[<%=a%>]
@@ -85,9 +85,9 @@
 					</a>&nbsp;
 				<%} %>
 			<%} %>
-			<%if(nowpage>=maxpage){ %>[다음]
+			<%if(nowpage>=maxpage){ %>[次へ]
 			<%}else{ %>
-			<a href="./AdminOrderList.adorder?page=<%=nowpage+1 %>">[다음]</a>
+			<a href="./AdminOrderList.adorder?page=<%=nowpage+1 %>">[次へ]</a>
 			<%} %>
 		</td>
 	</tr>
