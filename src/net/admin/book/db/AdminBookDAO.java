@@ -94,89 +94,108 @@ public class AdminBookDAO {
 
 		return abb;
 	}
-//	public int insertBook(BookBean abb) {
-//		int result = 0;
-//		int num=0;
-//		String sql="select max(book_no) from book";
-//		try {
-//			con = ds.getConnection();
-//			pstmt=con.prepareStatement(sql);
-//			rs=pstmt.executeQuery();
-//			rs.next();
-//			num=rs.getInt(1)+1;
-//			sql="insert into book values "+
-//			"(?,?,?,?,?,?,?,?,?,?,DATE(SYSDATE()))";
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setInt(1, num);
-//			pstmt.setString(2, abb.getBOOK_CATEGORY());
-//			pstmt.setString(3, abb.getBOOK_NAME());
-//			pstmt.setString(4, abb.getBOOK_CONTENT());
-//			pstmt.setString(5, abb.getBOOK_SIZE());
-//			pstmt.setString(6, abb.getBOOK_COLOR());
-//			pstmt.setInt(7, abb.getBOOK_AMOUNT());
-//			pstmt.setInt(8, abb.getBOOK_PRICE());
-//			pstmt.setString(9, abb.getBOOK_IMAGE());
-//			pstmt.setInt(10, abb.getBOOK_BEST());
-//			result = pstmt.executeUpdate();
-//			} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		finally{
-//			try{
-//				if(rs!=null)rs.close();
-//				if(pstmt!=null)pstmt.close();
-//				if(con!=null)con.close();
-//			}catch(Exception ex) {}
-//		}
-//		return result;
-//	}
-//	public int deleteBook(BookBean abb){
-//		int result = 0;
-//		try {
-//			con = ds.getConnection();
-//			String sql="delete from book where book_num=?";
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setInt(1, abb.getBOOK_NUM());
-//			result = pstmt.executeUpdate();
-//		} catch (Exception e) {
-//			e.getStackTrace();
-//		}
-//		finally{
-//			try{
-//				if(pstmt!=null)pstmt.close();
-//				if(con!=null)con.close();
-//			}catch(Exception ex) {}
-//		}
-//		return result;
-//	}
-//	public int modifyBook(BookBean abb) {
-//		int result = 0;
-//		try {
-//			con = ds.getConnection();
-//			String sql="update book set "+
-//			"book_category=?, book_name=?, book_price=? ,"+
-//			"book_color=? ,book_amount=? ,book_size=? ,"+
-//			"book_content=?,book_best=? where book_num=?";
-//			pstmt = con.prepareStatement(sql);
-//			pstmt.setString(1, abb.getBOOK_CATEGORY());
-//			pstmt.setString(2, abb.getBOOK_NAME());
-//			pstmt.setInt(3, abb.getBOOK_PRICE());
-//			pstmt.setString(4, abb.getBOOK_COLOR());
-//			pstmt.setInt(5, abb.getBOOK_AMOUNT());
-//			pstmt.setString(6, abb.getBOOK_SIZE());
-//			pstmt.setString(7, abb.getBOOK_CONTENT());
-//			pstmt.setInt(8, abb.getBOOK_BEST());
-//			pstmt.setInt(9, abb.getBOOK_NUM());
-//			result = pstmt.executeUpdate();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		finally{
-//			try{
-//				if(pstmt!=null)pstmt.close();
-//				if(con!=null)con.close();
-//			}catch(Exception ex) {}
-//		}
-//		return result;
-//	}
+	
+	public int getBookNo() {
+		int num = 0;
+		String sql="select max(book_no) from book";
+		try {
+		con = ds.getConnection();
+		pstmt=con.prepareStatement(sql);
+		rs=pstmt.executeQuery();
+		rs.next();
+		num=rs.getInt(1)+1;	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		finally{
+			try{
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			}catch(Exception ex) {}
+		}
+		return num;
+	}
+	
+	public int insertBook(BookBean abb, int num) {
+		int result = 0;
+		try {
+			con = ds.getConnection();
+			String sql="insert into book values "+
+			"(?,?,?,?,?,?,?,?,?,?,0,1,SYSDATE(),1,SYSDATE())";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setString(2, abb.getBOOK_CATEGORY());
+			pstmt.setString(3, abb.getBOOK_NAME());
+			pstmt.setString(4, abb.getBOOK_WRITER());
+			pstmt.setString(5, abb.getBOOK_PUBLISHER());
+			pstmt.setDate(6, abb.getBOOK_PUBLISHING_DATE());
+			pstmt.setString(7, abb.getBOOK_CONTENT());
+			pstmt.setBigDecimal(8, abb.getBOOK_PRICE());
+			pstmt.setString(9, abb.getBOOK_IMAGE());
+			pstmt.setString(10, abb.getBOOK_ISBN());
+			result = pstmt.executeUpdate();
+			} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			}catch(Exception ex) {}
+		}
+		return result;
+	}
+	
+	public int deleteBook(BookBean abb){
+		int result = 0;
+		try {
+			con = ds.getConnection();
+			String sql="update book set delete_flag=1 where book_no=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, abb.getBOOK_NO());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		finally{
+			try{
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			}catch(Exception ex) {}
+		}
+		return result;
+	}
+	public int modifyBook(BookBean abb, int num) {
+		int result = 0;
+		try {
+			con = ds.getConnection();
+			String sql="update book set "+
+			"book_category=?, book_name=?, book_writer=?, book_publisher=?, " + 
+			"book_publishing_date=?, book_content=?, book_price=?, " +
+			"book_image=? ,book_isbn=?, update_date=SYSDATE() " +
+			"where book_no=? and delete_flag=0";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, abb.getBOOK_CATEGORY());
+			pstmt.setString(2, abb.getBOOK_NAME());
+			pstmt.setString(3, abb.getBOOK_WRITER());
+			pstmt.setString(4, abb.getBOOK_PUBLISHER());
+			pstmt.setDate(5, abb.getBOOK_PUBLISHING_DATE());
+			pstmt.setString(6, abb.getBOOK_CONTENT());
+			pstmt.setBigDecimal(7, abb.getBOOK_PRICE());
+			pstmt.setString(8, abb.getBOOK_IMAGE());
+			pstmt.setString(9, abb.getBOOK_ISBN());
+			pstmt.setInt(10, num);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			}catch(Exception ex) {}
+		}
+		return result;
+	}
 }

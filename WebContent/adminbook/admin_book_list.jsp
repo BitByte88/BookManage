@@ -141,9 +141,9 @@ function bookdelete(book_no){
 				}
 			%>
 			</table>
+			</form>
 			</td>
 			</tr>
-			</form>
 		</table>
 		<!-- 図書リスト -->
 		</td>

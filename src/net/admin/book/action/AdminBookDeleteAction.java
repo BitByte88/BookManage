@@ -9,13 +9,13 @@ public class AdminBookDeleteAction implements Action {
 		ActionForward forward=new ActionForward();
 		AdminBookDAO abookdao=new AdminBookDAO();
 		BookBean bookbean= new BookBean();		
-//		bookbean.setBOOK_NUM(
-//				Integer.parseInt(request.getParameter("book_num")));		
-//		int check=abookdao.deleteBook(bookbean);
-//		if(check>0){
-//			forward.setRedirect(true);
-//			forward.setPath("BookList.adbook");
-//		}		
+		bookbean.setBOOK_NO(
+				Integer.parseInt(request.getParameter("book_no")));		
+		int check=abookdao.deleteBook(bookbean);
+		if(check>0){
+			forward.setRedirect(true);
+			forward.setPath("BookList.adbook");
+		}		
 		return forward;
 	}
 }

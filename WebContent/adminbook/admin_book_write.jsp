@@ -2,22 +2,90 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>쇼핑몰</title>
+	<link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon"> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
+	<jsp:include page="/menu/menu.jsp" />
+<title>図書管理システム</title>
+<script>
+function check(){
+	var category=bookform.book_category.value;
+	var name=bookform.book_name.value;
+	var writer=bookform.book_writer.value;
+	var publisher=bookform.book_publisher.value;
+	var publishingDate=bookform.book_publishing_date.value;
+	var price=bookform.book_price.value;
+	var isbn=bookform.book_isbn.value;
+	
+	var forms = document.getElementById("bookform");
+
+	if(category.length == 0){
+		alert("カテゴリーを入力してください。");
+		bookform.book_category.focus();
+		return false;
+	}
+	if(name.length == 0){
+		alert("図書名を入力してください。");
+		bookform.book_name.focus();
+		return false;
+	}
+	if(writer.length == 0){
+		alert("著者を入力してください。");
+		bookform.book_writer.focus();
+		return false;
+	}
+	if(publisher.length == 0){
+		alert("出版社を入力してください。");
+		bookform.book_publisher.focus();
+		return false;
+	}
+	if(publishingDate.length == 0){
+		alert("出版日時を入力してください。");
+		bookform.book_publishing_date.focus();
+		return false;
+	} else {
+		var regex = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
+		if(!regex.test(publishingDate)){
+			alert("出版日時の形式を確認してください。");
+			bookform.book_publishing_date.focus();
+			return false;			
+		}
+	}
+	if(price.length == 0){
+		alert("販売価格を入力してください。");
+		bookform.book_price.focus();
+		return false;
+	}
+	if(isbn.length == 0){
+		alert("ISBNコードを入力してください。");
+		bookform.book_isbn.focus();
+		return false;
+	} 	
+	return true;
+}
+</script>
+<style>
+p{
+margin:auto;
+}
+
+</style>
 </head>
 <body>
 <table width="960" cellspacing="0" cellpadding="0" border="0"
 	bordercolor="gray" align="center">
 <tr>
 <td colspan=2>
-<!-- 상품 등록 -->
-<table border="0" width="80%">
+<!-- 図書登録 -->
 <form name="bookform" action="./BookAddAction.adbook" method="post"
-	enctype="multipart/form-data">
-	<input type="hidden" name="book_best" value="0">
+	enctype="multipart/form-data" onsubmit="return check()">
+<table border="0" width="80%">
 	<tr> 
 		<td>
 			<p align="center">
-				<span style="font-size: 26pt;">상 품 등 록</span>
+				<span style="font-size: 26pt;">図　書　登　録</span>
 			</p>
 		</td>
 	</tr>
@@ -25,55 +93,85 @@
 		<td height="331">
 		<table border="1" align="center" width="558">
 			<tr>
-			<td width="196" height="30">
+			<td width="196" height="30" >
 				<p align="center">
-					<font size=2>카테고리</font>
+					<font size=2>カテゴリー</font>
 				</p>
 			</td>
 			<td width="346" height="30">
 				<select name="book_category" size="1">
-					<option value="outwear" selected>아웃웨어</option>
-					<option value="fulldress">정장/신사복</option>
-					<option value="Tshirts">티셔츠</option>
-					<option value="shirts">와이셔츠</option>
-					<option value="pants">팬츠</option>
-					<option value="shoes">슈즈</option>
+				<option value="文学・評論">文学・評論</option>
+				<option value="人文・思想">人文・思想</option>
+				<option value="社会・政治">社会・政治</option>
+				<option value="ノンフィクション">ノンフィクション</option>
+				<option value="歴史・地理">歴史・地理</option>
+				<option value="ビジネス・経済">ビジネス・経済</option>
+				<option value="投資・金融・会社経営">投資・金融・会社経営</option>
+				<option value="科学・テクノロジー">科学・テクノロジー</option>
+				<option value="医学・薬学・看護学・歯科学">医学・薬学・看護学・歯科学</option>
+				<option value="コンピュータ・IT">コンピュータ・IT</option>
+				<option value="アート・建築・デザイン">アート・建築・デザイン</option>
+				<option value="趣味・実用">趣味・実用</option>
+				<option value="スポーツ・アウトドア">スポーツ・アウトドア</option>
+				<option value="資格・検定・就職">資格・検定・就職</option>
+				<option value="暮らし・健康・子育て">暮らし・健康・子育て</option>
+				<option value="旅行ガイド・マップ">旅行ガイド・マップ</option>
+				<option value="語学・辞事典・年鑑">語学・辞事典・年鑑</option>
+				<option value="教育・学参・受験">教育・学参・受験</option>
+				<option value="絵本・児童書">絵本・児童書</option>
+				<option value="コミック・ラノベ・BL">コミック・ラノベ・BL</option>
+				<option value="ライトノベル">ライトノベル</option>
+				<option value="タレント写真集">タレント写真集</option>
+				<option value="ゲーム攻略・ゲームブック">ゲーム攻略・ゲームブック</option>
+				<option value="エンターテイメント">エンターテイメント</option>
+				<option value="雑誌">雑誌</option>
+				<option value="楽譜・スコア・音楽書">楽譜・スコア・音楽書</option>
+				<option value="古書">古書</option>
+				<option value="カレンダー">カレンダー</option>
+				<option value="ポスター">ポスター</option>
+				<option value="アダルト">アダルト</option>
 				</select>
 			</td>
 			</tr>
 			<tr>
 			<td>
-				<p align="center"><font size=2>상품이름</font></p>
+				<p align="center"><font size=2>図書名</font></p>
 			</td>
 			<td><input type="text" name="book_name"></td>
 		</tr>
 		<tr>
 			<td>
-				<p align="center"><font size=2>판매가</font></p>
+				<p align="center"><font size=2>著者</font></p>
 			</td>
-			<td><input type="text" name="book_price"></td>
+			<td><input type="text" name="book_writer"></td>
 		</tr>
 		<tr>
 			<td>
-				<p align="center"><font size=2>색깔</font></p>
+				<p align="center"><font size=2>出版社</font></p>
 			</td>
-			<td><input type="text" name="book_color"></td>
+			<td><input type="text" name="book_publisher"></td>
 		</tr>
 		<tr>
 			<td>
-				<p align="center"><font size=2>수량</font></p>
+				<p align="center"><font size=2>出版日時</font></p>
 			</td>
-			<td><input type="text" name="book_amount"></td>
+			<td><input type="text" name="book_publishing_date" placeholder="yyyy-MM-dd"></td>
 		</tr>
 		<tr>
 			<td>
-				<p align="center"><font size=2>사이즈</font></p>
+				<p align="center"><font size=2>販売価格</font></p>
 			</td>
-			<td><input type="text" name="book_size"></td>
+			<td><input type="number" name="book_price"></td>
+		</tr>
+		<tr>
+			<td>
+				<p align="center"><font size=2>ISBNコード</font></p>
+			</td>
+			<td><input type="text" name="book_isbn"></td>
 		</tr>
 		<tr>
 			<td width="196">
-				<p align="center"><font size=2>제품정보</font></p>
+				<p align="center"><font size=2>図書内容</font></p>
 			</td>
 			<td width="346">
 				<textarea 
@@ -82,37 +180,37 @@
 		</tr>
 		<tr>
 			<td>
-			<p align="center"><font size=2>메인 제품이미지(gif)</font></p>
+			<p align="center"><font size=2>サムネイル用画像(jpg)</font></p>
 			</td>
-			<td><input type="file" name="file4"></td></tr>
+			<td><input type="file" name="file1"></td></tr>
 			<tr>
 			<td>
-			<p align="center"><font size=2>제품이미지1(gif)</font></p>
-			</td>
-			<td><input type="file" name="file3"></td></tr>
-			<tr>
-			<td>
-			<p align="center"><font size=2>제품이미지2(gif)</font></p>
+			<p align="center"><font size=2>メイン画像(jpg)</font></p>
 			</td>
 			<td><input type="file" name="file2"></td></tr>
 			<tr>
 			<td>
-			<p align="center"><font size=2>제품이미지3(gif)</font></p>
+			<p align="center"><font size=2>詳細画像1(jpg)</font></p>
 			</td>
-			<td><input type="file" name="file1"></td>
+			<td><input type="file" name="file3"></td></tr>
+			<tr>
+			<td>
+			<p align="center"><font size=2>詳細画像2(jpg)</font></p>
+			</td>
+			<td><input type="file" name="file4"></td>
 		</tr>
 	</table>
 	</td>
 </tr>
 <tr>
 	<td height="75">
-	<p align="center"><input type="submit" value="등록">&nbsp;
-	<input type="reset" value="다시쓰기"></p>
+	<p align="center"><input type="submit" value="登録">&nbsp;
+	<input type="reset" value="クリア"></p>
 	</td>
 </tr>
 </table>
 </form>		
-<!-- 상품 등록 -->
+<!-- 商品登録 -->
 </td>
 </tr>
 </table>
