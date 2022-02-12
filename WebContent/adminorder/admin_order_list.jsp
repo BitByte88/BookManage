@@ -45,7 +45,7 @@
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>注文金額</td>
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>注文ステータス</td>
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>注文日時</td>
-	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>修正/削除</td>
+	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>変更/削除</td>
 	</tr>
 	<tr>
 		<td style="background-color:#EFEFEF; height:5px;" colspan=7>
