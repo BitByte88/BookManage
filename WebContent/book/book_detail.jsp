@@ -99,7 +99,7 @@ function count_change(temp){
 					<td colspan="3">${itemArray.BOOK_CATEGORY}</td>
 				</tr>
 				<tr>
-					<td>出版者 　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+					<td>著者 　　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
 					<td colspan="3">${itemArray.BOOK_WRITER}</td>
 				</tr>
 				<tr>
