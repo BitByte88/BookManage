@@ -155,8 +155,8 @@ public class OrderDAO {
 				conn = ds.getConnection();
 				++ordernum;
 				
-				sql = "insert into book_order values(?,?,?,?,?,"+
-					"?,?,?,?,?,?,?,?,?,?,SYSDATE(),SYSDATE(),0,0,0,SYSDATE(),0,SYSDATE())";
+				sql = "insert into book_order values(?,?,?,0,?,"+
+					"?,?,?,now(),now(),?,?,?,?,?,?,?,?,0,0,now(),0,now())";
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, ordernum);
@@ -164,16 +164,16 @@ public class OrderDAO {
 				pstmt.setInt(3, book.getBOOK_NO());
 				pstmt.setInt(4, cart.getCART_COUNT());
 				pstmt.setString(5, order.getORDER_MEMBER_ID());
-				pstmt.setString(6, order.getORDER_RECEIVE_NAME());
-				pstmt.setString(7, order.getORDER_RECEIVE_NAME_KANA());
-				pstmt.setString(8, order.getORDER_RECEIVE_EMAIL());
-				pstmt.setString(9, order.getORDER_RECEIVE_TEL());
-				pstmt.setString(10, order.getORDER_RECEIVE_ZIPCODE());
-				pstmt.setString(11, order.getORDER_RECEIVE_ADD_1());
-				pstmt.setString(12, order.getORDER_RECEIVE_ADD_2());
-				pstmt.setString(13, order.getORDER_RECEIVE_ADD_3());
-				pstmt.setString(14, order.getORDER_MEMO());
-				pstmt.setString(15, order.getORDER_TRADE_TYPE());
+				pstmt.setString(6, order.getORDER_MEMO());
+				pstmt.setString(7, order.getORDER_TRADE_TYPE());
+				pstmt.setString(8, order.getORDER_RECEIVE_NAME());
+				pstmt.setString(9, order.getORDER_RECEIVE_NAME_KANA());
+				pstmt.setString(10, order.getORDER_RECEIVE_EMAIL());
+				pstmt.setString(11, order.getORDER_RECEIVE_TEL());
+				pstmt.setString(12, order.getORDER_RECEIVE_ZIPCODE());
+				pstmt.setString(13, order.getORDER_RECEIVE_ADD_1());
+				pstmt.setString(14, order.getORDER_RECEIVE_ADD_2());
+				pstmt.setString(15, order.getORDER_RECEIVE_ADD_3());
       			
       			pstmt.executeUpdate();
       			
