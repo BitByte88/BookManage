@@ -72,7 +72,7 @@
    	<a href="./AdminOrderDetail.adorder?num=<%=order.getORDER_NO() %>">
    	変更</a>/
    	<a href="./AdminOrderDelete.adorder?num=<%=order.getORDER_NO() %>" 
-   		onclick="return confirm('キャンセルしますか。?')">削除</a>
+   		onclick="return confirm('削除しますか')">削除</a>
    	</td>
 	</tr>
 	<tr>
