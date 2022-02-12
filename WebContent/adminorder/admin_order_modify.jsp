@@ -169,7 +169,7 @@
 	</tr>
 	<tr height=20>
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
-			bgcolor="f7f7f7">届け先_丁目、番地、号、建物名</td>
+			bgcolor="f7f7f7">届け先_丁目、番地、建物名</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
 			<%=order.getORDER_RECEIVE_ADD_3() %>
 		</td>
@@ -187,7 +187,7 @@
 	</tr>
 	<tr height=20>
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
-			bgcolor="f7f7f7">ID</td>
+			bgcolor="f7f7f7">アカウント</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
 			<%=order.getORDER_MEMBER_ID() %>
 		</td>
