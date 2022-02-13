@@ -76,7 +76,7 @@
    	</td>
 	</tr>
 	<tr>
-		<td style="background-color:#F0F0F0; height:1px;" colspan=6>
+		<td style="background-color:#F0F0F0; height:1px;" colspan=7>
 	</tr>
 	<%} %>
 	<tr align=center height=20>
