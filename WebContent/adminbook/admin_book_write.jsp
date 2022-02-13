@@ -201,7 +201,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 						<p align="center"><font size=2>サムネイル用画像</font></p>
 						</td>
-						<td width="40%"><input type="file" name="file1"></td>
+						<td width="40%"><input type="file" name="file4"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -209,7 +209,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 						<p align="center"><font size=2>メイン画像</font></p>
 						</td>
-						<td width="40%"><input type="file" name="file2"></td>
+						<td width="40%"><input type="file" name="file3"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -217,7 +217,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 						<p align="center"><font size=2>詳細画像1</font></p>
 						</td>
-						<td width="40%"><input type="file" name="file3"></td>
+						<td width="40%"><input type="file" name="file2"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -225,7 +225,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 						<p align="center"><font size=2>詳細画像2</font></p>
 						</td>
-						<td width="40%"><input type="file" name="file4"></td>
+						<td width="40%"><input type="file" name="file1"></td>
 						<td width="20%"></td>
 					</tr>
 				</table>

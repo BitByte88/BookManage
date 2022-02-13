@@ -213,7 +213,7 @@ margin:auto;
 							<img src="<%=imageMap.get("thumbnail")%>" width="100" height="100" border="0">
 							<%} %>
 						</td>
-						<td width="30%"><input type="file" name="file1"></td>
+						<td width="30%"><input type="file" name="file4"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -226,7 +226,7 @@ margin:auto;
 							<img src="<%=imageMap.get("mainImage")%>" width="100" height="100" border="0">
 							<%} %>
 						</td>
-						<td width="30%" ><input type="file" name="file2"></td>
+						<td width="30%" ><input type="file" name="file3"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -239,7 +239,7 @@ margin:auto;
 							<img src="<%=imageMap.get("detailImage1")%>" width="100" height="100" border="0">
 							<%} %>
 						</td>
-						<td width="30%" ><input type="file" name="file3"></td>
+						<td width="30%" ><input type="file" name="file2"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -252,7 +252,7 @@ margin:auto;
 							<img src="<%=imageMap.get("detailImage2")%>" width="100" height="100" border="0">
 							<%} %>
 						</td>
-						<td width="30%" ><input type="file" name="file4"></td>
+						<td width="30%" ><input type="file" name="file1"></td>
 						<td width="20%"></td>
 					</tr>
 				</table>

@@ -2,6 +2,10 @@ package net.admin.book.action;
 import java.io.File;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -27,10 +31,10 @@ public class AdminBookModifyAction implements Action {
 		String savePath = "upload";
 		int maxSize = 5 * 1024 * 1024;
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("file1", "Thumbnail");
-		map.put("file2", "MainImage");
-		map.put("file3", "DetailImage1");
-		map.put("file4", "DetailImage2");
+		map.put("file4", "Thumbnail");
+		map.put("file3", "MainImage");
+		map.put("file2", "DetailImage1");
+		map.put("file1", "DetailImage2");
 		realPath = request.getServletContext().getRealPath(savePath);
 		//サーバ上の物理的なアップロードパスを取得
 		List savefiles=new ArrayList();
@@ -47,16 +51,15 @@ public class AdminBookModifyAction implements Action {
 					continue;
 				}
 	            String filepath  = realPath +"/" + fileName ; 
-	            File f = new File(filepath);
+	            Path f = Paths.get(filepath);
 	    		String Extension = "";
 	    		int i = fileName.lastIndexOf('.');
 	    		if (i > 0) {
 	    			Extension = fileName.substring(i+1);
 	    		}
 	    		String imageName = map.get(element);
-                File newFile = new File(realPath + "/" + imageName + "-" + bookNo + "." + Extension );
                 String newImage = imageName + "-" + bookNo + "." + Extension;
-                f.renameTo(newFile);  
+                Files.move(f, f.resolveSibling(realPath + "/" + imageName + "-" + bookNo + "." + Extension ),StandardCopyOption.REPLACE_EXISTING);                  
 				if(files.hasMoreElements()){
 					//取得した要素が最後ではない場合
 					savefiles.add(newImage+",");
