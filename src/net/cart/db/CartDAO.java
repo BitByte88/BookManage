@@ -37,7 +37,7 @@ public class CartDAO {
 		List booklist = new ArrayList();
 		
 		String sql = "select * from cart where " +
-				"CART_MEMBER_ID=?";
+				"CART_MEMBER_ID=? AND DELETE_FLAG = 0";
 		
 		try {
 			conn = ds.getConnection();
@@ -131,7 +131,7 @@ public class CartDAO {
 	}
 	
 	public boolean cartRemove(int num) {
-		String sql = "delete from CART where CART_NO=?";
+		String sql = "update CART set DELETE_FLAG=1 where CART_NO=?";
 		
 		try {
 			conn = ds.getConnection();
@@ -153,7 +153,7 @@ public class CartDAO {
 	}
 	
 	public boolean cartClear(String id) {
-		String sql = "delete from CART where CART_MEMBER_ID=?";
+		String sql = "update CART set DELETE_FLAG=1 WHERE CART_MEMBER_ID=?";
 		
 		try {
 			conn = ds.getConnection();

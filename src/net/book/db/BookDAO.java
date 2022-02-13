@@ -44,7 +44,7 @@ public class BookDAO {
 			findQuery.append("BOOK_NO, BOOK_CATEGORY, BOOK_NAME, ");
 			findQuery.append("BOOK_WRITER, BOOK_PUBLISHER, BOOK_PUBLISHING_DATE, ");
 			findQuery.append("BOOK_CONTENT, BOOK_PRICE, BOOK_IMAGE, BOOK_ISBN FROM ");
-			findQuery.append("BOOK ORDER BY BOOK_NO DESC) as book ");
+			findQuery.append("BOOK WHERE DELETE_FLAG = 0 ORDER BY BOOK_NO DESC) as book ");
 			findQuery.append("WHERE book.rowNum>=? AND book.rowNum<=? ");		
         	if(searchBean.getBOOK_NAME() != null && !searchBean.getBOOK_NAME().isEmpty()) {
         		findQuery.append("AND book.BOOK_NAME LIKE ? ");
@@ -118,10 +118,10 @@ public class BookDAO {
 		StringBuffer dQuery = new StringBuffer();
 		if(direction.equals("next")){
 			dQuery.append("SELECT * FROM BOOK ");
-			dQuery.append("WHERE BOOK_NO > ? ");
+			dQuery.append("WHERE BOOK_NO > ? AND DELETE_FLAG = 0");
 		}else if(direction.equals("prev")){
 			dQuery.append("SELECT * FROM BOOK ");
-			dQuery.append("WHERE BOOK_NO < ? ");
+			dQuery.append("WHERE BOOK_NO < ? AND DELETE_FLAG = 0 ");
 			dQuery.append("ORDER BY BOOK_NO DESC ");
 		}
 		
@@ -165,7 +165,7 @@ public class BookDAO {
 			StringBuffer dQuery = new StringBuffer();
 		
 			dQuery.append("SELECT * ");		
-			dQuery.append("FROM BOOK WHERE BOOK_NO=? ");
+			dQuery.append("FROM BOOK WHERE BOOK_NO=? AND DELETE_FLAG = 0");
 			
 			pstmt = con.prepareStatement(dQuery.toString(), 
 				ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -206,7 +206,7 @@ public class BookDAO {
 		
 		StringBuffer findQuery = new StringBuffer();
 		
-		findQuery.append("SELECT COUNT(BOOK_NO) FROM BOOK ");
+		findQuery.append("SELECT COUNT(BOOK_NO) FROM BOOK WHERE DELETE_FLAG=0");
 		try{
 			con = ds.getConnection();
 			pstmt=con.prepareStatement(findQuery.toString());
