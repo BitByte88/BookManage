@@ -142,7 +142,7 @@ margin:auto;
 						<td width="20%"bgcolor="#EFEFEF">
 							<p align="center"><font size=2>書名</font></p>
 						</td>
-						<td width="40%"><input type="text" name="book_name"></td>
+						<td width="40%"><input type="text" name="book_name" style="width:390"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -150,7 +150,7 @@ margin:auto;
 						<td width="20%"bgcolor="#EFEFEF">
 							<p align="center"><font size=2>著者</font></p>
 						</td>
-						<td width="40%"><input type="text" name="book_writer"></td>
+						<td width="40%"><input type="text" name="book_writer" style="width:390"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -158,7 +158,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 							<p align="center"><font size=2>出版社</font></p>
 						</td>
-						<td width="40%"><input type="text" name="book_publisher"></td>
+						<td width="40%"><input type="text" name="book_publisher" style="width:390"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -166,7 +166,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 							<p align="center"><font size=2>発行日</font></p>
 						</td>
-						<td width="40%"><input type="text" name="book_publishing_date" placeholder="yyyy-MM-dd"></td>
+						<td width="40%"><input type="text" name="book_publishing_date" placeholder="yyyy-MM-dd" style="width:390"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -174,7 +174,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 							<p align="center"><font size=2>販売価格</font></p>
 						</td>
-						<td width="40%"><input type="number" name="book_price"></td>
+						<td width="40%"><input type="number" name="book_price" style="width:390"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -182,7 +182,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 							<p align="center"><font size=2>ISBNコード</font></p>
 						</td>
-						<td width="40%"><input type="text" name="book_isbn"></td>
+						<td width="40%"><input type="text" name="book_isbn" style="width:390"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>

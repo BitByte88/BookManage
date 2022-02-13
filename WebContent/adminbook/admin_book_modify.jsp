@@ -150,7 +150,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 							<p align="center"><font size=2>書名</font></p>
 						</td>
-						<td width="40%" colspan="2"><input type="text" name="book_name" value=<%=abb.getBOOK_NAME() %>></td>
+						<td width="40%" colspan="2"><input type="text" name="book_name" value=<%=abb.getBOOK_NAME() %> style="width:390"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -158,7 +158,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 							<p align="center"><font size=2>著者</font></p>
 						</td>
-						<td width="40%" colspan="2"><input type="text" name="book_writer" value=<%=abb.getBOOK_WRITER() %>></td>
+						<td width="40%" colspan="2"><input type="text" name="book_writer" value=<%=abb.getBOOK_WRITER() %> style="width:390"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -166,7 +166,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 							<p align="center"><font size=2>出版社</font></p>
 						</td>
-						<td width="40%" colspan="2"><input type="text" name="book_publisher" value=<%=abb.getBOOK_PUBLISHER() %>></td>
+						<td width="40%" colspan="2"><input type="text" name="book_publisher" value=<%=abb.getBOOK_PUBLISHER() %> style="width:390"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -174,7 +174,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 							<p align="center"><font size=2>発行日</font></p>
 						</td>
-						<td width="40%" colspan="2"><input type="text" name="book_publishing_date" value=<%=abb.getBOOK_PUBLISHING_DATE() %>></td>
+						<td width="40%" colspan="2"><input type="text" name="book_publishing_date" value=<%=abb.getBOOK_PUBLISHING_DATE() %> style="width:390"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -182,7 +182,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 							<p align="center"><font size=2>販売価格</font></p>
 						</td>
-						<td width="40%" colspan="2"><input type="number" name="book_price" value=<%=format.format(abb.getBOOK_PRICE())%>></td>
+						<td width="40%" colspan="2"><input type="number" name="book_price" value=<%=format.format(abb.getBOOK_PRICE())%> style="width:390"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
@@ -190,7 +190,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 							<p align="center"><font size=2>ISBNコード</font></p>
 						</td>
-						<td width="40%" colspan="2"><input type="text" name="book_isbn" value=<%=abb.getBOOK_ISBN() %>></td>
+						<td width="40%" colspan="2"><input type="text" name="book_isbn" value=<%=abb.getBOOK_ISBN() %> style="width:390"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
