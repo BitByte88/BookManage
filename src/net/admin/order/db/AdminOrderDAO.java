@@ -53,14 +53,11 @@ public class AdminOrderDAO {
 		return 0;
 	}
 	
-	public List getOrderList(int page,int limit){
-		String order_list_sql="select * from (select ROW_NUMBER() OVER (order by ORDER_NO desc) AS rnum, "+
-				"BOR.ORDER_NO, BOR.ORDER_TRANS_NO, ORDER_TRADE_TYPE, BOR.ORDER_BOOK_NO, BOR.ORDER_MEMBER_ID, " + 
-				"BOR.ORDER_COUNT * B.BOOK_PRICE AS TOTAL_PRICE, ORDER_DATE, ORDER_STATUS " +
-				"from book_order AS BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO order by ORDER_NO desc) AS OL "+
-				"where OL.rnum>=? and OL.rnum<=?";
-		
-		List orderlist=new ArrayList();
+	public List<OrderBean> getOrderList(int page,int limit){
+		String order_list_sql="select * from (select ROW_NUMBER() OVER (order by ORDER_DATE desc) AS rnum, "+ 
+				"BOR.ORDER_NO, BOR.ORDER_STATUS, BOR.ORDER_MEMBER_ID, BOR.ORDER_TRADE_TYPE, "+ 
+				"BOR.ORDER_DATE from book_order AS BOR group by BOR.ORDER_NO) as orderList where rnum>=? and rnum<=?";
+		List<OrderBean> orderlist=new ArrayList<OrderBean>();
 		
 		int startrow=(page-1)*10+1;
 		int endrow=startrow+limit-1;
@@ -73,11 +70,8 @@ public class AdminOrderDAO {
 			while(rs.next()){
 				OrderBean order=new OrderBean();
 				order.setORDER_NO(rs.getInt("ORDER_NO"));
-				order.setORDER_TRANS_NO(rs.getString("ORDER_TRANS_NO"));
 				order.setORDER_TRADE_TYPE(rs.getString("ORDER_TRADE_TYPE"));
-				order.setORDER_BOOK_NO(rs.getInt("ORDER_BOOK_NO"));
 				order.setORDER_MEMBER_ID(rs.getString("ORDER_MEMBER_ID"));
-				order.setTOTAL_PRICE(rs.getInt("TOTAL_PRICE"));
 				order.setORDER_DATE(rs.getDate("ORDER_DATE"));
 				order.setORDER_STATUS(rs.getInt("ORDER_STATUS"));
 				orderlist.add(order);
@@ -97,8 +91,9 @@ public class AdminOrderDAO {
 		return null;
 	}
 	
-	public OrderBean getOrderDetail(int ordernum){	
-		String order_detail_sql="select BOR.ORDER_NO, BOR.ORDER_TRANS_NO, BOR.ORDER_BOOK_NO, B.BOOK_NAME,B.BOOK_PRICE, BOR.ORDER_COUNT, " + 
+	public List<OrderBean> getOrderDetail(int ordernum){
+		List<OrderBean> orderlist=new ArrayList<OrderBean>();
+		String order_detail_sql="select BOR.ORDER_NO, BOR.ORDER_ITEM_NO, BOR.ORDER_BOOK_NO, B.BOOK_NAME,B.BOOK_PRICE, BOR.ORDER_COUNT, " + 
 				"BOR.ORDER_TRADE_TYPE, BOR.ORDER_COUNT * B.BOOK_PRICE AS TOTAL_PRICE, ORDER_DATE, ORDER_STATUS, "	+ 			
 				"BOR.ORDER_MEMBER_ID, BOR.ORDER_RECEIVE_NAME, BOR.ORDER_RECEIVE_NAME_KANA, " + 
 				"BOR.ORDER_RECEIVE_EMAIL, BOR.ORDER_RECEIVE_TEL, BOR.ORDER_RECEIVE_ZIPCODE, " + 
@@ -109,11 +104,11 @@ public class AdminOrderDAO {
 			pstmt=conn.prepareStatement(order_detail_sql);
 			pstmt.setInt(1, ordernum);
 			rs=pstmt.executeQuery();
-			rs.next();
 			
+			while(rs.next()){
 			OrderBean order=new OrderBean();
 			order.setORDER_NO(rs.getInt("ORDER_NO"));
-			order.setORDER_TRANS_NO(rs.getString("ORDER_TRANS_NO"));
+			order.setORDER_ITEM_NO(rs.getInt("ORDER_ITEM_NO"));
 			order.setORDER_TRADE_TYPE(rs.getString("ORDER_TRADE_TYPE"));
 			order.setORDER_BOOK_NO(rs.getInt("ORDER_BOOK_NO"));
 			order.setBOOK_NAME(rs.getString("BOOK_NAME"));
@@ -132,8 +127,9 @@ public class AdminOrderDAO {
 			order.setORDER_RECEIVE_ADD_2(rs.getString("ORDER_RECEIVE_ADD_2"));
 			order.setORDER_RECEIVE_ADD_3(rs.getString("ORDER_RECEIVE_ADD_3"));
 			order.setORDER_MEMO(rs.getString("ORDER_MEMO"));
-
-			return order;
+			orderlist.add(order);
+			}
+			return orderlist;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -160,7 +156,7 @@ public class AdminOrderDAO {
 			pstmt.setInt(3, order.getORDER_NO());
 			result=pstmt.executeUpdate();
 			
-			if(result==1){
+			if(result>=1){
 				return true;
 			}
 		}catch(SQLException e){
@@ -186,7 +182,7 @@ public class AdminOrderDAO {
 			pstmt.setInt(1, ordernum);
 			result=pstmt.executeUpdate();
 			
-			if(result==1){
+			if(result>=1){
 				return true;
 			}
 		}catch(SQLException e){
@@ -200,5 +196,27 @@ public class AdminOrderDAO {
 			}catch(Exception ex) {}
 		}
 		return false;
+	}
+	
+	public int getTotalPrice(int orderNo){
+		String order_list_sql="select sum(sub_total) as TOTAL_PRICE from (select BOR.ORDER_NO, BOR.ORDER_COUNT * B.BOOK_PRICE AS sub_total from book_order as BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO WHERE BOR.ORDER_NO = ?) as ST";
+		try {
+			conn = ds.getConnection();
+			pstmt=conn.prepareStatement(order_list_sql);
+			pstmt.setInt(1, orderNo);
+			rs=pstmt.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			}catch(Exception ex) {}
+		}
+		return 0;
 	}
 }

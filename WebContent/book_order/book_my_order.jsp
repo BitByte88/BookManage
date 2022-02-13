@@ -89,9 +89,9 @@
 		<tr align=center height=20>
 			<td colspan=7 style="font-family: Tahoma; font-size: 10pt;">
 			<%if (nowpage <= 1) {%>
-			[前へ]&nbsp;
+			[最新注文]&nbsp;
 			<%}else{%>
-			<a href="./OrderList.order?page=<%=nowpage-1 %>">[前へ]</a>&nbsp;
+			<a href="./OrderList.order?page=<%=nowpage-1 %>">[最新注文]</a>&nbsp;
 			<%}%>
 			<%
 			for (int a = startpage; a <= endpage; a++) {
@@ -106,9 +106,9 @@
 			}
 			%>
 			<%if (nowpage >= maxpage) {%>
-			[次へ]
+			[以前注文]
 			<%}else{%>
-			<a href="./OrderList.order?page=<%=nowpage+1 %>">[次へ]</a>
+			<a href="./OrderList.order?page=<%=nowpage+1 %>">[以前注文]</a>
 			<%}%>
 			</td>
 		</tr>

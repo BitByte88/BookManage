@@ -19,6 +19,9 @@
 	
 <title>図書管理システム</title>
 <script>
+window.onload = function() {
+	document.querySelector('#book_category').value = "${abb.getBOOK_CATEGORY()}";
+}
 function check(){
 	var category=bookform.book_category.value;
 	var name=bookform.book_name.value;
@@ -109,8 +112,7 @@ margin:auto;
 							<p align="center"><font size=2>カテゴリー</font></p>
 						</td>
 						<td colspan="2" width="40%" height="30">
-							<select name="book_category" size="1" 
-									value=<%=abb.getBOOK_CATEGORY() %>>
+							<select id="book_category"name="book_category" size="1">
 								<option value="文学・評論">文学・評論</option>
 								<option value="人文・思想">人文・思想</option>
 								<option value="社会・政治">社会・政治</option>

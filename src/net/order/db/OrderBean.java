@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class OrderBean {
 	private int ORDER_NO;
-	private String ORDER_TRANS_NO;
+	private int ORDER_ITEM_NO;
 	private int ORDER_BOOK_NO;
 	private int ORDER_STATUS;
 	private int ORDER_COUNT;
@@ -32,11 +32,11 @@ public class OrderBean {
 	public void setORDER_NO(int oRDER_NO) {
 		ORDER_NO = oRDER_NO;
 	}
-	public String getORDER_TRANS_NO() {
-		return ORDER_TRANS_NO;
+	public int getORDER_ITEM_NO() {
+		return ORDER_ITEM_NO;
 	}
-	public void setORDER_TRANS_NO(String oRDER_TRANS_NO) {
-		ORDER_TRANS_NO = oRDER_TRANS_NO;
+	public void setORDER_ITEM_NO(int oRDER_ITEM_NO) {
+		ORDER_ITEM_NO = oRDER_ITEM_NO;
 	}
 	public int getORDER_BOOK_NO() {
 		return ORDER_BOOK_NO;

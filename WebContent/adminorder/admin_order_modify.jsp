@@ -1,8 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ page import="net.order.db.*"%>
 <%@ page import="net.member.db.*"%>
+<%@ page import="java.util.*" %>
 <%
-	OrderBean order=(OrderBean)request.getAttribute("order");
+	List<OrderBean> orderlist=(List<OrderBean>)request.getAttribute("orderlist");
 	MemberBean ordermember=(MemberBean)request.getAttribute("ordermember");
 %>
 <html>
@@ -23,7 +24,7 @@
 <td colspan=2 align=center>
 <!-- 注文情報修正(管理者) -->
 <form action="./AdminOrderModify.adorder" name="orderform" method="post">
-<input type="hidden" name="num" value="<%=order.getORDER_NO() %>">
+<input type="hidden" name="num" value="<%=orderlist.get(0).getORDER_NO() %>">
 <table width=90% border=0 cellpadding="0" cellspacing="1">
 	<tr>
 		<p align=left><b><font size=4>注文情報変更</font></b></p>
@@ -31,19 +32,13 @@
 	<tr><td height=10></td></tr>
 	<tr><td height=10></td></tr>
 	<tr>
-	<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;"
-		width=210 height=24 bgcolor="f7f7f7">送り状書留番号</td>
-		<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;">
-		<%=order.getORDER_TRANS_NO() %></td>
-	</tr>
-	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr>
 		<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;"
 			width=210 height=24 bgcolor="f7f7f7">注文番号</td>
 		<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;">
-		<%=order.getORDER_NO() %></td>
+		<%=orderlist.get(0).getORDER_NO() %></td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
@@ -56,15 +51,22 @@
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
+	<%for(int i=0;i<orderlist.size();i++){ 
+	OrderBean order=new OrderBean();
+	order=(OrderBean)orderlist.get(i); %>
+	<tr height=20>
+	<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
+		bgcolor="f7f7f7">アイテムNo</td>
+		<td style="font-family: Tahoma; font-size: 10pt; font-weight:bold;">
+		<%=order.getORDER_ITEM_NO() %>
+		</td>
+	</tr>
 	<tr height=20>
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">書名</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
 			<%=order.getBOOK_NAME() %>
 		</td>
-	</tr>
-	<tr>
-		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr height=23>
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
@@ -73,9 +75,6 @@
 			<%=order.getBOOK_PRICE() %>
 		</td>
 	</tr>
-	<tr>
-		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
-	</tr>
 	<tr height=23>
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">本数</td>
@@ -83,6 +82,10 @@
 			<%=order.getORDER_COUNT() %>
 		</td>
 	</tr>
+	<tr>
+	<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+	</tr>
+	<%} %>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
@@ -101,7 +104,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">届け先_氏名</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
-			<%=order.getORDER_RECEIVE_NAME() %>
+			<%=orderlist.get(0).getORDER_RECEIVE_NAME() %>
 		</td>
 	</tr>
 	<tr>
@@ -111,7 +114,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">届け先_氏名（カナ）</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
-			<%=order.getORDER_RECEIVE_NAME_KANA() %>
+			<%=orderlist.get(0).getORDER_RECEIVE_NAME_KANA() %>
 		</td>
 	</tr>
 	<tr>
@@ -121,7 +124,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">届け先_TEL</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
-			<%=order.getORDER_RECEIVE_TEL() %>
+			<%=orderlist.get(0).getORDER_RECEIVE_TEL() %>
 		</td>
 	</tr>
 	<tr>
@@ -131,7 +134,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">届け先_メールアドレス</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
-			<%=order.getORDER_RECEIVE_EMAIL() %>
+			<%=orderlist.get(0).getORDER_RECEIVE_EMAIL() %>
 		</td>
 	</tr>
 	<tr>
@@ -141,7 +144,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">届け先_郵便番号</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
-			<%=order.getORDER_RECEIVE_ZIPCODE() %>
+			<%=orderlist.get(0).getORDER_RECEIVE_ZIPCODE() %>
 		</td>
 	</tr>
 	<tr>
@@ -151,7 +154,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">届け先_都道府県</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
-			<%=order.getORDER_RECEIVE_ADD_1() %>
+			<%=orderlist.get(0).getORDER_RECEIVE_ADD_1() %>
 		</td>
 	</tr>
 	<tr>
@@ -161,7 +164,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">届け先_市区町村</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
-			<%=order.getORDER_RECEIVE_ADD_2() %>
+			<%=orderlist.get(0).getORDER_RECEIVE_ADD_2() %>
 		</td>
 	</tr>
 	<tr>
@@ -171,7 +174,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">届け先_丁目、番地、建物名</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
-			<%=order.getORDER_RECEIVE_ADD_3() %>
+			<%=orderlist.get(0).getORDER_RECEIVE_ADD_3() %>
 		</td>
 	</tr>
 	<tr>
@@ -189,7 +192,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">アカウント</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
-			<%=order.getORDER_MEMBER_ID() %>
+			<%=orderlist.get(0).getORDER_MEMBER_ID() %>
 		</td>
 	</tr>
 	<tr>
@@ -219,7 +222,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">メモー</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
-		<textarea name="memo" cols=60 rows=12><%=order.getORDER_MEMO() %>
+		<textarea name="memo" cols=60 rows=12><%=orderlist.get(0).getORDER_MEMO() %>
 		</textarea>
 		</td>
 	</tr>
@@ -238,7 +241,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">注文合計金額</td>
 		<td width=650 height=24>
-			<font size=2><%=order.getTOTAL_PRICE() %>円</font>
+			<font size=2><%=orderlist.get(0).getTOTAL_PRICE() %>円</font>
 		</td>
 	</tr>
 	<tr>
@@ -248,7 +251,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">注文日時</td>
 		<td width=650 height=24>
-			<font size=2><%=order.getORDER_DATE() %></font>
+			<font size=2><%=orderlist.get(0).getORDER_DATE() %></font>
 		</td>
 	</tr>
 	<tr>
@@ -258,7 +261,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">決済方法</td>
 		<td width=650 height=24>
-			<font size=2><%=order.getORDER_TRADE_TYPE() %></font>
+			<font size=2><%=orderlist.get(0).getORDER_TRADE_TYPE() %></font>
 		</td>
 	</tr>
 	<tr>
@@ -269,17 +272,17 @@
 			bgcolor="f7f7f7">注文ステータス</td>
 		<td width=650 height=24>
 		<select name="status">
-			<option value="0" <%if(order.getORDER_STATUS()==0){%> selected
+			<option value="0" <%if(orderlist.get(0).getORDER_STATUS()==0){%> selected
 				<%}%>>注文受付</option>
-			<option value="1" <%if(order.getORDER_STATUS()==1){%> selected
+			<option value="1" <%if(orderlist.get(0).getORDER_STATUS()==1){%> selected
 				<%}%>>発送準備中</option>
-			<option value="2" <%if(order.getORDER_STATUS()==2){%> selected
+			<option value="2" <%if(orderlist.get(0).getORDER_STATUS()==2){%> selected
 				<%}%>>発送済み</option>
-			<option value="3" <%if(order.getORDER_STATUS()==3){%> selected
+			<option value="3" <%if(orderlist.get(0).getORDER_STATUS()==3){%> selected
 				<%}%>>配送中</option>
-			<option value="4" <%if(order.getORDER_STATUS()==4){%> selected
+			<option value="4" <%if(orderlist.get(0).getORDER_STATUS()==4){%> selected
 				<%}%>>配送済み</option>
-			<option value="5" <%if(order.getORDER_STATUS()==5){%> selected
+			<option value="5" <%if(orderlist.get(0).getORDER_STATUS()==5){%> selected
 				<%}%>>注文キャンセル</option>
 		</select>
 		</td>

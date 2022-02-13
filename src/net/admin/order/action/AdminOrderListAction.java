@@ -7,20 +7,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.admin.order.db.AdminOrderDAO;
+import net.order.db.OrderBean;
 
 public class AdminOrderListAction implements Action{
 	public ActionForward execute(HttpServletRequest request,HttpServletResponse response) 
 	throws Exception{		
 		AdminOrderDAO orderdao=new AdminOrderDAO();
-		List orderlist = new ArrayList();
+		List<OrderBean> orderlist = new ArrayList<OrderBean>();
 		int page=1;
-		int limit=10;
+		int limit=50;
 		
 		if(request.getParameter("page")!=null){
 			page=Integer.parseInt(request.getParameter("page"));
 		}
 		int ordercount=orderdao.getOrderCount();
 		orderlist = orderdao.getOrderList(page,limit);
+		
+		for(OrderBean order : orderlist) {
+			order.setTOTAL_PRICE(orderdao.getTotalPrice(order.getORDER_NO()));
+		}
 		
 	   	int maxpage=(int)((double)ordercount/limit+0.95);
 	   	int startpage = (((int) ((double)page / 10 + 0.9)) - 1) * 10 + 1;

@@ -1,5 +1,8 @@
 package net.admin.order.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,12 +17,12 @@ public class AdminOrderDetailAction implements Action{
 		MemberDAO memberdao=new MemberDAO();
 		MemberBean member=new MemberBean();
 		AdminOrderDAO orderdao=new AdminOrderDAO();
-		OrderBean order=new OrderBean();
+		List<OrderBean> orderList=new ArrayList<OrderBean>();
 		
 		String num=request.getParameter("num");
-		order = orderdao.getOrderDetail(Integer.parseInt(num));
-		member=memberdao.getMember(order.getORDER_MEMBER_ID());
-		request.setAttribute("order", order);
+		orderList = orderdao.getOrderDetail(Integer.parseInt(num));
+		member=memberdao.getMember(orderList.get(0).getORDER_MEMBER_ID());
+		request.setAttribute("orderlist", orderList);
 		request.setAttribute("ordermember", member);
 		
 		ActionForward forward=new ActionForward();

@@ -35,7 +35,7 @@ public class OrderDAO {
 	}
 	
 	public int getOrderCount(String id) throws SQLException {
-		String sql="select count(*) from book_order where ORDER_MEMBER_ID=? AND DELETE_FLAG=0";
+		String sql="select  count(distinct order_no) from book_order where ORDER_MEMBER_ID=? AND DELETE_FLAG=0";
 		
 		try{
 			conn = ds.getConnection();
@@ -57,13 +57,14 @@ public class OrderDAO {
 		return 0;
 	}
 	
-	public int getOrderSumMoney(String id) throws SQLException{
+	public int getOrderSumMoney(String id, int orderNo) throws SQLException{
 		String sql="select sum(BOR.ORDER_COUNT * B.BOOK_PRICE) from book_order as BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO "+
-				   "where ORDER_MEMBER_ID=? AND BOR.DELETE_FLAG=0";
+				   "where ORDER_MEMBER_ID=? AND ORDER_NO = ? AND BOR.DELETE_FLAG=0";
 		try{
 			conn = ds.getConnection();
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setInt(2, orderNo);
 			rs=pstmt.executeQuery();
 			rs.next();
 			
@@ -81,28 +82,28 @@ public class OrderDAO {
 		return 0;
 	}
 	
-	public List getOrderList(int page,int limit,String id) throws SQLException {
-		String sql="select * from (select ROW_NUMBER() OVER (order by ORDER_DATE desc) AS rnum, "+
-				"BOR.ORDER_BOOK_NO, B.BOOK_NAME,B.BOOK_PRICE, BOR.ORDER_COUNT, "+
-				"BOR.ORDER_COUNT * B.BOOK_PRICE AS TOTAL_PRICE, ORDER_DATE, ORDER_STATUS "+
-				"from book_order AS BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO " +
-				"WHERE ORDER_MEMBER_ID = ? AND BOR.delete_flag = 0 order by ORDER_DATE desc) AS OL "+
-				"where OL.rnum>=? and OL.rnum<=?";
-		List book_order_list=new ArrayList();
+	public List<OrderBean> getOrderList(int page,String id) throws SQLException {
+		String sql="select BOR.ORDER_NO, BOR.ORDER_BOOK_NO, B.BOOK_NAME,B.BOOK_PRICE, BOR.ORDER_COUNT, " + 
+				"BOR.ORDER_COUNT * B.BOOK_PRICE AS TOTAL_PRICE, ORDER_DATE, ORDER_STATUS  " + 
+				"from book_order AS BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO " + 
+				"where order_no in (select * from (select order_no from book_order " + 
+				"WHERE ORDER_MEMBER_ID = ? AND delete_flag = 0 order by order_no desc limit 1 offset ?)as tmp) " + 
+				"order by order_item_no";
 		
-		int startrow=(page-1)*10+1;
-		int endrow=startrow+limit-1;
+		List<OrderBean> book_order_list=new ArrayList<>();
+		  ;
+		int offset= page-1;
 		
 		try{
 			conn = ds.getConnection();
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1,id);
-			pstmt.setInt(2,startrow);
-			pstmt.setInt(3,endrow);
+			pstmt.setInt(2,offset);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
 				OrderBean order=new OrderBean();
+				order.setORDER_NO(rs.getInt("ORDER_NO"));
 				order.setORDER_BOOK_NO(rs.getInt("ORDER_BOOK_NO"));
 				order.setBOOK_NAME(rs.getString("BOOK_NAME"));
 				order.setBOOK_PRICE(rs.getInt("BOOK_PRICE"));
@@ -139,28 +140,27 @@ public class OrderDAO {
 			pstmt = conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			rs.next();
-			ordernum=rs.getInt(1);
+			ordernum=rs.getInt(1)+1;
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 		
 		List cartlist=(ArrayList)bookvector.get(0);
 		List booklist=(ArrayList)bookvector.get(1);
-		
+		int count = 1;
 		for (int i = 0; i < cartlist.size(); i++) {
 			CartBean cart=(CartBean)cartlist.get(i);
 			BookBean book=(BookBean)booklist.get(i);
 			
 			try {
 				conn = ds.getConnection();
-				++ordernum;
 				
 				sql = "insert into book_order values(?,?,?,0,?,"+
 					"?,?,?,now(),now(),?,?,?,?,?,?,?,?,0,0,now(),0,now())";
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, ordernum);
-				pstmt.setString(2,sdf.format(cal.getTime()).toString()+ "-" + ordernum);
+				pstmt.setInt(2,count++);
 				pstmt.setInt(3, book.getBOOK_NO());
 				pstmt.setInt(4, cart.getCART_COUNT());
 				pstmt.setString(5, order.getORDER_MEMBER_ID());
@@ -191,4 +191,32 @@ public class OrderDAO {
 		
 		return ordernum;
 	}
+	
+	public int[] getOrderNoList(String id) throws SQLException {
+		String sql="select distinct ORDER_NO from book_order where ORDER_MEMBER_ID=? AND DELETE_FLAG=0 order by ORDER_NO";
+		int[] orderNoArray = {};		
+		try{
+			conn = ds.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			rs.next();	
+
+			int i=0;
+			while(rs.next()){
+				orderNoArray[i++] = rs.getInt("ORDER_NO");
+				}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		finally{
+			try{
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			}catch(Exception ex) {}
+		}
+		return orderNoArray;
+	}
+
 }
