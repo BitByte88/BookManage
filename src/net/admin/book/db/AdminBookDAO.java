@@ -122,7 +122,7 @@ public class AdminBookDAO {
 		try {
 			con = ds.getConnection();
 			String sql="insert into book values "+
-			"(?,?,?,?,?,?,?,?,?,?,0,1,SYSDATE(),1,SYSDATE())";
+			"(?,?,?,?,?,?,?,?,?,?,0,1,NOW(),1,NOW())";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, abb.getBOOK_CATEGORY());
@@ -173,7 +173,7 @@ public class AdminBookDAO {
 			String sql="update book set "+
 			"book_category=?, book_name=?, book_writer=?, book_publisher=?, " + 
 			"book_publishing_date=?, book_content=?, book_price=?, " +
-			"book_image=? ,book_isbn=?, update_date=SYSDATE() " +
+			"book_image=? ,book_isbn=?, update_date=NOW() " +
 			"where book_no=? and delete_flag=0";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, abb.getBOOK_CATEGORY());

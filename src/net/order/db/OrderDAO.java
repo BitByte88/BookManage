@@ -85,7 +85,7 @@ public class OrderDAO {
 		String sql="select BOR.ORDER_NO, BOR.ORDER_BOOK_NO, B.BOOK_NAME,B.BOOK_PRICE, BOR.ORDER_COUNT, " + 
 				"BOR.ORDER_COUNT * B.BOOK_PRICE AS TOTAL_PRICE, ORDER_DATE, ORDER_STATUS  " + 
 				"from book_order AS BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO " + 
-				"where order_no in (select * from (select order_no from book_order " + 
+				"where order_no in (select * from (select distinct order_no from book_order " + 
 				"WHERE ORDER_MEMBER_ID = ? AND delete_flag = 0 order by order_no desc limit 1 offset ?)as tmp) " + 
 				"order by order_item_no";
 		

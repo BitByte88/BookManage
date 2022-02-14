@@ -38,7 +38,7 @@
 		<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;"
 			width=210 height=24 bgcolor="f7f7f7">注文番号</td>
 		<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;">
-		<%=orderlist.get(0).getORDER_NO() %></td>
+		<%=String.format("%08d", orderlist.get(0).getORDER_NO())%></td>
 	</tr>
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
