@@ -40,7 +40,6 @@
 				<td height="3" colspan="7" align=right></td>
 			</tr>
 			<tr bgcolor="#f0f8ff" align="center">
-				<td width="5%"><font size="2">番号</font></td>
 				<td width="5%"><font size="2">画像</font></td>
 				<td width="25%"><font size="2">書名</font></td>
 				<td width="8%"><font size="2">数量</font></td>
@@ -55,7 +54,6 @@
 					BookBean book=(BookBean) bookList.get(i);
 			%>
 			<tr align="center">
-			<td><font size="2"><%=dto.getCART_NO()%></font></td>
 			<td><font size="2"><img 
 				src="./upload/<%=book.getBOOK_IMAGE().split(",")[0] %>" 
 				width=50 height=50></font></td>

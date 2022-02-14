@@ -3,7 +3,7 @@
 <%@ page import="net.order.db.*"%>
 <%
 	String id=(String)session.getAttribute("id");
-	List book_order_list=(List)request.getAttribute("book_order_list");
+	List<OrderBean> book_order_list=(List)request.getAttribute("book_order_list");
 	int ordercount=((Integer)request.getAttribute("ordercount")).intValue();
 	int nowpage=((Integer)request.getAttribute("page")).intValue();
 	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
@@ -35,6 +35,9 @@
 </tr>
 <tr>
 	<td>現在、 <%=id%>様からの注文件数は<%=ordercount%>件でございます。</td>
+</tr>
+<tr>
+	<td>注文番号：<%=String.format("%08d", book_order_list.get(0).getORDER_NO())%></td>
 </tr>
 <tr>
 	<td height="62" align="center" valign="middle">
