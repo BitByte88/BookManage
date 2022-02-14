@@ -54,7 +54,7 @@
 		OrderBean order=new OrderBean();
 		order=(OrderBean)orderlist.get(i); %>
 	<tr align=center height=20>
-	<td style=font-family:Tahoma;font-size:7pt;><%=order.getORDER_ITEM_NO()%></td>
+	<td style=font-family:Tahoma;font-size:7pt;><%=order.getORDER_NO()%></td>
 	<td style=font-family:Tahoma;font-size:10pt;><%=order.getORDER_MEMBER_ID()%></td>
 	<td style=font-family:Tahoma;font-size:10pt;><%=order.getORDER_TRADE_TYPE()%></td>
 	<td style=font-family:Tahoma;font-size:10pt;><%=order.getTOTAL_PRICE()%>円</td>

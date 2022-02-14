@@ -2,8 +2,8 @@ package net.order.action;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +32,6 @@ public class OrderAddAction implements Action{
 			return forward;
 		}
 		
-		Vector bookvector=new Vector();
 		
 		OrderDAO orderdao=new OrderDAO();
 		OrderBean order=new OrderBean();
@@ -65,13 +64,15 @@ public class OrderAddAction implements Action{
 			book.setBOOK_PRICE(Integer.parseInt(request.getParameter("price")));
 			cartlist.add(cart);
 			booklist.add(book);
-			bookvector.add(cartlist);
-			bookvector.add(booklist);
+
 		}else{
-			bookvector=cartdao.getCartList(id);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map = cartdao.getCartList(id);
+			cartlist=(ArrayList)map.get("cartlist");
+			booklist=(ArrayList)map.get("booklist");
 		}
 		
-		orderdao.addOrder(order, bookvector);
+		orderdao.addOrder(order, cartlist, booklist);
 		cartdao.cartClear(id);
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(true);

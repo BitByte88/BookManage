@@ -2,8 +2,8 @@ package net.cart.action;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,10 +28,10 @@ public class CartListAction implements Action{
 			forward.setPath("./MemberLogin.member");
 			return forward;			
 		}
-		
-		Vector vector = cartdao.getCartList(id);
-		List cartlist=(ArrayList)vector.get(0);
-		List booklist=(ArrayList)vector.get(1);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map = cartdao.getCartList(id);
+		List cartlist=(ArrayList)map.get("cartlist");
+		List booklist=(ArrayList)map.get("booklist");
 		
 		request.setAttribute("cartlist", cartlist);
 		request.setAttribute("booklist", booklist);

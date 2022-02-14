@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -129,7 +128,7 @@ public class OrderDAO {
 		return null;
 	}
 	
-	public int addOrder(OrderBean order, Vector bookvector){
+	public int addOrder(OrderBean order, List<CartBean> cartlist, List<BookBean> booklist){
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
 		
@@ -145,8 +144,6 @@ public class OrderDAO {
 			ex.printStackTrace();
 		}
 		
-		List cartlist=(ArrayList)bookvector.get(0);
-		List booklist=(ArrayList)bookvector.get(1);
 		int count = 1;
 		for (int i = 0; i < cartlist.size(); i++) {
 			CartBean cart=(CartBean)cartlist.get(i);

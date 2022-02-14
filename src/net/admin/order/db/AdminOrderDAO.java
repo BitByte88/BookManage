@@ -32,7 +32,7 @@ public class AdminOrderDAO {
 	}
 	
 	public int getOrderCount(){
-		String order_count_sql="select count(*) from BOOK_ORDER";		
+		String order_count_sql="select count(distinct ORDER_NO) from BOOK_ORDER";		
 		try{
 			conn = ds.getConnection();
 			pstmt=conn.prepareStatement(order_count_sql);

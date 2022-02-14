@@ -1,8 +1,8 @@
 package net.order.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,9 +43,10 @@ public class OrderStartAction implements Action{
 			request.setAttribute("orderinfo", orderinfo);
 		}else{
 			CartDAO cartdao=new CartDAO();
-			Vector vector=cartdao.getCartList(id);
-			List cartlist=(ArrayList)vector.get(0);
-			List booklist=(ArrayList)vector.get(1);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map = cartdao.getCartList(id);
+			List cartlist=(ArrayList)map.get("cartlist");
+			List booklist=(ArrayList)map.get("booklist");
 			
 			request.setAttribute("ordertype", "cart");
 			request.setAttribute("cartlist", cartlist);

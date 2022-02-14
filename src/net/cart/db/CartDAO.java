@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -31,8 +31,8 @@ public class CartDAO {
 		}
 	}
 	
-	public Vector getCartList(String id) {
-		Vector vector=new Vector();
+	public HashMap<String, Object> getCartList(String id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		List cartlist = new ArrayList();
 		List booklist = new ArrayList();
 		
@@ -80,10 +80,10 @@ public class CartDAO {
 				booklist.add(book);
 			}
 			
-			vector.add(cartlist);
-			vector.add(booklist);
+			map.put("cartlist", cartlist);
+			map.put("booklist", booklist);
 			
-			return vector;
+			return map;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
