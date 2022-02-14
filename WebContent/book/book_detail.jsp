@@ -108,7 +108,7 @@ function count_change(temp){
 				</tr>
 				<tr>
 				<tr>
-					<td>出版日時 　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+					<td>発行日　 　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
 					<td colspan="3">${itemArray.BOOK_PUBLISHING_DATE}</td>
 				</tr>
 				<tr>

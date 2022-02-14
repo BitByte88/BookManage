@@ -33,7 +33,7 @@ public class BookListAction implements Action{
 		searchBean.setSTART_DATE(request.getParameter("startDate"));
 		searchBean.setEND_DATE(request.getParameter("endDate"));
 
-		//出版日時形式チェック
+		//発行日形式チェック
 		SimpleDateFormat dateFormatParser = new SimpleDateFormat("yyyy/MM/dd"); 
         dateFormatParser.setLenient(false); 
         try {
@@ -47,7 +47,7 @@ public class BookListAction implements Action{
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('出版日時の形式を確認してください。');");
+			out.println("alert('発行日の形式を確認してください。');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();

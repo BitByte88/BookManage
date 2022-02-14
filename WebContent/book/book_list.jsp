@@ -59,7 +59,7 @@ function check(){
 			<td><input type="text" name="publisher" maxlength="20" size="20" value="${search.BOOK_PUBLISHER}"></td>
 			</tr>
 			<tr>
-			<td bgcolor="#f5f5f5">出版日時</td>
+			<td bgcolor="#f5f5f5">発行日</td>
 			<td><input type="text" name="startDate" placeholder="2022/01/01" maxlength="10" size="10" value="${search.START_DATE}"> - <input type="text" placeholder="2022/01/31" name="endDate" maxlength="10" size="10" value="${search.END_DATE}">			</td>
 			</tr>
 			<tr>
