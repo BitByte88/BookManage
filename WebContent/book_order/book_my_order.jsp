@@ -80,11 +80,11 @@
 			<td><%=order.getORDER_DATE()%></td>
 		</tr>
 		<tr>
-			<td height="2" bgcolor="94d7e7"></td>
-			<td height="2" bgcolor="94d7e7"></td>
-			<td height="2" bgcolor="94d7e7"></td>
-			<td height="2" bgcolor="94d7e7"></td>
-			<td height="2" bgcolor="94d7e7"></td>
+			<td height="1" bgcolor="94d7e7"></td>
+			<td height="1" bgcolor="94d7e7"></td>
+			<td height="1" bgcolor="94d7e7"></td>
+			<td height="1" bgcolor="94d7e7"></td>
+			<td height="1" bgcolor="94d7e7"></td>
 		</tr>
 		<%
 			}
