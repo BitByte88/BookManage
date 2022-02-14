@@ -127,7 +127,7 @@ function count_change(temp){
 							<a href="JavaScript:count_change(0)">▲</a>
 						</div>
 					</td>
-					<td width="69" rowspan="2" align="left">本</td>
+					<td width="69" rowspan="2" align="left">冊</td>
 				</tr>
 				<tr>
 					<td valign="top">
