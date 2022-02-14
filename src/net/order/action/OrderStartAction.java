@@ -30,16 +30,16 @@ public class OrderStartAction implements Action{
 		request.setCharacterEncoding("UTF-8");
 		
 		List orderinfo=new ArrayList();
-		String order=request.getParameter("order");
+		String orderType=request.getParameter("orderType");
 		
-		if(order.equals("book")){
+		if(orderType.equals("fromBookDetail")){
 			orderinfo.add(Integer.parseInt(request.getParameter("bookno")));
 			orderinfo.add(request.getParameter("bookname"));
 			orderinfo.add(Integer.parseInt(request.getParameter("amount")));
 			orderinfo.add(Integer.parseInt(request.getParameter("price")));
 			orderinfo.add(request.getParameter("bookimage"));
 			
-			request.setAttribute("ordertype", "book");
+			request.setAttribute("orderType", "fromBookDetail");
 			request.setAttribute("orderinfo", orderinfo);
 		}else{
 			CartDAO cartdao=new CartDAO();
@@ -48,7 +48,7 @@ public class OrderStartAction implements Action{
 			List cartlist=(ArrayList)map.get("cartlist");
 			List booklist=(ArrayList)map.get("booklist");
 			
-			request.setAttribute("ordertype", "cart");
+			request.setAttribute("orderType", "fromCart");
 			request.setAttribute("cartlist", cartlist);
 			request.setAttribute("booklist", booklist);
 		}

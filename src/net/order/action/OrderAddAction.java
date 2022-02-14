@@ -55,8 +55,8 @@ public class OrderAddAction implements Action{
 		
 		order.setORDER_TRADE_TYPE("オンライン入金");
 		
-		String ordertype=request.getParameter("ordertype");
-		if(ordertype.equals("book")){
+		String orderType=request.getParameter("orderType");
+		if(orderType.equals("fromBookDetail")){
 			cart.setCART_BOOK_NO(Integer.parseInt(request.getParameter("bookno")));
 			cart.setCART_COUNT(Integer.parseInt(request.getParameter("amount")));
 			book.setBOOK_NO(Integer.parseInt(request.getParameter("bookno")));

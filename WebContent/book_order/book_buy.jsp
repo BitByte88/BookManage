@@ -6,12 +6,12 @@
 <%@ page import="net.book.db.BookBean" %>
 <%
 	MemberBean member = (MemberBean) request.getAttribute("member");
-	String ordertype = (String) request.getAttribute("ordertype");
+	String orderType = (String) request.getAttribute("orderType");
 	List orderinfo = null;
 	List cartlist = null;
 	List booklist=null;
 	
-	if (ordertype.equals("book")) {
+	if (orderType.equals("fromBookDetail")) {
 		orderinfo = (ArrayList) request.getAttribute("orderinfo");
 	} else {
 		cartlist = (ArrayList) request.getAttribute("cartlist");
@@ -37,8 +37,8 @@
 	<td colspan=2 align=right>
 	<!-- 注文ページ -->
 	<form action="./OrderAdd.order" method="post" name="orderform">
-	<input type="hidden" name="ordertype" value="<%=ordertype%>"> 
-	<%if (ordertype.equals("book")) {%>
+	<input type="hidden" name="orderType" value="<%=orderType%>"> 
+	<%if (orderType.equals("fromBookDetail")) {%>
 	<input type="hidden" name="bookno" value="<%=orderinfo.get(0)%>">
 	<input type="hidden" name="bookname" value="<%=orderinfo.get(1)%>">
 	<input type="hidden" name="amount" value="<%=orderinfo.get(2)%>">
@@ -62,7 +62,7 @@
 			<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 		</tr>
 		<%
-			if (ordertype.equals("book")) {
+			if (orderType.equals("fromBookDetail")) {
 		%>
 		<tr align=center height=20>
 		<td style="font-family: Tahoma; font-size: 7pt;"><img

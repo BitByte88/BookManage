@@ -29,7 +29,7 @@
 		<td colspan=2><!--カート -->
 		<p align="center">
 		<form action="./OrderStart.order" name="cartform" method="post">
-		<input type="hidden" name="order" value="cart">
+		<input type="hidden" name="orderType" value="fromCart">
 		<table width="90%">
 			<tr align=center>
 				<td><p align=left><b><font size=4>カート</font></b></p></td>

@@ -74,7 +74,7 @@ function count_change(temp){
 		<form name="bookform" action="#" method="post">
 		<input type="hidden" name="bookno" 
 			value="${itemArray.BOOK_NO }">
-		<input type="hidden" name="order" value="book">
+		<input type="hidden" name="orderType" value="fromBookDetail">
 		<input type="hidden" name="price" value="<%=itemArray.getBOOK_PRICE() %>">
 		<input type="hidden" name="bookname" value="<%=itemArray.getBOOK_NAME() %>"> 
 		<input type="hidden" name="bookimage" value="${fn:trim(mainImage)}">
