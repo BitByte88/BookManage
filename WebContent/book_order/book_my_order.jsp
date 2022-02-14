@@ -45,7 +45,7 @@
 		</tr>
 		<tr>
 			<td height="20" bgcolor="f7f7f7"><div align="center">書名</div></td>
-			<td bgcolor="f7f7f7"><div align="center">本数</div></td>
+			<td bgcolor="f7f7f7"><div align="center">数量</div></td>
 			<td bgcolor="f7f7f7"><div align="center">小計</div></td>
 			<td bgcolor="f7f7f7"><div align="center">注文ステータス</div></td>
 			<td bgcolor="f7f7f7"><div align="center">注文日時</div></td>

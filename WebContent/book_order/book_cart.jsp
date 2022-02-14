@@ -43,7 +43,7 @@
 				<td width="5%"><font size="2">番号</font></td>
 				<td width="5%"><font size="2">画像</font></td>
 				<td width="25%"><font size="2">書名</font></td>
-				<td width="8%"><font size="2">本数</font></td>
+				<td width="8%"><font size="2">数量</font></td>
 				<td width="8%"><font size="2">価格</font></td>
 				<td width="8%"><font size="2">小計</font></td>
 				<td width="8%"><font size="2">キャンセル</font></td>

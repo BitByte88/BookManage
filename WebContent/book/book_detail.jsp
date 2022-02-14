@@ -23,7 +23,7 @@
 function isBuy(bookform) {
 	var amount= parseInt(document.bookform.amount.value);
 	if (amount <= 0) {
-		alert("本数は１本以上を注文してください。")
+		alert("数量は１冊以上を注文してください。")
 		return;
 	}
 	var isbuy=confirm("購入しますか");
@@ -38,7 +38,7 @@ function isBuy(bookform) {
 function isCart(cartform) {
 	var amount=parseInt(document.bookform.amount.value);
 	if (amount <= 0) {
-		alert("本数は１本以上を注文してください。")
+		alert("数量は１冊以上を注文してください。")
 		return;
 	}
 
@@ -116,7 +116,7 @@ function count_change(temp){
 					<td colspan="3">${itemArray.BOOK_PRICE} 円</td>
 				</tr>
 				<tr>
-					<td rowspan="2">本数　 　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+					<td rowspan="2">数量　 　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
 					<td width="58" rowspan="2">
 						<input name="amount" type="text" 
 							style="text-align: right"

@@ -55,7 +55,7 @@
 		<tr align=center height=20 bgcolor="f7f7f7">
 		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;">画像</td>
 		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;">書名</td>
-		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;">本数</td>
+		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;">数量</td>
 		<td style="font-family: Tahoma; font-size: 8pt; font-weight: bold;">価格</td>
 		</tr>
 		<tr>
