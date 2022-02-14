@@ -51,15 +51,21 @@
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
+	<tr>
+		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+	</tr>
 	<%for(int i=0;i<orderlist.size();i++){ 
 	OrderBean order=new OrderBean();
 	order=(OrderBean)orderlist.get(i); %>
 	<tr height=20>
-	<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
+		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 		bgcolor="f7f7f7">アイテムNo</td>
 		<td style="font-family: Tahoma; font-size: 10pt; font-weight:bold;">
 		<%=order.getORDER_ITEM_NO() %>
 		</td>
+	</tr>
+	<tr>
+		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr height=20>
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
@@ -68,30 +74,33 @@
 			<%=order.getBOOK_NAME() %>
 		</td>
 	</tr>
+	<tr>
+		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+	</tr>
 	<tr height=23>
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">単価</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
-			<%=order.getBOOK_PRICE() %>
+			<%=order.getBOOK_PRICE() %>円
 		</td>
+	</tr>
+	<tr>
+		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
 	<tr height=23>
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
-			bgcolor="f7f7f7">本数</td>
+			bgcolor="f7f7f7">数量</td>
 		<td style="font-family: Tahoma; font-size: 10pt;">
 			<%=order.getORDER_COUNT() %>
 		</td>
 	</tr>
 	<tr>
-	<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+	</tr>
+	<tr>
+		<td style="background-color: #F0F0F0; height: 2px;" colspan=6>
 	</tr>
 	<%} %>
-	<tr>
-		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
-	</tr>
-	<tr>
-		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
-	</tr>
 	<tr height=20></tr>
 	<tr height=20>
 		<td style="font-family: Tahoma; font-size: 10pt; font-weight: bold;"
@@ -238,6 +247,9 @@
 		<td><b><font size=2>決済情報</font></b></td>
 	</tr>
 	<tr>
+		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+	</tr>
+	<tr>
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 			bgcolor="f7f7f7">注文合計金額</td>
 		<td width=650 height=24>
@@ -287,7 +299,6 @@
 		</select>
 		</td>
 	</tr>
-	<tr><td style="background-color: #F0F0F0; height: 1px;" colspan=6></tr>
 	<tr><td style="background-color: #F0F0F0; height: 1px;" colspan=6></tr>
 	<tr>
 		<td align=center style="height: 1px;"
