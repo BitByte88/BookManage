@@ -87,8 +87,7 @@ margin:auto;
 </head>
 <body>
 <div name="main" style="margin:30 0 50 0">
-<table width="960" cellspacing="0" cellpadding="0" border="0"
-	bordercolor="gray" align="center">
+<table width="960" cellspacing="0" style="margin:auto">
 	<tr>
 		<td colspan=2>
 		<!-- 図書情報変更 -->
@@ -105,7 +104,7 @@ margin:auto;
 			<tr height="26"></tr>
 			<tr>
 				<td height="331">
-				<table border="0" align="center" width="960">
+				<table style="margin:auto" width="960">
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" height="30" bgcolor="#EFEFEF">

@@ -26,8 +26,8 @@ public class AdminBookDAO {
 			return;
 		}
 	}
-	public List getBookList() {
-		List booklist = new ArrayList();
+	public List<BookBean> getBookList() {
+		List<BookBean> booklist = new ArrayList<>();
 		try {
 			con = ds.getConnection();
 			String sql="select * from book where delete_flag = 0 order by book_no";

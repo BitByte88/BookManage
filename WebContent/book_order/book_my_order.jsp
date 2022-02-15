@@ -41,8 +41,7 @@
 </tr>
 <tr>
 	<td height="62" align="center" valign="middle">
-	<table width="800" border="0" cellspacing="0" cellpadding="0"
-		bordercolor="#CCCCCC">
+	<table width="800" cellspacing="0">
 		<tr height=13 bgcolor="94d7e7">
 			<td height="3" colspan="7" align=right></td>
 		</tr>

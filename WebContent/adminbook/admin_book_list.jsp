@@ -30,8 +30,7 @@ function bookdelete(book_no){
 </head>
 <body>
 <div name="main" style="margin:30 0 50 0">
-<table width="1000" cellspacing="0" cellpadding="0" border="0"
-	bordercolor="gray" align="center">
+<table width="1000" cellspacing="0" style="margin:auto">
 	<tr>
 		<td colspan=2>
 		<!-- 図書リスト -->

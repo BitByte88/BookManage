@@ -1,5 +1,7 @@
 package net.admin.book.action;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +14,7 @@ public class AdminBookListAction implements Action {
 		
 		ActionForward forward=new ActionForward();
 		
-		ArrayList list=(ArrayList)abookdao.getBookList();
+		List<BookBean> list=abookdao.getBookList();
 		
 		request.setAttribute("list",list);
 		

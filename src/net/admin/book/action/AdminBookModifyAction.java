@@ -37,7 +37,7 @@ public class AdminBookModifyAction implements Action {
 		map.put("file1", "DetailImage2");
 		realPath = request.getServletContext().getRealPath(savePath);
 		//サーバ上の物理的なアップロードパスを取得
-		List savefiles=new ArrayList();
+		List<String> savefiles=new ArrayList<>();
 		try {
 			MultipartRequest multi = null;
 			multi = new MultipartRequest(request, realPath, maxSize, "UTF-8",
