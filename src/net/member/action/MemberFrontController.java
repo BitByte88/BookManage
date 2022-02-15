@@ -100,8 +100,10 @@ public class MemberFrontController extends HttpServlet{
 			 }else{
 				 RequestDispatcher dispatcher=
 					 request.getRequestDispatcher(forward.getPath());
-				 dispatcher.forward(request, response);
-			 }	 
+				 	if(dispatcher != null) {
+				 		dispatcher.forward(request, response);
+				 	}
+				 }	 
 		 }
 	}
 }
