@@ -7,16 +7,9 @@
 <%
 	MemberBean member = (MemberBean) request.getAttribute("member");
 	String orderType = (String) request.getAttribute("orderType");
-	List<Object> orderinfo = null;
-	List<CartBean> cartlist = null;
-	List<BookBean> booklist=null;
-	
-	if (orderType.equals("fromBookDetail")) {
-		orderinfo = (ArrayList<Object>) request.getAttribute("orderinfo");
-	} else {
-		cartlist = (ArrayList<CartBean>) request.getAttribute("cartlist");
-		booklist = (ArrayList<BookBean>) request.getAttribute("booklist");
-	}
+	@SuppressWarnings("unchecked") List<Object> orderinfo = request.getAttribute("orderinfo") instanceof ArrayList<?> ? (ArrayList<Object>)request.getAttribute("orderinfo") : null;
+	@SuppressWarnings("unchecked") List<CartBean> cartlist = request.getAttribute("cartlist") instanceof ArrayList<?> ? (ArrayList<CartBean>)request.getAttribute("orderinfo") : null;
+	@SuppressWarnings("unchecked") List<BookBean> booklist= request.getAttribute("booklist") instanceof ArrayList<?> ? (ArrayList<BookBean>)request.getAttribute("orderinfo") : null;
 %>
 <html>
 <head>
