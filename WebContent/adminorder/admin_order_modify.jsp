@@ -17,17 +17,18 @@
 <title>図書管理システム</title>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table width="960" cellspacing="0" cellpadding="0" border="0"
-	align="center">
+<div style="margin:30 0 50 0">
+<table style="width:960; margin:auto">
 <tr>
 <td colspan=2 align=center>
 <!-- 注文情報修正(管理者) -->
 <form action="./AdminOrderModify.adorder" name="orderform" method="post">
 <input type="hidden" name="num" value="<%=orderlist.get(0).getORDER_NO() %>">
-<table width=90% border=0 cellpadding="0" cellspacing="1">
+<table style="width:90%; border-spacing:1">
 	<tr>
+		<td>
 		<p align=left><b><font size=4>注文情報変更</font></b></p>
+		</td>
 	</tr>
 	<tr><td height=10></td></tr>
 	<tr><td height=10></td></tr>
@@ -240,7 +241,7 @@
 	</tr>
 </table>
 
-<table width=90% border=0 cellpadding="0" cellspacing="1">
+<table style="width:90%; border-spacing:1">
 	<tr><td height=10></td></tr>
 	<tr><td height=10></td></tr>
 	<tr>

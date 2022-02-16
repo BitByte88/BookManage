@@ -6,7 +6,7 @@
 	String add_1="";
 	String add_2="";
 	String add_3="";
-	List zipcodeList=(ArrayList)request.getAttribute("zipcodelist");
+	List<String> zipcodeList=(ArrayList<String>)request.getAttribute("zipcodelist");
 %>
 
 <html>
@@ -28,19 +28,18 @@ function setZipcode(zipcode,add_1,add_2,add_3){
 }
 </script>
 </head>
-<body bgcolor="#f5f5f5">
-<center>
-<table width="370" border="0" cellspacing="0" cellpadding="5">
+<body bgcolor="#f5f5f5" style="margin:auto">
+<table style="width:370">
 	<tr align="center">
-		<td align="center">
+		<td align="center" style="padding:5">
 			<font color="#ff4500">郵便番号検索</font><br>
 		</td>
 	</tr>
 </table>
 <form action="./MemberZipcodeAction.member" method="post" name="form">
-<table width="370" border="0" cellspacing="0" cellpadding="5">
+<table style="width:370">
 	<tr align="center">
-		<td align="center">
+		<td align="center" style="padding:5">
 			<font size="2">郵便番号： </font>
 			<input type="text" name="zipcode" placeholder="1230123"/>
 			<input type="submit" value="検索"><br>
@@ -50,9 +49,9 @@ function setZipcode(zipcode,add_1,add_2,add_3){
 </table>
 </form>
 <br>
-<table width="370" border="0" cellspacing="0" cellpadding="5">
+<table style="width:370">
 <tr height="35">
-	<td align="center" colspan="2">検索結果</td>
+	<td align="center" style="padding:5" colspan="2">検索結果</td>
 </tr>
 <%	
 	if(zipcodeList!=null && zipcodeList.size()!=0){	
@@ -68,20 +67,19 @@ function setZipcode(zipcode,add_1,add_2,add_3){
 			add_3=addr.split("-")[2];
 %>
 <tr>
-	<td width="20%">
+	<td width="20%" style="padding:5">
 	<a href="#"	onclick="setZipcode('<%=zipcode%>','<%=add_1 %>','<%=add_2 %>','<%=add_3 %>')">
 		<font size="2"><%=zipcode%></font>
 	</a>
 	</td>
-	<td width="80%"><font size="2"><%=add_1+add_2+add_3 %></font></td>
+	<td width="80%" style="padding:5"><font size="2"><%=add_1+add_2+add_3 %></font></td>
 </tr>
 <%		}
 	}else{ %>
 <tr>
-	<td colspan="2" align="center">検索結果がありません。</td>
+	<td colspan="2" style="padding:5" align="center">検索結果がありません。</td>
 </tr>
 <%	}%>
 </table>
-</center>
 </body>
 </html>

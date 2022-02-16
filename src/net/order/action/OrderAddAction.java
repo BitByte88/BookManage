@@ -1,6 +1,5 @@
 package net.order.action;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +15,7 @@ import net.order.db.OrderBean;
 import net.order.db.OrderDAO;
 
 public class OrderAddAction implements Action{
+	@SuppressWarnings("unchecked")
 	public ActionForward execute(HttpServletRequest request,HttpServletResponse response) 
 	throws Exception{
 		request.setCharacterEncoding("UTF-8");
@@ -36,8 +36,8 @@ public class OrderAddAction implements Action{
 		OrderDAO orderdao=new OrderDAO();
 		OrderBean order=new OrderBean();
 		
-		List cartlist=new ArrayList();
-		List booklist=new ArrayList();
+		List<CartBean> cartlist=new ArrayList<>();
+		List<BookBean> booklist=new ArrayList<>();
 		BookBean book=new BookBean();
 		CartDAO cartdao=new CartDAO();
 		CartBean cart=new CartBean();
@@ -68,8 +68,8 @@ public class OrderAddAction implements Action{
 		}else{
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map = cartdao.getCartList(id);
-			cartlist=(ArrayList)map.get("cartlist");
-			booklist=(ArrayList)map.get("booklist");
+			cartlist=(ArrayList<CartBean>)map.get("cartlist");
+			booklist=(ArrayList<BookBean>)map.get("booklist");
 		}
 		
 		orderdao.addOrder(order, cartlist, booklist);

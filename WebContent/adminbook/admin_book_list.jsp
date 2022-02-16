@@ -4,7 +4,7 @@
 <%@ page import="java.math.RoundingMode"%>
 <%@ page import="net.admin.book.db.*"%>
 <%
-	ArrayList list = (ArrayList) request.getAttribute("list");
+	ArrayList<BookBean> list = (ArrayList<BookBean>) request.getAttribute("list");
     BookBean abb = null;
 %>
 <html>
@@ -29,12 +29,12 @@ function bookdelete(book_no){
 </script>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table width="1000" cellspacing="0" style="margin:auto">
+<div style="margin:30 0 50 0">
+<table style="margin:auto; width:1000">
 	<tr>
 		<td colspan=2>
 		<!-- 図書リスト -->
-		<table border="0" width="100%">
+		<table style="width:100%">
 			<tr>
 				<td height="26" bgcolor="94d7e7">
 					<p align="center">
@@ -54,7 +54,7 @@ function bookdelete(book_no){
 			<tr>
 			<td>
 			<form name=bookform method="post">
-			<table border="1" width="100%">
+			<table border="1" style="width:100%">
 			<tr bgcolor="#EFEFEF">
 				<td width="6%">
 				<p align="center"><font size=2>図書番号</font></p>

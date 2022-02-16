@@ -122,15 +122,15 @@ function gNumCheck(){
 </script>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table width="990" cellspacing="0" cellpadding="0" border="0" align="center">
+<div style="margin:30 0 50 0">
+<table style="width:990; margin:auto">
 	<tr>
 	<td colspan=2>
 	<!-- 会員登録 -->
 	<form id="joinform" name="joinform" action="./MemberJoinAction.member" method="post" 
 		onsubmit="return check()">		
 	<p align="center">	
-	<table width="100%" height="80%">
+	<table style="width:100%; height:80%">
 	<tr>
 		<td bgcolor="#f5f5f5">
 			<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;アカウント</font>
@@ -291,7 +291,7 @@ function gNumCheck(){
 			</td>
 		</tr>
 		</table>
-		<table width="80%">
+		<table style="width:80%">
 			<tr>
 				<td align="center">
 					<br/><input type="submit" value="確認" />

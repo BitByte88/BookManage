@@ -5,8 +5,8 @@
 <%@ page import="net.book.db.*" %>
 
 <%
-	List cartList = (ArrayList) request.getAttribute("cartlist");
-	List bookList = (ArrayList) request.getAttribute("booklist");
+	List<CartBean> cartList = (ArrayList<CartBean>) request.getAttribute("cartlist");
+	List<BookBean> bookList = (ArrayList<BookBean>) request.getAttribute("booklist");
 
 %>
 
@@ -22,20 +22,19 @@
 <title>図書管理システム</title>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table width="960" cellspacing="0" cellpadding="0" border="0"
-	align="center">
+<div style="margin:30 0 50 0">
+<table style="width:960; margin:auto">
 	<tr>
 		<td colspan=2><!--カート -->
 		<p align="center">
 		<form action="./OrderStart.order" name="cartform" method="post">
 		<input type="hidden" name="orderType" value="fromCart">
-		<table width="90%">
+		<table style="width:90%">
 			<tr align=center>
 				<td><p align=left><b><font size=4>カート</font></b></p></td>
 			</tr>
 		</table>
-		<table width="90%" cellpadding="0" cellspacing="0">
+		<table style="width:90%">
 			<tr height=26 bgcolor="94d7e7">
 				<td height="3" colspan="7" align=right></td>
 			</tr>
@@ -82,14 +81,14 @@
 			%>
 		</table>
 		
-		<table width="90%" border="0" cellspacing="0" cellpadding="0">
+		<table style="width:90%">
 			<tr>
 				<td height="2" bgcolor="94d7e7"></td>
 			</tr>
 		</table>
 		<br>
 		
-		<table width="90%" cellpadding="0" cellspacing="0">
+		<table style="width:90%">
 			<tr>
 			<td align="center">
 			<%

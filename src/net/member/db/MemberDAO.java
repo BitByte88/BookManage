@@ -298,9 +298,9 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public List searchZipcode(String zipcode){
+	public List<String> searchZipcode(String zipcode){
 		String sql="select * from zipcode where ZIPCODE like ? and DELETE_FLAG=0";
-		List zipcodeList=new ArrayList();
+		List<String> zipcodeList=new ArrayList<>();
 		
 		try{
 			con = ds.getConnection();
@@ -314,7 +314,6 @@ public class MemberDAO {
 				String add_3=rs.getString("ADD_3");  
 				
 				String zipcodeResult=rs.getString("ZIPCODE");
-				String addr=add_1+add_2+add_3;
 				
 				zipcodeList.add(zipcodeResult+","+add_1+"-"+add_2+"-"+add_3);
 			}

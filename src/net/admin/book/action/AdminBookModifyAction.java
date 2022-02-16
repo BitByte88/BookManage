@@ -1,5 +1,4 @@
 package net.admin.book.action;
-import java.io.File;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -42,7 +41,7 @@ public class AdminBookModifyAction implements Action {
 			MultipartRequest multi = null;
 			multi = new MultipartRequest(request, realPath, maxSize, "UTF-8",
 					new DefaultFileRenamePolicy());
-			Enumeration files=multi.getFileNames();
+			Enumeration<?> files=multi.getFileNames();
 			
 			while(files.hasMoreElements()){
 				String element = (String)files.nextElement();

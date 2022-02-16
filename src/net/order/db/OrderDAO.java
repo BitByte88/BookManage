@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.naming.Context;
@@ -129,8 +127,6 @@ public class OrderDAO {
 	}
 	
 	public int addOrder(OrderBean order, List<CartBean> cartlist, List<BookBean> booklist){
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
 		
 		int ordernum=0;
 		String sql="select max(ORDER_NO) from book_order";

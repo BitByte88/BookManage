@@ -1,6 +1,5 @@
 package net.cart.action;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,11 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.cart.action.Action;
-import net.cart.action.ActionForward;
+import net.book.db.BookBean;
+import net.cart.db.CartBean;
 import net.cart.db.CartDAO;
 
 public class CartListAction implements Action{
+	@SuppressWarnings("unchecked")
 	public ActionForward execute(HttpServletRequest request,HttpServletResponse response)
 	throws Exception{
 		CartDAO cartdao=new CartDAO();
@@ -30,8 +30,8 @@ public class CartListAction implements Action{
 		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map = cartdao.getCartList(id);
-		List cartlist=(ArrayList)map.get("cartlist");
-		List booklist=(ArrayList)map.get("booklist");
+		List<CartBean> cartlist=(ArrayList<CartBean>)map.get("cartlist");
+		List<BookBean> booklist=(ArrayList<BookBean>)map.get("booklist");
 		
 		request.setAttribute("cartlist", cartlist);
 		request.setAttribute("booklist", booklist);

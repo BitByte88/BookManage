@@ -86,14 +86,14 @@ margin:auto;
 </style>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table width="960" cellspacing="0" style="margin:auto">
+<div style="margin:30 0 50 0">
+<table style="margin:auto; width:960">
 	<tr>
 		<td colspan=2>
 		<!-- 図書情報変更 -->
 		<form name="bookform" action="./BookModifyAction.adbook?bookNo=<%=abb.getBOOK_NO()%>" method="post"
 		enctype="multipart/form-data" onsubmit="return check()">
-		<table border="0" width="100%">
+		<table style="width:100%">
 			<tr>
 				<td height="26" bgcolor="94d7e7">
 					<p align="center">
@@ -104,7 +104,7 @@ margin:auto;
 			<tr height="26"></tr>
 			<tr>
 				<td height="331">
-				<table style="margin:auto" width="960">
+				<table style="margin:auto" style="width:960">
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" height="30" bgcolor="#EFEFEF">

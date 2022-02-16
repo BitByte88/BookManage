@@ -12,13 +12,13 @@
 <title>図書管理システム</title>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table cellspacing="0" cellpadding="0" border="0" align="center">
+<div style="margin:30 0 50 0">
+<table style="margin:auto">
 <tr>
 <td colspan=2>
 <p align="center">
 <form action="./MemberDeleteAction.member" method="post">
-<table border="1" width="380" cellpadding="0" cellspacing="0">
+<table border="1" style="width:380">
 	<tr>
 		<td align="center" colspan="2">
 			<font size="4"><b>退会</b></font>

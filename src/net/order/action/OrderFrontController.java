@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class OrderFrontController extends javax.servlet.http.HttpServlet
 		implements javax.servlet.Servlet {
+	private static final long serialVersionUID = 8291740938003137142L;
 	private void execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String RequestURI = request.getRequestURI();

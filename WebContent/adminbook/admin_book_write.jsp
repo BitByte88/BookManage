@@ -74,14 +74,14 @@ margin:auto;
 </style>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table width="960" cellspacing="0" style="margin:auto">
+<div style="margin:30 0 50 0">
+<table style="margin:auto; width:960">
 	<tr>
 		<td colspan=2>
 		<!-- 図書登録 -->
 		<form name="bookform" action="./BookAddAction.adbook" method="post"
 			enctype="multipart/form-data" onsubmit="return check()">
-		<table border="0" width="100%">
+		<table style="width:100%">
 			<tr>
 				<td height="26" bgcolor="94d7e7">
 					<p align="center">
@@ -92,7 +92,7 @@ margin:auto;
 			<tr height="26"></tr>
 			<tr>
 				<td height="331">
-				<table border="0" align="center" width="960">
+				<table style="width:960; margin:auto">
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" height="30" bgcolor="#EFEFEF">
@@ -237,6 +237,7 @@ margin:auto;
 				</td>
 			</tr>
 		</table>
+		</form>
 		<!-- 商品登録 -->
 		</td>
 	</tr>

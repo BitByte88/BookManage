@@ -21,18 +21,18 @@ function windowclose(){
 </head>
 <body bgcolor="#f5f5f5">
 <% if(check == 1){ %>
-<table width="360" border="0" cellspacing="0" cellpadding="5">
+<table style="width:360">
 	<tr align="center">
-	<td height="30">
+	<td height="30" style="padding:5">
 		<font size="2"><%=id %> は既に登録済みのアカウントです。</font>
 	</td>
 	</tr>
 </table>
 
 <form action="./MemberIDCheckAction.member" method="post" name="checkForm" >
-<table width="360" border="0" cellspacing="0" cellpadding="5">
+<table style="width:360">
 	<tr>
-	<td align="center">
+	<td align="center" style="padding:5">
 		<font size="2">別のアカウントを入力してください。</font><p>
 		<input type="text" size="10" maxlength="12" name="MEMBER_ID"/>
 		<input type="submit" value="重複確認" />
@@ -41,9 +41,9 @@ function windowclose(){
 </table>
 </form>
 <% }else{ %>
-<table width="360" border="0" cellspacing="0" cellpadding="5">
+<table style="width:360">
 	<tr>
-		<td align="center">
+	<td align="center" style="padding:5">
 		<font size="2"> <%=id %> は登録可能なアカウントです。</font>
 		<br/><br/>
 		<input type="button" value="閉じる" onclick="windowclose()" />

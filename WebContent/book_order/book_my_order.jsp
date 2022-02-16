@@ -3,7 +3,7 @@
 <%@ page import="net.order.db.*"%>
 <%
 	String id=(String)session.getAttribute("id");
-	List<OrderBean> book_order_list=(List)request.getAttribute("book_order_list");
+	List<OrderBean> book_order_list=(List<OrderBean>)request.getAttribute("book_order_list");
 	int ordercount=((Integer)request.getAttribute("ordercount")).intValue();
 	int nowpage=((Integer)request.getAttribute("page")).intValue();
 	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
@@ -23,25 +23,32 @@
 <title>図書管理システム</title>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table width="960" cellspacing="0" cellpadding="0" border="0"
-	align="center">
+<div style="margin:30 0 50 0">
+<table style="width:960; margin:auto">
 <tr>
 <td colspan=2>
 <!-- 会員の注文履歴-->
-<table width="700" border="0" align="center">
+<table style="width:700; margin:auto">
 <tr>
+<td>
 	<p align=left><b><font size=4>注文履歴</font></b></p>
+</td>
 </tr>
 <tr>
 	<td>現在、 <%=id%>様からの注文件数は<%=ordercount%>件でございます。</td>
 </tr>
+		<%
+		if (book_order_list.size() != 0) {
+		%>
 <tr>
 	<td>注文番号：<%=String.format("%08d", book_order_list.get(0).getORDER_NO())%></td>
 </tr>
+		<%
+		}
+		%>
 <tr>
 	<td height="62" align="center" valign="middle">
-	<table width="800" cellspacing="0">
+	<table style="width:800">
 		<tr height=13 bgcolor="94d7e7">
 			<td height="3" colspan="7" align=right></td>
 		</tr>
@@ -55,7 +62,9 @@
 		<%
 		if (book_order_list.size() == 0) {
 		%>
+		<tr>
 		<td align=center colspan=6>注文する本がありません。</td>
+		</tr>
 		<%
 		}
 		

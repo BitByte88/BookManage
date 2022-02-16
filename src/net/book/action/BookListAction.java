@@ -9,7 +9,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.admin.book.db.BookBean;
 import net.book.db.*;
 
 public class BookListAction implements Action{
@@ -18,7 +17,7 @@ public class BookListAction implements Action{
 		ActionForward forward=new ActionForward();
 		BookDAO bookdao=new BookDAO();
 		request.setCharacterEncoding("UTF-8");
-		List itemList=null;
+		List<BookBean> itemList=null;
 		String item=null;
 		String price="";
 		int count=1;

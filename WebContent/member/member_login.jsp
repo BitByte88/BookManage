@@ -35,27 +35,27 @@ function openConfirmId(loginform){
 </script>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table width="960" cellspacing="0" cellpadding="0" border="0"
-	align="center">
+<div style="margin:30 0 50 0">
+<table style="width:960; margin:auto">
 <tr>
 <td colspan=2 align=center>
-<table border="0" cellpadding="0" cellspacing="0" width="550">
-<!--会員ログイン -->
-<tr>
 <form action="./MemberLoginAction.member" method=post name=loginform
 	onsubmit="return check()">
+<table style="width:550; margin:auto">
+<!--会員ログイン -->
+<tr>
+
 <td><br>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<table style="width:100%">
 	<tr>
 		<td bgcolor="f6f6f6">
-		<table width="100%" border="0" cellspacing="4" cellpadding="0">
+		<table style="width:100%; border-spacing:4">
 		<tr>
 		<td valign="top" bgcolor="#FFFFFF">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<table style="width:100%">
 		<tr>
 		<td align="center">
-		<table cellpadding=0 cellspacing=0 border=0>
+		<table>
 			<tr>
 			<td width=90>アカウント</td>
 			<td width=9>:</td>
@@ -93,7 +93,7 @@ function openConfirmId(loginform){
 		</tr>
 		<tr>
 			<td style="padding: 15 0 15 70;">
-			<table width="400" border="0" cellspacing="0" cellpadding="0">
+			<table style="width:400">
 				<tr>
 				<td width="8"><img src="#" width="8" height="7">
 				</td>
@@ -122,9 +122,9 @@ function openConfirmId(loginform){
 	</tr>
 </table>
 </td>
-</form>
 </tr>
 </table>
+</form>
 <!-- 会員ログイン -->
 </td>
 </tr>

@@ -7,15 +7,15 @@
 <%
 	MemberBean member = (MemberBean) request.getAttribute("member");
 	String orderType = (String) request.getAttribute("orderType");
-	List orderinfo = null;
-	List cartlist = null;
-	List booklist=null;
+	List<String> orderinfo = null;
+	List<CartBean> cartlist = null;
+	List<BookBean> booklist=null;
 	
 	if (orderType.equals("fromBookDetail")) {
-		orderinfo = (ArrayList) request.getAttribute("orderinfo");
+		orderinfo = (ArrayList<String>) request.getAttribute("orderinfo");
 	} else {
-		cartlist = (ArrayList) request.getAttribute("cartlist");
-		booklist = (ArrayList) request.getAttribute("booklist");
+		cartlist = (ArrayList<CartBean>) request.getAttribute("cartlist");
+		booklist = (ArrayList<BookBean>) request.getAttribute("booklist");
 	}
 %>
 <html>
@@ -30,9 +30,8 @@
 <title>図書管理システム</title>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table width="960" cellspacing="0" cellpadding="0" border="0"
-	align="center">
+<div style="margin:30 0 50 0">
+<table style="width:960; margin:auto">
 <tr>
 	<td colspan=2 align=right>
 	<!-- 注文ページ -->
@@ -47,9 +46,11 @@
 	<input type="hidden" name="memberid" value="<%=member.getMEMBER_ID() %>">
 	
 	<!-- 注文詳細内容 -->
-	<table border=0 cellspacing=1 cellpadding=0 width=90%>
+	<table style="width:90%; border-spacing:1">
 		<tr>
+		<td>
 			<p align=left><b><font size=4>注文詳細内容</font></b></p>
+		</td>
 		</tr>
 		
 		<tr align=center height=20 bgcolor="f7f7f7">
@@ -104,7 +105,7 @@
 		%>
 	</table>
 
-	<table width=90% border=0 cellpadding="0" cellspacing="1">
+	<table style="width:90%; border-spacing:1">
 		<tr>
 			<td height=10>
 			<td>
@@ -148,7 +149,7 @@
 		</tr>
 	</table>
 
-	<table width=90% border=0 cellpadding="0" cellspacing="1">
+	<table style="width:90%; border-spacing:1">
 		<tr>
 			<td height=10>
 			<td>
@@ -256,7 +257,7 @@
 		</tr>
 	</table>
 
-	<table width=90% border=0 cellpadding="0" cellspacing="1">
+	<table style="width:90%; border-spacing:1">
 		<tr>
 			<td style="height: 10px;" colspan=6>
 		</tr>

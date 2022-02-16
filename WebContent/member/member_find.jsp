@@ -37,7 +37,7 @@
 	</script>
 </head>
 <body>
-<table width="450px" height="20px">
+<table style="width:450px; height:20px">
 	<tr>
 		<td align="left">
 			<b>アカウント／パスワードを探す</b>
@@ -46,12 +46,16 @@
 </table>	
 <form action="./MemberFindAction.member" method="post" id="findform" 
 	onSubmit="return formSubmit();">
-<table width="450px" cellspacing="0" cellpadding="0" border="0">
+<table style="width:500px">
 <thead>
+<tr>
+<td colspan=2>
 	<font size="2">				
 	&nbsp;&nbsp;&nbsp;&nbsp;
 	氏名、氏名（カナ）、電話番号、メールアドレスを入力してください。
 	<br/><br/><br/><br/></font>
+</td>
+</tr>
 </thead>
 <tr>
 	<td height="29" bgcolor="#F3F3F3">

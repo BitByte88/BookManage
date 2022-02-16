@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class MemberFrontController extends HttpServlet{
+	private static final long serialVersionUID = 5048611743821593295L;
+
 	public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		
 		 String RequestURI=request.getRequestURI();

@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.book.action.BookDetailAction;
-import net.book.action.BookListAction;
 
 public class BookFrontController extends HttpServlet {
+	private static final long serialVersionUID = 856523771629891116L;
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		this.processRequest(request, response);

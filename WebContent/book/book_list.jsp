@@ -43,13 +43,12 @@ function check(){
 </script>
 </head>
 <body>		
-	<div name="main" style="margin:30 0 50 0">
-	<table width="960" cellspacing="0" cellpadding="0" border="0" 
-		align="center">
+	<div style="margin:30 0 50 0">
+	<table style="width:960; margin:auto">
 	<tr>
 	<td>
 		<form action="./BookList.book" method=post name=searchform onsubmit="return check()" accept-charset="UTF-8">
-			<table width="700" height="130" cellspacing="0" cellpadding="0" border="0" align="center">
+			<table style="width:700; height:130; margin:auto">
 			<tr>
 			<td bgcolor="#f5f5f5">タイトル</td>
 			<td><input type="text" name="title" maxlength="20" size="20" value="${search.BOOK_NAME}"></td>
@@ -72,11 +71,11 @@ function check(){
 	</tr>
 	<tr>
 	<td colspan=2>
-	<table width=700 height="460" border="0" align="center">	
+	<table style="width:700; height:460; margin:auto">	
 		<tr>
 		<td valign="top">
 		<!-- 図書リスト -->
-		<table border="0">
+		<table>
 		<tr>	   
 		   <c:choose> 
 				<c:when test=

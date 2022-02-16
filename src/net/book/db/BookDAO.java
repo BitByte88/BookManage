@@ -30,8 +30,8 @@ public class BookDAO {
 		}
 	}
 	
-	public List item_List(int page,SearchBean searchBean) {
-		List itemList = new ArrayList();
+	public List<BookBean> item_List(int page,SearchBean searchBean) {
+		List<BookBean> itemList = new ArrayList<>();
 		
 		int startnum=page*12-11;
 		int endnum=page*12;
@@ -112,8 +112,6 @@ public class BookDAO {
 	public BookBean findDetail(int book_no,String direction) {
 		BookBean book=new BookBean();
 		
-		int firstprice=0;
-		int secondprice=0;
 		
 		StringBuffer dQuery = new StringBuffer();
 		if(direction.equals("next")){

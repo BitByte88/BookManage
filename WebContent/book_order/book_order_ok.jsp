@@ -12,13 +12,12 @@
 <title>図書管理システム</title>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table width="960" cellspacing="0" cellpadding="0" border="0"
-	align="center">
+<div style="margin:30 0 50 0">
+<table style="width:960; margin:auto">
 <tr>
 <td colspan=2 align=center>
 	<b><font size=5>注文が完了されました。</font></b>
-	<table width=50% border=0 cellpadding="0" cellspacing="1">
+	<table style="width:50%; border-spacing:1">
 	<tr><td height=10><td></tr>
 	<tr><td height=10><td></tr>
 	<tr>

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AdminOrderFrontController extends javax.servlet.http.HttpServlet 
  	implements javax.servlet.Servlet {
+	private static final long serialVersionUID = -4826023681180085537L;
+
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) 
 	throws ServletException, IOException {
 		   String RequestURI=request.getRequestURI();

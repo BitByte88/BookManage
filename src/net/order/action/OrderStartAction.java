@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.member.db.MemberDAO;
+import net.admin.book.db.BookBean;
+import net.cart.db.CartBean;
 import net.cart.db.CartDAO;
 import net.member.db.MemberBean;
 
 public class OrderStartAction implements Action{
+	@SuppressWarnings("unchecked")
 	public ActionForward execute(HttpServletRequest request,HttpServletResponse response) 
 	throws Exception{
 		ActionForward forward=new ActionForward();
@@ -29,7 +32,7 @@ public class OrderStartAction implements Action{
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		List orderinfo=new ArrayList();
+		List<Object> orderinfo=new ArrayList<>();
 		String orderType=request.getParameter("orderType");
 		
 		if(orderType.equals("fromBookDetail")){
@@ -45,8 +48,8 @@ public class OrderStartAction implements Action{
 			CartDAO cartdao=new CartDAO();
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map = cartdao.getCartList(id);
-			List cartlist=(ArrayList)map.get("cartlist");
-			List booklist=(ArrayList)map.get("booklist");
+			List<CartBean> cartlist=(ArrayList<CartBean>)map.get("cartlist");
+			List<BookBean> booklist=(ArrayList<BookBean>)map.get("booklist");
 			
 			request.setAttribute("orderType", "fromCart");
 			request.setAttribute("cartlist", cartlist);

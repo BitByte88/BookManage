@@ -33,8 +33,8 @@ public class CartDAO {
 	
 	public HashMap<String, Object> getCartList(String id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		List cartlist = new ArrayList();
-		List booklist = new ArrayList();
+		List<CartBean> cartlist = new ArrayList<>();
+		List<BookBean> booklist = new ArrayList<>();
 		
 		String sql = "select * from cart where " +
 				"CART_MEMBER_ID=? AND DELETE_FLAG = 0";

@@ -1,12 +1,10 @@
 package net.admin.book.action;
-import java.io.File;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.Enumeration;
@@ -40,7 +38,7 @@ public class AdminBookAddAction implements Action {
 			MultipartRequest multi = null;
 			multi = new MultipartRequest(request, realPath, maxSize, "UTF-8",
 					new DefaultFileRenamePolicy());
-			Enumeration files=multi.getFileNames();
+			Enumeration<?> files=multi.getFileNames();
 			
 			while(files.hasMoreElements()){
 				String element = (String)files.nextElement();

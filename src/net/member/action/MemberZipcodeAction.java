@@ -10,7 +10,7 @@ public class MemberZipcodeAction implements Action{
 		request.setCharacterEncoding("UTF-8");
 		ActionForward forward=new ActionForward();
 		MemberDAO memberdao=new MemberDAO();
-		List zipcodeList=new ArrayList();
+		List<String> zipcodeList=new ArrayList<>();
 		String searchZipcode=request.getParameter("zipcode");
 		zipcodeList=memberdao.searchZipcode(searchZipcode);
 		request.setAttribute("zipcodelist", zipcodeList);

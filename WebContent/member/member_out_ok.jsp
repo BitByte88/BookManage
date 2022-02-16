@@ -11,11 +11,11 @@
 <title>図書管理システム</title>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table cellspacing="0" cellpadding="0" border="0" align="center">
+<div style="margin:30 0 50 0">
+<table style="margin:auto">
 <tr><td colspan=2>
 <p align="center">
-<table width="380" cellpadding="0" cellspacing="0">
+<table style="width:380">
 	<tr>
 		<td align="center" height="50">
 			<font size="4"><b>退会が完了しました。</b></font>

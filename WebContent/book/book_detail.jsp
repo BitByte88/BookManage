@@ -66,9 +66,8 @@ function count_change(temp){
 </script>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table width="960" cellspacing="0" cellpadding="0" border="0"
-	align="center">
+<div style="margin:30 0 50 0">
+<table style="width:960; margin:auto">
 	<tr>
 		<td colspan=2 align=center><!-- 商品内容 -->
 		<form name="bookform" action="#" method="post">
@@ -78,7 +77,7 @@ function count_change(temp){
 		<input type="hidden" name="price" value="<%=itemArray.getBOOK_PRICE() %>">
 		<input type="hidden" name="bookname" value="<%=itemArray.getBOOK_NAME() %>"> 
 		<input type="hidden" name="bookimage" value="${fn:trim(mainImage)}">
-		<table width="600" border="0" align="center">
+		<table style="width:600; margin:auto">
 		<tr>
 			<td height="60" colspan="2">詳細</td>
 		</tr>
@@ -88,7 +87,7 @@ function count_change(temp){
 				width="300" height="300"/>
 			</td>
 			<td width="381" align="center" valign="middle">
-			<table width="300" height="200" border="0">
+			<table style="width:300; height:200">
 				<tr>
 					<td colspan="4" align="center" height="50">
 						<b>${itemArray.BOOK_NAME}</b>
@@ -158,7 +157,7 @@ function count_change(temp){
 		</tr>
 		<tr>
 			<td colspan="2">
-			<table align="center">
+			<table style="margin:auto">
 				<tr>
 					<td>
 					<%
@@ -201,7 +200,7 @@ function count_change(temp){
 		</table>
 		</form>
 		<!-- 商品内容 -->
-		<table width="700" height="50" align="enter">
+		<table style="width:700; height:50; margin:auto">
 			<tr>
 				<td align="center">
 				<div>${itemArray.BOOK_CONTENT}</div>
@@ -209,7 +208,7 @@ function count_change(temp){
 			</tr>
 		</table>
 		<br><br>
-		<table width="200" border="0" align="center">
+		<table  style="width:200; margin:auto">
 			<tr align="left">
 				<td colspan="3">
 					<c:forEach var="itemimg" items="${requestScope.contentImage}">

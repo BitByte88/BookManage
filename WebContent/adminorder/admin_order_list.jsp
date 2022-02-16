@@ -2,7 +2,7 @@
 <%@ page import="net.order.db.*" %>
 <%@ page import="java.util.*" %>
 <%
-	List orderlist=(List)request.getAttribute("orderlist");
+	List<OrderBean> orderlist=(List<OrderBean>)request.getAttribute("orderlist");
 	int ordercount=((Integer)request.getAttribute("ordercount")).intValue();
 	int nowpage=((Integer)request.getAttribute("page")).intValue();
 	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
@@ -20,8 +20,8 @@
 <title>図書管理システム</title>
 </head>
 <body>
-<div name="main" style="margin:30 0 50 0">
-<table width="1000" cellspacing="0" cellpadding="0" border="0" align="center">
+<div style="margin:30 0 50 0">
+<table style="width:1000; margin:auto">
 <tr>
 	<td height="26" bgcolor="94d7e7">
 		<p align="center">
@@ -31,7 +31,7 @@
 </tr>
 <tr>
 <td colspan=2 align=center>
-<table border=0 cellspacing=1 cellpadding=0 width=100%>
+<table style="width:100%; border-spacing:1">
 	<tr>
 	<td align=right colspan=10 height=25 colspan=2 style=font-family:Tahoma;font-size:10pt;>
 	すべての注文数 : <b><%=ordercount %></b> 件&nbsp;&nbsp;&nbsp;

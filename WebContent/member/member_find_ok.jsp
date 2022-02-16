@@ -18,19 +18,20 @@ function windowclose(){
 </script>
 </head>
 <body>
-<table width="450px" height="35px">
+<table style="width:450px; height:35px">
 	<tr><td align="left">
 	<b>アカウント／パスワードを探す</b>
 	</td></tr>
 </table>
 	
-<table width="440px">
-	<thead><label style="font-size:12;color:red">アカウント／パスワードを忘れないように注意してください。</label><br/><br/><br/></thead>
+<table style="width:440px;">
+	<thead>
+	<tr><td><label style="font-size:12;color:red">アカウント／パスワードを忘れないように注意してください。</label><br/><br/><br/></td></tr></thead>
 	<tr><td align="left">アカウント　： <%=id %></td></tr>
 	<tr><td align="left">パスワード　： <%=passwd %></td></tr>
 </table>
 
-<table width="450px">
+<table style="width:450px">
 	<tr>
 		<td align="center">	
 			<hr/><br/><input type="button" value="閉じる" onclick="windowclose()"/>

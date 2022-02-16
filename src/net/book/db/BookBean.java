@@ -1,7 +1,6 @@
 package net.book.db;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 public class BookBean {
 	private int BOOK_NO;
