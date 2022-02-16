@@ -7,12 +7,12 @@
 <%
 	MemberBean member = (MemberBean) request.getAttribute("member");
 	String orderType = (String) request.getAttribute("orderType");
-	List<String> orderinfo = null;
+	List<Object> orderinfo = null;
 	List<CartBean> cartlist = null;
 	List<BookBean> booklist=null;
 	
 	if (orderType.equals("fromBookDetail")) {
-		orderinfo = (ArrayList<String>) request.getAttribute("orderinfo");
+		orderinfo = (ArrayList<Object>) request.getAttribute("orderinfo");
 	} else {
 		cartlist = (ArrayList<CartBean>) request.getAttribute("cartlist");
 		booklist = (ArrayList<BookBean>) request.getAttribute("booklist");
