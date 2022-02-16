@@ -5,7 +5,7 @@
 <%@ page import="java.text.*"%>
 <%  
 	BookBean abb=(BookBean)request.getAttribute("abb");
-	HashMap<String, String> imageMap = (HashMap<String,String>)request.getAttribute("imageMap");
+	@SuppressWarnings("unchecked") HashMap<String, String> imageMap = (HashMap<String,String>)request.getAttribute("imageMap");
 	DecimalFormat format = new DecimalFormat("0");
 %>
 <html>

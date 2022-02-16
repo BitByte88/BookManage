@@ -3,7 +3,7 @@
 <%@ page import="net.order.db.*"%>
 <%
 	String id=(String)session.getAttribute("id");
-	List<OrderBean> book_order_list=(List<OrderBean>)request.getAttribute("book_order_list");
+	@SuppressWarnings("unchecked") List<OrderBean> book_order_list=(List<OrderBean>)request.getAttribute("book_order_list");
 	int ordercount=((Integer)request.getAttribute("ordercount")).intValue();
 	int nowpage=((Integer)request.getAttribute("page")).intValue();
 	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();

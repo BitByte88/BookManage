@@ -2,7 +2,7 @@
 <%@ page import="net.order.db.*" %>
 <%@ page import="java.util.*" %>
 <%
-	List<OrderBean> orderlist=(List<OrderBean>)request.getAttribute("orderlist");
+	@SuppressWarnings("unchecked") List<OrderBean> orderlist=(List<OrderBean>)request.getAttribute("orderlist");
 	int ordercount=((Integer)request.getAttribute("ordercount")).intValue();
 	int nowpage=((Integer)request.getAttribute("page")).intValue();
 	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();

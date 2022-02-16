@@ -4,7 +4,7 @@
 <%@ page import="java.math.RoundingMode"%>
 <%@ page import="net.admin.book.db.*"%>
 <%
-	ArrayList<BookBean> list = (ArrayList<BookBean>) request.getAttribute("list");
+	@SuppressWarnings("unchecked") ArrayList<BookBean> list = (ArrayList<BookBean>) request.getAttribute("list");
     BookBean abb = null;
 %>
 <html>

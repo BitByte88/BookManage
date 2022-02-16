@@ -5,8 +5,8 @@
 <%@ page import="net.book.db.*" %>
 
 <%
-	List<CartBean> cartList = (ArrayList<CartBean>) request.getAttribute("cartlist");
-	List<BookBean> bookList = (ArrayList<BookBean>) request.getAttribute("booklist");
+	@SuppressWarnings("unchecked") List<CartBean> cartList = (ArrayList<CartBean>) request.getAttribute("cartlist");
+	@SuppressWarnings("unchecked") List<BookBean> bookList = (ArrayList<BookBean>) request.getAttribute("booklist");
 
 %>
 

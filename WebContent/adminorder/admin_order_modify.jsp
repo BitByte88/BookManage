@@ -3,7 +3,7 @@
 <%@ page import="net.member.db.*"%>
 <%@ page import="java.util.*" %>
 <%
-	List<OrderBean> orderlist=(List<OrderBean>)request.getAttribute("orderlist");
+	@SuppressWarnings("unchecked") List<OrderBean> orderlist=(List<OrderBean>)request.getAttribute("orderlist");
 	MemberBean ordermember=(MemberBean)request.getAttribute("ordermember");
 %>
 <html>

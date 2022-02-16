@@ -6,7 +6,7 @@
 	String add_1="";
 	String add_2="";
 	String add_3="";
-	List<String> zipcodeList=(ArrayList<String>)request.getAttribute("zipcodelist");
+	@SuppressWarnings("unchecked") List<String> zipcodeList=(ArrayList<String>)request.getAttribute("zipcodelist");
 %>
 
 <html>
