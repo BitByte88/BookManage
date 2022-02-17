@@ -8,8 +8,8 @@
 	MemberBean member = (MemberBean) request.getAttribute("member");
 	String orderType = (String) request.getAttribute("orderType");
 	@SuppressWarnings("unchecked") List<Object> orderinfo = (ArrayList<Object>)request.getAttribute("orderinfo");
-	@SuppressWarnings("unchecked") List<CartBean> cartlist = (ArrayList<CartBean>)request.getAttribute("orderinfo");
-	@SuppressWarnings("unchecked") List<BookBean> booklist= (ArrayList<BookBean>)request.getAttribute("orderinfo");
+	@SuppressWarnings("unchecked") List<CartBean> cartlist = (ArrayList<CartBean>)request.getAttribute("cartlist");
+	@SuppressWarnings("unchecked") List<BookBean> booklist= (ArrayList<BookBean>)request.getAttribute("booklist");
 %>
 <html>
 <head>
