@@ -51,6 +51,9 @@
 		        	<li class="nav-item">
 	          			<a class="nav-link" href="./AdminOrderList.adorder">注文リスト</a>
 		        	</li>
+		        	<li class="nav-item">
+	          			<a class="nav-link" href="./AdminMemberList.admember">会員リスト</a>
+		        	</li>
        		<%
 		        }
 		    }
