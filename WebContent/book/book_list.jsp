@@ -92,7 +92,7 @@ function check(){
 				<td width="180" valign="top" >
 				<br>
 				<div align="center">
-				<a href="Book_Detail.book?&gr_book_no=${item.BOOK_NO}">
+				<a href="Book_Detail.book?&book_no=${item.BOOK_NO}">
 			 	<img src="./upload/${fn:trim(item.BOOK_IMAGE)}" 
 			 		width="130" height="130" border="0"/>
 			 	<br/>${item.BOOK_NAME}<br/>

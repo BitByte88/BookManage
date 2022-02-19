@@ -109,18 +109,16 @@ public class BookDAO {
 
 	
 	
-	public BookBean findDetail(int book_no,String direction) {
+	public BookBean findDetailNextPrev(int book_no,String direction) {
 		BookBean book=new BookBean();
-		
-		
 		StringBuffer dQuery = new StringBuffer();
 		if(direction.equals("next")){
 			dQuery.append("SELECT * FROM BOOK ");
-			dQuery.append("WHERE BOOK_NO > ? AND DELETE_FLAG = 0");
-		}else if(direction.equals("prev")){
-			dQuery.append("SELECT * FROM BOOK ");
 			dQuery.append("WHERE BOOK_NO < ? AND DELETE_FLAG = 0 ");
 			dQuery.append("ORDER BY BOOK_NO DESC ");
+		}else if(direction.equals("prev")){
+			dQuery.append("SELECT * FROM BOOK ");
+			dQuery.append("WHERE BOOK_NO > ? AND DELETE_FLAG = 0");
 		}
 		
 		try {
@@ -128,9 +126,7 @@ public class BookDAO {
 			pstmt = con.prepareStatement(dQuery.toString(), 
 				ResultSet.TYPE_SCROLL_INSENSITIVE,
 				ResultSet.CONCUR_READ_ONLY );
-			
-					pstmt.setInt(1, book_no);
-			
+			pstmt.setInt(1, book_no);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				book.setBOOK_NO(rs.getInt("BOOK_NO"));
@@ -155,7 +151,7 @@ public class BookDAO {
 		return book;	
 	}
 	
-	public BookBean findDetailList(int book_num){
+	public BookBean findDetail(int book_num){
 		BookBean book=new BookBean();
 		
 		try {

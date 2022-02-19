@@ -163,7 +163,7 @@ function count_change(temp){
 					<%
 					if (prevpage.getBOOK_NO() != 0) {
 					%> 
-						<a href="Book_Detail.book?search=prev&gr_book_no=<%=itemArray.getBOOK_NO()%>">
+						<a href="Book_Detail.book?search=prev&book_no=<%=itemArray.getBOOK_NO()%>">
 						[前商品] 
 						</a>
 					</td>
@@ -186,7 +186,7 @@ function count_change(temp){
 					</div>
 					</td>
 					<td>
-						<a href="Book_Detail.book?search=next&gr_book_no=<%=itemArray.getBOOK_NO()%>">
+						<a href="Book_Detail.book?search=next&book_no=<%=itemArray.getBOOK_NO()%>">
 						[次商品] 
 						</a>
 					</td>

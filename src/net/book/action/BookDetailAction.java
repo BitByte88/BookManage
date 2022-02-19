@@ -16,38 +16,38 @@ public class BookDetailAction implements Action {
 		BookDAO bookdao = new BookDAO();
 		
 		List<String> imgList = new ArrayList<String>();
-		int gr_book_no = 0;
+		int book_no = 0;
 		BookBean isnextpage = null;
 		BookBean isprevpage = null;
 		BookBean itemArray = null;
 		BookBean next_Bean = null;
 		BookBean prev_Bean = null;		
 
-		gr_book_no = Integer.parseInt(request.getParameter("gr_book_no"));
+		book_no = Integer.parseInt(request.getParameter("book_no"));
 		int nextpage = 0;
 		int prevpage = 0;	
 		
 		
 		if (request.getParameter("search") != null) {
 			if (request.getParameter("search").equals("next")) {
-				next_Bean = bookdao.findDetail(gr_book_no, "next");
+				next_Bean = bookdao.findDetailNextPrev(book_no, "next");
 				nextpage = next_Bean.getBOOK_NO();
-				itemArray = bookdao.findDetailList(nextpage);
-				isnextpage = bookdao.findDetail(nextpage, "next");
-				isprevpage = bookdao.findDetail(nextpage, "prev");
+				itemArray = bookdao.findDetail(nextpage);
+				isnextpage = bookdao.findDetailNextPrev(nextpage, "next");
+				isprevpage = bookdao.findDetailNextPrev(nextpage, "prev");
 			} else if (request.getParameter("search").equals("prev")) {
-				prev_Bean = bookdao.findDetail(gr_book_no, "prev");
+				prev_Bean = bookdao.findDetailNextPrev(book_no, "prev");
 				prevpage = prev_Bean.getBOOK_NO();
-				itemArray = bookdao.findDetailList(prevpage);
-				isnextpage = bookdao.findDetail(prevpage, "next");
-				isprevpage = bookdao.findDetail(prevpage, "prev");
+				itemArray = bookdao.findDetail(prevpage);
+				isnextpage = bookdao.findDetailNextPrev(prevpage, "next");
+				isprevpage = bookdao.findDetailNextPrev(prevpage, "prev");
 			}
 		} else {
-			itemArray = bookdao.findDetailList(gr_book_no);
+			itemArray = bookdao.findDetail(book_no);
 
 
-			isnextpage = bookdao.findDetail(gr_book_no, "next");
-			isprevpage = bookdao.findDetail(gr_book_no, "prev");
+			isnextpage = bookdao.findDetailNextPrev(book_no, "next");
+			isprevpage = bookdao.findDetailNextPrev(book_no, "prev");
 		}
 		
 		String images = itemArray.getBOOK_IMAGE();
