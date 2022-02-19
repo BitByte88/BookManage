@@ -49,7 +49,7 @@
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>変更/削除</td>
 	</tr>
 	<tr>
-		<td style="background-color:#EFEFEF; height:5px;" colspan=7>
+		<td style="background-color:#EFEFEF; height:5px;" colspan=8>
 	</tr>
 	<%for(int i=0;i<memberlist.size();i++){ 
 		MemberBean member=new MemberBean();
@@ -74,11 +74,11 @@
    	</td>
 	</tr>
 	<tr>
-		<td style="background-color:#F0F0F0; height:1px;" colspan=7>
+		<td style="background-color:#F0F0F0; height:1px;" colspan=8>
 	</tr>
 	<%} %>
 	<tr align=center height=20>
-		<td colspan=7 style=font-family:Tahoma;font-size:10pt;>
+		<td colspan=8 style=font-family:Tahoma;font-size:10pt;>
 			<%if(nowpage<=1){ %>[前へ]&nbsp;
 			<%}else{ %>
 			<a href="./AdminMemberList.admember?page=<%=nowpage-1 %>">
