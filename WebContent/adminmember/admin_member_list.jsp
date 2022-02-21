@@ -39,12 +39,12 @@
 	</tr>
 	<tr height="26"></tr>
 	<tr align=center height=20 bgcolor="#EFEFEF">
-	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>ID</td>
+	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>アカウント</td>
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>氏名</td>
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>氏名(カナ)</td>
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>TEL</td>
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>メールアドレス</td>
-	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>タイプ</td>
+	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>会員種別</td>
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>加入日時</td>
 	  <td style=font-family:Tahoma;font-size:10pt;font-weight:bold;>変更/削除</td>
 	</tr>

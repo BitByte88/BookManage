@@ -9,7 +9,7 @@
 	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
 	int startpage=((Integer)request.getAttribute("startpage")).intValue();
 	int endpage=((Integer)request.getAttribute("endpage")).intValue();
-	int totalmoney=((Integer)request.getAttribute("totalmoney")).intValue();
+	int totalPrice=((Integer)request.getAttribute("totalPrice")).intValue();
 %>
 <html>
 <head>
@@ -128,7 +128,7 @@
 </tr>
 <tr>
 	<td height="28">
-	<div align="right">合計金額 : <%=totalmoney%>円</div>
+	<div align="right">合計金額 : <%=totalPrice%>円</div>
 	</td>
 </tr>
 </table>

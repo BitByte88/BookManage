@@ -27,7 +27,7 @@ public class OrderListAction implements Action{
 		
 		int page=1;
 		int getOrderNo = 0;
-		int totalmoney= 0;
+		int totalPrice= 0;
 		OrderDAO orderdao=new OrderDAO();
 		List<OrderBean> book_order_list=new ArrayList<OrderBean>();	
 		if(request.getParameter("page")!=null){
@@ -39,7 +39,7 @@ public class OrderListAction implements Action{
 			book_order_list = orderdao.getOrderList(page,id);
 			if(book_order_list != null && book_order_list.size() != 0) {
 				getOrderNo = book_order_list.get(0).getORDER_NO();
-				totalmoney=orderdao.getOrderSumMoney(id,getOrderNo);
+				totalPrice=orderdao.getOrderTotalPrice(id,getOrderNo);
 			}
 			
 			
@@ -52,7 +52,7 @@ public class OrderListAction implements Action{
 			request.setAttribute("startpage", startpage);
 			request.setAttribute("endpage", endpage);
 			request.setAttribute("ordercount", ordercount);
-			request.setAttribute("totalmoney", totalmoney);
+			request.setAttribute("totalPrice", totalPrice);
 			request.setAttribute("book_order_list", book_order_list);
 			
 			forward.setRedirect(false);

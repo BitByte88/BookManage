@@ -54,7 +54,7 @@ public class OrderDAO {
 		return 0;
 	}
 	
-	public int getOrderSumMoney(String id, int orderNo) throws SQLException{
+	public int getOrderTotalPrice(String id, int orderNo) throws SQLException{
 		String sql="select sum(BOR.ORDER_COUNT * B.BOOK_PRICE) from book_order as BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO "+
 				   "where ORDER_MEMBER_ID=? AND ORDER_NO = ? AND BOR.DELETE_FLAG=0";
 		try{

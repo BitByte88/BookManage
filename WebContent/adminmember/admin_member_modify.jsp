@@ -76,7 +76,7 @@ function check(){
 		return false;
 	}
 	if(memberType.length == 0){
-		alert("タイプを選択してください。");
+		alert("会員種別を選択してください。");
 		memberform.MEMBER_TYPE.focus();
 		return false;
 	}
@@ -128,7 +128,7 @@ margin:auto;
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" bgcolor="#EFEFEF">
-							<p align="center"><font size=2>書名</font></p>
+							<p><font size=2>書名</font></p>
 						</td>
 						<td width="40%" colspan="2"><input type="text" name="MEMBER_NAME" value=<%=member.getMEMBER_NAME() %> style="width:390"></td>
 						<td width="20%"></td>
@@ -136,7 +136,7 @@ margin:auto;
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" bgcolor="#EFEFEF">
-							<p align="center"><font size=2>書名（カナ）</font></p>
+							<p><font size=2>書名（カナ）</font></p>
 						</td>
 						<td width="40%" colspan="2"><input type="text" name="MEMBER_NAME_KANA" value=<%=member.getMEMBER_NAME_KANA() %> style="width:390"></td>
 						<td width="20%"></td>
@@ -144,7 +144,7 @@ margin:auto;
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" bgcolor="#EFEFEF">
-							<p align="center"><font size=2>電話番号</font></p>
+							<p><font size=2>電話番号</font></p>
 						</td>
 						<td width="40%" colspan="2"><input type="text" name="MEMBER_TEL" value=<%=member.getMEMBER_TEL() %> style="width:390"></td>
 						<td width="20%"></td>
@@ -152,7 +152,7 @@ margin:auto;
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" bgcolor="#EFEFEF">
-							<p align="center"><font size=2>メールアドレス</font></p>
+							<p><font size=2>メールアドレス</font></p>
 						</td>
 						<td width="40%" colspan="2"><input type="text" name="MEMBER_MAIL" value=<%=member.getMEMBER_MAIL() %> style="width:390"></td>
 						<td width="20%"></td>
@@ -160,7 +160,7 @@ margin:auto;
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" bgcolor="#EFEFEF">
-							<p align="center"><font size=2>郵便番号</font></p>
+							<p><font size=2>郵便番号</font></p>
 						</td>
 						<td width="40%" colspan="2">
 							<input type="text" name="MEMBER_ZIPCODE" size="7" onkeypress="gNumCheck()" maxlength="7" value=<%=member.getMEMBER_ZIPCODE() %> />&nbsp;&nbsp;
@@ -171,7 +171,7 @@ margin:auto;
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" bgcolor="#EFEFEF">
-							<p align="center"><font size=2>都道府県</font></p>
+							<p><font size=2>都道府県</font></p>
 						</td>
 						<td width="40%" colspan="2">
 							<select id="MEMBER_ADD_1" name="MEMBER_ADD_1">
@@ -228,7 +228,7 @@ margin:auto;
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" bgcolor="#EFEFEF">
-							<p align="center"><font size=2>市区町村</font></p>
+							<p><font size=2>市区町村</font></p>
 						</td>
 						<td width="40%" colspan="2"><input type="text" name="MEMBER_ADD_2" value=<%=member.getMEMBER_ADD_2() %> style="width:390"></td>
 						<td width="20%"></td>
@@ -236,7 +236,7 @@ margin:auto;
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" bgcolor="#EFEFEF">
-							<p align="center"><font size=2>丁目、番地、建物名</font></p>
+							<p><font size=2>丁目、番地、建物名</font></p>
 						</td>
 						<td width="40%" colspan="2"><input type="text" name="MEMBER_ADD_3" value=<%=member.getMEMBER_ADD_3() %> style="width:390"></td>
 						<td width="20%"></td>
@@ -244,7 +244,7 @@ margin:auto;
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" height="30" bgcolor="#EFEFEF">
-							<p align="center"><font size=2>タイプ</font></p>
+							<p><font size=2>会員種別</font></p>
 						</td>
 						<td colspan="2" width="40%" height="30">
 							<select id="member_type"name="MEMBER_TYPE" size="1">
