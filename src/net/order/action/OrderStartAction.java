@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.member.db.MemberDAO;
-import net.admin.book.db.BookBean;
+import net.book.db.BookBean;
 import net.cart.db.CartBean;
 import net.cart.db.CartDAO;
 import net.member.db.MemberBean;
+import net.member.db.MemberDAO;
 
 public class OrderStartAction implements Action{
 	@SuppressWarnings("unchecked")
@@ -37,13 +37,14 @@ public class OrderStartAction implements Action{
 		
 		if(orderType.equals("fromBookDetail")){
 			orderinfo.add(Integer.parseInt(request.getParameter("bookno")));
+			orderinfo.add(request.getParameter("bookimage"));
 			orderinfo.add(request.getParameter("bookname"));
 			orderinfo.add(Integer.parseInt(request.getParameter("amount")));
 			orderinfo.add(Integer.parseInt(request.getParameter("price")));
-			orderinfo.add(request.getParameter("bookimage"));
 			
 			request.setAttribute("orderType", "fromBookDetail");
 			request.setAttribute("orderinfo", orderinfo);
+			request.setAttribute("totalPrice", request.getParameter("price"));
 		}else{
 			CartDAO cartdao=new CartDAO();
 			HashMap<String, Object> map = new HashMap<String, Object>();
@@ -54,6 +55,11 @@ public class OrderStartAction implements Action{
 			request.setAttribute("orderType", "fromCart");
 			request.setAttribute("cartlist", cartlist);
 			request.setAttribute("booklist", booklist);
+			int totlaPrice = 0;
+			for(BookBean bookbean : booklist) {
+				totlaPrice += bookbean.getBOOK_PRICE();
+			}
+			request.setAttribute("totalPrice", totlaPrice);
 		}
 		
 		MemberDAO memberdao=new MemberDAO();

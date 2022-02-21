@@ -60,13 +60,18 @@
 		%>
 		<tr align=center height=20>
 		<td style="font-family: Tahoma; font-size: 7pt;"><img
-			src="./upload/<%=orderinfo.get(4) %>" width=50 height=50></td>
-		<td style="font-family: Tahoma; font-size: 8pt;"><%=orderinfo.get(1)%></td>
+			src="./upload/<%=orderinfo.get(1) %>" width=50 height=50></td>
 		<td style="font-family: Tahoma; font-size: 8pt;"><%=orderinfo.get(2)%></td>
-		<td style="font-family: Tahoma; font-size: 8pt;"><%=orderinfo.get(3)%>円</td>
+		<td style="font-family: Tahoma; font-size: 8pt;"><%=orderinfo.get(3)%></td>
+		<td style="font-family: Tahoma; font-size: 8pt;"><%=orderinfo.get(4)%>円</td>
 		</tr>
 		<tr>
 			<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
+		</tr>
+		<tr height=10></tr>
+		<tr align=right>
+			<td style="font-family: Tahoma; font-size: 8pt; font-weight:bold;" colspan="4">合計金額 ： <%=request.getAttribute("totalPrice")%>円</td>
+			
 		</tr>
 		<%
 			} else {
@@ -94,8 +99,16 @@
 		</tr>
 		<%
 				}
+		%>
+		<tr height=10></tr>
+		<tr align=right>
+			<td style="font-family: Tahoma; font-size: 8pt; font-weight:bold;" colspan="4">合計金額 ： <%=request.getAttribute("totalPrice")%>円</td>
+			
+		</tr>
+		<%
 			}
 		%>
+
 	</table>
 
 	<table style="width:90%; border-spacing:1">
