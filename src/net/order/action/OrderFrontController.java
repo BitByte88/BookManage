@@ -42,7 +42,7 @@ public class OrderFrontController extends javax.servlet.http.HttpServlet
 		}else if (command.equals("/OrderOk.order")){
 			forward=new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("./book_order/book_order_ok.jsp");
+			forward.setPath("./bookOrder/book_order_ok.jsp");
 		}
        if(forward != null){
 		if (forward.isRedirect()) {

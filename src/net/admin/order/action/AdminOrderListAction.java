@@ -40,7 +40,7 @@ public class AdminOrderListAction implements Action{
 		request.setAttribute("orderlist", orderlist);
 		
 		ActionForward forward=new ActionForward();
-		forward.setPath("./adminorder/admin_order_list.jsp");
+		forward.setPath("./adminOrder/admin_order_list.jsp");
 		return forward;
 	 } 
 }

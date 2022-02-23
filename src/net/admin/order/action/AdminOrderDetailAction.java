@@ -26,7 +26,7 @@ public class AdminOrderDetailAction implements Action{
 		request.setAttribute("ordermember", member);
 		
 		ActionForward forward=new ActionForward();
-		forward.setPath("./adminorder/admin_order_modify.jsp");
+		forward.setPath("./adminOrder/admin_order_modify.jsp");
 		return forward;
 	 } 
 }

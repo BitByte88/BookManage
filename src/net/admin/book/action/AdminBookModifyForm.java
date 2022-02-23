@@ -32,7 +32,7 @@ public class AdminBookModifyForm implements Action {
 		}
 		request.setAttribute("abb", bookbean);	
 		request.setAttribute("imageMap", imageMap);
-		forward.setPath("./adminbook/admin_book_modify.jsp");
+		forward.setPath("./adminBook/admin_book_modify.jsp");
 		return forward;
 	}
 }

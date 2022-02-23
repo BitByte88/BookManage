@@ -46,7 +46,7 @@ public class AdminBookFrontController extends HttpServlet {
 		else if(command.equals("/BookAdd.adbook")){
 			forward=new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("./adminbook/admin_book_write.jsp");
+			forward.setPath("./adminBook/admin_book_write.jsp");
 		}else if(command.equals("/BookDelete.adbook")){
 			action=new AdminBookDeleteAction();
 			try {

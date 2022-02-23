@@ -67,7 +67,7 @@ public class OrderStartAction implements Action{
 		request.setAttribute("member", member);
 		
 		forward.setRedirect(false);
-		forward.setPath("./book_order/book_buy.jsp");
+		forward.setPath("./bookOrder/book_buy.jsp");
 		return forward;
 	}
 }

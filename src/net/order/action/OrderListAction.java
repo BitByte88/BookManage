@@ -56,7 +56,7 @@ public class OrderListAction implements Action{
 			request.setAttribute("book_order_list", book_order_list);
 			
 			forward.setRedirect(false);
-			forward.setPath("./book_order/book_my_order.jsp");
+			forward.setPath("./bookOrder/book_my_order.jsp");
 			return forward;
 		}catch (Exception e) {
 			e.printStackTrace();

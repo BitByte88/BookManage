@@ -16,7 +16,7 @@ public class AdminBookListAction implements Action {
 		
 		request.setAttribute("list",list);
 		
-		forward.setPath("./adminbook/admin_book_list.jsp");
+		forward.setPath("./adminBook/admin_book_list.jsp");
 		return forward;
 	}
 }

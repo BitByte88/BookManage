@@ -35,7 +35,7 @@ public class AdminMemberListAction implements Action{
 		request.setAttribute("membercount", membercount);
 		request.setAttribute("memberlist", memberlist);
 		ActionForward forward=new ActionForward();
-		forward.setPath("./adminmember/admin_member_list.jsp");
+		forward.setPath("./adminMember/admin_member_list.jsp");
 		return forward;
 	 } 
 }

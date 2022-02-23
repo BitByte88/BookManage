@@ -19,7 +19,7 @@ public class AdminMemberDetailAction implements Action{
 		request.setAttribute("member", member);
 		
 		ActionForward forward=new ActionForward();
-		forward.setPath("./adminmember/admin_member_modify.jsp");
+		forward.setPath("./adminMember/admin_member_modify.jsp");
 		return forward;
 	 } 
 }
