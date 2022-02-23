@@ -26,11 +26,7 @@ public class AdminBookFrontController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length());
 		ActionForward forward=null;
-		Action action=null;
-		if(command.equals("/BookAddForm.adbook")){
-			forward = new ActionForward();
-			forward.setPath("./admingoods/admin_goods_write.jsp");
-		}				
+		Action action=null;				
 		if(command.equals("/BookAddAction.adbook")){
 			action= new AdminBookAddAction();
 			try {

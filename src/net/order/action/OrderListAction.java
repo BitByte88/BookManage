@@ -22,7 +22,7 @@ public class OrderListAction implements Action{
 			request.getSession().setAttribute("redirectURI", referer);
 			forward.setRedirect(true);
 			forward.setPath("./MemberLogin.member");
-			return forward;		
+			return forward;
 		}
 		
 		int page=1;
@@ -36,7 +36,7 @@ public class OrderListAction implements Action{
 		try{
 			int ordercount=orderdao.getOrderCount(id);
 
-			book_order_list = orderdao.getOrderList(page,id);
+			book_order_list = orderdao.getOrderList(id, page);
 			if(book_order_list != null && book_order_list.size() != 0) {
 				getOrderNo = book_order_list.get(0).getORDER_NO();
 				totalPrice=orderdao.getOrderTotalPrice(id,getOrderNo);

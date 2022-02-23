@@ -79,7 +79,7 @@ public class OrderDAO {
 		return 0;
 	}
 	
-	public List<OrderBean> getOrderList(int page,String id) throws SQLException {
+	public List<OrderBean> getOrderList(String id, int page) throws SQLException {
 		String sql="select BOR.ORDER_NO, BOR.ORDER_BOOK_NO, B.BOOK_NAME,B.BOOK_PRICE, BOR.ORDER_COUNT, " + 
 				"BOR.ORDER_COUNT * B.BOOK_PRICE AS TOTAL_PRICE, ORDER_DATE, ORDER_STATUS  " + 
 				"from book_order AS BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO " + 
