@@ -84,12 +84,11 @@ public class OrderDAO {
 				"BOR.ORDER_COUNT * B.BOOK_PRICE AS TOTAL_PRICE, ORDER_DATE, ORDER_STATUS  " + 
 				"from book_order AS BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO " + 
 				"where order_no in (select * from (select distinct order_no from book_order " + 
-				"WHERE ORDER_MEMBER_ID = ? AND delete_flag = 0 order by order_no desc limit 1 offset ?)as tmp) " + 
-				"order by order_item_no";
+				"WHERE ORDER_MEMBER_ID = ? AND delete_flag = 0 order by order_no desc limit 10 offset ?)as tmp) " + 
+				"order by order_no desc, order_item_no";
 		
 		List<OrderBean> book_order_list=new ArrayList<>();
-		  ;
-		int offset= page-1;
+		int offset= (page-1)*10;
 		
 		try{
 			conn = ds.getConnection();
@@ -210,6 +209,30 @@ public class OrderDAO {
 			}catch(Exception ex) {}
 		}
 		return orderNoArray;
+	}
+	
+	public int getItemCount(String id,int orderNo) throws SQLException {
+		String sql="select  count(ORDER_ITEM_NO) from book_order where ORDER_MEMBER_ID=? AND ORDER_NO = ? AND DELETE_FLAG=0";
+		
+		try{
+			conn = ds.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, orderNo);
+			rs=pstmt.executeQuery();
+			rs.next();			
+			return rs.getInt(1);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		finally{
+			try{
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			}catch(Exception ex) {}
+		}
+		return 0;
 	}
 
 }
