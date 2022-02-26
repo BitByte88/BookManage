@@ -32,9 +32,9 @@
 	<input type="hidden" name="orderType" value="<%=orderType%>"> 
 	<%if (orderType.equals("fromBookDetail")) {%>
 	<input type="hidden" name="bookno" value="<%=orderinfo.get(0)%>">
-	<input type="hidden" name="bookname" value="<%=orderinfo.get(1)%>">
-	<input type="hidden" name="amount" value="<%=orderinfo.get(2)%>">
-	<input type="hidden" name="price" value="<%=orderinfo.get(3)%>">
+	<input type="hidden" name="bookname" value="<%=orderinfo.get(2)%>">
+	<input type="hidden" name="amount" value="<%=orderinfo.get(3)%>">
+	<input type="hidden" name="price" value="<%=orderinfo.get(4)%>">
 	<%}%>
 	<input type="hidden" name="memberid" value="<%=member.getMEMBER_ID() %>">
 	
