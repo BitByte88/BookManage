@@ -51,6 +51,14 @@ function check(){
 			alert("発行日の形式を確認してください。");
 			bookform.book_publishing_date.focus();
 			return false;			
+		} else {
+			var today = new Date();
+			var date = new Date(publishingDate);
+			if(date > today){
+				alert("発行日は今日からそれ以前の日付のみ入力できます。");
+				bookform.book_publishing_date.focus();
+				return false;			
+			}
 		}
 	}
 	if(price.length == 0){
@@ -62,7 +70,11 @@ function check(){
 		alert("ISBNコードを入力してください。");
 		bookform.book_isbn.focus();
 		return false;
-	} 	
+	}else if(isbn.length != 10 && isbn.length != 13){
+		alert("ISBNコードは１０桁または１３桁で入力してください。");
+		bookform.book_isbn.focus();
+		return false;
+	}
 	return true;
 }
 </script>
