@@ -76,7 +76,7 @@
 			<%
 			if (tempOrderNo != order.getORDER_NO()) {
 			%>
-			<td rowspan="<%=2*itemCountMap.get(order.getORDER_NO())-1%>" style="border-right:2px solid #94d7e7"><%=order.getORDER_NO()%></td>			
+			<td rowspan="<%=2*itemCountMap.get(order.getORDER_NO())-1%>" style="border-right:2px solid #94d7e7"><%=String.format("%08d", order.getORDER_NO())%></td>			
 			<%
 			}
 			%>	
