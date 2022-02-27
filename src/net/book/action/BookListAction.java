@@ -27,11 +27,18 @@ public class BookListAction implements Action{
 		}
 		
 		SearchBean searchBean = new SearchBean();
-		searchBean.setBOOK_NAME(request.getParameter("title"));
-		searchBean.setBOOK_PUBLISHER(request.getParameter("publisher"));
-		searchBean.setSTART_DATE(request.getParameter("startDate"));
-		searchBean.setEND_DATE(request.getParameter("endDate"));
-
+		if(request.getParameter("title") != null) {
+		searchBean.setBOOK_NAME(request.getParameter("title").strip());
+		}
+		if(request.getParameter("publisher") != null) {
+		searchBean.setBOOK_PUBLISHER(request.getParameter("publisher").strip());
+		}
+		if(request.getParameter("startDate") != null) {
+		searchBean.setSTART_DATE(request.getParameter("startDate").strip());
+		}
+		if(request.getParameter("endDate") != null) {
+		searchBean.setEND_DATE(request.getParameter("endDate").strip());
+		}
 		//発行日形式チェック
 		SimpleDateFormat dateFormatParser = new SimpleDateFormat("yyyy/MM/dd"); 
         dateFormatParser.setLenient(false); 
