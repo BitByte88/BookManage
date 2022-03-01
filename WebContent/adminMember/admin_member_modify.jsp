@@ -128,7 +128,7 @@ margin:auto;
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" bgcolor="#EFEFEF">
-							<p><font size=2>書名</font></p>
+							<p><font size=2>氏名</font></p>
 						</td>
 						<td width="40%" colspan="2"><input type="text" name="MEMBER_NAME" value=<%=member.getMEMBER_NAME() %> style="width:390"></td>
 						<td width="20%"></td>
@@ -136,7 +136,7 @@ margin:auto;
 					<tr>
 						<td width="20%"></td>
 						<td width="20%" bgcolor="#EFEFEF">
-							<p><font size=2>書名（カナ）</font></p>
+							<p><font size=2>氏名（カナ）</font></p>
 						</td>
 						<td width="40%" colspan="2"><input type="text" name="MEMBER_NAME_KANA" value=<%=member.getMEMBER_NAME_KANA() %> style="width:390"></td>
 						<td width="20%"></td>

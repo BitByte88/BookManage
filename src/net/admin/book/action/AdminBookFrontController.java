@@ -26,7 +26,8 @@ public class AdminBookFrontController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length());
 		ActionForward forward=null;
-		Action action=null;				
+		Action action=null;
+		//図書情報登録処理
 		if(command.equals("/BookAddAction.adbook")){
 			action= new AdminBookAddAction();
 			try {
@@ -34,7 +35,8 @@ public class AdminBookFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}		
-		}		
+		}
+		//図書リスト画面表示
 		else if(command.equals("/BookList.adbook")){
 			action=new AdminBookListAction();
 			try {
@@ -43,25 +45,32 @@ public class AdminBookFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}		
+		//図書登録画面表示
 		else if(command.equals("/BookAdd.adbook")){
 			forward=new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./adminBook/admin_book_write.jsp");
-		}else if(command.equals("/BookDelete.adbook")){
+		}
+		//図書情報削除処理
+		else if(command.equals("/BookDelete.adbook")){
 			action=new AdminBookDeleteAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/BookModify.adbook")){
+		}
+		//図書情報変更画面表示
+		else if(command.equals("/BookModify.adbook")){
 			action=new AdminBookModifyForm();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/BookModifyAction.adbook")){
+		}
+		//図書情報変更処理
+		else if(command.equals("/BookModifyAction.adbook")){
 			action=new AdminBookModifyAction();
 			try {
 				forward=action.execute(request, response);

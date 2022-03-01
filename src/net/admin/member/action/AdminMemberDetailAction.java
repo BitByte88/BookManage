@@ -15,9 +15,10 @@ public class AdminMemberDetailAction implements Action{
 		MemberBean member =new MemberBean();
 		
 		String id=request.getParameter("id");
+		//会員情報を取得する。
 		member = memberdao.getMemberDetail(id);
 		request.setAttribute("member", member);
-		
+		//会員情報修正画面に遷移する。
 		ActionForward forward=new ActionForward();
 		forward.setPath("./adminMember/admin_member_modify.jsp");
 		return forward;

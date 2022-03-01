@@ -30,7 +30,7 @@ public class AdminOrderDAO {
 			return;
 		}
 	}
-	
+	//注文情報件数取得
 	public int getOrderCount(){
 		String order_count_sql="select count(distinct ORDER_NO) from BOOK_ORDER";		
 		try{
@@ -52,7 +52,7 @@ public class AdminOrderDAO {
 		}
 		return 0;
 	}
-	
+	//注文リスト取得
 	public List<OrderBean> getOrderList(int page,int limit){
 		String order_list_sql="select * from (select ROW_NUMBER() OVER (order by ORDER_DATE desc) AS rnum, "+ 
 				"BOR.ORDER_NO, BOR.ORDER_STATUS, BOR.ORDER_MEMBER_ID, BOR.ORDER_TRADE_TYPE, "+ 
@@ -69,10 +69,15 @@ public class AdminOrderDAO {
 			rs=pstmt.executeQuery();
 			while(rs.next()){
 				OrderBean order=new OrderBean();
+				//注文NO
 				order.setORDER_NO(rs.getInt("ORDER_NO"));
+				//決済方法
 				order.setORDER_TRADE_TYPE(rs.getString("ORDER_TRADE_TYPE"));
+				//注文者
 				order.setORDER_MEMBER_ID(rs.getString("ORDER_MEMBER_ID"));
+				//注文日時
 				order.setORDER_DATE(rs.getDate("ORDER_DATE"));
+				//注文ステータス
 				order.setORDER_STATUS(rs.getInt("ORDER_STATUS"));
 				orderlist.add(order);
 			}
@@ -90,7 +95,7 @@ public class AdminOrderDAO {
 		}
 		return null;
 	}
-	
+	//注文情報取得
 	public List<OrderBean> getOrderDetail(int ordernum){
 		List<OrderBean> orderlist=new ArrayList<OrderBean>();
 		String order_detail_sql="select BOR.ORDER_NO, BOR.ORDER_ITEM_NO, BOR.ORDER_BOOK_NO, B.BOOK_NAME,B.BOOK_PRICE, BOR.ORDER_COUNT, " + 
@@ -107,25 +112,45 @@ public class AdminOrderDAO {
 			
 			while(rs.next()){
 			OrderBean order=new OrderBean();
+			//注文NO
 			order.setORDER_NO(rs.getInt("ORDER_NO"));
+			//アイテムNo
 			order.setORDER_ITEM_NO(rs.getInt("ORDER_ITEM_NO"));
+			//決済方法
 			order.setORDER_TRADE_TYPE(rs.getString("ORDER_TRADE_TYPE"));
+			//図書NO
 			order.setORDER_BOOK_NO(rs.getInt("ORDER_BOOK_NO"));
+			//書名
 			order.setBOOK_NAME(rs.getString("BOOK_NAME"));
+			//単価
 			order.setBOOK_PRICE(rs.getInt("BOOK_PRICE"));
+			//数量
 			order.setORDER_COUNT(rs.getInt("ORDER_COUNT"));
+			//注文合計金額
 			order.setTOTAL_PRICE(rs.getInt("TOTAL_PRICE"));			
+			//注文日時
 			order.setORDER_DATE(rs.getDate("ORDER_DATE"));
+			//注文ステータス
 			order.setORDER_STATUS(rs.getInt("ORDER_STATUS"));
+			//アカウント
 			order.setORDER_MEMBER_ID(rs.getString("ORDER_MEMBER_ID"));
+			//届け先_氏名
 			order.setORDER_RECEIVE_NAME(rs.getString("ORDER_RECEIVE_NAME"));		
+			//届け先_氏名（カナ）
 			order.setORDER_RECEIVE_NAME_KANA(rs.getString("ORDER_RECEIVE_NAME_KANA"));	
+			//届け先_メールアドレス
 			order.setORDER_RECEIVE_EMAIL(rs.getString("ORDER_RECEIVE_EMAIL"));
+			//届け先_TEL
 			order.setORDER_RECEIVE_TEL(rs.getString("ORDER_RECEIVE_TEL"));
+			//届け先_郵便番号
 			order.setORDER_RECEIVE_ZIPCODE(rs.getString("ORDER_RECEIVE_ZIPCODE"));
+			//届け先_都道府県
 			order.setORDER_RECEIVE_ADD_1(rs.getString("ORDER_RECEIVE_ADD_1"));
+			//届け先_市区町村
 			order.setORDER_RECEIVE_ADD_2(rs.getString("ORDER_RECEIVE_ADD_2"));
+			//届け先_丁目、番地、建物名
 			order.setORDER_RECEIVE_ADD_3(rs.getString("ORDER_RECEIVE_ADD_3"));
+			//メモー
 			order.setORDER_MEMO(rs.getString("ORDER_MEMO"));
 			orderlist.add(order);
 			}
@@ -142,7 +167,7 @@ public class AdminOrderDAO {
 		}
 		return null;
 	}
-	
+	//注文情報修正
 	public boolean modifyOrder(OrderBean order){
 		String order_modify_sql=
 			"update BOOK_ORDER set ORDER_MEMO=?,ORDER_STATUS=? where ORDER_NO=?";
@@ -151,8 +176,11 @@ public class AdminOrderDAO {
 		try{
 			conn = ds.getConnection();
 			pstmt=conn.prepareStatement(order_modify_sql);
+			//メモ‐
 			pstmt.setString(1, order.getORDER_MEMO());
+			//注文ステータス
 			pstmt.setInt(2, order.getORDER_STATUS());
+			//注文NO
 			pstmt.setInt(3, order.getORDER_NO());
 			result=pstmt.executeUpdate();
 			
@@ -171,7 +199,7 @@ public class AdminOrderDAO {
 		}
 		return false;
 	}
-	
+	//注文情報削除
 	public boolean deleteOrder(int ordernum){
 		String order_delete_sql="delete from BOOK_ORDER where ORDER_NO=?";
 		int result=0;
@@ -197,7 +225,7 @@ public class AdminOrderDAO {
 		}
 		return false;
 	}
-	
+	//合計金額取得
 	public int getTotalPrice(int orderNo){
 		String order_list_sql="select sum(sub_total) as TOTAL_PRICE from (select BOR.ORDER_NO, BOR.ORDER_COUNT * B.BOOK_PRICE AS sub_total from book_order as BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO WHERE BOR.ORDER_NO = ?) as ST";
 		try {

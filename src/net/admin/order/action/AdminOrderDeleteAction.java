@@ -12,13 +12,14 @@ public class AdminOrderDeleteAction implements Action{
 		
 		boolean result=false;
 		String num=request.getParameter("num");
+		//注文情報削除
 		result=orderdao.deleteOrder(Integer.parseInt(num));
-		
+		//注文情報削除結果が「失敗」場合
 		if(result==false){
 			System.out.println("注文情報削除エラー");
 			return null;
 		}
-		
+		//注文リスト画面に遷移する。
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(true);
 		forward.setPath("./AdminOrderList.adorder");

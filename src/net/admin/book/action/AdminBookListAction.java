@@ -11,11 +11,11 @@ public class AdminBookListAction implements Action {
 		AdminBookDAO abookdao=new AdminBookDAO();
 		
 		ActionForward forward=new ActionForward();
-		
+		//図書リスト取得
 		List<BookBean> list=abookdao.getBookList();
-		
+		//取得した図書リストを設定
 		request.setAttribute("list",list);
-		
+		//図書リスト画面に遷移する。
 		forward.setPath("./adminBook/admin_book_list.jsp");
 		return forward;
 	}

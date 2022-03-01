@@ -17,7 +17,7 @@ public class AdminOrderFrontController extends javax.servlet.http.HttpServlet
 		   String command=RequestURI.substring(contextPath.length());
 		   ActionForward forward=null;
 		   Action action=null;
-		   
+		   //注文リスト画面
 		   if(command.equals("/AdminOrderList.adorder")){
 			   action  = new AdminOrderListAction();
 			   try {
@@ -25,21 +25,27 @@ public class AdminOrderFrontController extends javax.servlet.http.HttpServlet
 			   } catch (Exception e) {
 				   e.printStackTrace();
 			   }
-		   }else if(command.equals("/AdminOrderDetail.adorder")){
+		   }
+		   //注文情報修正画面
+		   else if(command.equals("/AdminOrderDetail.adorder")){
 			   action = new AdminOrderDetailAction();
 			   try{
 				   forward=action.execute(request, response);
 			   }catch(Exception e){
 				   e.printStackTrace();
 			   }
-		   }else if(command.equals("/AdminOrderModify.adorder")){
+		   }
+		   //注文情報修正処理
+		   else if(command.equals("/AdminOrderModify.adorder")){
 			   action = new AdminOrderModifyAction();
 			   try{
 				   forward=action.execute(request, response);
 			   }catch(Exception e){
 				   e.printStackTrace();
 			   }
-		   }else if(command.equals("/AdminOrderDelete.adorder")){
+		   }
+		   //注文情報削除処理
+		   else if(command.equals("/AdminOrderDelete.adorder")){
 			   action = new AdminOrderDeleteAction();
 			   try{
 				   forward=action.execute(request, response);

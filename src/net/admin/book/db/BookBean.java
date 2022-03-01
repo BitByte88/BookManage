@@ -4,20 +4,35 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 public class BookBean {
+	//図書NO
 	private int BOOK_NO;
+	//カテゴリー
 	private String BOOK_CATEGORY;
+	//書名
 	private String BOOK_NAME;
+	//著者
 	private String BOOK_WRITER;
+	//出版社
 	private String BOOK_PUBLISHER;
+	//発行日
 	private Date BOOK_PUBLISHING_DATE;
+	//図書内容
 	private String BOOK_CONTENT;
+	//販売価格
 	private BigDecimal BOOK_PRICE;
+	//イメージ
 	private String BOOK_IMAGE;
+	//ISBNコード
 	private String BOOK_ISBN;
+	//削除フラグ
 	private Integer DELETE_FLAG;
+	//作成者
 	private Integer CREATE_USER;
+	//作成日時
 	private Date CREATE_DATE;
+	//更新社
 	private Integer UPDATE_USER;
+	//更新日時
 	private Date UPDATE_DATE;
 	
 	public int getBOOK_NO() {
