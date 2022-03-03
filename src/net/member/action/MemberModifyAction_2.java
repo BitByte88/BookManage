@@ -44,7 +44,7 @@ public class MemberModifyAction_2 implements Action{
 		dto.setMEMBER_ADD_3(request.getParameter("MEMBER_ADD_3"));
 		//会員情報修正
 		memberdao.updateMember(dto);
-		
+		//修正完了メッセージを表示し、会員情報修正画面に遷移する。
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
