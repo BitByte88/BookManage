@@ -8,7 +8,7 @@ public class MemberDeleteAction implements Action{
 		ActionForward forward=new ActionForward();
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
-		
+		//セッションにログイン情報が存在しない場合、ログイン画面に遷移する。
 		if(id==null){
 			forward.setRedirect(true);
 			forward.setPath("./MemberLogin.member");
@@ -18,12 +18,15 @@ public class MemberDeleteAction implements Action{
 		String pass=request.getParameter("MEMBER_PW");
 		
 		try{
+			//会員情報削除
 			int check=memberdao.deleteMember(id, pass);
-			
+			//会員情報削除成功
 			if(check == 1){
 				session.invalidate();
 				forward.setPath("./member/member_out_ok.jsp"); 
-			}else{
+			}
+			//会員情報削除失敗、エラーメッセージを表示
+			else{
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");

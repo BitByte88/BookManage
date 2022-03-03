@@ -10,6 +10,7 @@ public class MemberModifyAction_1 implements Action{
 		ActionForward forward=new ActionForward();
 		HttpSession sesseion=request.getSession(true);
 		String id=(String)sesseion.getAttribute("id");
+		//セッションにログイン情報が存在しない場合、ログイン画面に遷移する。
 		if(id==null){
 			forward.setRedirect(true);
 			forward.setPath("./MemberLogin.member");
@@ -17,8 +18,9 @@ public class MemberModifyAction_1 implements Action{
 		}
 		
 		MemberDAO memberdao=new MemberDAO();
+		//会員情報取得
 		MemberBean dto=memberdao.getMember(id);
-		
+		//会員情報修正画面に遷移する。
 		request.setAttribute("member", dto);
 		forward.setPath("./member/member_info.jsp"); 			
 		return forward;

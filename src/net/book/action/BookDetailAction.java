@@ -22,34 +22,46 @@ public class BookDetailAction implements Action {
 		BookBean itemArray = null;
 		BookBean next_Bean = null;
 		BookBean prev_Bean = null;		
-
+		//図書NO
 		book_no = Integer.parseInt(request.getParameter("book_no"));
 		int nextpage = 0;
 		int prevpage = 0;	
 		
-		
 		if (request.getParameter("search") != null) {
+			//「次商品」ボタンを押す場合
 			if (request.getParameter("search").equals("next")) {
+				//次の図書の情報を取得する。
 				next_Bean = bookdao.findDetailNextPrev(book_no, "next");
 				nextpage = next_Bean.getBOOK_NO();
+				//次の図書の詳細情報を取得する。
 				itemArray = bookdao.findDetail(nextpage);
+				//取得した図書の次図書の情報を取得する。
 				isnextpage = bookdao.findDetailNextPrev(nextpage, "next");
+				//取得した図書の前図書の情報を取得する。
 				isprevpage = bookdao.findDetailNextPrev(nextpage, "prev");
-			} else if (request.getParameter("search").equals("prev")) {
+			} 
+			//「前商品」ボタンを押す場合
+			else if (request.getParameter("search").equals("prev")) {
+				//前の図書の情報を取得する。
 				prev_Bean = bookdao.findDetailNextPrev(book_no, "prev");
 				prevpage = prev_Bean.getBOOK_NO();
+				//前の図書の詳細情報を取得する。
 				itemArray = bookdao.findDetail(prevpage);
+				//取得した図書の次図書の情報を取得する。
 				isnextpage = bookdao.findDetailNextPrev(prevpage, "next");
+				//取得した図書の前図書の情報を取得する。
 				isprevpage = bookdao.findDetailNextPrev(prevpage, "prev");
 			}
 		} else {
+			//図書の詳細情報を取得する。
 			itemArray = bookdao.findDetail(book_no);
 
-
+			//取得した図書の次図書の情報を取得する。
 			isnextpage = bookdao.findDetailNextPrev(book_no, "next");
+			//取得した図書の前図書の情報を取得する。
 			isprevpage = bookdao.findDetailNextPrev(book_no, "prev");
 		}
-		
+		//図書イメージ
 		String images = itemArray.getBOOK_IMAGE();
 		StringTokenizer st = new StringTokenizer(images, ",");
 		while (st.hasMoreTokens()) {

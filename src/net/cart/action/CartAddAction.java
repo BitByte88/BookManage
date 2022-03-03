@@ -13,7 +13,7 @@ public class CartAddAction implements Action{
 		CartDAO cartdao=new CartDAO();
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
-		
+		//セッションにログイン情報が存在しない場合、ログイン画面に遷移する。
 		if(id==null){
 			String referer = request.getHeader("Referer");
 			request.getSession().setAttribute("redirectURI", referer);
@@ -25,9 +25,9 @@ public class CartAddAction implements Action{
 		
 		int num=Integer.parseInt(request.getParameter("bookno"));
 		int amount=Integer.parseInt(request.getParameter("amount"));
-		
+		//カート情報を登録する。
 		cartdao.cartAdd(id,num,amount);
-		
+		//カート画面に遷移する。
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(true);
 		forward.setPath("./CartList.cart");

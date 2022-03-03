@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 	   String command=RequestURI.substring(contextPath.length());
 	   ActionForward forward=null;
 	   Action action=null;
-	   
+	   //カート画面
 	   if(command.equals("/CartList.cart")){
 		   action  = new CartListAction();
 		   try {
@@ -25,14 +25,18 @@ import javax.servlet.http.HttpServletResponse;
 		   } catch (Exception e) {
 			   e.printStackTrace();
 		   }
-	   }else if(command.equals("/CartAdd.cart")){
+	   }
+	   //カート情報登録処理
+	   else if(command.equals("/CartAdd.cart")){
 		   action  = new CartAddAction();
 		   try {
 			   forward=action.execute(request, response );
 		   } catch (Exception e) {
 			   e.printStackTrace();
 		   }
-	   }else if(command.equals("/CartDelete.cart")){
+	   }
+	   //カート情報削除処理
+	   else if(command.equals("/CartDelete.cart")){
 		   action=new CartDeleteAction();
 		   try {
 			   forward=action.execute(request, response );

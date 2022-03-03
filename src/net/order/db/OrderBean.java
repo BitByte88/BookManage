@@ -3,28 +3,48 @@ package net.order.db;
 import java.sql.Date;
 
 public class OrderBean {
+	//注文NO
 	private int ORDER_NO;
+	//アイテムNO
 	private int ORDER_ITEM_NO;
+	//図書NO
 	private int ORDER_BOOK_NO;
+	//注文ステータス
 	private int ORDER_STATUS;
+	//数量
 	private int ORDER_COUNT;
+	//アカウント
 	private String ORDER_MEMBER_ID;
+	//メモー
 	private String ORDER_MEMO;
+	//決済方法
 	private String ORDER_TRADE_TYPE;
+	//決済日時
 	private Date ORDER_TRADE_DATE;	
+	//注文日時
 	private Date ORDER_DATE;
+	//届け先_氏名
 	private String ORDER_RECEIVE_NAME;
+	//届け先_氏名（カナ）
 	private String ORDER_RECEIVE_NAME_KANA;
+	//届け先_メールアドレス
 	private String ORDER_RECEIVE_EMAIL;
+	//届け先_電話番号
 	private String ORDER_RECEIVE_TEL;
+	//届け先_郵便番号
 	private String ORDER_RECEIVE_ZIPCODE;
+	//届け先_都道府県
 	private String ORDER_RECEIVE_ADD_1;
+	//届け先_市区町村
 	private String ORDER_RECEIVE_ADD_2;
+	//届け先_丁目、番地、建物名
 	private String ORDER_RECEIVE_ADD_3;
+	//合計金額
 	private int TOTAL_PRICE;
+	//書名
 	private String BOOK_NAME;
+	//単価
 	private int BOOK_PRICE;
-	
 	
 	public int getORDER_NO() {
 		return ORDER_NO;

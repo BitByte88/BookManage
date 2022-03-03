@@ -12,7 +12,9 @@ public class MemberZipcodeAction implements Action{
 		MemberDAO memberdao=new MemberDAO();
 		List<String> zipcodeList=new ArrayList<>();
 		String searchZipcode=request.getParameter("zipcode");
+		//郵便番号情報を取得
 		zipcodeList=memberdao.searchZipcode(searchZipcode);
+		//郵便番号検索画面に遷移する。
 		request.setAttribute("zipcodelist", zipcodeList);
 		forward.setPath("./member/member_zipcode.jsp"); 
 		return forward;

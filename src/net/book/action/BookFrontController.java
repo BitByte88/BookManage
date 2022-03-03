@@ -31,7 +31,7 @@ public class BookFrontController extends HttpServlet {
 		
 		ActionForward forward = null;
 		Action action = null;
-		
+		//図書詳細画面
 		if (command.equals("/Book_Detail.book")) {
 			action = new BookDetailAction();
 			try {
@@ -40,6 +40,7 @@ public class BookFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		//図書リスト画面
 		else if (command.equals("/BookList.book")) {
 			action = new BookListAction();
 			try {

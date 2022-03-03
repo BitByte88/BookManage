@@ -1,9 +1,13 @@
 package net.book.db;
 
 public class SearchBean {
+	//タイトル
 	private String BOOK_NAME;
+	//出版社
 	private String BOOK_PUBLISHER;
+	//発行日(開始）
 	private String START_DATE;
+	//発行日(終了）
 	private String END_DATE;
 
 

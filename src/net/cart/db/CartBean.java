@@ -3,10 +3,15 @@ package net.cart.db;
 import java.sql.Timestamp;
 
 public class CartBean {
+	//カートNO
 	private int CART_NO;
+	//会員アカウント
 	private String CART_MEMBER_ID;
+	//図書NO
 	private int CART_BOOK_NO;
+	//数量
 	private int CART_COUNT;
+	//カート生成日時
 	private Timestamp CART_GENERATE_DATE;
 	
 	public int getCART_NO() {

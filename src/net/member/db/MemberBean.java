@@ -1,22 +1,37 @@
 package net.member.db;
 import java.sql.*;
 public class MemberBean {
-
+	//アカウント
 	private String MEMBER_ID;
+	//パスワード
 	private String MEMBER_PW;
+	//氏名
 	private String MEMBER_NAME;
+	//氏名（カナ）
 	private String MEMBER_NAME_KANA;
+	//電話番号
 	private String MEMBER_TEL;
+	//メールアドレス
 	private String MEMBER_MAIL;
+	//郵便番号
 	private String MEMBER_ZIPCODE;
+	//都道府県
 	private String MEMBER_ADD_1;
+	//市区町村
 	private String MEMBER_ADD_2;
+	//丁目、番地、建物名
 	private String MEMBER_ADD_3;
+	//会員種別
 	private Integer MEMBER_TYPE;
+	//削除フラグ
 	private Integer DELETE_FLAG;
+	//作成者
 	private Integer CREATE_USER;
+	//作成日時
 	private Date CREATE_DATE;
+	//更新者
 	private Integer UPDATE_USER;
+	//更新日時
 	private Date UPDATE_DATE;
 	
 	

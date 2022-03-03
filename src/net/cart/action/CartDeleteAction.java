@@ -13,7 +13,7 @@ public class CartDeleteAction implements Action{
 		CartDAO cartdao=new CartDAO();
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("id");
-		
+		//セッションにログイン情報が存在しない場合、ログイン画面に遷移する。
 		if(id==null){
 			String referer = request.getHeader("Referer");
 			request.getSession().setAttribute("redirectURI", referer);
@@ -27,9 +27,9 @@ public class CartDeleteAction implements Action{
 		if(num==null){
 			return null;
 		}
-		
+		//カート情報を削除する。
 		cartdao.cartRemove(Integer.parseInt(num));
-		
+		//カート画面に遷移する。
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(true);
 		forward.setPath("./CartList.cart");

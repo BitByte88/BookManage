@@ -30,7 +30,7 @@ public class OrderDAO {
 			return;
 		}
 	}
-	
+	//注文件数取得
 	public int getOrderCount(String id) throws SQLException {
 		String sql="select  count(distinct order_no) from book_order where ORDER_MEMBER_ID=? AND DELETE_FLAG=0";
 		
@@ -53,7 +53,7 @@ public class OrderDAO {
 		}
 		return 0;
 	}
-	
+	//注文合計金額取得
 	public int getOrderTotalPrice(String id, int orderNo) throws SQLException{
 		String sql="select sum(BOR.ORDER_COUNT * B.BOOK_PRICE) from book_order as BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO "+
 				   "where ORDER_MEMBER_ID=? AND ORDER_NO = ? AND BOR.DELETE_FLAG=0";
@@ -78,7 +78,7 @@ public class OrderDAO {
 		}
 		return 0;
 	}
-	
+	//注文リスト取得
 	public List<OrderBean> getOrderList(String id, int page) throws SQLException {
 		String sql="select BOR.ORDER_NO, BOR.ORDER_BOOK_NO, B.BOOK_NAME,B.BOOK_PRICE, BOR.ORDER_COUNT, " + 
 				"BOR.ORDER_COUNT * B.BOOK_PRICE AS TOTAL_PRICE, ORDER_DATE, ORDER_STATUS  " + 
@@ -99,13 +99,21 @@ public class OrderDAO {
 			
 			while(rs.next()){
 				OrderBean order=new OrderBean();
+				//注文NO
 				order.setORDER_NO(rs.getInt("ORDER_NO"));
+				//図書NO
 				order.setORDER_BOOK_NO(rs.getInt("ORDER_BOOK_NO"));
+				//書名
 				order.setBOOK_NAME(rs.getString("BOOK_NAME"));
+				//単価
 				order.setBOOK_PRICE(rs.getInt("BOOK_PRICE"));
+				//数量
 				order.setORDER_COUNT(rs.getInt("ORDER_COUNT"));
+				//小計
 				order.setTOTAL_PRICE(rs.getInt("TOTAL_PRICE"));
+				//注文日時
 				order.setORDER_DATE(rs.getDate("ORDER_DATE"));
+				//注文ステータス
 				order.setORDER_STATUS(rs.getInt("ORDER_STATUS"));
 				
 				book_order_list.add(order);
@@ -124,9 +132,9 @@ public class OrderDAO {
 		}
 		return null;
 	}
-	
+	//注文情報登録
 	public int addOrder(OrderBean order, List<CartBean> cartlist, List<BookBean> booklist){
-		
+		//最大注文NO取得
 		int ordernum=0;
 		String sql="select max(ORDER_NO) from book_order";
 		try {
@@ -134,11 +142,12 @@ public class OrderDAO {
 			pstmt = conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			rs.next();
+			//最大注文NO+1
 			ordernum=rs.getInt(1)+1;
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
-		
+		//注文情報登録
 		int count = 1;
 		for (int i = 0; i < cartlist.size(); i++) {
 			CartBean cart=(CartBean)cartlist.get(i);
@@ -183,7 +192,7 @@ public class OrderDAO {
 		
 		return ordernum;
 	}
-	
+	//注文NOリストを取得
 	public int[] getOrderNoList(String id) throws SQLException {
 		String sql="select distinct ORDER_NO from book_order where ORDER_MEMBER_ID=? AND DELETE_FLAG=0 order by ORDER_NO";
 		int[] orderNoArray = {};		
@@ -210,7 +219,7 @@ public class OrderDAO {
 		}
 		return orderNoArray;
 	}
-	
+	//アイテム件数を取得（注文NO単位）
 	public int getItemCount(String id,int orderNo) throws SQLException {
 		String sql="select  count(ORDER_ITEM_NO) from book_order where ORDER_MEMBER_ID=? AND ORDER_NO = ? AND DELETE_FLAG=0";
 		

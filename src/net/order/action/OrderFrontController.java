@@ -17,7 +17,7 @@ public class OrderFrontController extends javax.servlet.http.HttpServlet
 		String command = RequestURI.substring(contextPath.length());
 		ActionForward forward = null;
 		Action action = null;
-		
+		//注文詳細画面
 		if (command.equals("/OrderStart.order")) {
 			action  = new OrderStartAction();
 			try {
@@ -25,21 +25,27 @@ public class OrderFrontController extends javax.servlet.http.HttpServlet
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (command.equals("/OrderList.order")) {
+		}
+		//注文履歴画面
+		else if (command.equals("/OrderList.order")) {
 			action  = new OrderListAction();
 			try {
 				forward=action.execute(request, response );
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (command.equals("/OrderAdd.order")) {
+		}
+		//注文登録処理
+		else if (command.equals("/OrderAdd.order")) {
 			action  = new OrderAddAction();
 			try {
 				forward=action.execute(request, response );
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (command.equals("/OrderOk.order")){
+		}
+		//注文完了画面
+		else if (command.equals("/OrderOk.order")){
 			forward=new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./bookOrder/book_order_ok.jsp");

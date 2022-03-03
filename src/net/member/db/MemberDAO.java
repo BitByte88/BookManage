@@ -28,7 +28,7 @@ public class MemberDAO {
 			return;
 		}
 	}
-	
+	//会員情報登録
 	public boolean insertMember(MemberBean mb) throws SQLException{
 		String sql=null;
 		boolean result = false;
@@ -39,21 +39,37 @@ public class MemberDAO {
 				"(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 			pstmt=con.prepareStatement(sql);
+			//アカウント
 			pstmt.setString(1, mb.getMEMBER_ID());
+			//パスワード
 			pstmt.setString(2, mb.getMEMBER_PW());
+			//氏名
 			pstmt.setString(3, mb.getMEMBER_NAME());
+			//氏名（カナ）
 			pstmt.setString(4, mb.getMEMBER_NAME_KANA());
+			//電話番号
 			pstmt.setString(5, mb.getMEMBER_TEL());
+			//メールアドレス
 			pstmt.setString(6, mb.getMEMBER_MAIL());
+			//郵便番号
 			pstmt.setString(7, mb.getMEMBER_ZIPCODE());
+			//都道府県
 			pstmt.setString(8, mb.getMEMBER_ADD_1());
+			//市区町村
 			pstmt.setString(9, mb.getMEMBER_ADD_2());
+			//丁目、番地、建物名
 			pstmt.setString(10, mb.getMEMBER_ADD_3());
+			//会員種別
 			pstmt.setInt(11, 1); //1:一般ユーザー
+			//削除フラグ
 			pstmt.setInt(12, 0); //0:未削除
+			//作成者
 			pstmt.setInt(13, 1); //1:一般ユーザー
+			//作成日時
 			pstmt.setDate(14, new Date(date));
+			//更新者
 			pstmt.setInt(15, 1); //1:一般ユーザー
+			//更新日時
 			pstmt.setDate(16, new Date(date));
 			pstmt.executeUpdate();
 			result = true;
@@ -68,7 +84,7 @@ public class MemberDAO {
 		
 		return result;
 	}
-	
+	//会員情報チェック
 	public int userCheck(String id, String pw) throws SQLException{
 		String sql=null;
 		int x=-1;
@@ -81,10 +97,12 @@ public class MemberDAO {
 			rs=pstmt.executeQuery();
 			if(rs.next()){
 				String memberpw=rs.getString("MEMBER_PW");
-				
+				//取得した会員情報とパスワードが一致する場合、1を戻り値で設定
 				if(memberpw.equals(pw)){
 					x=1;
-				}else{
+				}
+				//取得した会員情報とパスワードが一致ではない場合、0を戻り値で設定
+				else{
 					x=0;
 				}
 			}
@@ -97,9 +115,10 @@ public class MemberDAO {
 				if(con!=null)con.close();
 			}catch(Exception ex) {}
 		}
+		//アカウント存在しない場合、-1を戻り値で設定
 		return x;
 	}
-	
+	//ID存在チェック
 	public int confirmId(String id) throws SQLException{
 		String sql=null;
 		int x=-1;
@@ -113,6 +132,7 @@ public class MemberDAO {
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()){
+				//一致するIDが存在する場合、1を戻り値で設定
 				x=1;
 			}
 		}catch(Exception e){
@@ -124,9 +144,10 @@ public class MemberDAO {
 				if(con!=null)con.close();
 			}catch(Exception ex) {}
 		}
+		//一致するIDが存在しない場合、-1を戻り値で設定
 		return x;
 	}
-	
+	//会員情報取得
 	public MemberBean getMember(String id) throws SQLException{
 		MemberBean member=null;
 		String sql=null;
@@ -140,16 +161,25 @@ public class MemberDAO {
 			
 			if(rs.next()){
 				member=new MemberBean();
-				
+				//アカウント
 				member.setMEMBER_ID(rs.getString("MEMBER_ID"));
+				//氏名
 				member.setMEMBER_NAME(rs.getString("MEMBER_NAME"));
+				//氏名（カナ）
 				member.setMEMBER_NAME_KANA(rs.getString("MEMBER_NAME_KANA"));
+				//電話番号
 				member.setMEMBER_TEL(rs.getString("MEMBER_TEL"));
+				//メールアドレス
 				member.setMEMBER_MAIL(rs.getString("MEMBER_MAIL"));
+				//郵便番号
 				member.setMEMBER_ZIPCODE(rs.getString("MEMBER_ZIPCODE"));
+				//都道府県
 				member.setMEMBER_ADD_1(rs.getString("MEMBER_ADD_1"));
+				//市区町村
 				member.setMEMBER_ADD_2(rs.getString("MEMBER_ADD_2"));
+				//丁目、番地、建物名
 				member.setMEMBER_ADD_3(rs.getString("MEMBER_ADD_3"));
+				//会員種別
 				member.setMEMBER_TYPE(rs.getInt("MEMBER_TYPE"));
 			}
 		}catch(Exception e){
@@ -163,7 +193,7 @@ public class MemberDAO {
 		}
 		return member;
 	}
-	
+	//会員情報修正
 	public void updateMember(MemberBean mb) throws SQLException{
 		String sql=null;
 		
@@ -175,15 +205,25 @@ public class MemberDAO {
 			"MEMBER_ADD_3=? where MEMBER_ID=? and DELETE_FLAG=0";
 			
 			pstmt=con.prepareStatement(sql);
+			//パスワード
 			pstmt.setString(1, mb.getMEMBER_PW());
+			//氏名
 			pstmt.setString(2, mb.getMEMBER_NAME());
+			//氏名（カナ）
 			pstmt.setString(3, mb.getMEMBER_NAME_KANA());
+			//電話番号
 			pstmt.setString(4, mb.getMEMBER_TEL());
+			//メールアドレス
 			pstmt.setString(5, mb.getMEMBER_MAIL());
+			//郵便番号
 			pstmt.setString(6, mb.getMEMBER_ZIPCODE());
+			//都道府県
 			pstmt.setString(7, mb.getMEMBER_ADD_1());
+			//市区町村
 			pstmt.setString(8, mb.getMEMBER_ADD_2());
+			//丁目、番地、建物名
 			pstmt.setString(9, mb.getMEMBER_ADD_3());
+			//アカウント
 			pstmt.setString(10, mb.getMEMBER_ID());
 			pstmt.executeUpdate();
 		}catch(Exception e){
@@ -196,7 +236,7 @@ public class MemberDAO {
 			}catch(Exception ex) {}
 		}
 	}
-	
+	//会員情報削除
 	public int deleteMember(String id, String pw) throws SQLException{
 		String sql=null;
 		int x=-1;
@@ -232,7 +272,7 @@ public class MemberDAO {
 		}
 		return x;
 	}	
-	
+	//アカウント情報探す
 	public MemberBean findId(String name, String nameKana, String tel, String mail)
 	throws SQLException{
 		String sql=null;
@@ -244,15 +284,21 @@ public class MemberDAO {
 				"from MEMBER where MEMBER_NAME=? and MEMBER_NAME_KANA=? and MEMBER_TEL=? and MEMBER_MAIL=? and DELETE_FLAG=0";
 			
 			pstmt=con.prepareStatement(sql);
+			//氏名
 			pstmt.setString(1, name);
+			//氏名（カナ）
 			pstmt.setString(2, nameKana);
+			//電話番号
 			pstmt.setString(3, tel);
+			//メールアドレス
 			pstmt.setString(4, mail);
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()){
 				member = new MemberBean();
+				//アカウント
 				member.setMEMBER_ID(rs.getString("MEMBER_ID"));
+				//パスワード
 				member.setMEMBER_PW(rs.getString("MEMBER_PW"));
 			}
 			
@@ -268,7 +314,7 @@ public class MemberDAO {
 		}
 		return member;
 	}
-	
+	//会員種別チェック
 	public boolean isAdmin(String id){
 		String sql="select MEMBER_TYPE from MEMBER where MEMBER_ID=? and DELETE_FLAG=0";
 		int member_admin=1;
@@ -281,7 +327,7 @@ public class MemberDAO {
 			rs.next();
 			
 			member_admin=rs.getInt("MEMBER_TYPE");
-			
+			//チェック結果が「0：管理者」の場合
 			if(member_admin==0){
 				result = true;
 			}
@@ -295,9 +341,10 @@ public class MemberDAO {
 				if(con!=null)con.close();
 			}catch(Exception ex) {}
 		}
+		//チェック結果が「1：一般ユーザ」の場合
 		return result;
 	}
-	
+	//郵便番号検索
 	public List<String> searchZipcode(String zipcode){
 		String sql="select * from zipcode where ZIPCODE like ? and DELETE_FLAG=0";
 		List<String> zipcodeList=new ArrayList<>();
@@ -309,10 +356,13 @@ public class MemberDAO {
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
+				//都道府県
 				String add_1=rs.getString("ADD_1");
+				//市区町村
 				String add_2=rs.getString("ADD_2");
+				//丁目、番地、建物名
 				String add_3=rs.getString("ADD_3");  
-				
+				//郵便番号
 				String zipcodeResult=rs.getString("ZIPCODE");
 				
 				zipcodeList.add(zipcodeResult+","+add_1+"-"+add_2+"-"+add_3);

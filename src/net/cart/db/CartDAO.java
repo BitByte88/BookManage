@@ -30,7 +30,7 @@ public class CartDAO {
 			return;
 		}
 	}
-	
+	//カート、図書情報を取得する。
 	public HashMap<String, Object> getCartList(String id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		List<CartBean> cartlist = new ArrayList<>();
@@ -48,14 +48,18 @@ public class CartDAO {
 			while (rs.next()) {
 				CartBean dto = new CartBean();
 				BookBean book = new BookBean();
-				
+				//カートNO
 				dto.setCART_NO(rs.getInt("CART_NO"));
+				//会員アカウント
 				dto.setCART_MEMBER_ID(
 						rs.getString("CART_MEMBER_ID"));
+				//図書NO
 				dto.setCART_BOOK_NO(
 						rs.getInt("CART_BOOK_NO"));
+				//数量
 				dto.setCART_COUNT(
 						rs.getInt("CART_COUNT"));
+				//カート生成日時
 				dto.setCART_GENERATE_DATE(
 						rs.getTimestamp("CART_GENERATE_DATE"));
 				
@@ -65,11 +69,15 @@ public class CartDAO {
 				rs1 = pstmt.executeQuery();
 				
 				if(rs1.next()){
+					//図書NO
 					book.setBOOK_NO(rs1.getInt("BOOK_NO"));
+					//書名
 					book.setBOOK_NAME(
 							rs1.getString("BOOK_NAME"));
+					//価格
 					book.setBOOK_PRICE(
 							rs1.getInt("BOOK_PRICE"));
+					//画像
 					book.setBOOK_IMAGE(
 							rs1.getString("BOOK_IMAGE"));
 				}else{
@@ -97,7 +105,7 @@ public class CartDAO {
 		
 		return null;
 	}
-	
+	//カート情報を登録する。
 	public void cartAdd(String id,int bookno, int amount){
 		String sql="select max(cart_no) from cart";
 		int num=0;
@@ -113,9 +121,13 @@ public class CartDAO {
 				"(?,?,?,?,NOW(),0,0,NOW(),0,NOW())";
 			
 			pstmt=conn.prepareStatement(sql);
+			//カートNO
 			pstmt.setInt(1, num);
+			//会員アカウント
 			pstmt.setString(2, id);
+			//図書NO
 			pstmt.setInt(3, bookno);
+			//数量
 			pstmt.setInt(4, amount);
 			pstmt.executeUpdate();
 		}catch(SQLException e){
@@ -129,7 +141,7 @@ public class CartDAO {
 			}catch(Exception ex) {}
 		}
 	}
-	
+	//カート情報を削除する。
 	public boolean cartRemove(int num) {
 		String sql = "update CART set DELETE_FLAG=1 where CART_NO=?";
 		
@@ -151,7 +163,7 @@ public class CartDAO {
 		}
 		return false;
 	}
-	
+	//カートをクリアする。
 	public boolean cartClear(String id) {
 		String sql = "update CART set DELETE_FLAG=1 WHERE CART_MEMBER_ID=?";
 		

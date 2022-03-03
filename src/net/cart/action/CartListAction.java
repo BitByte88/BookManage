@@ -19,7 +19,7 @@ public class CartListAction implements Action{
 		CartDAO cartdao=new CartDAO();
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
-		
+		//セッションにログイン情報が存在しない場合、ログイン画面に遷移する。
 		if(id==null){
 			String referer = request.getHeader("Referer");
 			request.getSession().setAttribute("redirectURI", referer);
@@ -28,14 +28,18 @@ public class CartListAction implements Action{
 			forward.setPath("./MemberLogin.member");
 			return forward;			
 		}
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		//カート、図書情報を取得する。
 		map = cartdao.getCartList(id);
+		//カート情報
 		List<CartBean> cartlist=(ArrayList<CartBean>)map.get("cartlist");
+		//図書情報
 		List<BookBean> booklist=(ArrayList<BookBean>)map.get("booklist");
 		
 		request.setAttribute("cartlist", cartlist);
 		request.setAttribute("booklist", booklist);
-		
+		//カート画面に遷移する。
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("./bookOrder/book_cart.jsp");

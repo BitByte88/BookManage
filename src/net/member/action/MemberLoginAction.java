@@ -12,23 +12,30 @@ public class MemberLoginAction implements Action{
 		ActionForward forward=new ActionForward();
 		MemberDAO memberdao=new MemberDAO();		
 		String id=request.getParameter("MEMBER_ID");
-		String pass=request.getParameter("MEMBER_PW");		
+		String pass=request.getParameter("MEMBER_PW");
+		//ログイン情報チェック
 		int check=memberdao.userCheck(id, pass);
+		//チェック結果が「成功」の場合
 		if(check == 1){
 			session.setAttribute("id", id);
+			//会員種別が「０:管理者」の場合
   			if(memberdao.isAdmin(id)){
+  				//図書リスト（管理者）画面に遷移する。
   				session.setAttribute("memberType", 0); //管理者
 				forward.setRedirect(true);
 				forward.setPath("./BookList.adbook"); 
 				return forward;
 			}else{
+				//会員種別が「１:一般ユーザー」の場合
 				session.setAttribute("memberType", 1); //一般ユーザー
 				
 				String redirectURL = (String)session.getAttribute("redirectURI");
+				//遷移元がない場合
 				if(redirectURL == null) {
 					forward.setRedirect(true);
 					forward.setPath("./BookList.book"); 
 				} else {
+					//遷移元がある場合、遷移元に遷移する。
 					forward.setRedirect(true);
 					redirectURL =redirectURL.substring(redirectURL.lastIndexOf("/"));
 					forward.setPath("."+redirectURL);
@@ -36,7 +43,9 @@ public class MemberLoginAction implements Action{
 				}
 				return forward;
 			}
-		}else if(check == 0){
+		}
+		//チェック結果が「失敗：パスワード未一致」の場合、エラーメッセージを表示
+		else if(check == 0){
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
@@ -45,6 +54,7 @@ public class MemberLoginAction implements Action{
 			out.println("</script>");
 			out.close();
 		}else{
+			//チェック結果が「失敗：一致するアカウントが無い」の場合、エラーメッセージを表示
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
