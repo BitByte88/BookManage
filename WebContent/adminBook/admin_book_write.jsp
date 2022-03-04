@@ -83,6 +83,12 @@ p{
 margin:auto;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 </style>
 </head>
 <body>
@@ -185,7 +191,7 @@ margin:auto;
 						<td width="20%" bgcolor="#EFEFEF">
 							<p align="center"><font size=2>販売価格</font></p>
 						</td>
-						<td width="40%"><input type="number" name="book_price" style="width:390"></td>
+						<td width="40%"><input type="number" min="0" name="book_price" style="width:390"></td>
 						<td width="20%"></td>
 					</tr>
 					<tr>
