@@ -15,6 +15,26 @@
 	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
 	<jsp:include page="/menu/menu.jsp" />
 <title>図書管理システム</title>
+<script>
+function check(){
+	var memo=memberform.memo.value;
+	var status=memberform.status.value;
+	
+	if(memo.length > 128){//桁数チェック（メモー）
+		alert("メモーは128文字以内まで入力してください。");
+		bookform.memo.focus();
+		return false;		
+	}
+	
+	if(status.length == 0){//必須チェック（注文ステータス）
+		alert("注文ステータスを選択してください。");
+		memberform.status.focus();
+		return false;
+	}
+	
+	return true;
+}
+</script>
 </head>
 <body>
 <div style="margin:30 0 50 0">
@@ -22,7 +42,7 @@
 <tr>
 <td colspan=2 align=center>
 <!-- 注文情報修正(管理者) -->
-<form action="./AdminOrderModify.adorder" name="orderform" method="post">
+<form action="./AdminOrderModify.adorder" name="orderform" method="post" onsubmit="return check()">
 <input type="hidden" name="num" value="<%=orderlist.get(0).getORDER_NO() %>">
 <table style="width:90%; border-spacing:1">
 	<tr>

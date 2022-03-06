@@ -1,6 +1,5 @@
 package net.book.db;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 
 public class BookBean {

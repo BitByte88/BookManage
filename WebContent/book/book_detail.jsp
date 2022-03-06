@@ -21,9 +21,15 @@
 <title>図書管理システム</title>
 <script>
 function isBuy(bookform) {
-	var amount= parseInt(document.bookform.amount.value);
-	if (amount <= 0) {
-		alert("数量は１冊以上を注文してください。")
+	var amount= document.bookform.amount.value;
+	if (amount.length == 0) {//必須チェック（数量）
+		alert("数量を入力してください。");
+		return;
+	} else if(isNaN(amount)){//形式チェック（数量）
+		alert("数量は数字を入力してください。");
+		return;
+	} else if(parseInt(amount) <= 0){//入力する数量が０以下の場合
+		alert("数量は１冊以上を注文してください。");
 		return;
 	}
 	var isbuy=confirm("購入しますか");
@@ -36,12 +42,17 @@ function isBuy(bookform) {
 }
 
 function isCart(cartform) {
-	var amount=parseInt(document.bookform.amount.value);
-	if (amount <= 0) {
-		alert("数量は１冊以上を注文してください。")
+	var amount = document.bookform.amount.value;
+	if (amount.length == 0) {//必須チェック（数量）
+		alert("数量を入力してください。");
+		return;
+	} else if(isNaN(amount)){//形式チェック（数量）
+		alert("数量は数字を入力してください。");
+		return;
+	} else if(parseInt(amount) <= 0){//入力する数量が０以下の場合
+		alert("数量は１冊以上を注文してください。");
 		return;
 	}
-
 	
 	var isbuy=confirm("カートに入れますか");
 	

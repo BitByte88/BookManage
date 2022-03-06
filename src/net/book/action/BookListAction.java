@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,14 +46,33 @@ public class BookListAction implements Action{
 		SimpleDateFormat dateFormatParser = new SimpleDateFormat("yyyy/MM/dd"); 
         dateFormatParser.setLenient(false); 
         try {
+        	
+        	Date date1 = null;
+        	Date date2 = null;
+        	
         	//発行日検索の入力値（開始）がある場合
         	if(searchBean.getSTART_DATE() != null && !searchBean.getSTART_DATE().isEmpty()) {
-			dateFormatParser.parse(searchBean.getSTART_DATE());
+			date1 = dateFormatParser.parse(searchBean.getSTART_DATE());
         	}
-        	//タイトル検索の入力値（終了）がある場合
+        	//発行日検索の入力値（終了）がある場合
         	if(searchBean.getEND_DATE() != null && !searchBean.getEND_DATE().isEmpty()) {
-			dateFormatParser.parse(searchBean.getEND_DATE());
+			date2 = dateFormatParser.parse(searchBean.getEND_DATE());
         	}
+        	
+        	//発行日検索の入力値（開始）より発行日検索の入力値（終了）が以後の日時の場合
+        	if(date1 !=null && date2 != null) {
+        		if(date2.before(date1)) {
+        			response.setContentType("text/html; charset=UTF-8");
+        			PrintWriter out = response.getWriter();
+        			out.println("<script>");
+        			out.println("alert('発行日検索の入力値範囲を確認してください。');");
+        			out.println("history.back();");
+        			out.println("</script>");
+        			out.close();
+        			return null;
+				}
+        	}
+        	
 		} catch (ParseException e1) {
 			//発行日の形式に問題がある場合、エラーメッセージを画面に表示する。
 			response.setContentType("text/html; charset=UTF-8");

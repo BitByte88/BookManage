@@ -1,5 +1,6 @@
 package net.order.action;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,12 +32,34 @@ public class OrderStartAction implements Action{
 			return forward;		
 		}
 		
+
+		
 		request.setCharacterEncoding("UTF-8");
 		
 		List<Object> orderinfo=new ArrayList<>();
 		String orderType=request.getParameter("orderType");
 		//図書詳細画面から遷移する場合
 		if(orderType.equals("fromBookDetail")){
+
+			//パラメータチェック
+			List<String> errorMsg = orderStartParameterCheck(request);	
+			
+			//チェック結果が「エラー」の場合
+			if(errorMsg.size() != 0) {
+				String error = "";
+				for(String msg : errorMsg) {
+					error = error + msg + "\\n";
+				}
+				
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('"+ error +"')");
+				out.println("history.back()");
+				out.println("</script>");
+				return null;				
+			}
+			
 			//図書NO
 			orderinfo.add(Integer.parseInt(request.getParameter("bookno")));
 			//画像
@@ -86,5 +109,25 @@ public class OrderStartAction implements Action{
 		forward.setRedirect(false);
 		forward.setPath("./bookOrder/book_buy.jsp");
 		return forward;
+	}
+	
+	public List<String> orderStartParameterCheck(HttpServletRequest request) {
+		List<String> errorMsg = new ArrayList<String>();
+		String amount = request.getParameter("amount");
+		
+		try {
+			if (amount == null || amount.isEmpty()) {//必須チェック（数量）
+				errorMsg.add("数量を入力してください。");
+			} else {
+				int parseAmount = Integer.parseInt(request.getParameter("amount"));
+				if(parseAmount <= 0) {//入力する数量が０以下の場合
+					errorMsg.add("数量は１冊以上を注文してください。");
+				}
+			}
+		} catch (Exception e) {//形式チェック（数量
+			errorMsg.add("数量は数字を入力してください。");
+		}
+		
+		return errorMsg;
 	}
 }

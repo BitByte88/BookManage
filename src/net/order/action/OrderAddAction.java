@@ -1,5 +1,6 @@
 package net.order.action;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 
 import net.book.db.BookBean;
 import net.cart.db.CartBean;
@@ -32,6 +34,24 @@ public class OrderAddAction implements Action{
 			return forward;
 		}
 		
+		//パラメータチェック
+		List<String> errorMsg = orderAddParameterCheck(request);	
+		
+		//チェック結果が「エラー」の場合
+		if(errorMsg.size() != 0) {
+			String error = "";
+			for(String msg : errorMsg) {
+				error = error + msg + "\\n";
+			}
+			
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('"+ error +"')");
+			out.println("history.back()");
+			out.println("</script>");
+			return null;				
+		}
 		
 		OrderDAO orderdao=new OrderDAO();
 		OrderBean order=new OrderBean();
@@ -97,5 +117,70 @@ public class OrderAddAction implements Action{
 		forward.setRedirect(true);
 		forward.setPath("./OrderOk.order");
 		return forward;
+	}
+	
+	public List<String> orderAddParameterCheck(HttpServletRequest request) {
+		List<String> errorMsg = new ArrayList<String>();
+		String name = request.getParameter("ORDER_RECEIVE_NAME");
+		String nameKana = request.getParameter("ORDER_RECEIVE_NAME_KANA");
+		String tel = request.getParameter("ORDER_RECEIVE_TEL");
+		String mail = request.getParameter("ORDER_RECEIVE_EMAIL");
+		String zipCode = request.getParameter("ORDER_RECEIVE_ZIPCODE");
+		String add1 = (request.getParameter("ORDER_RECEIVE_ADD_1"));
+		String add2 = request.getParameter("ORDER_RECEIVE_ADD_2");
+		String add3 = request.getParameter("ORDER_RECEIVE_ADD_3");
+		String memo = request.getParameter("ORDER_MEMO");
+		
+		if(name == null || name.isEmpty()){//必須チェック（届け先_氏名）
+			errorMsg.add("届け先_氏名を入力してください。");
+		} else if (name.length() > 32) {//桁数チェック（届け先_氏名）
+			errorMsg.add("届け先_氏名は32文字以内まで入力してください。");
+		}
+		
+		if(nameKana == null || nameKana.isEmpty()){//必須チェック（届け先_氏名（カナ））
+			errorMsg.add("届け先_氏名（カナ）を入力してください。");
+		} else if (nameKana.length() > 32) {//桁数チェック（届け先_氏名（カナ））
+			errorMsg.add("届け先_氏名（カナ）は32文字以内まで入力してください。");
+		}
+		
+		if(tel == null || tel.isEmpty()){//必須チェック（届け先_TEL）
+			errorMsg.add("届け先_TELを入力してください。");
+		} else if (tel.length() > 16) {//桁数チェック（届け先_TEL）
+			errorMsg.add("届け先_TELは16文字以内まで入力してください。");
+		}
+		
+		if(mail == null || mail.isEmpty()){//必須チェック（届け先_メールアドレス）
+			errorMsg.add("届け先_メールアドレスを入力してください。");
+		} else if (mail.length() > 32) {//桁数チェック（届け先_メールアドレス）
+			errorMsg.add("届け先_メールアドレスは128文字以内まで入力してください。");
+		}
+		
+		if(zipCode == null || zipCode.length() <= 6){//必須チェック（郵便番号
+			errorMsg.add("届け先_郵便番号を入力してください。");
+		}
+		
+		if(add1 == null || add1.isEmpty()){//必須チェック（届け先_都道府県）
+			errorMsg.add("届け先_都道府県を選択してください。");
+		} else if (add1.length() > 128) {//桁数チェック（届け先_都道府県）
+			errorMsg.add("届け先_都道府県は128文字以内まで入力してください。");
+		}
+		
+		if(add2 == null || add2.isEmpty()){//必須チェック（届け先_市区町村）
+			errorMsg.add("届け先_市区町村を選択してください。");
+		} else if (add2.length() > 128) {//桁数チェック（届け先_市区町村）
+			errorMsg.add("届け先_市区町村は128文字以内まで入力してください。");
+		}
+		
+		if(add3 == null || add3.isEmpty()){//必須チェック（届け先_丁目、番地、建物名）
+			errorMsg.add("届け先_丁目、番地、建物名を選択してください。");
+		} else if (add3.length() > 128) {//桁数チェック（届け先_丁目、番地、建物名）
+			errorMsg.add("届け先_丁目、番地、建物名は128文字以内まで入力してください。");
+		}
+		
+		if(memo != null && memo.length() > 128){//桁数チェック（メモー）
+			errorMsg.add("メモーは128文字以内まで入力してください。");
+		}
+		
+		return errorMsg;
 	}
 }

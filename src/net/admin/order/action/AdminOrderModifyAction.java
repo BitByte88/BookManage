@@ -1,5 +1,9 @@
 package net.admin.order.action;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +15,25 @@ public class AdminOrderModifyAction implements Action{
 	throws Exception{
 		AdminOrderDAO orderdao=new AdminOrderDAO();
 		OrderBean order=new OrderBean();
+
+		//パラメータチェック
+		List<String> errorMsg = orderParameterCheck(request);	
+		
+		//チェック結果が「エラー」の場合
+		if(errorMsg.size() != 0) {
+			String error = "";
+			for(String msg : errorMsg) {
+				error = error + msg + "\\n";
+			}
+			
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('"+ error +"')");
+			out.println("history.back()");
+			out.println("</script>");
+			return null;				
+		}
 		
 		boolean result=false;
 		request.setCharacterEncoding("UTF-8");
@@ -33,4 +56,21 @@ public class AdminOrderModifyAction implements Action{
 		forward.setPath("./AdminOrderList.adorder");
 		return forward;
 	 } 
+	
+	public List<String> orderParameterCheck(HttpServletRequest request) {
+		List<String> errorMsg = new ArrayList<String>();
+		String memo = request.getParameter("memo");
+		String status = request.getParameter("status");
+		
+		if (memo != null && memo.length() > 128) {//桁数チェック（メモー）
+			errorMsg.add("メモーは128文字以内まで入力してください。");
+		}
+		
+		if(status == null || status.isEmpty()){//必須チェック（注文ステータス）
+			errorMsg.add("注文ステータスを選択してください。");
+		}
+		
+		
+		return errorMsg;
+	}
 }

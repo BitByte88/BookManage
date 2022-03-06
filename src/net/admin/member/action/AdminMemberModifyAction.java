@@ -1,5 +1,9 @@
 package net.admin.member.action;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +15,25 @@ public class AdminMemberModifyAction implements Action{
 	throws Exception{
 		AdminMemberDAO memberdao=new AdminMemberDAO();
 		MemberBean member=new MemberBean();
+		
+		//パラメータチェック
+		List<String> errorMsg = memberParameterCheck(request);	
+		
+		//チェック結果が「エラー」の場合
+		if(errorMsg.size() != 0) {
+			String error = "";
+			for(String msg : errorMsg) {
+				error = error + msg + "\\n";
+			}
+			
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('"+ error +"')");
+			out.println("history.back()");
+			out.println("</script>");
+			return null;				
+		}
 		
 		boolean result=false;
 		request.setCharacterEncoding("UTF-8");
@@ -46,5 +69,70 @@ public class AdminMemberModifyAction implements Action{
 		forward.setRedirect(true);
 		forward.setPath("./AdminMemberList.admember");
 		return forward;
-	 } 
+	 }
+	
+	public List<String> memberParameterCheck(HttpServletRequest request) {
+		List<String> errorMsg = new ArrayList<String>();
+		String name = request.getParameter("MEMBER_NAME");
+		String nameKana = request.getParameter("MEMBER_NAME_KANA");
+		String tel = request.getParameter("MEMBER_TEL");
+		String mail = request.getParameter("MEMBER_MAIL");
+		String zipCode = request.getParameter("MEMBER_ZIPCODE");
+		String add1 = (request.getParameter("MEMBER_ADD_1"));
+		String add2 = request.getParameter("MEMBER_ADD_2");
+		String add3 = request.getParameter("MEMBER_ADD_3");
+		String memberType = request.getParameter("MEMBER_TYPE");
+		
+		if(name == null || name.isEmpty()){//必須チェック（氏名）
+			errorMsg.add("氏名を入力してください。");
+		} else if (name.length() > 32) {//桁数チェック（氏名）
+			errorMsg.add("氏名は32文字以内まで入力してください。");
+		}
+		
+		if(nameKana == null || nameKana.isEmpty()){//必須チェック（氏名（カナ））
+			errorMsg.add("氏名（カナ）を入力してください。");
+		} else if (nameKana.length() > 32) {//桁数チェック（氏名（カナ））
+			errorMsg.add("氏名（カナ）は32文字以内まで入力してください。");
+		}
+		
+		if(tel == null || tel.isEmpty()){//必須チェック（TEL）
+			errorMsg.add("TELを入力してください。");
+		} else if (tel.length() > 16) {//桁数チェック（TEL）
+			errorMsg.add("TELは16文字以内まで入力してください。");
+		}
+		
+		if(mail == null || mail.isEmpty()){//必須チェック（メールアドレス）
+			errorMsg.add("メールアドレスを入力してください。");
+		} else if (mail.length() > 32) {//桁数チェック（メールアドレス）
+			errorMsg.add("メールアドレスは128文字以内まで入力してください。");
+		}
+		
+		if(zipCode == null || zipCode.length() <= 6){//必須チェック（郵便番号）
+			errorMsg.add("郵便番号を入力してください。");
+		}
+		
+		if(add1 == null || add1.isEmpty()){//必須チェック（都道府県）
+			errorMsg.add("都道府県を選択してください。");
+		} else if (add1.length() > 128) {//桁数チェック（都道府県）
+			errorMsg.add("都道府県は128文字以内まで入力してください。");
+		}
+		
+		if(add2 == null || add2.isEmpty()){//必須チェック（市区町村）
+			errorMsg.add("市区町村を選択してください。");
+		} else if (add2.length() > 128) {//桁数チェック（市区町村）
+			errorMsg.add("市区町村は128文字以内まで入力してください。");
+		}
+		
+		if(add3 == null || add3.isEmpty()){//必須チェック（丁目、番地、建物名）
+			errorMsg.add("丁目、番地、建物名を選択してください。");
+		} else if (add3.length() > 128) {//桁数チェック（丁目、番地、建物名）
+			errorMsg.add("丁目、番地、建物名は128文字以内まで入力してください。");
+		}
+		
+		if(memberType == null || memberType.isEmpty()){//必須チェック（会員種別）
+			errorMsg.add("会員種別を選択してください。");
+		}
+		
+		return errorMsg;
+	}
 }
