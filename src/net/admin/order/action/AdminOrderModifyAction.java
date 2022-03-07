@@ -55,7 +55,7 @@ public class AdminOrderModifyAction implements Action{
 		forward.setRedirect(true);
 		forward.setPath("./AdminOrderList.adorder");
 		return forward;
-	 } 
+	 }
 	
 	public List<String> orderParameterCheck(HttpServletRequest request) {
 		List<String> errorMsg = new ArrayList<String>();
@@ -69,7 +69,6 @@ public class AdminOrderModifyAction implements Action{
 		if(status == null || status.isEmpty()){//必須チェック（注文ステータス）
 			errorMsg.add("注文ステータスを選択してください。");
 		}
-		
 		
 		return errorMsg;
 	}

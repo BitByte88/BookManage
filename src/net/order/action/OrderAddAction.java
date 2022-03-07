@@ -4,12 +4,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-
 import net.book.db.BookBean;
 import net.cart.db.CartBean;
 import net.cart.db.CartDAO;

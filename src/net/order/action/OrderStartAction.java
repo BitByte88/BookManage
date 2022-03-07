@@ -32,10 +32,7 @@ public class OrderStartAction implements Action{
 			return forward;		
 		}
 		
-
-		
 		request.setCharacterEncoding("UTF-8");
-		
 		List<Object> orderinfo=new ArrayList<>();
 		String orderType=request.getParameter("orderType");
 		//図書詳細画面から遷移する場合
