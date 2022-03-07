@@ -1,6 +1,6 @@
 package net.admin.book.action;
 
-public class ActionForward {
+public class ForwardService {
 	private boolean isRedirect=false;
 	private String path=null;
 	

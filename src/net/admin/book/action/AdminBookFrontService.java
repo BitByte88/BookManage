@@ -1,4 +1,5 @@
 package net.admin.book.action;
+
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -19,12 +20,188 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import net.admin.book.db.*;
-public class AdminBookModifyAction implements Action {
-	public ActionForward execute(HttpServletRequest request,
-			HttpServletResponse response) throws Exception{
+import net.admin.book.db.AdminBookDAO;
+import net.admin.book.db.BookBean;
+
+public class AdminBookFrontService{
+	
+	//図書リスト画面表示
+	public ForwardService AdminBookListAction(HttpServletRequest request, HttpServletResponse response) {
+		AdminBookDAO abookdao=new AdminBookDAO();
+		
+		ForwardService forward=new ForwardService();
+		//図書リスト取得
+		List<BookBean> list=abookdao.getBookList();
+		//取得した図書リストを設定
+		request.setAttribute("list",list);
+		//図書リスト画面に遷移する。
+		forward.setPath("./adminBook/admin_book_list.jsp");
+		return forward;
+	}
+
+	//図書情報を登録する。
+	public ForwardService AdminBookAddAction(HttpServletRequest request, HttpServletResponse response) {
+		ForwardService forward = new ForwardService();
+		AdminBookDAO abookdao= new AdminBookDAO();
+		BookBean bookbean = new BookBean();
+		int bookNo = abookdao.getBookNo();
+		String realPath = "";
+		String savePath = "upload";
+		//最大サイズ指定
+		int maxSize = 5 * 1024 * 1024;
+		//アップロードファイルの指定ファイル名Mapを設定
+		HashMap<String, String> map = new HashMap<String, String>();
+		//サムネイル用画像
+		map.put("file4", "Thumbnail");
+		//メイン画像
+		map.put("file3", "MainImage");
+		//詳細画像1
+		map.put("file2", "DetailImage1");
+		//詳細画像2
+		map.put("file1", "DetailImage2");
+		//サーバ上の物理的なアップロードパスを取得
+		realPath = request.getServletContext().getRealPath(savePath);
+		List<String> savefiles=new ArrayList<>();
+		try {
+			MultipartRequest multi = null;
+			//画面から登録された情報を取得（ファイルアップロード含め）
+			multi = new MultipartRequest(request, realPath, maxSize, "UTF-8",
+					new DefaultFileRenamePolicy());
+			
+			//パラメータチェック
+			List<String> errorMsg = bookParameterCheck(multi);
+			
+			//チェック結果が「エラー」の場合
+			if(errorMsg.size() != 0) {
+				String error = "";
+				for(String msg : errorMsg) {
+					error = error + msg + "\\n";
+				}
+				
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('"+ error +"')");
+				out.println("history.back()");
+				out.println("</script>");
+				return null;				
+			}
+			//アップロードファイル取得
+			Enumeration<?> files=multi.getFileNames();
+			//アップロードファイル件数分、以下の処理を行う。
+			while(files.hasMoreElements()){
+				String element = (String)files.nextElement();
+				//ファイル名取得
+				String fileName = multi.getFilesystemName(element);
+				if(fileName == null) {
+					continue;
+				}
+				//ファイルパス設定
+	            String filepath  = realPath +"/" + fileName ; 
+	            Path f = Paths.get(filepath);
+	    		String Extension = "";
+	    		//拡張子取得
+	    		int i = fileName.lastIndexOf('.');
+	    		if (i > 0) {
+	    			Extension = fileName.substring(i+1);
+	    		}
+	    		//指定ファイル名取得
+	    		String imageName = map.get(element);
+	    		String newImage = imageName + "-" + bookNo + "." + Extension;
+                //アップロードファイルを指定ファイル名に変換
+	    		Files.move(f, f.resolveSibling(realPath + "/" + imageName + "-" + bookNo + "." + Extension ),StandardCopyOption.REPLACE_EXISTING);                  
+				if(files.hasMoreElements()){
+					//取得した要素が最後ではない場合
+					savefiles.add(newImage+",");
+				}else{
+					//取得した要素が最後の場合
+					savefiles.add(newImage);
+				}
+			}
+			StringBuffer fl=new StringBuffer();
+			for(int i=0;i<savefiles.size();i++){
+				fl.append(savefiles.get(i));	
+			}
+			//カテゴリー
+			bookbean.setBOOK_CATEGORY(multi.getParameter("book_category"));
+			//書名
+			bookbean.setBOOK_NAME(multi.getParameter("book_name"));
+			//著者
+			bookbean.setBOOK_WRITER(multi.getParameter("book_writer"));
+			//出版社
+			bookbean.setBOOK_PUBLISHER(multi.getParameter("book_publisher"));
+			//発行日
+			bookbean.setBOOK_PUBLISHING_DATE(Date.valueOf(multi.getParameter("book_publishing_date")));
+			//販売価格
+			bookbean.setBOOK_PRICE(new BigDecimal(multi.getParameter("book_price")));
+			//ISBNコード
+			bookbean.setBOOK_ISBN(multi.getParameter("book_isbn"));
+			//図書内容
+			bookbean.setBOOK_CONTENT(multi.getParameter("book_content"));
+			//イメージ
+			bookbean.setBOOK_IMAGE(fl.toString());
+			//図書情報登録
+			int result = abookdao.insertBook(bookbean, bookNo);
+			//図書情報登録が「失敗」の場合、エラーメッセージを図書登録画面に戻って表示する。
+			if (result <= 0){
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('登録を失敗しました。')");
+				out.println("history.back()");
+				out.println("</script>");
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//図書情報登録が「成功」の場合、図書リスト画面に遷移する。
+		forward.setRedirect(true);
+		forward.setPath("BookList.adbook");
+		return forward;
+	}
+	
+	//図書情報修正画面を表示する。
+	public ForwardService AdminBookModifyForm(HttpServletRequest request, HttpServletResponse response) {
+		ForwardService forward=new ForwardService();		
+		AdminBookDAO abookdao=new AdminBookDAO();
+		BookBean bookbean=new BookBean();	
+		//図書NO取得
+		String num=request.getParameter("book_no");
+		//図書情報取得
+		bookbean=abookdao.getBook(Integer.parseInt(num));
+		//イメージ名区分（区分字「,」）
+		String[] imageStr = bookbean.getBOOK_IMAGE().split(",");
+		HashMap<String, String> imageMap = new HashMap<String, String>();
+		for(String imageName : imageStr) {
+			//サムネイル用画像を設定
+			if(imageName.contains("Thumbnail")) {
+				imageMap.put("thumbnail","./upload/" + imageName);
+			}
+			//メイン画像を設定
+			if(imageName.contains("MainImage")) {
+				imageMap.put("mainImage","./upload/" + imageName);
+			}
+			//詳細画像1を設定
+			if(imageName.contains("DetailImage1")) {
+				imageMap.put("detailImage1","./upload/" + imageName);
+			}
+			//詳細画像2を設定
+			if(imageName.contains("DetailImage2")) {
+				imageMap.put("detailImage2","./upload/" + imageName);
+			}
+		}
+		request.setAttribute("abb", bookbean);	
+		request.setAttribute("imageMap", imageMap);
+		//図書情報変更画面に遷移する。
+		forward.setPath("./adminBook/admin_book_modify.jsp");
+		return forward;
+	}
+	
+	//図書情報を修正する。
+	public ForwardService AdminBookModifyAction(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		request.setCharacterEncoding("UTF-8");
-		ActionForward forward=new ActionForward();
+		ForwardService forward=new ForwardService();
 		BookBean bookbean = new BookBean();
 		AdminBookDAO abookdao= new AdminBookDAO();
 		int bookNo = Integer.parseInt(request.getParameter("bookNo"));
@@ -145,6 +322,24 @@ public class AdminBookModifyAction implements Action {
 		return forward;
 	}
 	
+	//図書情報を削除する。
+	public ForwardService AdminBookDeleteAction(HttpServletRequest request,	HttpServletResponse response) {	
+		ForwardService forward=new ForwardService();
+		AdminBookDAO abookdao=new AdminBookDAO();
+		BookBean bookbean= new BookBean();	
+		bookbean.setBOOK_NO(
+				Integer.parseInt(request.getParameter("book_no")));		
+		//図書情報削除
+		int check=abookdao.deleteBook(bookbean);
+		//図書情報削除が「成功」の場合、図書リスト画面に遷移する。
+		if(check>0){
+			forward.setRedirect(true);
+			forward.setPath("BookList.adbook");
+		}		
+		return forward;
+	}
+	
+	//パラメータチェック（図書情報登録、　図書情報修正）
 	public List<String> bookParameterCheck(MultipartRequest multi) {
 		List<String> errorMsg = new ArrayList<String>();
 		String category = multi.getParameter("book_category");
@@ -152,7 +347,7 @@ public class AdminBookModifyAction implements Action {
 		String writer = multi.getParameter("book_writer");
 		String publisher = multi.getParameter("book_publisher");
 		String publishingDate = multi.getParameter("book_publishing_date");
-		String price = (multi.getParameter("book_price"));
+		String price = multi.getParameter("book_price");
 		String isbn = multi.getParameter("book_isbn");
 		String content = multi.getParameter("book_content");
 		
@@ -162,7 +357,7 @@ public class AdminBookModifyAction implements Action {
 			errorMsg.add("カテゴリーは32文字以内まで入力してください。");
 		}
 		
-		if(name == null || name.isEmpty()){//必須チェック（書名
+		if(name == null || name.isEmpty()){//必須チェック（書名）
 			errorMsg.add("書名を入力してください。");
 		} else if (name.length() > 32) {//桁数チェック（書名）
 			errorMsg.add("書名は32文字以内まで入力してください。");
@@ -196,7 +391,7 @@ public class AdminBookModifyAction implements Action {
 			}	
 		}
 		
-		if(price == null || price.isEmpty()){//必須チェック（販売価格
+		if(price == null || price.isEmpty()){//必須チェック（販売価格）
 			errorMsg.add("販売価格を入力してください。");
 		} else {
 			try {
@@ -208,7 +403,7 @@ public class AdminBookModifyAction implements Action {
 		
 		if(isbn == null || isbn.isEmpty()){//必須チェック（ISBN）
 			errorMsg.add("ISBNコードを入力してください。");
-		} else if (isbn.length() != 10 && isbn.length() != 13) {//桁数チェック（ISBN）
+		} else if (isbn.length() != 10 && isbn.length() != 13) {//桁数チェック（ISBN
 			errorMsg.add("ISBNコードは１０桁または１３桁で入力してください。");
 		}
 		
@@ -218,4 +413,5 @@ public class AdminBookModifyAction implements Action {
 		
 		return errorMsg;
 	}
+
 }
