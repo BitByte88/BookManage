@@ -14,7 +14,7 @@ import net.order.db.OrderBean;
 
 public class AdminOrderFrontService {
 	// 注文リスト画面
-	public ForwardService AdminOrderListAction(HttpServletRequest request,HttpServletResponse response) {		
+	public ForwardService AdminOrderListAction(HttpServletRequest request,HttpServletResponse response) {
 		AdminOrderDAO orderdao=new AdminOrderDAO();
 		List<OrderBean> orderlist = new ArrayList<OrderBean>();
 		int page=1;
@@ -75,6 +75,7 @@ public class AdminOrderFrontService {
 	 } 
 	// 注文情報修正処理
 	public ForwardService AdminOrderModifyAction(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		request.setCharacterEncoding("UTF-8");
 		AdminOrderDAO orderdao=new AdminOrderDAO();
 		OrderBean order=new OrderBean();
 
@@ -98,7 +99,6 @@ public class AdminOrderFrontService {
 		}
 		
 		boolean result=false;
-		request.setCharacterEncoding("UTF-8");
 		//注文NO
 		order.setORDER_NO(Integer.parseInt(request.getParameter("num")));
 		//メモー

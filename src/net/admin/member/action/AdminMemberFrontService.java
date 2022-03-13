@@ -69,6 +69,7 @@ public class AdminMemberFrontService {
 	
 	//会員情報を修正する。
 	public ForwardService AdminMemberModifyAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 		AdminMemberDAO memberdao = new AdminMemberDAO();
 		MemberBean member = new MemberBean();
 
@@ -92,7 +93,6 @@ public class AdminMemberFrontService {
 		}
 
 		boolean result = false;
-		request.setCharacterEncoding("UTF-8");
 		// アカウント
 		member.setMEMBER_ID(request.getParameter("id"));
 		// 氏名

@@ -1,10 +1,12 @@
 eclipse.preferences.version=1
 encoding//WebContent/SQL/table.sql=UTF-8
-encoding//WebContent/adminbook/admin_book_list.jsp=UTF-8
-encoding//WebContent/adminbook/admin_book_modify.jsp=UTF-8
-encoding//WebContent/adminbook/admin_book_write.jsp=UTF-8
-encoding//WebContent/adminorder/admin_order_list.jsp=UTF-8
-encoding//WebContent/adminorder/admin_order_modify.jsp=UTF-8
+encoding//WebContent/adminBook/admin_book_list.jsp=UTF-8
+encoding//WebContent/adminBook/admin_book_modify.jsp=UTF-8
+encoding//WebContent/adminBook/admin_book_write.jsp=UTF-8
+encoding//WebContent/adminOrder/admin_order_list.jsp=UTF-8
+encoding//WebContent/adminOrder/admin_order_modify.jsp=UTF-8
+encoding//WebContent/adminMember/admin_member_list.jsp=UTF-8
+encoding//WebContent/adminMember/admin_member_modify.jsp=UTF-8
 encoding//WebContent/book/book_detail.jsp=UTF-8
 encoding//WebContent/book/book_list.jsp=UTF-8
 encoding//WebContent/book_order/book_buy.jsp=UTF-8
