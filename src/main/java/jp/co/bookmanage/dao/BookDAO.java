@@ -102,12 +102,8 @@ public class BookDAO {
 				//販売価格
 				bookdto.setBOOK_PRICE(rs.getInt("BOOK_PRICE"));
 				
-				StringTokenizer st=new StringTokenizer(
-						rs.getString("BOOK_IMAGE"),",");
-				String firstImg = "";
-				if(st.countTokens() != 0) {
-				firstImg=st.nextToken();
-				}
+				StringTokenizer st=new StringTokenizer(rs.getString("BOOK_IMAGE"),",");
+				String firstImg = (st.countTokens() >= 1) ? st.nextToken() : "";
 				//画像
 				bookdto.setBOOK_IMAGE(firstImg);									
 				itemList.add(bookdto);

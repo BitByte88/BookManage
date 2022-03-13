@@ -173,10 +173,7 @@ public class BookService {
 		while (st.hasMoreTokens()) {
 			imgList.add(st.nextToken());
 		}
-		String mainImage = "";
-		if(imgList.size() != 0) {
-		mainImage = (String) imgList.get(0);
-		}
+		String mainImage = (imgList.size() >= 1) ? (String)imgList.get(0) : "";
 		List<String> contentImage = new ArrayList<String>();
 		for (int i = 2; i < imgList.size(); i++) {
 			contentImage.add(imgList.get(i));
