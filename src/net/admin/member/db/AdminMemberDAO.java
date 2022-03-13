@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import net.book.db.BookBean;
 import net.member.db.MemberBean;
 
 public class AdminMemberDAO {
@@ -206,30 +207,31 @@ public class AdminMemberDAO {
 		}
 		return false;
 	}
+	
 	//会員情報削除
 	public boolean deleteMember(String id){
-		String order_delete_sql="delete from MEMBER where MEMBER_ID=?";
-		int result=0;
-		
-		try{
+		int result = 0;
+		try {
 			conn = ds.getConnection();
-			pstmt=conn.prepareStatement(order_delete_sql);
+			String sql="update MEMBER set delete_flag=1 where member_id=?";
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
-			result=pstmt.executeUpdate();
-			
+			result = pstmt.executeUpdate();
+
 			if(result>=1){
 				return true;
 			}
-		}catch(SQLException e){
-			e.printStackTrace();
+			
+		} catch (Exception e) {
+			e.getStackTrace();
 		}
 		finally{
 			try{
-				if(rs!=null)rs.close();
 				if(pstmt!=null)pstmt.close();
 				if(conn!=null)conn.close();
 			}catch(Exception ex) {}
 		}
 		return false;
 	}
+	
 }

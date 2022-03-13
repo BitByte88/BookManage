@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.math.RoundingMode"%>
-<%@ page import="net.admin.book.db.*"%>
+<%@ page import="net.book.db.*"%>
 <%
 	@SuppressWarnings("unchecked") ArrayList<BookBean> list = (ArrayList<BookBean>) request.getAttribute("list");
     BookBean abb = null;
@@ -110,7 +110,7 @@ function bookdelete(book_no){
 			</td>
 			<td>
 			<p align="center">
-				<font size=2><%=abb.getBOOK_PRICE().setScale(0, RoundingMode.DOWN).toString()%>円</font>
+				<font size=2><%=abb.getBOOK_PRICE()%>円</font>
 			</p>
 			</td>
 			<td>

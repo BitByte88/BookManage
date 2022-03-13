@@ -1,7 +1,6 @@
 package net.admin.book.action;
 
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,7 +20,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import net.admin.book.db.AdminBookDAO;
-import net.admin.book.db.BookBean;
+import net.book.db.BookBean;
 
 public class AdminBookFrontService{
 	
@@ -133,7 +132,7 @@ public class AdminBookFrontService{
 			//発行日
 			bookbean.setBOOK_PUBLISHING_DATE(Date.valueOf(multi.getParameter("book_publishing_date")));
 			//販売価格
-			bookbean.setBOOK_PRICE(new BigDecimal(multi.getParameter("book_price")));
+			bookbean.setBOOK_PRICE(Integer.parseInt(multi.getParameter("book_price")));
 			//ISBNコード
 			bookbean.setBOOK_ISBN(multi.getParameter("book_isbn"));
 			//図書内容
@@ -294,7 +293,7 @@ public class AdminBookFrontService{
 			//発行日
 			bookbean.setBOOK_PUBLISHING_DATE(Date.valueOf(multi.getParameter("book_publishing_date")));
 			//販売価格
-			bookbean.setBOOK_PRICE(new BigDecimal(multi.getParameter("book_price")));
+			bookbean.setBOOK_PRICE(Integer.parseInt(multi.getParameter("book_price")));
 			//ISBNコード
 			bookbean.setBOOK_ISBN(multi.getParameter("book_isbn"));
 			//図書内容

@@ -32,7 +32,7 @@ public class AdminOrderDAO {
 	}
 	//注文情報件数取得
 	public int getOrderCount(){
-		String order_count_sql="select count(distinct ORDER_NO) from BOOK_ORDER";		
+		String order_count_sql="select count(distinct ORDER_NO) from BOOK_ORDER where delete_flag = 0";		
 		try{
 			conn = ds.getConnection();
 			pstmt=conn.prepareStatement(order_count_sql);
@@ -56,7 +56,7 @@ public class AdminOrderDAO {
 	public List<OrderBean> getOrderList(int page,int limit){
 		String order_list_sql="select * from (select ROW_NUMBER() OVER (order by ORDER_DATE desc) AS rnum, "+ 
 				"BOR.ORDER_NO, BOR.ORDER_STATUS, BOR.ORDER_MEMBER_ID, BOR.ORDER_TRADE_TYPE, "+ 
-				"BOR.ORDER_DATE from book_order AS BOR group by BOR.ORDER_NO) as orderList where rnum>=? and rnum<=?";
+				"BOR.ORDER_DATE from book_order AS BOR where DELETE_FLAG =0 group by BOR.ORDER_NO ) as orderList where rnum>=? and rnum<=?";
 		List<OrderBean> orderlist=new ArrayList<OrderBean>();
 		
 		int startrow=(page-1)*10+1;
@@ -103,7 +103,7 @@ public class AdminOrderDAO {
 				"BOR.ORDER_MEMBER_ID, BOR.ORDER_RECEIVE_NAME, BOR.ORDER_RECEIVE_NAME_KANA, " + 
 				"BOR.ORDER_RECEIVE_EMAIL, BOR.ORDER_RECEIVE_TEL, BOR.ORDER_RECEIVE_ZIPCODE, " + 
 				"BOR.ORDER_RECEIVE_ADD_1, BOR.ORDER_RECEIVE_ADD_2, BOR.ORDER_RECEIVE_ADD_3, BOR.ORDER_MEMO " + 
-				"from BOOK_ORDER AS BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO where ORDER_NO=?";
+				"from BOOK_ORDER AS BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO where ORDER_NO=? AND BOR.DELETE_FLAG =0 AND B.DELETE_FLAG =0";
 		try {
 			conn = ds.getConnection();
 			pstmt=conn.prepareStatement(order_detail_sql);
@@ -170,7 +170,7 @@ public class AdminOrderDAO {
 	//注文情報修正
 	public boolean modifyOrder(OrderBean order){
 		String order_modify_sql=
-			"update BOOK_ORDER set ORDER_MEMO=?,ORDER_STATUS=? where ORDER_NO=?";
+			"update BOOK_ORDER set ORDER_MEMO=?,ORDER_STATUS=? where ORDER_NO=? AND DELETE_FLAG =0";
 		int result=0;
 		
 		try{
@@ -199,35 +199,36 @@ public class AdminOrderDAO {
 		}
 		return false;
 	}
-	//注文情報削除
+	
+	//会員情報削除
 	public boolean deleteOrder(int ordernum){
-		String order_delete_sql="delete from BOOK_ORDER where ORDER_NO=?";
-		int result=0;
-		
-		try{
+		int result = 0;
+		try {
 			conn = ds.getConnection();
-			pstmt=conn.prepareStatement(order_delete_sql);
+			String sql="update BOOK_ORDER set delete_flag=1 where ORDER_NO=?";
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, ordernum);
-			result=pstmt.executeUpdate();
-			
+			result = pstmt.executeUpdate();
+
 			if(result>=1){
 				return true;
 			}
-		}catch(SQLException e){
-			e.printStackTrace();
+			
+		} catch (Exception e) {
+			e.getStackTrace();
 		}
 		finally{
 			try{
-				if(rs!=null)rs.close();
 				if(pstmt!=null)pstmt.close();
 				if(conn!=null)conn.close();
 			}catch(Exception ex) {}
 		}
 		return false;
 	}
+	
 	//合計金額取得
 	public int getTotalPrice(int orderNo){
-		String order_list_sql="select sum(sub_total) as TOTAL_PRICE from (select BOR.ORDER_NO, BOR.ORDER_COUNT * B.BOOK_PRICE AS sub_total from book_order as BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO WHERE BOR.ORDER_NO = ?) as ST";
+		String order_list_sql="select sum(sub_total) as TOTAL_PRICE from (select BOR.ORDER_NO, BOR.ORDER_COUNT * B.BOOK_PRICE AS sub_total from book_order as BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO WHERE BOR.ORDER_NO = ? AND BOR.DELETE_FLAG =0 AND B.DELETE_FLAG =0) as ST";
 		try {
 			conn = ds.getConnection();
 			pstmt=conn.prepareStatement(order_list_sql);

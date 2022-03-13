@@ -10,6 +10,9 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import net.book.db.BookBean;
+
 public class AdminBookDAO {
 	DataSource ds;
 	Connection con = null;
@@ -51,7 +54,7 @@ public class AdminBookDAO {
 				//図書内容
 				bookbean.setBOOK_CONTENT(rs.getString("book_content"));
 				//販売価格
-				bookbean.setBOOK_PRICE(rs.getBigDecimal("book_price"));
+				bookbean.setBOOK_PRICE(rs.getInt("book_price"));
 				//イメージ
 				bookbean.setBOOK_IMAGE(rs.getString("book_image"));
 				//ISBNコード
@@ -97,7 +100,7 @@ public class AdminBookDAO {
 				//図書内容
 				abb.setBOOK_CONTENT(rs.getString("book_content"));
 				//販売価格
-				abb.setBOOK_PRICE(rs.getBigDecimal("book_price"));
+				abb.setBOOK_PRICE(rs.getInt("book_price"));
 				//イメージ
 				abb.setBOOK_IMAGE(rs.getString("book_image"));
 				//ISBNコード
@@ -162,7 +165,7 @@ public class AdminBookDAO {
 			//図書内容
 			pstmt.setString(7, abb.getBOOK_CONTENT());
 			//販売価格
-			pstmt.setBigDecimal(8, abb.getBOOK_PRICE());
+			pstmt.setInt(8, abb.getBOOK_PRICE());
 			//イメージ
 			pstmt.setString(9, abb.getBOOK_IMAGE());
 			//ISBNコード
@@ -223,7 +226,7 @@ public class AdminBookDAO {
 			//図書内容
 			pstmt.setString(6, abb.getBOOK_CONTENT());
 			//販売価格
-			pstmt.setBigDecimal(7, abb.getBOOK_PRICE());
+			pstmt.setInt(7, abb.getBOOK_PRICE());
 			//イメージ
 			pstmt.setString(8, abb.getBOOK_IMAGE());
 			//ISBNコード
