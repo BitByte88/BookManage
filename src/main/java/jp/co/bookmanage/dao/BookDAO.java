@@ -104,7 +104,10 @@ public class BookDAO {
 				
 				StringTokenizer st=new StringTokenizer(
 						rs.getString("BOOK_IMAGE"),",");
-				String firstImg=st.nextToken();	
+				String firstImg = "";
+				if(st.countTokens() != 0) {
+				firstImg=st.nextToken();
+				}
 				//画像
 				bookdto.setBOOK_IMAGE(firstImg);									
 				itemList.add(bookdto);
