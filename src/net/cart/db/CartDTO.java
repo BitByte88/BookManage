@@ -2,7 +2,7 @@ package net.cart.db;
 
 import java.sql.Timestamp;
 
-public class CartBean {
+public class CartDTO {
 	//カートNO
 	private int CART_NO;
 	//会員アカウント

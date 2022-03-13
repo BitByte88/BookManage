@@ -8,8 +8,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.member.db.MemberBean;
+import net.member.db.MemberDTO;
 import net.member.db.MemberDAO;
+
+class ForwardService {
+	private boolean isRedirect=false;
+	private String path=null;
+	
+	public boolean isRedirect(){
+		return isRedirect;
+	}
+	
+	public String getPath(){
+		return path;
+	}
+	
+	public void setRedirect(boolean b){
+		isRedirect=b;
+	}
+	
+	public void setPath(String string){
+		path=string;
+	}
+}
 
 public class MemberFrontService {
 	// ログイン処理
@@ -96,7 +117,7 @@ public class MemberFrontService {
 	public ForwardService MemberJoinAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		MemberDAO memberdao = new MemberDAO();
-		MemberBean dto = new MemberBean();
+		MemberDTO dto = new MemberDTO();
 
 		// パラメータチェック
 		List<String> errorMsg = joinParameterCheck(request);
@@ -165,7 +186,7 @@ public class MemberFrontService {
 
 		MemberDAO memberdao = new MemberDAO();
 		// 会員情報取得
-		MemberBean dto = memberdao.getMember(id);
+		MemberDTO dto = memberdao.getMember(id);
 		// 会員情報修正画面に遷移する。
 		request.setAttribute("member", dto);
 		forward.setPath("./member/member_info.jsp");
@@ -205,7 +226,7 @@ public class MemberFrontService {
 		}
 
 		MemberDAO memberdao = new MemberDAO();
-		MemberBean dto = new MemberBean();
+		MemberDTO dto = new MemberDTO();
 		// アカウント
 		dto.setMEMBER_ID(id);
 		// パスワード
@@ -298,7 +319,7 @@ public class MemberFrontService {
 		request.setCharacterEncoding("UTF-8");		
 		ForwardService forward=new ForwardService();
 		MemberDAO memberdao=new MemberDAO();
-		MemberBean member=new MemberBean();
+		MemberDTO member=new MemberDTO();
 		
 		//パラメータチェック
 		List<String> errorMsg = memberFindParameterCheck(request);	

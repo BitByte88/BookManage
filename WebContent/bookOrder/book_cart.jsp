@@ -5,9 +5,8 @@
 <%@ page import="net.book.db.*" %>
 
 <%
-	@SuppressWarnings("unchecked") List<CartBean> cartList = (ArrayList<CartBean>) request.getAttribute("cartlist");
-	@SuppressWarnings("unchecked") List<BookBean> bookList = (ArrayList<BookBean>) request.getAttribute("booklist");
-
+@SuppressWarnings("unchecked") List<CartDTO> cartList = (ArrayList<CartDTO>) request.getAttribute("cartlist");
+	@SuppressWarnings("unchecked") List<BookDTO> bookList = (ArrayList<BookDTO>) request.getAttribute("booklist");
 %>
 
 <html>
@@ -48,9 +47,9 @@
 			</tr>
 			<%
 			if (cartList != null && cartList.size() != 0) {
-				for (int i = 0; i < cartList.size(); i++) {
-					CartBean dto = (CartBean) cartList.get(i);
-					BookBean book=(BookBean) bookList.get(i);
+						for (int i = 0; i < cartList.size(); i++) {
+							CartDTO dto = (CartDTO) cartList.get(i);
+							BookDTO book=(BookDTO) bookList.get(i);
 			%>
 			<tr align="center">
 			<td><font size="2"><img 

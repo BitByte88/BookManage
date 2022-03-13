@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="net.member.db.MemberBean" %>
+<%@ page import="net.member.db.MemberDTO" %>
 <%
-	MemberBean member=(MemberBean)request.getAttribute("member");
+MemberDTO member=(MemberDTO)request.getAttribute("member");
 	String MEMBER_MAIL=member.getMEMBER_MAIL();
 	String[] email=MEMBER_MAIL.split("@");
 %>

@@ -4,9 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
-	BookBean itemArray = (BookBean) request.getAttribute("itemArray");
-	BookBean prevpage = (BookBean) request.getAttribute("prevpage");
-	BookBean nextpage = (BookBean) request.getAttribute("nextpage");
+BookDTO itemArray = (BookDTO) request.getAttribute("itemArray");
+	BookDTO prevpage = (BookDTO) request.getAttribute("prevpage");
+	BookDTO nextpage = (BookDTO) request.getAttribute("nextpage");
 %>
 
 <html>

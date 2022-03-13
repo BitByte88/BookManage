@@ -2,7 +2,7 @@
 <%@ page import="net.member.db.*" %>
 <%@ page import="java.util.*" %>
 <%
-	@SuppressWarnings("unchecked") List<MemberBean> memberlist=(List<MemberBean>)request.getAttribute("memberlist");
+@SuppressWarnings("unchecked") List<MemberDTO> memberlist=(List<MemberDTO>)request.getAttribute("memberlist");
 	int membercount=((Integer)request.getAttribute("membercount")).intValue();
 	int nowpage=((Integer)request.getAttribute("page")).intValue();
 	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
@@ -34,7 +34,7 @@
 <table style="width:100%; border-spacing:1">
 	<tr>
 	<td align=right colspan=10 height=25 colspan=2 style=font-family:Tahoma;font-size:10pt;>
-	すべての会員数 : <b><%=membercount %></b>名&nbsp;&nbsp;&nbsp;
+	すべての会員数 : <b><%=membercount%></b>名&nbsp;&nbsp;&nbsp;
 	</td>
 	</tr>
 	<tr height="26"></tr>
@@ -51,9 +51,11 @@
 	<tr>
 		<td style="background-color:#EFEFEF; height:5px;" colspan=8>
 	</tr>
-	<%for(int i=0;i<memberlist.size();i++){ 
-		MemberBean member=new MemberBean();
-		member=(MemberBean)memberlist.get(i); %>
+	<%
+	for(int i=0;i<memberlist.size();i++){ 
+			MemberDTO member=new MemberDTO();
+			member=(MemberDTO)memberlist.get(i);
+	%>
 	<tr align=center height=20>
 	<td style=font-family:Tahoma;font-size:7pt;><%=member.getMEMBER_ID()%></td>
 	<td style=font-family:Tahoma;font-size:10pt;><%=member.getMEMBER_NAME()%></td>

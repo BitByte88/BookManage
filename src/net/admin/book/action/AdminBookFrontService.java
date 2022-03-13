@@ -20,17 +20,38 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import net.admin.book.db.AdminBookDAO;
-import net.book.db.BookBean;
+import net.book.db.BookDTO;
+
+class ForwardService {
+	private boolean isRedirect=false;
+	private String path=null;
+	
+	public boolean isRedirect(){
+		return isRedirect;
+	}
+	
+	public String getPath(){
+		return path;
+	}
+	
+	public void setRedirect(boolean b){
+		isRedirect=b;
+	}
+	
+	public void setPath(String string){
+		path=string;
+	}
+}
 
 public class AdminBookFrontService{
-	
+		
 	//図書リスト画面表示
 	public ForwardService AdminBookListAction(HttpServletRequest request, HttpServletResponse response) {
 		AdminBookDAO abookdao=new AdminBookDAO();
 		
 		ForwardService forward=new ForwardService();
 		//図書リスト取得
-		List<BookBean> list=abookdao.getBookList();
+		List<BookDTO> list=abookdao.getBookList();
 		//取得した図書リストを設定
 		request.setAttribute("list",list);
 		//図書リスト画面に遷移する。
@@ -42,7 +63,7 @@ public class AdminBookFrontService{
 	public ForwardService AdminBookAddAction(HttpServletRequest request, HttpServletResponse response) {
 		ForwardService forward = new ForwardService();
 		AdminBookDAO abookdao= new AdminBookDAO();
-		BookBean bookbean = new BookBean();
+		BookDTO bookdto = new BookDTO();
 		int bookNo = abookdao.getBookNo();
 		String realPath = "";
 		String savePath = "upload";
@@ -122,25 +143,25 @@ public class AdminBookFrontService{
 				fl.append(savefiles.get(i));	
 			}
 			//カテゴリー
-			bookbean.setBOOK_CATEGORY(multi.getParameter("book_category"));
+			bookdto.setBOOK_CATEGORY(multi.getParameter("book_category"));
 			//書名
-			bookbean.setBOOK_NAME(multi.getParameter("book_name"));
+			bookdto.setBOOK_NAME(multi.getParameter("book_name"));
 			//著者
-			bookbean.setBOOK_WRITER(multi.getParameter("book_writer"));
+			bookdto.setBOOK_WRITER(multi.getParameter("book_writer"));
 			//出版社
-			bookbean.setBOOK_PUBLISHER(multi.getParameter("book_publisher"));
+			bookdto.setBOOK_PUBLISHER(multi.getParameter("book_publisher"));
 			//発行日
-			bookbean.setBOOK_PUBLISHING_DATE(Date.valueOf(multi.getParameter("book_publishing_date")));
+			bookdto.setBOOK_PUBLISHING_DATE(Date.valueOf(multi.getParameter("book_publishing_date")));
 			//販売価格
-			bookbean.setBOOK_PRICE(Integer.parseInt(multi.getParameter("book_price")));
+			bookdto.setBOOK_PRICE(Integer.parseInt(multi.getParameter("book_price")));
 			//ISBNコード
-			bookbean.setBOOK_ISBN(multi.getParameter("book_isbn"));
+			bookdto.setBOOK_ISBN(multi.getParameter("book_isbn"));
 			//図書内容
-			bookbean.setBOOK_CONTENT(multi.getParameter("book_content"));
+			bookdto.setBOOK_CONTENT(multi.getParameter("book_content"));
 			//イメージ
-			bookbean.setBOOK_IMAGE(fl.toString());
+			bookdto.setBOOK_IMAGE(fl.toString());
 			//図書情報登録
-			int result = abookdao.insertBook(bookbean, bookNo);
+			int result = abookdao.insertBook(bookdto, bookNo);
 			//図書情報登録が「失敗」の場合、エラーメッセージを図書登録画面に戻って表示する。
 			if (result <= 0){
 				response.setContentType("text/html;charset=UTF-8");
@@ -164,13 +185,13 @@ public class AdminBookFrontService{
 	public ForwardService AdminBookModifyForm(HttpServletRequest request, HttpServletResponse response) {
 		ForwardService forward=new ForwardService();		
 		AdminBookDAO abookdao=new AdminBookDAO();
-		BookBean bookbean=new BookBean();	
+		BookDTO bookdto=new BookDTO();	
 		//図書NO取得
 		String num=request.getParameter("book_no");
 		//図書情報取得
-		bookbean=abookdao.getBook(Integer.parseInt(num));
+		bookdto=abookdao.getBook(Integer.parseInt(num));
 		//イメージ名区分（区分字「,」）
-		String[] imageStr = bookbean.getBOOK_IMAGE().split(",");
+		String[] imageStr = bookdto.getBOOK_IMAGE().split(",");
 		HashMap<String, String> imageMap = new HashMap<String, String>();
 		for(String imageName : imageStr) {
 			//サムネイル用画像を設定
@@ -190,7 +211,7 @@ public class AdminBookFrontService{
 				imageMap.put("detailImage2","./upload/" + imageName);
 			}
 		}
-		request.setAttribute("abb", bookbean);	
+		request.setAttribute("abb", bookdto);	
 		request.setAttribute("imageMap", imageMap);
 		//図書情報変更画面に遷移する。
 		forward.setPath("./adminBook/admin_book_modify.jsp");
@@ -201,7 +222,7 @@ public class AdminBookFrontService{
 	public ForwardService AdminBookModifyAction(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		request.setCharacterEncoding("UTF-8");
 		ForwardService forward=new ForwardService();
-		BookBean bookbean = new BookBean();
+		BookDTO bookdto = new BookDTO();
 		AdminBookDAO abookdao= new AdminBookDAO();
 		int bookNo = Integer.parseInt(request.getParameter("bookNo"));
 		String realPath = "";
@@ -283,25 +304,25 @@ public class AdminBookFrontService{
 				fl.append(savefiles.get(i));	
 			}
 			//カテゴリー
-			bookbean.setBOOK_CATEGORY(multi.getParameter("book_category"));
+			bookdto.setBOOK_CATEGORY(multi.getParameter("book_category"));
 			//書名
-			bookbean.setBOOK_NAME(multi.getParameter("book_name"));
+			bookdto.setBOOK_NAME(multi.getParameter("book_name"));
 			//著者
-			bookbean.setBOOK_WRITER(multi.getParameter("book_writer"));
+			bookdto.setBOOK_WRITER(multi.getParameter("book_writer"));
 			//出版社
-			bookbean.setBOOK_PUBLISHER(multi.getParameter("book_publisher"));
+			bookdto.setBOOK_PUBLISHER(multi.getParameter("book_publisher"));
 			//発行日
-			bookbean.setBOOK_PUBLISHING_DATE(Date.valueOf(multi.getParameter("book_publishing_date")));
+			bookdto.setBOOK_PUBLISHING_DATE(Date.valueOf(multi.getParameter("book_publishing_date")));
 			//販売価格
-			bookbean.setBOOK_PRICE(Integer.parseInt(multi.getParameter("book_price")));
+			bookdto.setBOOK_PRICE(Integer.parseInt(multi.getParameter("book_price")));
 			//ISBNコード
-			bookbean.setBOOK_ISBN(multi.getParameter("book_isbn"));
+			bookdto.setBOOK_ISBN(multi.getParameter("book_isbn"));
 			//図書内容
-			bookbean.setBOOK_CONTENT(multi.getParameter("book_content"));
+			bookdto.setBOOK_CONTENT(multi.getParameter("book_content"));
 			//イメージ
-			bookbean.setBOOK_IMAGE(fl.toString());
+			bookdto.setBOOK_IMAGE(fl.toString());
 			//図書情報変更
-			int result = abookdao.modifyBook(bookbean, bookNo);
+			int result = abookdao.modifyBook(bookdto, bookNo);
 			//図書情報変更が「失敗」の場合、エラーメッセージを図書登録画面に戻って表示する
 			if (result <= 0){
 				response.setContentType("text/html;charset=UTF-8");
@@ -325,11 +346,11 @@ public class AdminBookFrontService{
 	public ForwardService AdminBookDeleteAction(HttpServletRequest request,	HttpServletResponse response) {	
 		ForwardService forward=new ForwardService();
 		AdminBookDAO abookdao=new AdminBookDAO();
-		BookBean bookbean= new BookBean();	
-		bookbean.setBOOK_NO(
+		BookDTO bookdto= new BookDTO();	
+		bookdto.setBOOK_NO(
 				Integer.parseInt(request.getParameter("book_no")));		
 		//図書情報削除
-		int check=abookdao.deleteBook(bookbean);
+		int check=abookdao.deleteBook(bookdto);
 		//図書情報削除が「成功」の場合、図書リスト画面に遷移する。
 		if(check>0){
 			forward.setRedirect(true);

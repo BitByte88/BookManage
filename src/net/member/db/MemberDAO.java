@@ -29,7 +29,7 @@ public class MemberDAO {
 		}
 	}
 	//会員情報登録
-	public boolean insertMember(MemberBean mb) throws SQLException{
+	public boolean insertMember(MemberDTO mb) throws SQLException{
 		String sql=null;
 		boolean result = false;
 		try{
@@ -148,8 +148,8 @@ public class MemberDAO {
 		return x;
 	}
 	//会員情報取得
-	public MemberBean getMember(String id) throws SQLException{
-		MemberBean member=null;
+	public MemberDTO getMember(String id) throws SQLException{
+		MemberDTO member=null;
 		String sql=null;
 		
 		try{
@@ -160,7 +160,7 @@ public class MemberDAO {
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()){
-				member=new MemberBean();
+				member=new MemberDTO();
 				//アカウント
 				member.setMEMBER_ID(rs.getString("MEMBER_ID"));
 				//氏名
@@ -194,7 +194,7 @@ public class MemberDAO {
 		return member;
 	}
 	//会員情報修正
-	public void updateMember(MemberBean mb) throws SQLException{
+	public void updateMember(MemberDTO mb) throws SQLException{
 		String sql=null;
 		
 		try{
@@ -273,10 +273,10 @@ public class MemberDAO {
 		return x;
 	}	
 	//アカウント情報探す
-	public MemberBean findId(String name, String nameKana, String tel, String mail)
+	public MemberDTO findId(String name, String nameKana, String tel, String mail)
 	throws SQLException{
 		String sql=null;
-		MemberBean member=null;
+		MemberDTO member=null;
 		
 		try{
 			con = ds.getConnection();
@@ -295,7 +295,7 @@ public class MemberDAO {
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()){
-				member = new MemberBean();
+				member = new MemberDTO();
 				//アカウント
 				member.setMEMBER_ID(rs.getString("MEMBER_ID"));
 				//パスワード

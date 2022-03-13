@@ -2,7 +2,7 @@ package net.order.db;
 
 import java.sql.Date;
 
-public class OrderBean {
+public class OrderDTO {
 	//注文NO
 	private int ORDER_NO;
 	//アイテムNO

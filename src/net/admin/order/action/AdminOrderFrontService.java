@@ -8,15 +8,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.admin.order.db.AdminOrderDAO;
-import net.member.db.MemberBean;
+import net.member.db.MemberDTO;
 import net.member.db.MemberDAO;
-import net.order.db.OrderBean;
+import net.order.db.OrderDTO;
+
+class ForwardService {
+	private boolean isRedirect=false;
+	private String path=null;
+	
+	public boolean isRedirect(){
+		return isRedirect;
+	}
+	
+	public String getPath(){
+		return path;
+	}
+	
+	public void setRedirect(boolean b){
+		isRedirect=b;
+	}
+	
+	public void setPath(String string){
+		path=string;
+	}
+}
 
 public class AdminOrderFrontService {
 	// 注文リスト画面
 	public ForwardService AdminOrderListAction(HttpServletRequest request,HttpServletResponse response) {
 		AdminOrderDAO orderdao=new AdminOrderDAO();
-		List<OrderBean> orderlist = new ArrayList<OrderBean>();
+		List<OrderDTO> orderlist = new ArrayList<OrderDTO>();
 		int page=1;
 		//１ページに表示する注文件数
 		int limit=50;
@@ -29,7 +50,7 @@ public class AdminOrderFrontService {
 		//注文リスト取得
 		orderlist = orderdao.getOrderList(page,limit);
 		//合計金額設定
-		for(OrderBean order : orderlist) {
+		for(OrderDTO order : orderlist) {
 			order.setTOTAL_PRICE(orderdao.getTotalPrice(order.getORDER_NO()));
 		}
 		//ページング
@@ -57,9 +78,9 @@ public class AdminOrderFrontService {
 	// 注文情報修正画面
 	public ForwardService AdminOrderDetailAction(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		MemberDAO memberdao=new MemberDAO();
-		MemberBean member=new MemberBean();
+		MemberDTO member=new MemberDTO();
 		AdminOrderDAO orderdao=new AdminOrderDAO();
-		List<OrderBean> orderList=new ArrayList<OrderBean>();
+		List<OrderDTO> orderList=new ArrayList<OrderDTO>();
 		
 		String num=request.getParameter("num");
 		//注文詳細情報を取得
@@ -77,7 +98,7 @@ public class AdminOrderFrontService {
 	public ForwardService AdminOrderModifyAction(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		request.setCharacterEncoding("UTF-8");
 		AdminOrderDAO orderdao=new AdminOrderDAO();
-		OrderBean order=new OrderBean();
+		OrderDTO order=new OrderDTO();
 
 		//パラメータチェック
 		List<String> errorMsg = orderParameterCheck(request);	

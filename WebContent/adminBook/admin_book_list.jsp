@@ -4,8 +4,8 @@
 <%@ page import="java.math.RoundingMode"%>
 <%@ page import="net.book.db.*"%>
 <%
-	@SuppressWarnings("unchecked") ArrayList<BookBean> list = (ArrayList<BookBean>) request.getAttribute("list");
-    BookBean abb = null;
+@SuppressWarnings("unchecked") ArrayList<BookDTO> list = (ArrayList<BookDTO>) request.getAttribute("list");
+    BookDTO abb = null;
 %>
 <html>
 <head>
@@ -82,8 +82,8 @@ function bookdelete(book_no){
 				</td>
 			</tr>
 			<%
-					for (int i = 0; i < list.size(); i++) {
-					abb = (BookBean) list.get(i);
+			for (int i = 0; i < list.size(); i++) {
+						abb = (BookDTO) list.get(i);
 			%>
 			<tr>
 			<td>

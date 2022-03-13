@@ -12,9 +12,30 @@ import java.util.StringTokenizer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.book.db.BookBean;
+import net.book.db.BookDTO;
 import net.book.db.BookDAO;
-import net.book.db.SearchBean;
+import net.book.db.SearchDTO;
+
+class ForwardService {
+	private boolean isRedirect=false;
+	private String path=null;
+	
+	public boolean isRedirect(){
+		return isRedirect;
+	}
+	
+	public String getPath(){
+		return path;
+	}
+	
+	public void setRedirect(boolean b){
+		isRedirect=b;
+	}
+	
+	public void setPath(String string){
+		path=string;
+	}
+}
 
 public class BookFrontService {
 	//図書リスト画面
@@ -22,29 +43,29 @@ public class BookFrontService {
 		ForwardService forward=new ForwardService();
 		BookDAO bookdao=new BookDAO();
 		request.setCharacterEncoding("UTF-8");
-		List<BookBean> itemList=null;
+		List<BookDTO> itemList=null;
 		int count=1;
 		int page=1;
 		if(request.getParameter("page")!=null){
 			page=Integer.parseInt(request.getParameter("page"));
 		}
 		
-		SearchBean searchBean = new SearchBean();
+		SearchDTO searchdto = new SearchDTO();
 		//タイトル検索の入力値がある場合
 		if(request.getParameter("title") != null) {
-		searchBean.setBOOK_NAME(request.getParameter("title").trim());
+		searchdto.setBOOK_NAME(request.getParameter("title").trim());
 		}
 		//出版社検索の入力値がある場合
 		if(request.getParameter("publisher") != null) {
-		searchBean.setBOOK_PUBLISHER(request.getParameter("publisher").trim());
+		searchdto.setBOOK_PUBLISHER(request.getParameter("publisher").trim());
 		}
 		//発行日検索の入力値（開始）がある場合
 		if(request.getParameter("startDate") != null) {
-		searchBean.setSTART_DATE(request.getParameter("startDate").trim());
+		searchdto.setSTART_DATE(request.getParameter("startDate").trim());
 		}
 		//タイトル検索の入力値（終了）がある場合
 		if(request.getParameter("endDate") != null) {
-		searchBean.setEND_DATE(request.getParameter("endDate").trim());
+		searchdto.setEND_DATE(request.getParameter("endDate").trim());
 		}
 		//発行日形式チェック
 		SimpleDateFormat dateFormatParser = new SimpleDateFormat("yyyy/MM/dd"); 
@@ -55,12 +76,12 @@ public class BookFrontService {
         	Date date2 = null;
         	
         	//発行日検索の入力値（開始）がある場合
-        	if(searchBean.getSTART_DATE() != null && !searchBean.getSTART_DATE().isEmpty()) {
-			date1 = dateFormatParser.parse(searchBean.getSTART_DATE());
+        	if(searchdto.getSTART_DATE() != null && !searchdto.getSTART_DATE().isEmpty()) {
+			date1 = dateFormatParser.parse(searchdto.getSTART_DATE());
         	}
         	//発行日検索の入力値（終了）がある場合
-        	if(searchBean.getEND_DATE() != null && !searchBean.getEND_DATE().isEmpty()) {
-			date2 = dateFormatParser.parse(searchBean.getEND_DATE());
+        	if(searchdto.getEND_DATE() != null && !searchdto.getEND_DATE().isEmpty()) {
+			date2 = dateFormatParser.parse(searchdto.getEND_DATE());
         	}
         	
         	//発行日検索の入力値（開始）より発行日検索の入力値（終了）が以後の日時の場合
@@ -89,7 +110,7 @@ public class BookFrontService {
 			return null;
 		} 
 		//図書リスト取得
-		itemList= bookdao.item_List(page,searchBean);
+		itemList= bookdao.item_List(page,searchdto);
 		//図書件数取得
 		count=bookdao.getCount();
 		//ページング
@@ -103,7 +124,7 @@ public class BookFrontService {
 		//図書件数
 		request.setAttribute("count", count);
 		//検索入力値
-		request.setAttribute("search", searchBean);
+		request.setAttribute("search", searchdto);
 		//ページ数
 		request.setAttribute("pageCount", pageCount);
 		//ページングに最初に表示されるページ番号
@@ -122,11 +143,11 @@ public class BookFrontService {
 		
 		List<String> imgList = new ArrayList<String>();
 		int book_no = 0;
-		BookBean isnextpage = null;
-		BookBean isprevpage = null;
-		BookBean itemArray = null;
-		BookBean next_Bean = null;
-		BookBean prev_Bean = null;		
+		BookDTO isnextpage = null;
+		BookDTO isprevpage = null;
+		BookDTO itemArray = null;
+		BookDTO next_Bean = null;
+		BookDTO prev_Bean = null;		
 		//図書NO
 		book_no = Integer.parseInt(request.getParameter("book_no"));
 		int nextpage = 0;

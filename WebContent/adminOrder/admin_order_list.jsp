@@ -2,7 +2,7 @@
 <%@ page import="net.order.db.*" %>
 <%@ page import="java.util.*" %>
 <%
-	@SuppressWarnings("unchecked") List<OrderBean> orderlist=(List<OrderBean>)request.getAttribute("orderlist");
+@SuppressWarnings("unchecked") List<OrderDTO> orderlist=(List<OrderDTO>)request.getAttribute("orderlist");
 	int ordercount=((Integer)request.getAttribute("ordercount")).intValue();
 	int nowpage=((Integer)request.getAttribute("page")).intValue();
 	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
@@ -34,7 +34,7 @@
 <table style="width:100%; border-spacing:1">
 	<tr>
 	<td align=right colspan=10 height=25 colspan=2 style=font-family:Tahoma;font-size:10pt;>
-	すべての注文数 : <b><%=ordercount %></b> 件&nbsp;&nbsp;&nbsp;
+	すべての注文数 : <b><%=ordercount%></b> 件&nbsp;&nbsp;&nbsp;
 	</td>
 	</tr>
 	<tr height="26"></tr>
@@ -50,9 +50,11 @@
 	<tr>
 		<td style="background-color:#EFEFEF; height:5px;" colspan=7>
 	</tr>
-	<%for(int i=0;i<orderlist.size();i++){ 
-		OrderBean order=new OrderBean();
-		order=(OrderBean)orderlist.get(i); %>
+	<%
+	for(int i=0;i<orderlist.size();i++){ 
+			OrderDTO order=new OrderDTO();
+			order=(OrderDTO)orderlist.get(i);
+	%>
 	<tr align=center height=20>
 	<td style=font-family:Tahoma;font-size:7pt;><%=String.format("%08d", order.getORDER_NO())%></td>
 	<td style=font-family:Tahoma;font-size:10pt;><%=order.getORDER_MEMBER_ID()%></td>

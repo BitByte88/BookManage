@@ -2,7 +2,7 @@ package net.book.db;
 
 import java.sql.Date;
 
-public class BookBean {
+public class BookDTO {
 	//図書NO
 	private int BOOK_NO;
 	//カテゴリー

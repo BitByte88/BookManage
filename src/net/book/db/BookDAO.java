@@ -30,8 +30,8 @@ public class BookDAO {
 		}
 	}
 	//図書リスト取得
-	public List<BookBean> item_List(int page,SearchBean searchBean) {
-		List<BookBean> itemList = new ArrayList<>();
+	public List<BookDTO> item_List(int page,SearchDTO searchBean) {
+		List<BookDTO> itemList = new ArrayList<>();
 		
 		int startnum=page*12-11;
 		int endnum=page*12;
@@ -88,23 +88,23 @@ public class BookDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				BookBean bookbean = new BookBean();
+				BookDTO bookdto = new BookDTO();
 				//図書NO
-				bookbean.setBOOK_NO(rs.getInt("BOOK_NO"));
+				bookdto.setBOOK_NO(rs.getInt("BOOK_NO"));
 				//カテゴリー
-				bookbean.setBOOK_CATEGORY(
+				bookdto.setBOOK_CATEGORY(
 						rs.getString("BOOK_CATEGORY"));
 				//書名
-				bookbean.setBOOK_NAME(rs.getString("BOOK_NAME"));
+				bookdto.setBOOK_NAME(rs.getString("BOOK_NAME"));
 				//販売価格
-				bookbean.setBOOK_PRICE(rs.getInt("BOOK_PRICE"));
+				bookdto.setBOOK_PRICE(rs.getInt("BOOK_PRICE"));
 				
 				StringTokenizer st=new StringTokenizer(
 						rs.getString("BOOK_IMAGE"),",");
 				String firstImg=st.nextToken();	
 				//画像
-				bookbean.setBOOK_IMAGE(firstImg);									
-				itemList.add(bookbean);
+				bookdto.setBOOK_IMAGE(firstImg);									
+				itemList.add(bookdto);
 			} 		
 			
 			return itemList;
@@ -123,8 +123,8 @@ public class BookDAO {
 
 	
 	//該当図書の前もしくは後の図書情報を取得する。
-	public BookBean findDetailNextPrev(int book_no,String direction) {
-		BookBean book=new BookBean();
+	public BookDTO findDetailNextPrev(int book_no,String direction) {
+		BookDTO book=new BookDTO();
 		StringBuffer dQuery = new StringBuffer();
 		//次図書
 		if(direction.equals("next")){
@@ -172,8 +172,8 @@ public class BookDAO {
 		return book;	
 	}
 	//図書詳細情報取得
-	public BookBean findDetail(int book_num){
-		BookBean book=new BookBean();
+	public BookDTO findDetail(int book_num){
+		BookDTO book=new BookDTO();
 		
 		try {
 			con = ds.getConnection();

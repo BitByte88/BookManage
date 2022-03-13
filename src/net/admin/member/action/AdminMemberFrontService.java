@@ -8,13 +8,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.admin.member.db.AdminMemberDAO;
-import net.member.db.MemberBean;
+import net.member.db.MemberDTO;
+
+class ForwardService {
+	private boolean isRedirect=false;
+	private String path=null;
+	
+	public boolean isRedirect(){
+		return isRedirect;
+	}
+	
+	public String getPath(){
+		return path;
+	}
+	
+	public void setRedirect(boolean b){
+		isRedirect=b;
+	}
+	
+	public void setPath(String string){
+		path=string;
+	}
+}
 
 public class AdminMemberFrontService {
 	//会員リスト画面表示
 	public ForwardService AdminMemberListAction(HttpServletRequest request, HttpServletResponse response) {
 		AdminMemberDAO memberdao = new AdminMemberDAO();
-		List<MemberBean> memberlist = new ArrayList<MemberBean>();
+		List<MemberDTO> memberlist = new ArrayList<MemberDTO>();
 
 		int page = 1;
 		// 1ページに表示する会員数
@@ -54,7 +75,7 @@ public class AdminMemberFrontService {
 	//会員情報修正画面を表示する。
 	public ForwardService AdminMemberDetailAction(HttpServletRequest request, HttpServletResponse response) {
 		AdminMemberDAO memberdao = new AdminMemberDAO();
-		MemberBean member = new MemberBean();
+		MemberDTO member = new MemberDTO();
 
 		String id = request.getParameter("id");
 		// 会員情報を取得する。
@@ -71,7 +92,7 @@ public class AdminMemberFrontService {
 	public ForwardService AdminMemberModifyAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		AdminMemberDAO memberdao = new AdminMemberDAO();
-		MemberBean member = new MemberBean();
+		MemberDTO member = new MemberDTO();
 
 		// パラメータチェック
 		List<String> errorMsg = memberParameterCheck(request);

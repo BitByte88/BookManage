@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="net.member.db.MemberBean"%>
-<%@ page import="net.cart.db.CartBean"%>
-<%@ page import="net.book.db.BookBean" %>
+<%@ page import="net.member.db.MemberDTO"%>
+<%@ page import="net.cart.db.CartDTO"%>
+<%@ page import="net.book.db.BookDTO" %>
 <%
-	MemberBean member = (MemberBean) request.getAttribute("member");
+MemberDTO member = (MemberDTO) request.getAttribute("member");
 	String orderType = (String) request.getAttribute("orderType");
 	@SuppressWarnings("unchecked") List<Object> orderinfo = (ArrayList<Object>)request.getAttribute("orderinfo");
-	@SuppressWarnings("unchecked") List<CartBean> cartlist = (ArrayList<CartBean>)request.getAttribute("cartlist");
-	@SuppressWarnings("unchecked") List<BookBean> booklist= (ArrayList<BookBean>)request.getAttribute("booklist");
+	@SuppressWarnings("unchecked") List<CartDTO> cartlist = (ArrayList<CartDTO>)request.getAttribute("cartlist");
+	@SuppressWarnings("unchecked") List<BookDTO> booklist= (ArrayList<BookDTO>)request.getAttribute("booklist");
 %>
 <html>
 <head>
@@ -128,13 +128,17 @@ function check(){
 	<!-- 注文ページ -->
 	<form action="./OrderAdd.order" method="post" name="orderform" onsubmit="return check()">
 	<input type="hidden" name="orderType" value="<%=orderType%>"> 
-	<%if (orderType.equals("fromBookDetail")) {%>
+	<%
+ 	if (orderType.equals("fromBookDetail")) {
+ 	%>
 	<input type="hidden" name="bookno" value="<%=orderinfo.get(0)%>">
 	<input type="hidden" name="bookname" value="<%=orderinfo.get(2)%>">
 	<input type="hidden" name="amount" value="<%=orderinfo.get(3)%>">
 	<input type="hidden" name="price" value="<%=orderinfo.get(4)%>">
-	<%}%>
-	<input type="hidden" name="memberid" value="<%=member.getMEMBER_ID() %>">
+	<%
+	}
+	%>
+	<input type="hidden" name="memberid" value="<%=member.getMEMBER_ID()%>">
 	
 	<!-- 注文詳細内容 -->
 	<table style="width:90%; border-spacing:1">
@@ -154,11 +158,11 @@ function check(){
 			<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 		</tr>
 		<%
-			if (orderType.equals("fromBookDetail")) {
+		if (orderType.equals("fromBookDetail")) {
 		%>
 		<tr align=center height=20>
 		<td style="font-family: Tahoma; font-size: 7pt;"><img
-			src="./upload/<%=orderinfo.get(1) %>" width=50 height=50></td>
+			src="./upload/<%=orderinfo.get(1)%>" width=50 height=50></td>
 		<td style="font-family: Tahoma; font-size: 8pt;"><%=orderinfo.get(2)%></td>
 		<td style="font-family: Tahoma; font-size: 8pt;"><%=orderinfo.get(3)%></td>
 		<td style="font-family: Tahoma; font-size: 8pt;"><%=orderinfo.get(4)%>円</td>
@@ -172,10 +176,10 @@ function check(){
 			
 		</tr>
 		<%
-			} else {
+		} else {
 				for (int i = 0; i < cartlist.size(); i++) {
-					CartBean cart = (CartBean) cartlist.get(i);
-					BookBean book = (BookBean) booklist.get(i);
+					CartDTO cart = (CartDTO) cartlist.get(i);
+					BookDTO book = (BookDTO) booklist.get(i);
 		%>
 		<tr align=center height=20>
 		<td style="font-family: Tahoma; font-size: 7pt;">

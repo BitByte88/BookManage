@@ -11,7 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import net.order.db.OrderBean;
+import net.order.db.OrderDTO;
 
 public class AdminOrderDAO {
 	DataSource ds;
@@ -53,11 +53,11 @@ public class AdminOrderDAO {
 		return 0;
 	}
 	//注文リスト取得
-	public List<OrderBean> getOrderList(int page,int limit){
+	public List<OrderDTO> getOrderList(int page,int limit){
 		String order_list_sql="select * from (select ROW_NUMBER() OVER (order by ORDER_DATE desc) AS rnum, "+ 
 				"BOR.ORDER_NO, BOR.ORDER_STATUS, BOR.ORDER_MEMBER_ID, BOR.ORDER_TRADE_TYPE, "+ 
 				"BOR.ORDER_DATE from book_order AS BOR where DELETE_FLAG =0 group by BOR.ORDER_NO ) as orderList where rnum>=? and rnum<=?";
-		List<OrderBean> orderlist=new ArrayList<OrderBean>();
+		List<OrderDTO> orderlist=new ArrayList<OrderDTO>();
 		
 		int startrow=(page-1)*10+1;
 		int endrow=startrow+limit-1;
@@ -68,7 +68,7 @@ public class AdminOrderDAO {
 			pstmt.setInt(2, endrow);
 			rs=pstmt.executeQuery();
 			while(rs.next()){
-				OrderBean order=new OrderBean();
+				OrderDTO order=new OrderDTO();
 				//注文NO
 				order.setORDER_NO(rs.getInt("ORDER_NO"));
 				//決済方法
@@ -96,8 +96,8 @@ public class AdminOrderDAO {
 		return null;
 	}
 	//注文情報取得
-	public List<OrderBean> getOrderDetail(int ordernum){
-		List<OrderBean> orderlist=new ArrayList<OrderBean>();
+	public List<OrderDTO> getOrderDetail(int ordernum){
+		List<OrderDTO> orderlist=new ArrayList<OrderDTO>();
 		String order_detail_sql="select BOR.ORDER_NO, BOR.ORDER_ITEM_NO, BOR.ORDER_BOOK_NO, B.BOOK_NAME,B.BOOK_PRICE, BOR.ORDER_COUNT, " + 
 				"BOR.ORDER_TRADE_TYPE, BOR.ORDER_COUNT * B.BOOK_PRICE AS TOTAL_PRICE, ORDER_DATE, ORDER_STATUS, "	+ 			
 				"BOR.ORDER_MEMBER_ID, BOR.ORDER_RECEIVE_NAME, BOR.ORDER_RECEIVE_NAME_KANA, " + 
@@ -111,7 +111,7 @@ public class AdminOrderDAO {
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
-			OrderBean order=new OrderBean();
+			OrderDTO order=new OrderDTO();
 			//注文NO
 			order.setORDER_NO(rs.getInt("ORDER_NO"));
 			//アイテムNo
@@ -168,7 +168,7 @@ public class AdminOrderDAO {
 		return null;
 	}
 	//注文情報修正
-	public boolean modifyOrder(OrderBean order){
+	public boolean modifyOrder(OrderDTO order){
 		String order_modify_sql=
 			"update BOOK_ORDER set ORDER_MEMO=?,ORDER_STATUS=? where ORDER_NO=? AND DELETE_FLAG =0";
 		int result=0;

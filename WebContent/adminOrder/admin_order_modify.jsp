@@ -3,8 +3,8 @@
 <%@ page import="net.member.db.*"%>
 <%@ page import="java.util.*" %>
 <%
-	@SuppressWarnings("unchecked") List<OrderBean> orderlist=(List<OrderBean>)request.getAttribute("orderlist");
-	MemberBean ordermember=(MemberBean)request.getAttribute("ordermember");
+@SuppressWarnings("unchecked") List<OrderDTO> orderlist=(List<OrderDTO>)request.getAttribute("orderlist");
+	MemberDTO ordermember=(MemberDTO)request.getAttribute("ordermember");
 %>
 <html>
 <head>
@@ -43,7 +43,7 @@ function check(){
 <td colspan=2 align=center>
 <!-- 注文情報修正(管理者) -->
 <form action="./AdminOrderModify.adorder" name="orderform" method="post" onsubmit="return check()">
-<input type="hidden" name="num" value="<%=orderlist.get(0).getORDER_NO() %>">
+<input type="hidden" name="num" value="<%=orderlist.get(0).getORDER_NO()%>">
 <table style="width:90%; border-spacing:1">
 	<tr>
 		<td>
@@ -75,9 +75,11 @@ function check(){
 	<tr>
 		<td style="background-color: #F0F0F0; height: 1px;" colspan=6>
 	</tr>
-	<%for(int i=0;i<orderlist.size();i++){ 
-	OrderBean order=new OrderBean();
-	order=(OrderBean)orderlist.get(i); %>
+	<%
+	for(int i=0;i<orderlist.size();i++){ 
+		OrderDTO order=new OrderDTO();
+		order=(OrderDTO)orderlist.get(i);
+	%>
 	<tr height=20>
 		<td style="font-family: Tahoma; font-size: 10pt;" width=210 height=24
 		bgcolor="f7f7f7">アイテムNo</td>

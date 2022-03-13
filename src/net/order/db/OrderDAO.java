@@ -11,8 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import net.book.db.BookBean;
-import net.cart.db.CartBean;
+import net.book.db.BookDTO;
+import net.cart.db.CartDTO;
 
 public class OrderDAO {
 	DataSource ds;
@@ -79,7 +79,7 @@ public class OrderDAO {
 		return 0;
 	}
 	//注文リスト取得
-	public List<OrderBean> getOrderList(String id, int page) throws SQLException {
+	public List<OrderDTO> getOrderList(String id, int page) throws SQLException {
 		String sql="select BOR.ORDER_NO, BOR.ORDER_BOOK_NO, B.BOOK_NAME,B.BOOK_PRICE, BOR.ORDER_COUNT, " + 
 				"BOR.ORDER_COUNT * B.BOOK_PRICE AS TOTAL_PRICE, ORDER_DATE, ORDER_STATUS  " + 
 				"from book_order AS BOR join book as B on BOR.ORDER_BOOK_NO = B.BOOK_NO " + 
@@ -87,7 +87,7 @@ public class OrderDAO {
 				"WHERE ORDER_MEMBER_ID = ? AND delete_flag = 0 order by order_no desc limit 10 offset ?)as tmp) " + 
 				"order by order_no desc, order_item_no";
 		
-		List<OrderBean> book_order_list=new ArrayList<>();
+		List<OrderDTO> book_order_list=new ArrayList<>();
 		int offset= (page-1)*10;
 		
 		try{
@@ -98,7 +98,7 @@ public class OrderDAO {
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
-				OrderBean order=new OrderBean();
+				OrderDTO order=new OrderDTO();
 				//注文NO
 				order.setORDER_NO(rs.getInt("ORDER_NO"));
 				//図書NO
@@ -133,7 +133,7 @@ public class OrderDAO {
 		return null;
 	}
 	//注文情報登録
-	public int addOrder(OrderBean order, List<CartBean> cartlist, List<BookBean> booklist){
+	public int addOrder(OrderDTO order, List<CartDTO> cartlist, List<BookDTO> booklist){
 		//最大注文NO取得
 		int ordernum=0;
 		String sql="select max(ORDER_NO) from book_order";
@@ -150,8 +150,8 @@ public class OrderDAO {
 		//注文情報登録
 		int count = 1;
 		for (int i = 0; i < cartlist.size(); i++) {
-			CartBean cart=(CartBean)cartlist.get(i);
-			BookBean book=(BookBean)booklist.get(i);
+			CartDTO cart=(CartDTO)cartlist.get(i);
+			BookDTO book=(BookDTO)booklist.get(i);
 			
 			try {
 				conn = ds.getConnection();

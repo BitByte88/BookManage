@@ -3,8 +3,8 @@
 <%@ page import="java.util.*" %>
 <%@ page import="net.member.db.*"%>
 <%@ page import="java.text.*"%>
-<%  
-	MemberBean member=(MemberBean)request.getAttribute("member");
+<%
+MemberDTO member=(MemberDTO)request.getAttribute("member");
 	DecimalFormat format = new DecimalFormat("0");
 %>
 <html>

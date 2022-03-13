@@ -11,8 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import net.book.db.BookBean;
-import net.member.db.MemberBean;
+import net.member.db.MemberDTO;
 
 public class AdminMemberDAO {
 	DataSource ds;
@@ -54,12 +53,12 @@ public class AdminMemberDAO {
 		return 0;
 	}
 	//会員リスト取得
-	public List<MemberBean> getMemberList(int page,int limit){
+	public List<MemberDTO> getMemberList(int page,int limit){
 		String member_list_sql="select * from (select ROW_NUMBER() OVER (order by CREATE_DATE desc) AS rnum, "+ 
 				"MB.MEMBER_ID, MB.MEMBER_PW, MB.MEMBER_NAME, MB.MEMBER_NAME_KANA, "+ 
 				"MB.MEMBER_TEL, MB.MEMBER_MAIL, MB.MEMBER_ZIPCODE, MB.MEMBER_ADD_1, "+
 				"MB.MEMBER_ADD_2, MB.MEMBER_ADD_3, MB.MEMBER_TYPE, MB.CREATE_DATE from member AS MB where DELETE_FLAG =0) as memberList where rnum>=? and rnum<=?";
-		List<MemberBean> memberlist=new ArrayList<MemberBean>();
+		List<MemberDTO> memberlist=new ArrayList<MemberDTO>();
 		
 		int startrow=(page-1)*limit+1;
 		int endrow=startrow+limit-1;
@@ -70,7 +69,7 @@ public class AdminMemberDAO {
 			pstmt.setInt(2, endrow);
 			rs=pstmt.executeQuery();
 			while(rs.next()){
-				MemberBean member=new MemberBean();
+				MemberDTO member=new MemberDTO();
 				//アカウント
 				member.setMEMBER_ID(rs.getString("MEMBER_ID"));
 				//パスワード
@@ -112,8 +111,8 @@ public class AdminMemberDAO {
 		return null;
 	}
 	//会員情報取得
-	public MemberBean getMemberDetail(String id){
-		MemberBean member = null;
+	public MemberDTO getMemberDetail(String id){
+		MemberDTO member = null;
 		try {
 			conn = ds.getConnection();
 			String sql="select * from member where MEMBER_ID = ? and delete_flag = 0";
@@ -122,7 +121,7 @@ public class AdminMemberDAO {
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()){
-				member=new MemberBean();
+				member=new MemberDTO();
 				//アカウント
 				member.setMEMBER_ID(rs.getString("MEMBER_ID"));
 				//パスワード
@@ -160,7 +159,7 @@ public class AdminMemberDAO {
 		return member;
 	}
 	//会員情報修正
-	public boolean modifyMember(MemberBean member){
+	public boolean modifyMember(MemberDTO member){
 		String order_modify_sql=
 			"update MEMBER set MEMBER_NAME=?, MEMBER_NAME_KANA=?, MEMBER_TEL=?, MEMBER_MAIl=?, "+ 
 			"MEMBER_ZIPCODE=?, MEMBER_ADD_1=?, MEMBER_ADD_2=?, MEMBER_ADD_3=?, "+

@@ -12,7 +12,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import net.book.db.BookBean;
+import net.book.db.BookDTO;
 
 public class CartDAO {
 	DataSource ds;
@@ -33,8 +33,8 @@ public class CartDAO {
 	//カート、図書情報を取得する。
 	public HashMap<String, Object> getCartList(String id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		List<CartBean> cartlist = new ArrayList<>();
-		List<BookBean> booklist = new ArrayList<>();
+		List<CartDTO> cartlist = new ArrayList<>();
+		List<BookDTO> booklist = new ArrayList<>();
 		
 		String sql = "select * from cart where " +
 				"CART_MEMBER_ID=? AND DELETE_FLAG = 0";
@@ -46,8 +46,8 @@ public class CartDAO {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				CartBean dto = new CartBean();
-				BookBean book = new BookBean();
+				CartDTO dto = new CartDTO();
+				BookDTO book = new BookDTO();
 				//カートNO
 				dto.setCART_NO(rs.getInt("CART_NO"));
 				//会員アカウント

@@ -1,6 +1,6 @@
 package net.member.db;
 import java.sql.*;
-public class MemberBean {
+public class MemberDTO {
 	//アカウント
 	private String MEMBER_ID;
 	//パスワード

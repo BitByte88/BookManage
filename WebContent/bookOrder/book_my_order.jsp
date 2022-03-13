@@ -2,8 +2,8 @@
 <%@ page import="java.util.*"%>
 <%@ page import="net.order.db.*"%>
 <%
-	String id=(String)session.getAttribute("id");
-	@SuppressWarnings("unchecked") List<OrderBean> book_order_list=(List<OrderBean>)request.getAttribute("book_order_list");
+String id=(String)session.getAttribute("id");
+	@SuppressWarnings("unchecked") List<OrderDTO> book_order_list=(List<OrderDTO>)request.getAttribute("book_order_list");
 	int ordercount=((Integer)request.getAttribute("ordercount")).intValue();
 	int nowpage=((Integer)request.getAttribute("page")).intValue();
 	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
@@ -63,13 +63,13 @@
 		</tr>
 		<%
 		}
-		
-		for (int i = 0; i < book_order_list.size(); i++) {
-			OrderBean order = new OrderBean();
-			OrderBean nextOrder = new OrderBean();
-			order = (OrderBean) book_order_list.get(i);
+				
+				for (int i = 0; i < book_order_list.size(); i++) {
+			OrderDTO order = new OrderDTO();
+			OrderDTO nextOrder = new OrderDTO();
+			order = (OrderDTO) book_order_list.get(i);
 			if(i != book_order_list.size()-1){
-				nextOrder = (OrderBean) book_order_list.get(i+1);
+				nextOrder = (OrderDTO) book_order_list.get(i+1);
 			}
 		%>
 		<tr align=center>

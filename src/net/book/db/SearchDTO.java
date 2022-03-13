@@ -1,6 +1,6 @@
 package net.book.db;
 
-public class SearchBean {
+public class SearchDTO {
 	//タイトル
 	private String BOOK_NAME;
 	//出版社

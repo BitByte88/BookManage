@@ -11,7 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import net.book.db.BookBean;
+import net.book.db.BookDTO;
 
 public class AdminBookDAO {
 	DataSource ds;
@@ -30,36 +30,36 @@ public class AdminBookDAO {
 		}
 	}
 	//図書リスト取得
-	public List<BookBean> getBookList() {
-		List<BookBean> booklist = new ArrayList<>();
+	public List<BookDTO> getBookList() {
+		List<BookDTO> booklist = new ArrayList<>();
 		try {
 			con = ds.getConnection();
 			String sql="select * from book where delete_flag = 0 order by book_no";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				BookBean bookbean = new BookBean();
+				BookDTO bookdto = new BookDTO();
 				//図書NO
-				bookbean.setBOOK_NO(rs.getInt("book_no"));
+				bookdto.setBOOK_NO(rs.getInt("book_no"));
 				//カテゴリー
-				bookbean.setBOOK_CATEGORY(rs.getString("book_category"));
+				bookdto.setBOOK_CATEGORY(rs.getString("book_category"));
 				//書名
-				bookbean.setBOOK_NAME(rs.getString("book_name"));
+				bookdto.setBOOK_NAME(rs.getString("book_name"));
 				//著者
-				bookbean.setBOOK_WRITER(rs.getString("book_writer"));
+				bookdto.setBOOK_WRITER(rs.getString("book_writer"));
 				//出版社
-				bookbean.setBOOK_PUBLISHER(rs.getString("book_publisher"));
+				bookdto.setBOOK_PUBLISHER(rs.getString("book_publisher"));
 				//発行日
-				bookbean.setBOOK_PUBLISHING_DATE(rs.getDate("book_publishing_date"));
+				bookdto.setBOOK_PUBLISHING_DATE(rs.getDate("book_publishing_date"));
 				//図書内容
-				bookbean.setBOOK_CONTENT(rs.getString("book_content"));
+				bookdto.setBOOK_CONTENT(rs.getString("book_content"));
 				//販売価格
-				bookbean.setBOOK_PRICE(rs.getInt("book_price"));
+				bookdto.setBOOK_PRICE(rs.getInt("book_price"));
 				//イメージ
-				bookbean.setBOOK_IMAGE(rs.getString("book_image"));
+				bookdto.setBOOK_IMAGE(rs.getString("book_image"));
 				//ISBNコード
-				bookbean.setBOOK_ISBN(rs.getString("book_isbn"));
-				booklist.add(bookbean);
+				bookdto.setBOOK_ISBN(rs.getString("book_isbn"));
+				booklist.add(bookdto);
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -74,8 +74,8 @@ public class AdminBookDAO {
 		return booklist;
 	}
 	//図書情報取得
-	public BookBean getBook(int num) {
-		BookBean abb = null;
+	public BookDTO getBook(int num) {
+		BookDTO abb = null;
 		try {
 			con = ds.getConnection();
 			String sql="select * from book where book_no=? and delete_flag=0";
@@ -84,7 +84,7 @@ public class AdminBookDAO {
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()){
-				abb=new BookBean();
+				abb=new BookDTO();
 				//図書NO
 				abb.setBOOK_NO(rs.getInt("book_no"));
 				//カテゴリー
@@ -143,7 +143,7 @@ public class AdminBookDAO {
 		return num;
 	}
 	//図書登録
-	public int insertBook(BookBean abb, int num) {
+	public int insertBook(BookDTO abb, int num) {
 		int result = 0;
 		try {
 			con = ds.getConnection();
@@ -183,7 +183,7 @@ public class AdminBookDAO {
 		return result;
 	}
 	//図書情報削除
-	public int deleteBook(BookBean abb){
+	public int deleteBook(BookDTO abb){
 		int result = 0;
 		try {
 			con = ds.getConnection();
@@ -203,7 +203,7 @@ public class AdminBookDAO {
 		return result;
 	}
 	//図書情報変更
-	public int modifyBook(BookBean abb, int num) {
+	public int modifyBook(BookDTO abb, int num) {
 		int result = 0;
 		try {
 			con = ds.getConnection();

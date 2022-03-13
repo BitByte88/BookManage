@@ -5,7 +5,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import net.error.Action;
-import net.error.ForwardService;
 import net.error.ErrorService;
 
 public class ErrorController extends HttpServlet {

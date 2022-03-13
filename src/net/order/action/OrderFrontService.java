@@ -10,13 +10,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.book.db.BookBean;
-import net.cart.db.CartBean;
+import net.book.db.BookDTO;
+import net.cart.db.CartDTO;
 import net.cart.db.CartDAO;
-import net.member.db.MemberBean;
+import net.member.db.MemberDTO;
 import net.member.db.MemberDAO;
-import net.order.db.OrderBean;
+import net.order.db.OrderDTO;
 import net.order.db.OrderDAO;
+
+class ForwardService {
+	private boolean isRedirect=false;
+	private String path=null;
+	
+	public boolean isRedirect(){
+		return isRedirect;
+	}
+	
+	public String getPath(){
+		return path;
+	}
+	
+	public void setRedirect(boolean b){
+		isRedirect=b;
+	}
+	
+	public void setPath(String string){
+		path=string;
+	}
+}
 
 public class OrderFrontService {
 	//注文詳細画面
@@ -84,9 +105,9 @@ public class OrderFrontService {
 			//カート、図書情報を取得する。
 			map = cartdao.getCartList(id);
 			//カート情報
-			List<CartBean> cartlist=(ArrayList<CartBean>)map.get("cartlist");
+			List<CartDTO> cartlist=(ArrayList<CartDTO>)map.get("cartlist");
 			//図書情報
-			List<BookBean> booklist=(ArrayList<BookBean>)map.get("booklist");
+			List<BookDTO> booklist=(ArrayList<BookDTO>)map.get("booklist");
 			//注文タイプ：カート画面から遷移
 			request.setAttribute("orderType", "fromCart");
 			//カート情報
@@ -103,7 +124,7 @@ public class OrderFrontService {
 		
 		MemberDAO memberdao=new MemberDAO();
 		//会員情報を取得
-		MemberBean member=(MemberBean)memberdao.getMember(id);
+		MemberDTO member=(MemberDTO)memberdao.getMember(id);
 		request.setAttribute("member", member);
 		//注文詳細画面に遷移する。
 		forward.setRedirect(false);
@@ -129,7 +150,7 @@ public class OrderFrontService {
 		HashMap<Integer, Integer> totalPriceMap = new HashMap<Integer, Integer>();
 		HashMap<Integer, Integer> itemCountMap = new HashMap<Integer, Integer>();
 		OrderDAO orderdao=new OrderDAO();
-		List<OrderBean> book_order_list=new ArrayList<OrderBean>();	
+		List<OrderDTO> book_order_list=new ArrayList<OrderDTO>();	
 		if(request.getParameter("page")!=null){
 			page=Integer.parseInt(request.getParameter("page"));
 		}
@@ -140,7 +161,7 @@ public class OrderFrontService {
 			book_order_list = orderdao.getOrderList(id, page);
 			if(book_order_list != null && book_order_list.size() != 0) {
 				//注文件数分、以下の処理を行う。
-				for(OrderBean book_order : book_order_list) {
+				for(OrderDTO book_order : book_order_list) {
 					//注文NO単位で、合計金額、アイテム件数を計算する。
 					if(!totalPriceMap.containsKey(book_order.getORDER_NO())) {
 						//（key：注文NO、value：0)で合計金額MAPを設定
@@ -228,13 +249,13 @@ public class OrderFrontService {
 		}
 		
 		OrderDAO orderdao=new OrderDAO();
-		OrderBean order=new OrderBean();
+		OrderDTO order=new OrderDTO();
 		
-		List<CartBean> cartlist=new ArrayList<>();
-		List<BookBean> booklist=new ArrayList<>();
-		BookBean book=new BookBean();
+		List<CartDTO> cartlist=new ArrayList<>();
+		List<BookDTO> booklist=new ArrayList<>();
+		BookDTO book=new BookDTO();
 		CartDAO cartdao=new CartDAO();
-		CartBean cart=new CartBean();
+		CartDTO cart=new CartDTO();
 		//アカウント
 		order.setORDER_MEMBER_ID(request.getParameter("memberid"));
 		//届け先_氏名
@@ -279,8 +300,8 @@ public class OrderFrontService {
 		else{
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map = cartdao.getCartList(id);
-			cartlist=(ArrayList<CartBean>)map.get("cartlist");
-			booklist=(ArrayList<BookBean>)map.get("booklist");
+			cartlist=(ArrayList<CartDTO>)map.get("cartlist");
+			booklist=(ArrayList<BookDTO>)map.get("booklist");
 		}
 		//注文情報を登録する。
 		orderdao.addOrder(order, cartlist, booklist);

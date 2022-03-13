@@ -3,8 +3,8 @@
 <%@ page import="java.util.*" %>
 <%@ page import="net.book.db.*"%>
 <%@ page import="java.text.*"%>
-<%  
-	BookBean abb=(BookBean)request.getAttribute("abb");
+<%
+BookDTO abb=(BookDTO)request.getAttribute("abb");
 	@SuppressWarnings("unchecked") HashMap<String, String> imageMap = (HashMap<String,String>)request.getAttribute("imageMap");
 	DecimalFormat format = new DecimalFormat("0");
 %>

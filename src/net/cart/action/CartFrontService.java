@@ -9,9 +9,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.book.db.BookBean;
-import net.cart.db.CartBean;
+import net.book.db.BookDTO;
+import net.cart.db.CartDTO;
 import net.cart.db.CartDAO;
+
+class ForwardService {
+	private boolean isRedirect=false;
+	private String path=null;
+	
+	public boolean isRedirect(){
+		return isRedirect;
+	}
+	
+	public String getPath(){
+		return path;
+	}
+	
+	public void setRedirect(boolean b){
+		isRedirect=b;
+	}
+	
+	public void setPath(String string){
+		path=string;
+	}
+}
 
 public class CartFrontService {
 	// カート画面
@@ -34,9 +55,9 @@ public class CartFrontService {
 		//カート、図書情報を取得する。
 		map = cartdao.getCartList(id);
 		//カート情報
-		List<CartBean> cartlist=(ArrayList<CartBean>)map.get("cartlist");
+		List<CartDTO> cartlist=(ArrayList<CartDTO>)map.get("cartlist");
 		//図書情報
-		List<BookBean> booklist=(ArrayList<BookBean>)map.get("booklist");
+		List<BookDTO> booklist=(ArrayList<BookDTO>)map.get("booklist");
 		
 		request.setAttribute("cartlist", cartlist);
 		request.setAttribute("booklist", booklist);
