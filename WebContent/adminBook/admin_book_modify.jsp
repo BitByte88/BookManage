@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@ page import="net.book.db.*"%>
+<%@ page import="main.java.jp.co.bookmanage.dto.BookDTO"%>
 <%@ page import="java.text.*"%>
 <%
 BookDTO abb=(BookDTO)request.getAttribute("abb");

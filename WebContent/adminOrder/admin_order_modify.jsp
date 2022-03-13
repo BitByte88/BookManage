@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@ page import="net.order.db.*"%>
-<%@ page import="net.member.db.*"%>
+<%@ page import="main.java.jp.co.bookmanage.dto.OrderDTO"%>
+<%@ page import="main.java.jp.co.bookmanage.dto.MemberDTO"%>
 <%@ page import="java.util.*" %>
 <%
 @SuppressWarnings("unchecked") List<OrderDTO> orderlist=(List<OrderDTO>)request.getAttribute("orderlist");

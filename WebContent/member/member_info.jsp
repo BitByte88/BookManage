@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="net.member.db.MemberDTO" %>
+<%@ page import="main.java.jp.co.bookmanage.dto.MemberDTO"%>
 <%
 MemberDTO member=(MemberDTO)request.getAttribute("member");
 	String MEMBER_MAIL=member.getMEMBER_MAIL();

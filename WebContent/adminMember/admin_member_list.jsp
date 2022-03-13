@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="net.member.db.*" %>
+<%@ page import="main.java.jp.co.bookmanage.dto.MemberDTO"%>
 <%@ page import="java.util.*" %>
 <%
 @SuppressWarnings("unchecked") List<MemberDTO> memberlist=(List<MemberDTO>)request.getAttribute("memberlist");

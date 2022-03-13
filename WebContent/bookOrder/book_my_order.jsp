@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="net.order.db.*"%>
+<%@ page import="main.java.jp.co.bookmanage.dto.OrderDTO"%>
 <%
 String id=(String)session.getAttribute("id");
 	@SuppressWarnings("unchecked") List<OrderDTO> book_order_list=(List<OrderDTO>)request.getAttribute("book_order_list");

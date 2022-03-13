@@ -4,78 +4,78 @@
   <display-name>BookManage</display-name>
   <servlet>
     <description></description>
-    <display-name>AdminOrderFrontController</display-name>
-    <servlet-name>AdminOrderFrontController</servlet-name>
-    <servlet-class>net.admin.order.action.AdminOrderFrontController</servlet-class>
+    <display-name>AdminOrderController</display-name>
+    <servlet-name>AdminOrderController</servlet-name>
+    <servlet-class>main.java.jp.co.bookmanage.controller.AdminOrderController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AdminOrderFrontController</servlet-name>
+    <servlet-name>AdminOrderController</servlet-name>
     <url-pattern>*.adorder</url-pattern>
   </servlet-mapping>
   
   <servlet>
     <description></description>
-    <display-name>OrderFrontController</display-name>
-    <servlet-name>OrderFrontController</servlet-name>
-    <servlet-class>net.order.action.OrderFrontController</servlet-class>
+    <display-name>OrderController</display-name>
+    <servlet-name>OrderController</servlet-name>
+    <servlet-class>main.java.jp.co.bookmanage.controller.OrderController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>OrderFrontController</servlet-name>
+    <servlet-name>OrderController</servlet-name>
     <url-pattern>*.order</url-pattern>
   </servlet-mapping>
   
   <servlet>
     <description></description>
-    <display-name>MemberFrontController</display-name>
-    <servlet-name>MemberFrontController</servlet-name>
-    <servlet-class>net.member.action.MemberFrontController</servlet-class>
+    <display-name>MemberController</display-name>
+    <servlet-name>MemberController</servlet-name>
+    <servlet-class>main.java.jp.co.bookmanage.controller.MemberController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>MemberFrontController</servlet-name>
+    <servlet-name>MemberController</servlet-name>
     <url-pattern>*.member</url-pattern>
   </servlet-mapping>
   
   <servlet>
     <description></description>
-    <display-name>CartFrontController</display-name>
-    <servlet-name>CartFrontController</servlet-name>
-    <servlet-class>net.cart.action.CartFrontController</servlet-class>
+    <display-name>CartController</display-name>
+    <servlet-name>CartController</servlet-name>
+    <servlet-class>main.java.jp.co.bookmanage.controller.CartController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CartFrontController</servlet-name>
+    <servlet-name>CartController</servlet-name>
     <url-pattern>*.cart</url-pattern>
   </servlet-mapping>
   
   <servlet>
     <description></description>
-    <display-name>BookFrontController</display-name>
-    <servlet-name>BookFrontController</servlet-name>
-    <servlet-class>net.book.action.BookFrontController</servlet-class>
+    <display-name>BookController</display-name>
+    <servlet-name>BookController</servlet-name>
+    <servlet-class>main.java.jp.co.bookmanage.controller.BookController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>BookFrontController</servlet-name>
+    <servlet-name>BookController</servlet-name>
     <url-pattern>*.book</url-pattern>
   </servlet-mapping>
   
   <servlet>
     <description></description>
-    <display-name>AdminBookFrontController</display-name>
-    <servlet-name>AdminBookFrontController</servlet-name>
-    <servlet-class>net.admin.book.action.AdminBookFrontController</servlet-class>
+    <display-name>AdminBookController</display-name>
+    <servlet-name>AdminBookController</servlet-name>
+    <servlet-class>main.java.jp.co.bookmanage.controller.AdminBookController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AdminBookFrontController</servlet-name>
+    <servlet-name>AdminBookController</servlet-name>
     <url-pattern>*.adbook</url-pattern>
   </servlet-mapping>
   
   <servlet>
     <description></description>
-    <display-name>AdminMemberFrontController</display-name>
-    <servlet-name>AdminMemberFrontController</servlet-name>
-    <servlet-class>net.admin.member.action.AdminMemberFrontController</servlet-class>
+    <display-name>AdminMemberController</display-name>
+    <servlet-name>AdminMemberController</servlet-name>
+    <servlet-class>main.java.jp.co.bookmanage.controller.AdminMemberController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AdminMemberFrontController</servlet-name>
+    <servlet-name>AdminMemberController</servlet-name>
     <url-pattern>*.admember</url-pattern>
   </servlet-mapping>
 
@@ -90,7 +90,7 @@
   
 <servlet>
    <servlet-name>ErrorController</servlet-name>
-   <servlet-class>net.error.ErrorController</servlet-class>
+   <servlet-class>main.java.jp.co.bookmanage.controller.ErrorController</servlet-class>
 </servlet>
 <servlet-mapping>
    <servlet-name>ErrorController</servlet-name>

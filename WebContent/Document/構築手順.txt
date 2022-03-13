@@ -1,6 +1,0 @@
-１．ローカルDBサーバー構築。（MySQL）
-２．EclipseにてBookManage.zipファイルをインポート。
-３．BookManageプロジェクト内の「table.sql」内容を用いて各テーブルを生成。
-４．BookManageプロジェクト内の「insertData.sql」内容を用いてマスタ及び基本情報を挿入。
-５．TomcatにてローカルWEBサーバー起動。
-６．ブラウザから「http://localhost:8080/BookManage」を入力して画面起動。

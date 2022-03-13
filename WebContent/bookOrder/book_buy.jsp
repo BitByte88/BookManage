@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="net.member.db.MemberDTO"%>
-<%@ page import="net.cart.db.CartDTO"%>
-<%@ page import="net.book.db.BookDTO" %>
+<%@ page import="main.java.jp.co.bookmanage.dto.BookDTO"%>
+<%@ page import="main.java.jp.co.bookmanage.dto.MemberDTO"%>
+<%@ page import="main.java.jp.co.bookmanage.dto.CartDTO"%>
 <%
 MemberDTO member = (MemberDTO) request.getAttribute("member");
 	String orderType = (String) request.getAttribute("orderType");

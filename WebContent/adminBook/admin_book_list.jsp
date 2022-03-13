@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.math.RoundingMode"%>
-<%@ page import="net.book.db.*"%>
+<%@ page import="main.java.jp.co.bookmanage.dto.BookDTO"%>
 <%
 @SuppressWarnings("unchecked") ArrayList<BookDTO> list = (ArrayList<BookDTO>) request.getAttribute("list");
     BookDTO abb = null;
