@@ -252,7 +252,7 @@ public class MemberDAO {
 			if(rs.next()){
 				String memberpw=rs.getString("MEMBER_PW");
 				if(memberpw.equals(pw)){
-					sql="delete from member where MEMBER_ID=?";
+					sql="update MEMBER set DELETE_FLAG=1 where MEMBER_ID=?";
 					pstmt=con.prepareStatement(sql);
 					pstmt.setString(1, id);
 					pstmt.executeUpdate();

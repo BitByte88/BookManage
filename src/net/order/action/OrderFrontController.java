@@ -4,49 +4,45 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class OrderFrontController extends javax.servlet.http.HttpServlet
-		implements javax.servlet.Servlet {
+public class OrderFrontController extends HttpServlet {
 	private static final long serialVersionUID = 8291740938003137142L;
-	private void execute(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
-		ActionForward forward = null;
-		Action action = null;
+		ForwardService forward = null;
+		OrderFrontService orderFrontService = new OrderFrontService();
 		//注文詳細画面
 		if (command.equals("/OrderStart.order")) {
-			action  = new OrderStartAction();
 			try {
-				forward=action.execute(request, response );
+				forward = orderFrontService.OrderStartAction(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		//注文履歴画面
 		else if (command.equals("/OrderList.order")) {
-			action  = new OrderListAction();
-			try {
-				forward=action.execute(request, response );
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			forward = orderFrontService.OrderListAction(request, response);
 		}
 		//注文登録処理
 		else if (command.equals("/OrderAdd.order")) {
-			action  = new OrderAddAction();
 			try {
-				forward=action.execute(request, response );
+				forward = orderFrontService.OrderAddAction(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		//注文完了画面
 		else if (command.equals("/OrderOk.order")){
-			forward=new ActionForward();
+			forward=new ForwardService();
 			forward.setRedirect(false);
 			forward.setPath("./bookOrder/book_order_ok.jsp");
 		}
@@ -60,12 +56,5 @@ public class OrderFrontController extends javax.servlet.http.HttpServlet
 		}
        }
 	}
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		execute(request, response);
-	}
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		execute(request, response);
-	}
+
 }

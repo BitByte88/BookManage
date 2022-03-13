@@ -1,6 +1,6 @@
-package net.member.action;
+package net.book.action;
 
-public class ActionForward {
+public class ForwardService {
 	private boolean isRedirect=false;
 	private String path=null;
 	

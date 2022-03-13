@@ -12,42 +12,26 @@ import javax.servlet.http.HttpServletResponse;
 public class BookFrontController extends HttpServlet {
 	private static final long serialVersionUID = 856523771629891116L;
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
-		this.processRequest(request, response);
-
-	}
-
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		this.processRequest(request, response);
+		this.doGet(request, response);
 	}
-
-	private void processRequest(HttpServletRequest request,
-			HttpServletResponse response) throws IOException, ServletException {
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		String requestURI = request.getRequestURI();
 		String contextpath = request.getContextPath();
 		String command = requestURI.substring(contextpath.length());
 		
-		ActionForward forward = null;
-		Action action = null;
+		ForwardService forward = null;
+		BookFrontService bookFrontService= new BookFrontService();
 		//図書詳細画面
 		if (command.equals("/Book_Detail.book")) {
-			action = new BookDetailAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			forward = bookFrontService.BookDetailAction(request,response);
 		}
 		//図書リスト画面
 		else if (command.equals("/BookList.book")) {
-			action = new BookListAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			forward = bookFrontService.BookListAction(request,response);
 		}
 		
 		if (forward != null) {
@@ -59,6 +43,5 @@ public class BookFrontController extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}
-		
 	}
 }

@@ -13,7 +13,7 @@ import net.member.db.MemberDAO;
 import net.order.db.OrderBean;
 
 public class AdminOrderFrontService {
-	
+	// 注文リスト画面
 	public ForwardService AdminOrderListAction(HttpServletRequest request,HttpServletResponse response) {		
 		AdminOrderDAO orderdao=new AdminOrderDAO();
 		List<OrderBean> orderlist = new ArrayList<OrderBean>();
@@ -54,7 +54,7 @@ public class AdminOrderFrontService {
 		forward.setPath("./adminOrder/admin_order_list.jsp");
 		return forward;
 	 } 	
-	
+	// 注文情報修正画面
 	public ForwardService AdminOrderDetailAction(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		MemberDAO memberdao=new MemberDAO();
 		MemberBean member=new MemberBean();
@@ -73,7 +73,7 @@ public class AdminOrderFrontService {
 		forward.setPath("./adminOrder/admin_order_modify.jsp");
 		return forward;
 	 } 
-	
+	// 注文情報修正処理
 	public ForwardService AdminOrderModifyAction(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		AdminOrderDAO orderdao=new AdminOrderDAO();
 		OrderBean order=new OrderBean();
@@ -118,7 +118,7 @@ public class AdminOrderFrontService {
 		forward.setPath("./AdminOrderList.adorder");
 		return forward;
 	 }
-	
+	// 注文情報削除処理
 	public ForwardService AdminOrderDeleteAction(HttpServletRequest request,HttpServletResponse response) {
 		AdminOrderDAO orderdao=new AdminOrderDAO();
 		
@@ -137,7 +137,7 @@ public class AdminOrderFrontService {
 		forward.setPath("./AdminOrderList.adorder");
 		return forward;
 	 } 
-	
+	//パラメータチェック（注文情報修正）
 	public List<String> orderParameterCheck(HttpServletRequest request) {
 		List<String> errorMsg = new ArrayList<String>();
 		String memo = request.getParameter("memo");
