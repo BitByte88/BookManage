@@ -22,14 +22,18 @@
 	    </button>
 	    <div class="collapse navbar-collapse" id="navbarColor01">
 	      <ul class="navbar-nav me-auto">
+	      	<%
+	      	String id=(String)session.getAttribute("id");
+	      	Integer memberType=(Integer)session.getAttribute("memberType");
+	      	if(memberType!= null && memberType==1) { 
+	      	%>
 	        <li class="nav-item active">
 	          <a class="nav-link" href="./BookList.book">ホーム
 	            <span class="visually-hidden">(current)</span>
 	          </a>
 	        </li>
 	        <%
-	        String id=(String)session.getAttribute("id");
-	        Integer memberType=(Integer)session.getAttribute("memberType");
+	     	}
 	        if(id==null) {
 	        %>
 		        <li class="nav-item">
