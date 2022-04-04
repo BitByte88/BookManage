@@ -25,17 +25,13 @@
 	      	<%
 	      	String id=(String)session.getAttribute("id");
 	      	Integer memberType=(Integer)session.getAttribute("memberType");
-	      	if(memberType!= null && memberType==1) { 
-	      	%>
-	        <li class="nav-item active">
-	          <a class="nav-link" href="./BookList.book">ホーム
-	            <span class="visually-hidden">(current)</span>
-	          </a>
-	        </li>
-	        <%
-	     	}
 	        if(id==null) {
 	        %>
+	        	<li class="nav-item active">
+	          		<a class="nav-link" href="./BookList.book">ホーム
+	            		<span class="visually-hidden">(current)</span>
+	          		</a>
+	        	</li>
 		        <li class="nav-item">
 		          <a class="nav-link" href="./CartList.cart">カート</a>
 		        </li>
@@ -43,6 +39,11 @@
 		    } else {
 		        if(memberType==1) {
 	        %>
+	        		<li class="nav-item active">
+	          			<a class="nav-link" href="./BookList.book">ホーム
+	            			<span class="visually-hidden">(current)</span>
+	          			</a>
+	        		</li>
 		        	<li class="nav-item">
 		          		<a class="nav-link" href="./CartList.cart">カート</a>
 		        	</li>
