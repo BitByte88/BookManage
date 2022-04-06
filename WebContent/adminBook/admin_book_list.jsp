@@ -17,16 +17,7 @@
 	<jsp:include page="/menu/menu.jsp" />
 	
 <title>図書管理システム</title>
-<script type="text/javascript">
-function bookmodify(book_no){
-	document.bookform.action="./BookModify.adbook?book_no="+book_no;
-	document.bookform.submit();	
-}
-function bookdelete(book_no){
-	document.bookform.action="./BookDelete.adbook?book_no="+book_no;
-	document.bookform.submit();	
-}
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/admin_book_list.js"></script>
 </head>
 <body>
 <div style="margin:30 0 50 0">
