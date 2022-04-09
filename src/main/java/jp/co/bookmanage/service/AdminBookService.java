@@ -173,26 +173,32 @@ public class AdminBookService{
 		//イメージ名区分（区分字「,」）
 		String[] imageStr = bookdto.getBOOK_IMAGE().split(",");
 		HashMap<String, String> imageMap = new HashMap<String, String>();
+		HashMap<String, String> imageNameMap = new HashMap<String, String>();
 		for(String imageName : imageStr) {
 			//サムネイル用画像を設定
 			if(imageName.contains("Thumbnail")) {
+				imageNameMap.put("thumbnail",imageName);
 				imageMap.put("thumbnail","./upload/" + imageName);
 			}
 			//メイン画像を設定
 			if(imageName.contains("MainImage")) {
+				imageNameMap.put("mainImage",imageName);
 				imageMap.put("mainImage","./upload/" + imageName);
 			}
 			//詳細画像1を設定
 			if(imageName.contains("DetailImage1")) {
+				imageNameMap.put("detailImage1",imageName);
 				imageMap.put("detailImage1","./upload/" + imageName);
 			}
 			//詳細画像2を設定
 			if(imageName.contains("DetailImage2")) {
+				imageNameMap.put("detailImage2",imageName);
 				imageMap.put("detailImage2","./upload/" + imageName);
 			}
 		}
 		request.setAttribute("abb", bookdto);	
 		request.setAttribute("imageMap", imageMap);
+		request.setAttribute("imageNameMap", imageNameMap);
 		//図書情報変更画面に遷移する。
 		forward.setPath("./adminBook/admin_book_modify.jsp");
 		return forward;
@@ -252,15 +258,23 @@ public class AdminBookService{
 			//アップロードファイル件数分、以下の処理を行う。
 			while(files.hasMoreElements()){
 				String element = (String)files.nextElement();
+				//既存に登録されているファイル名を取得する。
+				String originalName = multi.getParameter(element + "Name");
+	         	String newImage = "";
+		    	String Extension = "";
 				//ファイル名取得
 				String fileName = multi.getFilesystemName(element);
-				if(fileName == null) {
+				//登録されているファイルがなく変更するファイルもない場合
+				if(originalName == null && fileName == null) {
+					//次のファイルを続ける
 					continue;
-				}
+				} else if (fileName == null) {//登録されているファイルがあり、変更ファイルがない場合
+					//登録されているファイルを維持する。
+					newImage = originalName;
+				} else {//変更ファイルがある場合
 				//ファイルパス設定
 	            String filepath  = realPath +"/" + fileName ; 
 	            Path f = Paths.get(filepath);
-	    		String Extension = "";
 	    		//拡張子取得
 	    		int i = fileName.lastIndexOf('.');
 	    		if (i > 0) {
@@ -268,9 +282,11 @@ public class AdminBookService{
 	    		}
 	    		//指定ファイル名取得
 	    		String imageName = map.get(element);
-                String newImage = imageName + "-" + bookNo + "." + Extension;
-                //アップロードファイルを指定ファイル名に変換
+	    		newImage = imageName + "-" + bookNo + "." + Extension;
                 Files.move(f, f.resolveSibling(realPath + "/" + imageName + "-" + bookNo + "." + Extension ),StandardCopyOption.REPLACE_EXISTING);                  
+				}
+				
+                //アップロードファイルを指定ファイル名に変換
 				if(files.hasMoreElements()){
 					//取得した要素が最後ではない場合
 					savefiles.add(newImage+",");

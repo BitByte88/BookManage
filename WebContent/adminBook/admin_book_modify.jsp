@@ -6,6 +6,7 @@
 <%
 BookDTO abb=(BookDTO)request.getAttribute("abb");
 	@SuppressWarnings("unchecked") HashMap<String, String> imageMap = (HashMap<String,String>)request.getAttribute("imageMap");
+	@SuppressWarnings("unchecked") HashMap<String, String> imageNameMap = (HashMap<String,String>)request.getAttribute("imageNameMap");
 	DecimalFormat format = new DecimalFormat("0");
 %>
 <html>
@@ -159,6 +160,7 @@ input[type="number"]::-webkit-inner-spin-button {
 						<td width="10%" height="100">
 							<% if(imageMap.get("thumbnail") != null) {%>
 							<img src="<%=imageMap.get("thumbnail")%>" width="100" height="100" border="0">
+							<input type="hidden" name="file4Name" value="<%=imageNameMap.get("thumbnail")%>">
 							<%} %>
 						</td>
 						<td width="30%"><input type="file" name="file4"></td>
@@ -172,6 +174,7 @@ input[type="number"]::-webkit-inner-spin-button {
 						<td width="10%" height="100">
 							<% if(imageMap.get("mainImage") != null) {%>
 							<img src="<%=imageMap.get("mainImage")%>" width="100" height="100" border="0">
+							<input type="hidden" name="file3Name" value="<%=imageNameMap.get("mainImage")%>">
 							<%} %>
 						</td>
 						<td width="30%" ><input type="file" name="file3"></td>
@@ -185,6 +188,7 @@ input[type="number"]::-webkit-inner-spin-button {
 						<td width="10%" height="100">
 							<% if(imageMap.get("detailImage1") != null) {%>
 							<img src="<%=imageMap.get("detailImage1")%>" width="100" height="100" border="0">
+							<input type="hidden" name="file2Name" value="<%=imageNameMap.get("detailImage1")%>">
 							<%} %>
 						</td>
 						<td width="30%" ><input type="file" name="file2"></td>
@@ -198,6 +202,7 @@ input[type="number"]::-webkit-inner-spin-button {
 						<td width="10%" height="100">
 							<% if(imageMap.get("detailImage2") != null) {%>
 							<img src="<%=imageMap.get("detailImage2")%>" width="100" height="100" border="0">
+							<input type="hidden" name="file1Name" value="<%=imageNameMap.get("detailImage2")%>">
 							<%} %>
 						</td>
 						<td width="30%" ><input type="file" name="file1"></td>
