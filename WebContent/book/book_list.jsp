@@ -26,21 +26,7 @@
 	<jsp:include page="/menu/menu.jsp" />
 	
 <title>図書管理システム</title>
-<script>
-function check(){
-	var title=searchform.title.value;
-	var publisher=searchform.publisher.value;
-	var startDate=searchform.startDate.value;
-	var endDate=searchform.endDate.value;
-	
-	if(title.length == 0 && publisher.length == 0 && startDate.length == 0 && endDate.length == 0){
-		alert("入力内容が存在しません。");
-		return false;
-	}
-	
-	return true;
-}
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/book_list.js"></script>
 </head>
 <body>		
 	<div style="margin:30 0 50 0">

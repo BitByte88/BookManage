@@ -15,26 +15,7 @@
 	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
 	<jsp:include page="/menu/menu.jsp" />
 <title>図書管理システム</title>
-<script>
-function check(){
-	var memo=memberform.memo.value;
-	var status=memberform.status.value;
-	
-	if(memo.length > 128){//桁数チェック（メモー）
-		alert("メモーは128文字以内まで入力してください。");
-		bookform.memo.focus();
-		return false;		
-	}
-	
-	if(status.length == 0){//必須チェック（注文ステータス）
-		alert("注文ステータスを選択してください。");
-		memberform.status.focus();
-		return false;
-	}
-	
-	return true;
-}
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/admin_order_modify.js"></script>
 </head>
 <body>
 <div style="margin:30 0 50 0">

@@ -12,12 +12,7 @@
 	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
 	
 <title>アカウント確認</title>
-<script>
-function windowclose(){
-	opener.document.joinform.MEMBER_ID.value="<%=id %>";
-	self.close();
-}
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/member_idchk.js"></script>
 </head>
 <body bgcolor="#f5f5f5">
 <% if(check == 1){ %>

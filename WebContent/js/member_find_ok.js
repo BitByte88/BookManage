@@ -1,0 +1,3 @@
+function windowclose(){
+	self.close();
+}

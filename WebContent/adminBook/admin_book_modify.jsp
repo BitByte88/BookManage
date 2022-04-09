@@ -20,6 +20,11 @@ BookDTO abb=(BookDTO)request.getAttribute("abb");
 	
 <title>図書管理システム</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/admin_book_modify.js"></script>
+<script>
+window.onload = function() {
+	document.querySelector('#book_category').value = "${abb.getBOOK_CATEGORY()}";
+}
+</script>
 <style>
 p{
 margin:auto;

@@ -8,7 +8,7 @@ function check(){
 	var isbn=bookform.book_isbn.value;
 	var content=bookform.book_content.value;
 	
-	
+
 	if(category.length == 0){//必須チェック（カテゴリー）
 		alert("カテゴリーを入力してください。");
 		bookform.book_category.focus();

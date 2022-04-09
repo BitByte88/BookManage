@@ -11,11 +11,7 @@
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/favicon-144x144.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/favicon-72x72.png">
 	<link rel="apple-touch-icon-precomposed" href="favicon/favicon-54x54.png">
-<script>
-function windowclose(){
-	self.close();
-}
-</script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/member_find_ok.js"></script>
 </head>
 <body>
 <table style="width:450px; height:35px">
